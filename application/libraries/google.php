@@ -19,7 +19,7 @@
 			$this->g_client->setClientSecret("lQMtpbYso3Hw0FD3G-H8srEq");
 			$this->g_client->setScopes("https://www.googleapis.com/auth/plus.login profile email https://mail.google.com/ https://www.googleapis.com/auth/gmail.compose");
 			$this->g_client->setAccessType("offline");
-			$this->g_client->setRedirectUri("http://localhost/tms_ci/index.php/login");    
+			$this->g_client->setRedirectUri("http://localhost/tms_ci_term2/index.php/login");    
 		}
 
 		public function set_redirect_uri($url)
