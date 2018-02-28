@@ -199,6 +199,13 @@
 			$data['student_data'] = $this->student_model->get_user_information($user_id);
 			$data['sched'] = $this->student_model->get_sched($user_id);
 			$data['group_id'] = $this->student_model->get_group($user_id);
+			$data['schedule_complete'] = $this->student_model->get_schedule_complete($user_id);
+			$data['mo'] = $this->student_model->get_schedule_complete_by_day($user_id, 'MO');
+			$data['tu'] = $this->student_model->get_schedule_complete_by_day($user_id, 'TU');
+			$data['we'] = $this->student_model->get_schedule_complete_by_day($user_id, 'WE');
+			$data['th'] = $this->student_model->get_schedule_complete_by_day($user_id, 'TH');
+			$data['fr'] = $this->student_model->get_schedule_complete_by_day($user_id, 'FR');
+			$data['sa'] = $this->student_model->get_schedule_complete_by_day($user_id, 'SA');
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "",
@@ -208,18 +215,20 @@
 			);
 
 
-			$this->load->view('student/student_base_head', $data);
-			if(sizeof($data['sched'])>0)
-			{
-				$this->load->view('student/student_with_schedule_view', $data);
-			}
-			else
-			{
-				$this->load->view('student/student_schedule_view', $data);
-			}
+			// $this->load->view('student/student_base_head', $data);
+			// if(sizeof($data['sched'])>0)
+			// {
+			// 	$this->load->view('student/student_with_schedule_view', $data);
+			// }
+			// else
+			// {
+			// 	$this->load->view('student/student_schedule_view', $data);
+			// }
 			
+			// $this->load->view('student/student_base_foot', $data); 
+			$this->load->view('student/student_base_head', $data);
+			$this->load->view('student/sample', $data);
 			$this->load->view('student/student_base_foot', $data); 
-			//$this->load->view('faculty/sample', $data);
 		}
 
 		public function view_edit_schedule()

@@ -36,6 +36,115 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+
+  <script src="<?php echo base_url();?>js/jquery.min.js"></script>
+  <script src="<?php echo base_url();?>jquery.weekly-schedule-plugin.js"></script>
+  <?php 
+    $day1_content = array();
+    foreach($mo as $row)
+    {
+      $no_space = str_replace(' ', '', $row['START_TIME']);
+      array_push($day1_content, ltrim($no_space, '0'));
+    }
+
+    $day2_content = array();
+    foreach($tu as $row)
+    {
+      $no_space = str_replace(' ', '', $row['START_TIME']);
+      array_push($day2_content, ltrim($no_space, '0'));
+    }
+
+    $day3_content = array();
+    foreach($we as $row)
+    {
+      $no_space = str_replace(' ', '', $row['START_TIME']);
+      array_push($day3_content, ltrim($no_space, '0'));
+    }
+
+    $day4_content = array();
+    foreach($th as $row)
+    {
+      $no_space = str_replace(' ', '', $row['START_TIME']);
+      array_push($day4_content, ltrim($no_space, '0'));
+    }
+
+    $day5_content = array();
+    foreach($fr as $row)
+    {
+      $no_space = str_replace(' ', '', $row['START_TIME']);
+      array_push($day5_content, ltrim($no_space, '0'));
+    }
+
+    $day6_content = array();
+    foreach($sa as $row)
+    {
+      $no_space = str_replace(' ', '', $row['START_TIME']);
+      array_push($day6_content, ltrim($no_space, '0'));
+    }
+
+    $day1 = $day1_content;
+    $day2 = $day2_content;
+    $day3 = $day3_content;
+    $day4 = $day4_content;
+    $day5 = $day5_content;
+    $day6 = $day6_content;
+    $array = array('day1'=>$day1,'day2'=>$day2,'day3'=>$day3,'day4'=>$day4,'day5'=>$day5,'day6'=>$day6);
+    echo "<script> var schedule=".json_encode($array)."; passData(schedule); </script>";
+
+    // $day1 = $day1_content;
+    // $day2 = array("07:30AM");
+    // $day3 = array("7:30AM");
+    // $day4 = array("7:30AM");
+    // $day5 = array("7:30AM");
+    // $day6 = array("7:30PM");
+  ?>
+  <!-- <script>
+
+    var scheduleTest1 = {
+
+
+      day1: ["7:30AM"],
+      day2: [],
+      day3: [],
+      day4: [],
+      day5: [],
+      day6: [],
+
+
+    };
+
+    var scheduleTest2 = {
+
+
+      day1: ["7:30AM", "9:15AM", "11:00AM", "12:45PM", "2:30PM", "4:15PM", "6:00PM", "8:45PM"],
+      day2: ["7:30AM", "9:15AM", "11:00AM", "6:00PM", "8:45PM"],
+      day3: ["7:30AM", "9:15AM", "2:30PM", "4:15PM"],
+      day4: ["7:30AM", "11:00AM",  "2:30PM", "4:15PM", "8:45PM"],
+      day5: ["7:30AM", "9:15AM", "11:00AM", "12:45PM", "2:30PM", "4:15PM", "6:00PM", "8:45PM"],
+      day6: ["9:15AM", "11:00AM","12:45PM"]
+
+
+    };
+
+
+    var blank={
+
+
+      day1: [],
+      day2: [],
+      day3: [],
+      day4: [],
+      day5: [],
+      day6: []
+
+
+    };
+
+    passData(scheduleTest1);
+
+
+  </script> -->
+
 </head>
 <!--
 BODY TAG OPTIONS:

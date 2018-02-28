@@ -1,3 +1,12 @@
+var scheduleTest = "EMPTY";
+var scheduleTimes = "EMPTY";
+        function passData(passedDataSched){
+
+            scheduleTest = passedDataSched   ;
+          
+        }
+
+
 (function($) {
     $.fn.weekly_schedule = function(callerSettings) {
 
@@ -15,6 +24,10 @@
             onRemoved: function(){} // handler called after removal
         }, callerSettings||{});
 
+      
+        scheduleTimes = settings.hours;
+       
+
         settings.hoursParsed = parseHours(settings.hours);
 
         var mousedown = false;
@@ -31,7 +44,8 @@
                 
                 sched[key] = [];
                 for(let index1 = 0; index1 < time.length; ++index1){
-                    sched[key].push(time[index1].classList['2'] + ' to ' + time[index1].classList['6']);
+                    sched[key].push((time[index1].classList['1']).replace("<br>","") + (time[index1].classList['2']).replace("<br>","") 
+                    + (time[index1].classList['3']).replace("<br>","").replace("-",""));
                 }
             }
 
@@ -39,6 +53,8 @@
             return (sched);
 
         }
+
+
 
         function getSelectedHour() {
             var dayContainer = $('.day');
@@ -55,8 +71,8 @@
                 output[i] = hoursSelected;
             }
             
-            console.log(transformData(output));
-            return output;
+            console.log(output);
+            return (transformData(output));
         }
 
         if (typeof callerSettings == 'string') {
@@ -123,10 +139,11 @@
                 hourHeaderContainer.append(hour_header_item);
             }
 
-            var testCompare = ["7:30AM", "9:15AM", "11:00AM", "12:45PM", "2:30PM", "4:15PM", "6:00PM", "8:45PM"];
+            var testCompare = ["7:30AM", "9:15AM", "11:00AM", "12:45PM", "2:30PM", "4:15PM", "6:00PM", "7:30PM"];
 
                var testSched = {};
 
+                 
                 testSched = {
 
                 "0": [],
@@ -139,39 +156,44 @@
 
 
                 
+  
+             setSchedule(scheduleTest);
+        
 
 
-            function setSchedule (day1,day2,day3,day4,day5,day6){
+            function setSchedule (schedule){
 
+          
 
-            day1 = ["7:30AM", "9:15AM", "12:45PM"];
-            day2 = ["12:45PM"];
-            day3 = ["7:30AM", "9:15AM", "12:45PM"];
-            day4 = ["7:30AM", "9:15AM", "12:45PM"];
-            day5 = ["7:30AM", "9:15AM", "12:45PM"];
-            day6 = ["9:15AM", "12:45PM"];
+            var day1 = schedule.day1;
+            var day2 = schedule.day2;
+            var day3 = schedule.day3;
+            var day4 = schedule.day4;
+            var day5 = schedule.day5;
+            var day6 = schedule.day6;
+            
                 for (var b = 0; b < day1.length; b++ ){
                     testSched[0].push(day1[b]);
 
                 }
-                for (var b = 0; b < day1.length; b++ ){
+                for (var b = 0; b < day2.length; b++ ){
                     testSched[1].push(day2[b]);
 
                 }
-                for (var b = 0; b < day1.length; b++ ){
+                for (var b = 0; b < day3.length; b++ ){
                     testSched[2].push(day3[b]);
 
                 }
-                for (var b = 0; b < day1.length; b++ ){
+                for (var b = 0; b < day4.length; b++ ){
                     testSched[3].push(day4[b]);
 
                 }
-                for (var b = 0; b < day1.length; b++ ){
+                for (var b = 0; b < day5.length; b++ ){
                     testSched[4].push(day5[b]);
 
                 }
 
-                for (var b = 0; b < day1.length; b++ ){
+                for (var b = 0; b < day6.length; b++ ){
                     testSched[5].push(day6[b]);
 
                 }
@@ -191,9 +213,9 @@
                 var x = 0;
                 var skip = "dont";
                 
-                while (x < 7) {
+                while (x < 8) {
 
-                    if (testSched[i][x] == testCompare[j]){                            
+                    if (testSched[i][x] == testCompare[j]){    
 
                         var hour = $('<div></div>', {
                             class: "hour-save " + hours[j]
@@ -211,7 +233,7 @@
 
                     x++;
 
-                }
+                }   
 
                     if(skip == "skip"){
 
@@ -392,7 +414,7 @@
                     }
                     else {
                         $(this).addClass('selected');
-                        console.log(" A A A A A GUY GANSA ");
+                       
                     }
                 }
             }).on('mousedown', function() {
@@ -408,7 +430,7 @@
                         schedule.trigger('selectionremoved')
                         $(this).removeClass('selected');
                         devarionMode = true;
-                        console.log("REMOVED? AGUY GANSA");
+                        console.log("REMOVED?  GANSA");
                         $(this).css('background','#dddddd');
 
                     }
@@ -416,7 +438,7 @@
                     schedule.trigger('selectionremoved')
                     $(this).removeClass('selected');
                     devarionMode = true;
-                    console.log("REMOVED? AGUY");
+                    console.log("REMOVED? ");
                 }
 
 
@@ -443,9 +465,29 @@
 
         function parseHours(string) {
 
-            var output = ["<br> 7:30 AM<br> - </br> 9:00 PM","<br> 9:15 AM<br> - </br> 10:45 PM","<br> 11:00 AM<br> - </br> 12:30 PM",
-            "<br> 12:45 AM<br> - </br> 2:15 PM","<br> 2:30 AM<br> - </br> 4:00 PM", 
-            "<br> 4:15 AM<br> - </br> 5:45 PM", "<br> 6:00 AM<br> - </br> 7:30 PM", "<br> 8:45 AM<br> - </br> 9:15 PM"];
+            // TO VARIABLE THE TIME SCHEDULE 
+
+            var Entry1Start = scheduleTimes.Entry1Start;
+            var Entry1End = scheduleTimes.Entry1End;
+            var Entry2Start = scheduleTimes.Entry2Start;
+            var Entry2End = scheduleTimes.Entry2End;
+            var Entry3Start = scheduleTimes.Entry3Start;
+            var Entry3End = scheduleTimes.Entry3End;
+            var Entry4Start = scheduleTimes.Entry4Start;
+            var Entry4End = scheduleTimes.Entry4End;
+            var Entry5Start = scheduleTimes.Entry5Start;
+            var Entry5End = scheduleTimes.Entry5End;
+            var Entry6Start = scheduleTimes.Entry6Start;
+            var Entry6End = scheduleTimes.Entry6End;
+            var Entry7Start = scheduleTimes.Entry7Start;
+            var Entry7End = scheduleTimes.Entry7End;
+            var Entry8Start = scheduleTimes.Entry8Start;
+            var Entry8End = scheduleTimes.Entry8End;            
+
+            var output = ["<br>" + Entry1Start + "<br> - </br>" + Entry1End,"<br>" + Entry2Start + "<br> - </br>" + Entry2End,
+            "<br>" + Entry3Start + "<br> - </br>" + Entry3End, "<br> " + Entry4Start + "<br> - </br>" + Entry4End,
+            "<br>" + Entry5Start + "<br> - </br>" + Entry5End, "<br> " + Entry6Start + "<br> - </br>" + Entry6End, 
+            "<br> " + Entry7Start + "<br> - </br>" + Entry7End, "<br> " + Entry8Start + "<br> - </br>" + Entry8End];
 
             return output;
         }

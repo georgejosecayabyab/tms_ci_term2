@@ -401,6 +401,27 @@
 			$this->db->delete('schedule'); 
 		}
 
+		public function get_schedule_complete($user_id)
+		{
+			$sql = "SELECT S.USER_ID, S.TIME_ID, S.DAY, TIME_FORMAT(TIME(T.START_TIME), '%h:%i %p') AS 'START_TIME', TIME_FORMAT(TIME(T.END_TIME), '%h:%i %p') AS 'END_TIME'
+					FROM SCHEDULE S JOIN TIME T
+					ON S.TIME_ID=T.TIME_ID
+					WHERE S.USER_ID='".$user_id."'";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
+		public function get_schedule_complete_by_day($user_id, $day)
+		{
+			$sql = "SELECT TIME_FORMAT(TIME(T.START_TIME), '%h:%i %p') AS 'START_TIME'
+					FROM SCHEDULE S JOIN TIME T
+					ON S.TIME_ID=T.TIME_ID
+					WHERE S.USER_ID='".$user_id."' 
+					AND S.DAY='".$day."';";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
 		public function insert_upload($data)
 		{
 			//escape every variable
@@ -539,6 +560,7 @@
 		{
 			$this->db->insert('meeting', $data);
 		}
+
 
 	}
 

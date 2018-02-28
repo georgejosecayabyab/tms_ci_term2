@@ -49,7 +49,7 @@
 
 
 <!-- jQuery 3 -->
-<script src="<?php echo base_url();?>js/jquery.min.js"></script>
+<!-- <script src="<?php //echo base_url();?>js/jquery.min.js"></script> -->
 
 <script src="<?php echo base_url();?>js/ckeditor/ckeditor.js"></script>
 
@@ -63,7 +63,7 @@
 <script src="<?php echo base_url();?>js/bootstrap-datepicker.min.js"></script>
 <script src="<?php echo base_url();?>js/bootstrap-datepicker.js"></script>
 
-<script src="<?php echo base_url();?>js/jquery.weekly-schedule-plugin.js"></script>
+<!-- <script src="<?php //echo base_url();?>js/jquery.weekly-schedule-plugin.js"></script> -->
 
 <script type="text/javascript">
   $('#datepicker').datepicker({
@@ -111,7 +111,7 @@
 </script>
 
 <!-- schedule-->
-<script>    
+<!-- <script>    
   $('.schedule').on('selectionmade', function() {
       console.log("Selection Made");
   }).on('selectionremoved', function() {
@@ -151,7 +151,7 @@
   });
 
 
-  $("#submit").click(function() {
+  $("#submitbtn").click(function() {
     var test = $('#target').weekly_schedule("getSelectedHour");
     console.log(test);
     $.ajax({
@@ -189,7 +189,7 @@
 
     
   });
-</script>
+</script> -->
 
 <!--notification refresh-->
 <script>
@@ -260,7 +260,7 @@
       },
       error: function(data, errorThrown)
       {
-        console.log(errorThrown);
+        console.log(data);
       }
     });
   });
@@ -311,6 +311,253 @@
   $(document).ready(function() {
     $('#table').DataTable();
   });
+</script>
+
+<!-- schedule 2-->
+
+<script>
+  $('.schedule').on('selectionmade', function() {
+    console.log("Selection Made");
+  }).on('selectionremoved', function() {
+    console.log("Selection Removed");
+  });
+
+  var hoursFormat = {
+
+            Entry1Start : "7:30 AM",
+            Entry1End : "9:00 AM",
+            Entry2Start : "9:15 AM",
+            Entry2End : "10:45 AM",
+            Entry3Start : "11:00 AM",
+            Entry3End : "12:30 PM",
+            Entry4Start : "12:45 PM",
+            Entry4End : "2:15 PM",
+            Entry5Start : "2:30 PM",
+            Entry5End : "4:00 PM",
+            Entry6Start : "4:15 PM",
+            Entry6End : "5:45 PM",
+            Entry7Start : "6:00 PM",
+            Entry7End : "7:30 PM",
+            Entry8Start :"7:30 PM",
+            Entry8End : "9:00 PM"           
+
+
+  };
+
+  var hoursFormat2 = {
+
+            Entry1Start : "ANDYAN",
+            Entry1End : "KA NANAMAN",
+            Entry2Start : "BAT DI KO",
+            Entry2End : "MAIWASAN",
+            Entry3Start : "NADARANG ",
+            Entry3End : "NANAMAN",
+            Entry4Start : "SA IYONG",
+            Entry4End : "APOY",
+            Entry5Start : "BAKIT BA ",
+            Entry5End : "LAGI BANG",
+            Entry6Start : "HINAHAYAAN",
+            Entry6End : "5:45 PM",
+            Entry7Start : "6:00 PM",
+            Entry7End : "7:30 PM",
+            Entry8Start :"7:30 PM",
+            Entry8End : "9:00 PM"          
+
+  }
+
+  var hoursFormat3 = {
+
+            Entry1Start : "9:00 AM",
+            Entry1End : "10:30 AM",
+            Entry2Start : "10:45 AM",
+            Entry2End : "12:15 PM",
+            Entry3Start : "1:45 PM",
+            Entry3End : "2:00 PM",
+            Entry4Start : "3:30 PM",
+            Entry4End : "5:00 PM",
+            Entry5Start : "5:15 PM",
+            Entry5End : "6:45 PM",
+            Entry6Start : "7:00 PM",
+            Entry6End : "8:30 PM",
+            Entry7Start : "8:45 PM",
+            Entry7End : "10:15 PM",
+            Entry8Start :"10:30 PM",
+            Entry8End : "12:00 PM"           
+
+
+  };
+
+  $('#target').weekly_schedule({
+    // Days displayed
+    days: ["mon", "tue", "wed", "thu", "fri", "sat"],
+    // Hours displyed
+    hours: hoursFormat,
+    // Font used in the component
+    fontFamily: "Montserrat",
+    // Font colot used in the component
+    fontColor: "black",
+    // Font weight used in the component
+    fontWeight: "10000",
+    // Font size used in the component
+    fontSize: "0.8em",
+    // Background color when hovered
+    hoverColor: "#2866a4",
+    // Background color when selected
+    selectionColor: "#6fa6dc",
+    // Background color of headers
+    headerBackgroundColor: "transparent"
+
+  });
+
+
+
+  $('#specialCase').click(function (){
+    $('#specialField').html('<input class="text form-control" placeholder="Subject/Date/Time" id="specialText"> </input>');
+  });
+  $("#submitbtn").click(function() {
+      var test = $('#target').weekly_schedule("getSelectedHour");
+
+      console.log('test');
+      console.log(test);
+      $.ajax({
+        type:'POST',
+        url: '/tms_ci/index.php/student/delete_schedule',
+        success: function()
+        {
+          for(var i = 0; i<=5; i++){
+            var i2 = i+"";
+            var day = i;
+            $.ajax({
+              type:'POST',
+              url:'/tms_ci/index.php/student/insert_schedule',
+              data: {'data': test[i2], 'day': day},
+              success: function(data)
+              {
+                console.log('succes');
+                console.log('length is '+ JSON.stringify(data));
+              },
+              error: function(err)
+              {
+                console.log('joke!'+err);
+              }
+
+            }); 
+            console.log(test[i2] + ' ' + i);
+          }
+
+          console.log('Schedule has been uploaded!');
+        },
+        error: function(err)
+        {
+          console.log('hay!'+err);
+        }
+      });
+
+      // console.log(test);
+
+  });
+
+    
+  // FUNCTION TO DISPLAY WHETHER IT HAS A SCHED OR NOT
+
+  hasSched("no");
+
+  function hasSched(x){
+
+
+
+    if (x == "no"){
+
+      $('#noSched').css({
+
+        display: "inline",
+        visibility: "visible"
+      });
+
+    }
+
+    else{
+
+     $('#withSched').css({
+
+      display: "inline",
+      visibility: "visible"
+    });
+
+   }
+
+  }
+
+  $('#editSched').click(function (){
+
+
+    $("#withSched").css({
+      display: "none",
+      visibility: "hidden"
+    });
+
+
+    $("#noSched").css({
+      display: "inline",
+      visibility: "visible"
+    });
+
+
+  });
+
+  // $('#submitbtn').click(function (){
+
+
+  //   $("#withSched").css({
+  //     display: "inline",
+  //     visibility: "visible"
+  //   });
+
+
+  //   $("#noSched").css({
+  //     display: "none",
+  //     visibility: "hidden"
+  //   });
+
+
+  // });
+
+  // $("#submit").click(function() {
+  //   var test = $('#target').weekly_schedule("getSelectedHour");
+  //   console.log(test);
+  //   $.ajax({
+  //     type:'POST',
+  //     url: '/tms_ci/index.php/student/delete_schedule',
+  //     success: function()
+  //     {
+  //       for(var i = 0; i<=5; i++){
+  //         var i2 = i+"";
+  //         var day = i;
+  //         $.ajax({
+  //           type:'POST',
+  //           url:'/tms_ci/index.php/student/insert_schedule',
+  //           data: {'data': test[i2], 'day': day},
+  //           success: function(data)
+  //           {
+  //             console.log('succes');
+  //             console.log('length is '+ JSON.stringify(data));
+  //           },
+  //           error: function(err)
+  //           {
+  //             console.log(err);
+  //           }
+
+  //         }); 
+  //       }
+
+  //       alert('Schedule has been uploaded!');
+  //     },
+  //     error: function(err)
+  //     {
+  //       console.log(err);
+  //     }
+  // });
+
 </script>
 
 </body>

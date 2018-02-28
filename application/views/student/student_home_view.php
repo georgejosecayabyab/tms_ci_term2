@@ -101,3 +101,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <?php echo base_url();?>
