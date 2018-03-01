@@ -280,6 +280,12 @@
 			$data['faculty_data'] = $this->faculty_model->get_faculty_detail($user_id);
 			$data['sched'] = $this->faculty_model->get_sched($user_id);
 			$data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
+			$data['mo'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'MO');
+			$data['tu'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'TU');
+			$data['we'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'WE');
+			$data['th'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'TH');
+			$data['fr'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'FR');
+			$data['sa'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'SA');
 			$data['active_tab'] = array(
 				'home' => "",
 				'schedule' => "active",
@@ -289,17 +295,21 @@
 			);
 
 
-			$this->load->view('faculty/faculty_base_head', $data);
-			if(sizeof($data['sched'])> 0)
-			{
-				$this->load->view('faculty/faculty_with_schedule_view', $data);
-			}
-			else
-			{
-				$this->load->view('faculty/faculty_schedule_view', $data);
-			}
-			$this->load->view('faculty/faculty_base_foot', $data); 
+			// $this->load->view('faculty/faculty_base_head', $data);
+			// if(sizeof($data['sched'])> 0)
+			// {
+			// 	$this->load->view('faculty/faculty_with_schedule_view', $data);
+			// }
+			// else
+			// {
+			// 	$this->load->view('faculty/faculty_schedule_view', $data);
+			// }
+			// $this->load->view('faculty/faculty_base_foot', $data); 
 			//$this->load->view('faculty/sample', $data);
+
+			$this->load->view('faculty/faculty_base_head', $data);
+			$this->load->view('faculty/faculty_schedule_view', $data);
+			$this->load->view('faculty/faculty_base_foot', $data); 
 		}
 
 		public function view_edit_schedule()

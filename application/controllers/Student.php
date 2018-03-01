@@ -227,7 +227,7 @@
 			
 			// $this->load->view('student/student_base_foot', $data); 
 			$this->load->view('student/student_base_head', $data);
-			$this->load->view('student/sample', $data);
+			$this->load->view('student/student_schedule_view', $data);
 			$this->load->view('student/student_base_foot', $data); 
 		}
 

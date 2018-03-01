@@ -41,6 +41,71 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
 
+  <script src="<?php echo base_url();?>js/jquery.min.js"></script>
+  <script src="<?php echo base_url();?>jquery.weekly-schedule-plugin.js"></script>
+  <?php 
+    if($active_tab['schedule']=='active')
+    {
+      $day1_content = array();
+      foreach($mo as $row)
+      {
+        $no_space = str_replace(' ', '', $row['START_TIME']);
+        array_push($day1_content, ltrim($no_space, '0'));
+      }
+
+      $day2_content = array();
+      foreach($tu as $row)
+      {
+        $no_space = str_replace(' ', '', $row['START_TIME']);
+        array_push($day2_content, ltrim($no_space, '0'));
+      }
+
+      $day3_content = array();
+      foreach($we as $row)
+      {
+        $no_space = str_replace(' ', '', $row['START_TIME']);
+        array_push($day3_content, ltrim($no_space, '0'));
+      }
+
+      $day4_content = array();
+      foreach($th as $row)
+      {
+        $no_space = str_replace(' ', '', $row['START_TIME']);
+        array_push($day4_content, ltrim($no_space, '0'));
+      }
+
+      $day5_content = array();
+      foreach($fr as $row)
+      {
+        $no_space = str_replace(' ', '', $row['START_TIME']);
+        array_push($day5_content, ltrim($no_space, '0'));
+      }
+
+      $day6_content = array();
+      foreach($sa as $row)
+      {
+        $no_space = str_replace(' ', '', $row['START_TIME']);
+        array_push($day6_content, ltrim($no_space, '0'));
+      }
+
+      $day1 = $day1_content;
+      $day2 = $day2_content;
+      $day3 = $day3_content;
+      $day4 = $day4_content;
+      $day5 = $day5_content;
+      $day6 = $day6_content;
+      $array = array('day1'=>$day1,'day2'=>$day2,'day3'=>$day3,'day4'=>$day4,'day5'=>$day5,'day6'=>$day6);
+      echo "<script> var schedule=".json_encode($array)."; passData(schedule); </script>";
+    }
+
+    // $day1 = $day1_content;
+    // $day2 = array("07:30AM");
+    // $day3 = array("7:30AM");
+    // $day4 = array("7:30AM");
+    // $day5 = array("7:30AM");
+    // $day6 = array("7:30PM");
+  ?>
+
 </head>
 <!--
 BODY TAG OPTIONS:

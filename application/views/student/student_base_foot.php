@@ -314,7 +314,6 @@
 </script>
 
 <!-- schedule 2-->
-
 <script>
   $('.schedule').on('selectionmade', function() {
     console.log("Selection Made");
