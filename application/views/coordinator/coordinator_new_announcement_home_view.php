@@ -4,7 +4,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h2>
-    Discussions
+    Home Announcement
     
     </h2>
     <ol class="breadcrumb">
@@ -36,7 +36,7 @@
           <form action="<?php echo site_url('coordinator/validate_home_announcement');?>" method="POST">
             <div class="box-header">
               <div class="form-group">
-                <label for="discussion_title" class="col-sm-2 control-label">Discussion Title</label>
+                <label for="discussion_title" class="col-sm-1 control-label">Title</label>
                 <div class="col-sm-6">
                   <input class="form-control" id="discussion_title" name="discussion_title" placeholder="Title">
                 </div>

@@ -19,9 +19,7 @@
           }
 
         </style>
-        <div class="col-lg-3 col-xs-2">
-          <a href="<?php echo site_url('coordinator/view_new_home_announcement');?>"><button id="newann" type="button" class="btn btn-block btn-primary">New Announcement</button></a>
-        </div>
+        
         <section id="tableSection" class="content container-fluid">
           <div class="row" id="scheduleRow">
             <table id="table" class="display" cellspacing="0" width="100%">
@@ -38,7 +36,7 @@
                 <?php foreach($news as $row):?>
                   <tr>
                     <td><a href="#"><?php echo $row['news_title'];?></a></td>
-                    <td id="del"><a href="<?php echo site_url('coordinator/delete_news/'.$row['news_id']);?>"><button type="button" value= "<?php echo $row['news_id'];?>" class="btn btn-block btn-danger">Delete</button></a></td>
+                    <td id="del"><a href="<?php echo site_url('coordinator/delete_news/'.$row['news_id']);?>"><button type="button" value= "<?php echo $row['news_id'];?>" class="btn btn-block btn-primary">Edit</button></a></td>
                   </tr>
                 <?php endforeach;?>
               </tbody>

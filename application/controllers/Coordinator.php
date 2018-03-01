@@ -44,7 +44,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -69,7 +70,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => "",
+				'time' => ""   
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -97,7 +99,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -121,7 +124,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -144,7 +148,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -166,7 +171,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -188,7 +194,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -210,7 +217,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -232,7 +240,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -256,7 +265,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -278,7 +288,8 @@
 				'report' => "active",
 				'archive' => "",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -303,7 +314,8 @@
 				'report' => "",
 				'archive' => "active",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -328,7 +340,8 @@
 				'report' => "",
 				'archive' => "active",
 				'specialization' => "",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -353,7 +366,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "",
-				'term' => "active"  
+				'term' => "active"  ,
+				'time' => "" 
 			);
 
 			//echo $data['year']['year'];
@@ -377,7 +391,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "active",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 
 			$this->load->view('coordinator/coordinator_base_head', $data);
@@ -398,7 +413,8 @@
 				'report' => "",
 				'archive' => "",
 				'specialization' => "active",
-				'term' => ""  
+				'term' => ""  ,
+				'time' => "" 
 			);
 		}
 
@@ -1114,6 +1130,29 @@
 			$this->session->sess_destroy();
 			$g_client->revokeToken();
 			redirect("home/index");
+		}
+		public function view_set_time_slot()
+		{
+			$data['active_tab'] = array(
+				'home' => "",
+				'group' => "",
+				'faculty' => "",
+				'student' => "",
+				'home_announcement' => "",
+				'specific_announcement' => "",
+				'form' => "",
+				'report' => "",
+				'archive' => "",
+				'specialization' => "",
+				'term' => "",
+				'time' => "active"  
+			);
+
+			//echo $data['year']['year'];
+
+			$this->load->view('coordinator/coordinator_base_head', $data);
+			$this->load->view('coordinator/coordinator_set_time_slot_view', $data);
+			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
 
