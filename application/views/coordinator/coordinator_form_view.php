@@ -3,13 +3,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
     Form Download Links
     
-    </h1>
+    </h2>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-      
+      <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
+      <li class="<?php echo $active_tab['form'];?>"><a href="<?php echo site_url('coordinator/view_form');?>"><i class="fa fa-sticky-note"></i> <span>Forms</span></a></li>
     </ol>
   </section>
   <!-- Main content -->
@@ -27,9 +27,15 @@
       <?php echo $this->session->flashdata('success'); ?></center>
     </div>
   <?php endif; ?>
+  <style type="text/css">
+    #addForm{
+      margin-left: 30px;
+      margin-top: 20px;
+    }
+  </style>
   <div class="row">
-    <div class="col-lg-6 col-xs-4">
-      <button id="addFaculty2" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Form</button>
+    <div class="col-lg-12 col-xs-8">
+      <button id="addForm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Form</button>
     </div>
   </div>
   <!-- Modal -->
@@ -51,8 +57,8 @@
             </div>
           <div class="form-group ">
             <div class="col-sm-8">
-              <label for="inputName" class="col-sm-2 control-label">Course</label>
-              <select class="form-control" name="course">
+              <label for="course" class="col-sm-2 control-label">Course</label>
+              <select class="form-control" id="course" name="course" style="width: 50%;">
                 <?php foreach($course as $row):?>
                   <option><?php echo $row['course_code'];?></option>
                 <?php endforeach;?>
@@ -60,10 +66,16 @@
             </div>
           </div>
         </div>
+        <style>
+          #btnb{
+            margin-right: 20px;
+          }
+        </style>
         <div class="modal-footer">
           <div class="row" align="center">
-            <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
-            <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+           
+            <button id="btnb" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+             <button type="submit" class="btn btn-success">Save and Quit</button>
           </div>
         </div>
       </div>

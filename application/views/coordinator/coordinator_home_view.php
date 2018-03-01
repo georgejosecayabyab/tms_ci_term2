@@ -2,22 +2,17 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 id="Title">
-        Defense
+      <h2>
+        Upcoming Defense Schedules
         
-      </h1>
+      </h2>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        
+        <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i>Home</a>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-
-
-
-
       <div class="row" id="scheduleRow">
         <?php foreach($defense as $row):?>
           <div class="col-lg-4 col-xs-4">
@@ -56,7 +51,7 @@
               <div class="icon">
               <i class="fa fa-calendar"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+             
             </div>
           </div>
         <?php endforeach;?>

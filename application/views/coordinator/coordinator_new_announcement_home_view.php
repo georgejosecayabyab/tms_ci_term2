@@ -3,13 +3,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
     Discussions
     
-    </h1>
+    </h2>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-      
+      <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-exclamation-circle"></i> <span>Announcements</span></a></li>
     </ol>
   </section>
   <!-- Main content -->
@@ -48,6 +48,16 @@
               <!-- /. tools -->
             </div>
             <!-- /.box-header -->
+            <style type="text/css">
+            #save_discussion{
+              margin-top: 20px;
+            }
+            #exit{
+              margin-right: 20px;
+              margin-top: 20px;
+            }
+
+            </style>
             <div class="box-body pad">
               <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
               <div class="container-fluid">
@@ -57,8 +67,9 @@
                   </div>
                   <div class="col-lg-3 col-xs-12">
                     <span></span>
-                    <input onclick="home_fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">
+                    
                     <a href="<?php echo site_url('coordinator/view_home_announcement');?>"><input id="exit" name="exit" type="button" class="btn btn-danger" value="Exit"></a>
+                    <input onclick="home_fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">
                   </div>
                 </div>
               </div>

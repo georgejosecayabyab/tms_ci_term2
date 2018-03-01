@@ -2,14 +2,14 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1 id="Title">
+        <h2>
         Specialization
         
         
-        </h1>
+        </h2>
         <ol class="breadcrumb">
-          <li><a href="studentHome"><i class="fa fa-home"></i> Home</a></li>
-          <li><a href="studentThesisArchive.html">Archive</a></li>
+          <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
+          <li class="<?php echo $active_tab['specialization'];?>"><a href="<?php echo site_url('coordinator/view_specialization');?>"><i class="fa fa-lightbulb-o"></i> <span>Specialization</span></a></li>
         </ol>
       </section>
       <!-- Main content -->
@@ -52,10 +52,18 @@
                   </div>
                 </div>
               </div>
+              <style type="text/css">
+              #btna{
+                margin-left: 20px;
+              }
+              </style>
               <div class="modal-footer">
                 <div class="row" align="center">
-                  <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
-                  <a href="<?php echo site_url('coordinator/view_specialization');?>"><button id="submitbtn2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button></a>
+
+                  <a href="<?php echo site_url('coordinator/view_specialization');?>"><button data-dismiss="modal" type="button" class="btn btn-danger">Exit</button></a>
+                  <button id="btna" type="submit" class="btn btn-success">Save and Quit</button>
+                 
+                  
                 </div>
               </div>
             </div>

@@ -2,13 +2,13 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1 id="Title">
+          <h2>
           Announcement Specific
           
-          </h1>
+          </h2>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            
+            <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
+            <li class="<?php echo $active_tab['specific_announcement'];?>"><a href="<?php echo site_url('coordinator/view_specific_announcement');?>"><i class="fa fa-circle-o"></i> Specific Announcements</a></li>
           </ol>
         </section>
         <!-- Main content -->

@@ -3,13 +3,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
       Thesis Groups
 
-    </h1>
+    </h2>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-       
+      <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i>Home</a></li>
+       <li class="<?php echo $active_tab['group'];?>"><a href="<?php echo site_url('coordinator/view_group');?>"><i class="fa fa-users"></i> <span>Groups</span></a></li>
     </ol>
   </section>
   <!-- Main content -->

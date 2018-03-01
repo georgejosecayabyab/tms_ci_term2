@@ -2,10 +2,11 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">Faculty</h1>
+    <h2>Faculty</h2>
     <ol class="breadcrumb">
 
       <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
+      <li class="<?php echo $active_tab['faculty'];?>"><a href="<?php echo site_url('coordinator/view_faculty');?>"><i class="fa fa-mortar-board"></i> <span>Faculty</span></a></li>
     </ol>
   </section>
   <!-- Main content -->
@@ -23,10 +24,16 @@
       <?php echo $this->session->flashdata('success'); ?></center>
     </div>
   <?php endif; ?>
+  <style type="text/css">
+    #addFac{
+      margin-left: 30px;
+      margin-top: 20px
+    }
+  </style>
   <!-- Trigger the modal with a button -->
   <div class="row">
     <div class="col-lg-6 col-xs-4">
-      <button id="addFaculty2" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Faculty</button>
+      <button id="addFac" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Faculty</button>
     </div>
   </div>
   <!-- Modal -->
@@ -73,10 +80,16 @@
                 </div>
               </div>
           </div>
+          <style>
+          #ex{
+            margin-right: 20px;
+          }
+          </style>
           <div class="modal-footer">
             <div class="row" align="center">
-              <button id="submitbtn" onclick=create_faculty() type="submit" class="btn btn-success">Save and Quit</button>
-              <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              
+              <button id="ex" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              <button onclick=create_faculty() type="submit" class="btn btn-success">Save and Quit</button>
             </div>
           </div>
         </div>

@@ -79,28 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 
                 <!-- /.messages-menu -->
                 <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
-                  <!-- Menu toggle button -->
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning">10</span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="header">You have 10 notifications</li>
-                    <li>
-                      <!-- Inner Menu: contains the notifications -->
-                      <ul class="menu">
-                        <li><!-- start notification -->
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                      </li>
-                      <!-- end notification -->
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">View all</a></li>
-                </ul>
-              </li>
+                
               <!-- Tasks Menu -->
               
               <!-- Control Sidebar Toggle Button -->
@@ -149,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="<?php echo $active_tab['archive'];?>"><a href="<?php echo site_url('coordinator/view_archive');?>"><i class="fa fa-archive"></i> <span>Archive</span></a></li>
           <li class="<?php echo $active_tab['specialization'];?>"><a href="<?php echo site_url('coordinator/view_specialization');?>"><i class="fa fa-lightbulb-o"></i> <span>Specialization</span></a></li>
           <li class="<?php echo $active_tab['term'];?>"><a href="<?php echo site_url('coordinator/view_set_term');?>"><i class="fa fa-calendar"></i> <span>Set Current Term </span></a></li>
+          <li class="<?php echo $active_tab['term'];?>"><a href="<?php echo site_url('coordinator/view_set_time_slot');?>"><i class="fa fa-calendar"></i> <span>Set Time Slot </span></a></li>
           
         </ul>
         <!-- /.sidebar-menu -->

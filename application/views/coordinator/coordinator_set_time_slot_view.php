@@ -8,7 +8,8 @@
     </h2>
     <ol class="breadcrumb">
       <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
-      <li class="<?php echo $active_tab['term'];?>"><a href="<?php echo site_url('coordinator/view_set_term');?>"><i class="fa fa-calendar"></i> <span>Set Current Term </span></a></li>      
+      <li><a href="studentGroup.html"><i class="fa fa-home"></i> Group</a></li>
+      
     </ol>
   </section>
   <!-- Main content -->

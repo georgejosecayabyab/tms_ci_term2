@@ -2,13 +2,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
     Students
     
-    </h1>
+    </h2>
     <ol class="breadcrumb">
-      <li><a href="studentHome"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="studentThesisArchive.html">Archive</a></li>
+      <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
+      <li class="<?php echo $active_tab['student'];?>"><a href="<?php echo site_url('coordinator/view_student');?>"><i class="fa fa-user"></i> <span>Students</span></a></li>
     </ol>
   </section>
   <!-- Main content -->
@@ -26,12 +26,20 @@
       <?php echo $this->session->flashdata('success'); ?></center>
     </div>
   <?php endif; ?>
+  <style type="text/css">
+    #addStu{
+      margin-top: 20px;
+      margin-left: 30px;
+      margin-right: 20px;
+    }
+    #addGroup{
+      margin-top: 20px;
+    }
+  </style>
   <div class="row">
-    <div class="col-lg-2 col-xs-4">
-      <button id="addFaculty" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Student</button>
-    </div>
-    <div class="col-lg-6 col-xs-4">
-      <button id="addFaculty" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Add Group</button>
+    <div class="col-lg-12 col-xs-8">
+      <button id="addStu" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Student</button>
+      <button id="addGroup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Add Group</button>
     </div>
   </div>
   <!-- Modal 1 -->
@@ -77,10 +85,16 @@
             </div>
             
           </div>
+          <style>
+          #ex2{
+            margin-right: 20px;
+          }
+          </style>
           <div class="modal-footer">
             <div class="row" align="center">
-              <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
-              <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              
+              <button id="ex2" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              <button type="submit" class="btn btn-success">Save and Quit</button>
             </div>
           </div>
         </div>
@@ -120,7 +134,7 @@
             <div class="form-group">
               <label for="course" class="col-sm-2 control-label">Course</label>
               <div class="col-sm-8">
-                <select class="form-control select2" id="course" name="course" style="width: 100%;">
+                <select class="form-control" id="course" name="course" style="width: 100%;">
                   <?php foreach($course as $row):?>
                     <option><?php echo $row['course_code'];?></option>
                   <?php endforeach;?>
@@ -130,7 +144,7 @@
             <div class="form-group">
               <label for="inputName" class="col-sm-2 control-label">Adviser</label>
               <div class="col-sm-8">
-                <select class="form-control select2" name="adviser" id="adviser" style="width: 100%;">
+                <select class="form-control" name="adviser" id="adviser" style="width: 100%;">
                   <?php foreach($faculty as $row):?>
                     <option value="<?php echo $row['user_id'];?>"><?php echo $row['last_name'].', '.$row['first_name'];?></option>
                   <?php endforeach;?>
@@ -146,8 +160,9 @@
           </div>
           <div class="modal-footer">
             <div class="row" align="center">
+              <button id="ex2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
               <button id="add_group_submit" onclick="" type="submit" class="btn btn-success">Save and Quit</button>
-              <button id="submitbtn2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              
             </div>
           </div>
         </div>
@@ -171,8 +186,25 @@
         <div class="form-group">
           <tbody>
             <?php foreach($student as $row):?>
+
+
               <tr>
+              <?php 
+                if($row['IS_ACTIVE'] == 1 && $row['GROUP_NAME'] == null)
+                {
+                  ?>
                 <td><input name="<?php echo $row['USER_ID'];?>" type="checkbox" id="student_box"></td>
+
+                <?php } 
+                else
+                {
+                  echo '<td></td>';
+
+                }
+
+
+                ?>
+
                 <td><?php echo $row['NAME'];?></td>
                 <td>
                   <?php
