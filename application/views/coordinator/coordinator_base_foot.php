@@ -13,7 +13,7 @@
       <ul class="control-sidebar-menu">
         <li>
           <a href="<?php echo site_url('coordinator/logout');?>">
-            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+            <i class="menu-icon fa fa-sign-out bg-green"></i>
             <div class="menu-info">
               <h4 class="control-sidebar-subheading">Logout Profile</h4>
             </div>
