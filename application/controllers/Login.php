@@ -77,7 +77,7 @@
 					else
 					{
 						$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Invalid email and password!</div>');
-                        redirect('login/index');
+                        redirect('login/index_1');
 					}
 				}
 				else

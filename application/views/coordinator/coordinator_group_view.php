@@ -137,92 +137,20 @@
               </td>
               <td>
                 <?php if($row['DEFENSE_DATE']!=NULL):?>
-                  <?php if($row['INITIAL_VERDICT'] == 'NOV'):?>
+                  <?php if($row['INITIAL_VERDICT'] == 'NOV'):?> <!--PAG WALA PA SYANG INITIAL VERDICT-->
                     <button id="<?php echo $row['INITIAL_VERDICT'];?>" value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState('<?php echo $row['DEFENSE_TYPE'];?>')"> 
                       <?php 
-                        if($row['INITIAL_VERDICT']=='NOV')
-                        {
-                          if($row['INITIAL_VERDICT']=='NOV')
-                          {
-                            echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
-                          }
-                          else if($row['INITIAL_VERDICT']=='CP')
-                          {
-                            echo 'Conditional Pass <i class="fa fa-check-circle conditionalCircle">';
-                          }
-                          else if($row['INITIAL_VERDICT']=='F')
-                          {
-                            echo 'Fail <i class="fa fa-times-circle failCircle"> </i>';
-                          }
-                          else if($row['INITIAL_VERDICT']=='P')
-                          {
-                            echo 'Pass <i class="fa fa-check-circle successCircle"></i>';
-                          }
-                          else
-                          {
-                            echo 'Redefense  <i class="fa fa-refresh redefenseCircle"> </i>';
-                          }
-                        }
-                        else
-                        {
-                          if($row['FINAL_VERDICT']=='NVY')
-                          {
-                            echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
-                          }
-                          else if($row['FINAL_VERDICT']=='CP')
-                          {
-                            echo 'Conditional Pass <i class="fa fa-check-circle conditionalCircle">';
-                          }
-                          else if($row['FINAL_VERDICT']=='F')
-                          {
-                            echo 'Fail <i class="fa fa-times-circle failCircle"> </i>';
-                          }
-                          else if($row['FINAL_VERDICT']=='P')
-                          {
-                            echo 'Pass <i class="fa fa-check-circle successCircle"></i>';
-                          }
-                          else
-                          {
-                            echo 'Redefense  <i class="fa fa-refresh redefenseCircle"> </i>';
-                          }
-                        }
+                        echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
                       ?>
                     </button>
-                  <?php else:?>
-                    <?php if($row['FINAL_VERDICT'] != 'P'): ?>
-                      <button id="<?php echo $row['INITIAL_VERDICT'];?>" value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState('no')"> 
-                          <?php 
-                              if($row['INITIAL_VERDICT']=='NOV')
-                              {
-                                echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
-                              }
-                              else if($row['INITIAL_VERDICT']=='CP')
-                              {
-                                echo 'Conditional Pass <i class="fa fa-check-circle conditionalCircle">';
-                              }
-                              else if($row['INITIAL_VERDICT']=='F')
-                              {
-                                echo 'Fail <i class="fa fa-times-circle failCircle"> </i>';
-                              }
-                              else if($row['INITIAL_VERDICT']=='P')
-                              {
-                                echo 'Pass <i class="fa fa-check-circle successCircle"></i>';
-                              }
-                              else
-                              {
-                                echo 'Redefense  <i class="fa fa-refresh redefenseCircle"> </i>';
-                              }
-                          ?>
-                      </button>
+                  <?php else:?> <!-- MAY INITIAL VERDICT NA SIYA-->
+                    <?php if($row['INITIAL_VERDICT'] == 'P'):?>
+                        <?php echo 'Pass <i class="fa fa-check-circle successCircle"></i>'; ?>
                     <?php else:?>
-                      <?php 
-                        if($row['FINAL_VERDICT'] == 'NVY')
-                        {
-                          if($row['INITIAL_VERDICT']=='NOV')
-                          {
-                            echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
-                          }
-                          else if($row['INITIAL_VERDICT']=='CP')
+                      <?php if($row['FINAL_VERDICT'] == 'NVY'):?>
+                        <button id="<?php echo $row['INITIAL_VERDICT'];?>" value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState('no')"> 
+                        <?php 
+                          if($row['INITIAL_VERDICT']=='CP')
                           {
                             echo 'Conditional Pass <i class="fa fa-check-circle conditionalCircle">';
                           }
@@ -230,22 +158,26 @@
                           {
                             echo 'Fail <i class="fa fa-times-circle failCircle"> </i>';
                           }
-                          else if($row['INITIAL_VERDICT']=='P')
+                          else if($row['INITIAL_VERDICT']=='SD')
                           {
-                            echo 'Pass <i class="fa fa-check-circle successCircle"></i>';
+                            echo 'Special Defense <i class="fa fa-refresh redefenseCircle"> </i>';
+                          }
+                          else if($row['INITIAL_VERDICT']=='RD')
+                          {
+                            echo 'Redefense <i class="fa fa-refresh redefenseCircle"> </i>';
+                          }
+                          else if($row['INITIAL_VERDICT']=='RM')
+                          {
+                            echo 'Redemo <i class="fa fa-refresh redefenseCircle"> </i>';
                           }
                           else
                           {
-                            echo 'Redefense  <i class="fa fa-refresh redefenseCircle"> </i>';
-                          }
-                        }
-                        else
-                        {
-                          if($row['FINAL_VERDICT']=='NVY')
-                          {
                             echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
                           }
-                          else if($row['FINAL_VERDICT']=='CP')
+                        ?>
+                      <?php else:?>
+                        <?php 
+                          if($row['FINAL_VERDICT']=='CP')
                           {
                             echo 'Conditional Pass <i class="fa fa-check-circle conditionalCircle">';
                           }
@@ -253,19 +185,28 @@
                           {
                             echo 'Fail <i class="fa fa-times-circle failCircle"> </i>';
                           }
-                          else if($row['FINAL_VERDICT']=='P')
+                          else if($row['FINAL_VERDICT']=='SD')
                           {
-                            echo 'Pass <i class="fa fa-check-circle successCircle"></i>';
+                            echo 'Special Defense <i class="fa fa-refresh redefenseCircle"> </i>';
+                          }
+                          else if($row['FINAL_VERDICT']=='RD')
+                          {
+                            echo 'Redefense <i class="fa fa-refresh redefenseCircle"> </i>';
+                          }
+                          else if($row['FINAL_VERDICT']=='RM')
+                          {
+                            echo 'Redemo <i class="fa fa-refresh redefenseCircle"> </i>';
                           }
                           else
                           {
-                            echo 'Redefense  <i class="fa fa-refresh redefenseCircle"> </i>';
+                            echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
                           }
-                        }
-                      ?>
+                        ?>
+                      <?php endif;?>
                     <?php endif;?>
                   <?php endif;?>
                 <?php else:?>
+
                 <?php endif;?>
 
               </td>
