@@ -85,6 +85,7 @@
 			$data['panel'] = $this->coordinator_model->get_no_of_panels();
 			$data['group'] = $this->coordinator_model->get_no_of_groups();
 			$data['all_rank'] = $this->coordinator_model->get_all_rank();
+			$data['all_department'] = $this->coordinator_model->get_all_department();
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "",
@@ -772,6 +773,7 @@
 			$first_name = $this->input->post("first_name");
 			$last_name = $this->input->post("last_name");
 			$rank = $this->input->post("rank");
+			$department_name = $this->input->post("department_name");
 			date_default_timezone_set('Asia/Manila');
 			$date_time = date("Y-m-d H:i:s");
 
@@ -787,7 +789,7 @@
 			}
 			else
 			{
-				$this->create_faculty($email, $first_name, $last_name, $date_time, $rank);
+				$this->create_faculty($email, $first_name, $last_name, $date_time, $rank, $department_name);
 				$this->session->set_flashdata('success', 'Faculty has been created!');
 				redirect('coordinator/view_faculty');
 			}
@@ -820,7 +822,7 @@
 			}
 		}
 
-		public function create_faculty($email, $first_name, $last_name, $date_time, $rank)
+		public function create_faculty($email, $first_name, $last_name, $date_time, $rank, $department_name)
 		{
 			$user = array(
 				'first_name' => $first_name,
@@ -835,7 +837,7 @@
 			);
 			$this->coordinator_model->insert_user($user);
 
-			$this->coordinator_model->insert_faculty($first_name, $last_name, $email, $rank);
+			$this->coordinator_model->insert_faculty($first_name, $last_name, $email, $rank, $department_name);
 
 		}
 

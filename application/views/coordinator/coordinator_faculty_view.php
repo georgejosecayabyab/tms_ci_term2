@@ -68,6 +68,19 @@
               </div>
               
               <div class="form-group ">
+                <label for="inputName" class="col-sm-2 control-label">Department</label>
+                
+                <div class="col-sm-8">
+                  <select name="department_name" class="form-control" id="faculty_department">
+                    <?php foreach($all_department as $row):?>
+                      <option><?php echo $row['department_name'];?></option>
+                    <?php endforeach;?>
+                    
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group ">
                 <label for="inputName" class="col-sm-2 control-label">Rank</label>
                 
                 <div class="col-sm-8">

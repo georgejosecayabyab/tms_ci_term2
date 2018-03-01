@@ -1487,8 +1487,9 @@ immediately after the control sidebar -->
     var first_name = $('#faculty_first_name').val();
     var last_name = $('#faculty_last_name').val();
     var rank = $('#faculty_rank').val();
+    var department = $('#faculty_department').val();
 
-    console.log(email+first_name+last_name+rank);
+    console.log(email+first_name+last_name+rank+department);
     
   }
 </script>

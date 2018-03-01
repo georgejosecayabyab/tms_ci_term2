@@ -516,6 +516,13 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function get_all_department()
+	{
+		$sql = "SELECT * FROM DEPARTMENT";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	public function insert_user($data)
 	{
 		//escape every variable
@@ -531,10 +538,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 	}
 
-	public function insert_faculty($first_name, $last_name, $email, $rank)
+	public function insert_faculty($first_name, $last_name, $email, $rank, $department_name)
 	{
-		$sql = "INSERT INTO FACULTY (USER_ID, IS_COORDINATOR, RANK)
-				VALUES ((SELECT USER_ID FROM USER WHERE FIRST_NAME='".$first_name."' AND LAST_NAME='".$last_name."' AND EMAIL='".$email."' AND USER_TYPE=1),0, (SELECT RANK_CODE FROM RANK WHERE RANK='".$rank."'));";
+		$sql = "INSERT INTO FACULTY (USER_ID, IS_COORDINATOR, RANK, DEPARTMENT_CODE)
+				VALUES ((SELECT USER_ID FROM USER WHERE FIRST_NAME='".$first_name."' AND LAST_NAME='".$last_name."' AND EMAIL='".$email."' AND USER_TYPE=1),0, (SELECT RANK_CODE FROM RANK WHERE RANK='".$rank."'),(SELECT DEPARTMENT_CODE FROM DEPARTMENT WHERE DEPARTMENT_NAME='".$department_name."'));"; 
 
 		$query = $this->db->query($sql);
 	}
