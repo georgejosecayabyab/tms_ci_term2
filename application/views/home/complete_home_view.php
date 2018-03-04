@@ -148,14 +148,9 @@
              
               <div>
                 <h2>
-                <i class="fa fa-calendar"></i> Announcement 1
+                <i class="fa fa-calendar"></i><?php echo $news_1['news_title'];?>
                 </h2>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!
-
-                    <br> </br>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!
-
-          
+                <?php echo substr($news_1['news_details'],0, 100);?>
               </div>
             </div>
           </div>
@@ -165,17 +160,9 @@
              
               <div>
                 <h2>
-                <i class="fa fa-trophy"></i> Announcement 2
+                <i class="fa fa-trophy"></i><?php echo $news_2['news_title'];?>
                 </h2>
-
-                <div class="body">
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!
-
-                  <br></br> 
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!
-
-               </div>
-          
+                <?php echo substr($news_2['news_details'],0, 100);?>
               </div>
             </div>
           </div>
@@ -185,17 +172,9 @@
              
               <div>
                 <h2>
-                <i class="fa fa-newspaper-o"></i>  Announcement 3
+                <i class="fa fa-newspaper-o"></i><?php echo $news_3['news_title'];?>
                 </h2>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores! 
-
-                 <br> </br>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!
-
-
-
-
-          
+                <?php echo substr($news_3['news_details'],0, 100);?>
               </div>
             </div>
           </div>
@@ -336,13 +315,16 @@
              <h2 class="card-title">  <i class="fa fa-calendar"></i>  News</h2>
          
           <br>
-            <strong> News Ipsunm Dolor</strong> 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+          <strong><?php echo $news_1['news_title']?></strong>
+          <?php echo $news_1['news_details'];?>
 
-          <strong> Adipisci News Soluto</strong>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+          <br>
+          <strong><?php echo $news_2['news_title']?></strong>
+          <?php echo $news_2['news_details'];?>
+
+          <br>
+          <strong><?php echo $news_3['news_title']?></strong>
+          <?php echo $news_3['news_details'];?>
 
         </div>
         <div class="card-footer">

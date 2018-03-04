@@ -14,6 +14,9 @@
 		{
 			$data['awards'] = $this->home_model->get_awards_list();
 			$data['news'] = $this->home_model->get_news_list();
+			$data['news_1'] = $this->home_model->get_specific_news(1);
+			$data['news_2'] = $this->home_model->get_specific_news(2);
+			$data['news_3'] = $this->home_model->get_specific_news(3);
 			$data['defense'] = $this->home_model->get_defense_list();
 			$data['active_tab'] = array(
 				'home' => "active",
@@ -26,7 +29,6 @@
 			// $this->load->view('home/home_foot');
 			$this->load->view('home/complete_home_view', $data);
 		}
-
 		
 	}
 ?>

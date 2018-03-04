@@ -50,7 +50,13 @@
 			return $query->first_row('array');
 		}
 
-
+		public function get_specific_news($news_id)
+		{
+			$sql = "SELECT * FROM NEWS 
+					WHERE NEWS_ID='".$news_id."';";
+			$query = $this->db->query($sql);
+			return $query->first_row('array');
+		}
 		
 			
 	}
