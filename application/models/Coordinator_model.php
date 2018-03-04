@@ -553,6 +553,22 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function get_specific_news($news_id)
+	{
+		$sql = "SELECT * FROM NEWS 
+				WHERE NEWS_ID='".$news_id."';";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
+	public function update_specific_news($data)
+	{
+		$sql = "update news
+				set news_title='".$data['news_title']."', news_details='".$data['news_details']."', date_time='".$data['date_time']."' 
+				where news_id='".$data['news_id']."';";
+		$this->db->query($sql);
+	}
+
 	public function delete_news($news_id)
 	{
 		//escape all variable

@@ -15,30 +15,29 @@
   <!-- Main content -->
   <section class="content">
     <?php if($this->session->flashdata('fail')): ?>
-        
-                <div class="alert alert-info alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-info"></i> Alert!</h4>
-                <?php echo $this->session->flashdata('fail'); ?>
-          </div>
-      <?php endif; ?>
-      <?php if($this->session->flashdata('success')): ?>
+      <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-info"></i> Alert!</h4>
+        <?php echo $this->session->flashdata('fail'); ?>
+      </div>
+    <?php endif; ?>
+    <?php if($this->session->flashdata('success')): ?>
+      <?php echo $this->session->flashdata('success'); ?>
+      <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-info"></i> Alert!</h4>
         <?php echo $this->session->flashdata('success'); ?>
-        <div class="alert alert-info alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-info"></i> Alert!</h4>
-                <?php echo $this->session->flashdata('success'); ?>
-        </div>
-      <?php endif; ?>
+      </div>
+    <?php endif; ?>
     <div class="row">
       <div class="col-md-12">
         <div class="box box-info">
-          <form action="<?php echo site_url('coordinator/validate_home_announcement');?>" method="POST">
+          <form action="<?php echo site_url('coordinator/validate_edited_home_announcement/'.$specific_news['news_id']);?>" method="POST">
             <div class="box-header">
               <div class="form-group">
                 <label for="discussion_title" class="col-sm-1 control-label">Title</label>
                 <div class="col-sm-6">
-                  <input class="form-control" id="discussion_title" name="discussion_title" placeholder="Title">
+                  <input class="form-control" id="discussion_title" name="discussion_title" placeholder="Title" value="<?php echo $specific_news['news_title'];?>">
                 </div>
               </div>
               <!-- tools box -->
@@ -59,7 +58,7 @@
 
             </style>
             <div class="box-body pad">
-              <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
+              <textarea id="editor1" name="editor1" rows="10" cols="80"><?php echo $specific_news['news_details'];?></textarea>
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-lg-4 col-xs-12">

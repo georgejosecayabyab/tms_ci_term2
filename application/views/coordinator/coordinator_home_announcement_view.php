@@ -35,8 +35,8 @@
               <tbody>
                 <?php foreach($news as $row):?>
                   <tr>
-                    <td><a href="#"><?php echo $row['news_title'];?></a></td>
-                    <td id="del"><a href="<?php echo site_url('coordinator/delete_news/'.$row['news_id']);?>"><button type="button" value= "<?php echo $row['news_id'];?>" class="btn btn-block btn-primary">Edit</button></a></td>
+                    <td><a href="<?php echo site_url('coordinator/view_specific_home_announcement/'.$row['news_id']);?>"><?php echo $row['news_title'];?></a></td>
+                    <td id="del"><a href="<?php echo site_url('coordinator/view_specific_home_announcement/'.$row['news_id']);?>"><button type="button" value= "<?php echo $row['news_id'];?>" class="btn btn-block btn-primary">Edit</button></a></td>
                   </tr>
                 <?php endforeach;?>
               </tbody>

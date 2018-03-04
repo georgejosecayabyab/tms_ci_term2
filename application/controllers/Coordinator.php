@@ -203,6 +203,30 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		public function view_specific_home_announcement($news_id)
+		{
+			$data['group'] = $this->coordinator_model->get_group_info();
+			$data['specific_news'] = $this->coordinator_model->get_specific_news($news_id);
+			$data['active_tab'] = array(
+				'home' => "",
+				'group' => "",
+				'faculty' => "",
+				'student' => "",
+				'home_announcement' => "",
+				'specific_announcement' => "active",
+				'form' => "",
+				'report' => "",
+				'archive' => "",
+				'specialization' => "",
+				'term' => ""  ,
+				'time' => "" 
+			);
+
+			$this->load->view('coordinator/coordinator_base_head', $data);
+			$this->load->view('coordinator/coordinator_new_announcement_home_view', $data);
+			$this->load->view('coordinator/coordinator_base_foot', $data);
+		}
+
 		public function view_specific_announcement()
 		{
 			$data['related_news'] = $this->coordinator_model->get_related_news();
@@ -912,6 +936,37 @@
 					'is_featured' => 0,
 				);
 				$this->coordinator_model->insert_new_home_announcement($data);
+				redirect('coordinator/view_home_announcement');
+
+			}
+		}
+		
+		public function validate_edited_home_announcement($news_id)
+		{
+			$topic_name = $this->input->post("discussion_title");
+			$discussion = $this->input->post("editor1");
+			date_default_timezone_set('Asia/Manila');
+			$date_time = date("Y-m-d H:i:s");
+			
+
+
+			$this->form_validation->set_rules('discussion_title', 'Title', 'required|trim');
+			$this->form_validation->set_rules('editor1', 'Information', 'required|trim');
+
+			if($this->form_validation->run() == FALSE)
+			{
+				redirect('coordinator/view_specific_home_announcement/'.$news_id);
+			}
+			else
+			{
+				$data = array(
+					'news_details' => $discussion,
+					'news_title' => $topic_name,
+					'date_time' => $date_time,
+					'is_featured' => 0,
+					'news_id' => $news_id
+				);
+				$this->coordinator_model->update_specific_news($data);
 				redirect('coordinator/view_home_announcement');
 
 			}

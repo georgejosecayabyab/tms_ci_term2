@@ -46,7 +46,7 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><a href="#" data-toggle="modal" data-target="#modal-description"><?php echo $row['GROUP_NAME'];?></a></td><!--isn't better to have it as thesis?-->
+              <td><?php echo $row['GROUP_NAME'];?></td><!--isn't better to have it as thesis?-->
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
