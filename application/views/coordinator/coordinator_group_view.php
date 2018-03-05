@@ -4,7 +4,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h2>
-      Thesis Groups
+      Thesis Groups 
 
     </h2>
     <ol class="breadcrumb">
@@ -238,6 +238,7 @@
                     <i class="fa fa-calendar"></i>
                   </div>
                   <input type="text" class="form-control pull-right" id="datepicker">
+                  <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                 </div>
               </div>
             </div>

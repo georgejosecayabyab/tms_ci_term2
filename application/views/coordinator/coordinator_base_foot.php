@@ -1116,10 +1116,12 @@ immediately after the control sidebar -->
         m += 1;  // JavaScript months are 0-11
         var y = formattedDate.getFullYear();
         var new_date = y + "-" + m + "-" + d;
+        var base_url = $('#base').val();
+        console.log('echo the ' + base_url);
         
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_defense_date',
+          url: base_url+'index.php/coordinator/get_panel_defense_date',
           data: {'group_id': group_id, 'date': new_date, 'day':day},
           success: function(data)
           {
@@ -1130,7 +1132,7 @@ immediately after the control sidebar -->
             var common_button = "";
             for(var x = 0; x<data['free'].length; x++)
             {
-              var link = '/tms_ci/index.php/coordinator/set_defense_date_link/'+group_id+'/'+new_date+'/'+data['free'][x]['TIME_ID'];
+              var link = base_url+'index.php/coordinator/set_defense_date_link/'+group_id+'/'+new_date+'/'+data['free'][x]['TIME_ID'];
               var time_string = data['free'][x]['START']+'-'+data['free'][x]['END'];
               common_button = common_button + '<a href="'+link+'"><button id="'+data['free'][x]['TIME_ID']+'" class="btn btn-default time_button" name="time_button" value="'+data['free'][x]['TIME_ID']+'">'+ time_string+'</button></a>';
               console.log(common_button);

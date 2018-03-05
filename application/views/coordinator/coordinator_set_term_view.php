@@ -42,7 +42,6 @@
                     <?php 
                       $year1 = $year['year'] + 1;
                       $year = $year['year'];
-
                       echo 'Term '.$term['term'].' AY '.$year.'-'.$year1;
                     ?>  
                   </text>
