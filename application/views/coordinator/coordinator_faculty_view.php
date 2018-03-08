@@ -130,7 +130,7 @@
         <tbody>
           <?php foreach($faculty_detail as $row):?>
             <tr>
-              <td><?php echo $row['NAME'];?></td>
+              <td><a href="#"><?php echo $row['NAME'];?></a></td>
               <td><?php echo $row['EMAIL'];?></td>
               <td><?php echo $row['DEPARTMENT_NAME'];?></td>
               <td><?php echo $row['RANK'];?></td>

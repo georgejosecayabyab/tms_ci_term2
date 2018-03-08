@@ -83,7 +83,7 @@
               <tbody>
                 <?php foreach($specialization as $row):?>
                   <tr>
-                    <td><?php echo $row['specialization'];?></td>
+                    <td><a href="#"><?php echo $row['specialization'];?></a></td>
                   </tr>
                 <?php endforeach;?>
               </tbody>
