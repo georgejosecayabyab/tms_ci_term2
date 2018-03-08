@@ -7,7 +7,7 @@
           
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url('student/index');?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
             <li><a href="facultyPanelInitial.html">Panels</a></li>
             <li class="active">CT - Thesis Platform</li>
             

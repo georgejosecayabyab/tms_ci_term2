@@ -2,13 +2,13 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1 id="Title">
+          <h2>
           CT - Thesis Portal
           
-          </h1>
+          </h2>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="facultyPanelInitial.html">Panels</a></li>
+            <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url("faculty/index");?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li class="<?php echo $active_tab['panels'];?>"><a href="<?php echo site_url("faculty/view_panel_details");?>"><i class="fa fa-graduation-cap"></i> <span>Panels</span></a></li>
             <li class="active">CT - Thesis Platform</li>
             
           </ol>

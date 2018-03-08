@@ -3,10 +3,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 id="Title">
+      <h2>
         Defense Dates
         
-      </h1>
+      </h2>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('faculty');?>"><i class="fa fa-home"></i> Home</a></li>
         
@@ -57,7 +57,7 @@
               <div class="icon">
               <i class="fa fa-calendar"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              
             </div>
           </div>
         <?php endforeach;?>

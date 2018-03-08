@@ -2,13 +2,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 id="Title">
+      <h2>
         Advisees
         
-      </h1>
+      </h2> 
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('faculty');?>"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">Advisees</li>
+        <li class="active">Advisees</li><i class="fa fa-users"></i>
         
       </ol>
     </section>
@@ -108,10 +108,15 @@
         <?php else:?>
           <div class="col-lg-12 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-green">
-                <center>No Advisee Groups</center>
-              </div>
-            </div>
+             
+
+
+          <div class="alert alert-info alert-dismissible">
+            <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+            <?php echo "No Advisees"; ?></center>
+          </div>
+        </div>
         <?php endif;?>
       </div>
 

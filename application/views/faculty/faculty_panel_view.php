@@ -2,13 +2,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
       Panels
       
-    </h1>
+    </h2>
     <ol class="breadcrumb">
       <li><a href="<?php echo site_url('faculty');?>"><i class="fa fa-home"></i> Home</a></li>
-      <li class="active">Panels</li>
+      <li class="<?php echo $active_tab['panels'];?>"><a href="<?php echo site_url("faculty/view_panel_details");?>"><i class="fa fa-graduation-cap"></i> <span>Panels</span></a></li>
       
     </ol>
   </section>
@@ -23,7 +23,7 @@
         <div class="small-box bg-green">
           <div class="inner">
             
-          <h3><?php echo $row['GROUP_NAME'];?></h3>
+          <h2><b><?php echo $row['GROUP_NAME'];?></b></h2>
             <div class="row">
                 <div class="col-lg-6">
                 <p class="titleCard"> <b>
@@ -34,9 +34,8 @@
                   ?>  
                 </b></p>           
                 <p> <b> Time: </b><?php echo $row['START'].'-'.$row['END'];?></p>
-                <p> <b> Venue: </b><?php echo $row['VENUE']?></p>
-                <p> <b> Initial Defense: </b><?php echo $row['IV_CODE'];?></p>
-                <p> <b> Final Defense: </b><?php echo $row['FV_CODE'];?></p>
+                
+                
                 </div>
                 <div class="col-lg-6">
                 
@@ -88,7 +87,7 @@
                 <div class="col-lg-12">
                 
                   <p>
-                  <b> Tags: </b>
+                  <b> Specialization: </b>
                     <span></span>
                     <?php foreach($tags as $row_tag):?>
                       <?php if($row['GROUP_ID']==$row_tag['group_id']):?>
