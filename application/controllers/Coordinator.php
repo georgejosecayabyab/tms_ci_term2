@@ -1217,6 +1217,7 @@
 		{
 			$data = $this->coordinator_model->get_verdict($group_id);
 
+			
 			header('Content-Type: application/json');
 			echo json_encode($data);
 

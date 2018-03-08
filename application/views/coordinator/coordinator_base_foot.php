@@ -1452,13 +1452,14 @@ immediately after the control sidebar -->
   function edit_verdict()
   {
     var link = "";
+    var base = $('#base_url').val();
     if(type != 1)
     {
-      link = '/tms_ci/index.php/coordinator/update_initial_group_verdict';
+      link = base+'index.php/coordinator/update_initial_group_verdict';
     }
     else
     {
-      link = '/tms_ci/index.php/coordinator/update_final_group_verdict';
+      link = base+'index.php/coordinator/update_final_group_verdict';
     }
     $.ajax({
       type: 'POST',
