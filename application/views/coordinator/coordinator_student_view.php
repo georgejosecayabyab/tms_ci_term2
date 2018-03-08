@@ -206,7 +206,7 @@
 
                 ?>
 
-                <td><a href="#"><?php echo $row['NAME'];?></a></td>
+                <td><?php echo $row['NAME'];?></a></td>
                 <td>
                   <?php
                     echo $row['COURSE_CODE'];

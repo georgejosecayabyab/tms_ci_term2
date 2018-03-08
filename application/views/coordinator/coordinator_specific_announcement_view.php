@@ -3,7 +3,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h2>
-          Announcement Specific
+          Course Specific Announcement
           
           </h2>
           <ol class="breadcrumb">
