@@ -558,6 +558,12 @@
   // });
 
 </script>
+<script>
+  function sample()
+  {
+    console.log('Modal Sample');
+  }
+</script>
 
 </body>
 </html>
