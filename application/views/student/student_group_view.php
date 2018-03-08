@@ -3,13 +3,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
       <?php echo $group['group_name'];?>
-    </h1>
+    </h2>
     <br>
     <ol class="breadcrumb">
-      <li><a href="studentHome.html"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="#">Group</a></li>
+      <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url('student/index');?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
+      <li class="<?php echo $active_tab['group'];?>"><a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><i class="fa fa-users"></i> <span>Group</span></a></li>
       <li class="active"><?php echo $group['group_name'];?></li>
     </ol>
   </section>

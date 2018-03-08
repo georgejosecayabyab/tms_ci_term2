@@ -2,13 +2,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 id="Title">
-        Title
+      <h2>
+        Forms
         
-      </h1>
+      </h2>
       <ol class="breadcrumb">
-        <li><a href="studentHome.html"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active"><a href="studentForms.html">Forms</a></li>
+        <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url('student/index');?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li class="<?php echo $active_tab['form'];?>"><a href="<?php echo site_url('student/view_forms');?>"><i class="fa fa-sticky-note"></i> <span>Forms</span></a></li>
         
       </ol>
     </section>
