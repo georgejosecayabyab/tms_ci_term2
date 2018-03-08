@@ -1087,7 +1087,7 @@
 					$this->coordinator_model->update_student_course($mem['user_id'], $degree_code, $course_order['@ANSWER']);
 					if($mem['course_order'] == $course_order['@ANSWER'])
 					{
-						$this->coordinator_model->update_student_status($mem['user_id']); ///deactivates users
+						$this->coordinator_model->update_user_status($mem['user_id'], 0); ///deactivates users
 					}
 				}
 
@@ -1220,6 +1220,26 @@
 			header('Content-Type: application/json');
 			echo json_encode($data);
 
+		}
+
+		public function update_user_status()
+		{
+			$user_id = $this->input->post('user_id');
+			$status = $this->input->post('status');
+			$status_to_be = "";
+			if($status == 0)
+			{
+				$status_to_be = 1;
+			}
+			else
+			{
+				$status_to_be = 0;
+			}
+			$this->coordinator_model->update_user_status($user_id, $status_to_be);
+			$data = $this->coordinator_model->get_user_info($user_id);
+
+			header('Content-Type: application/json');
+			echo json_encode($data);
 		}
 
 	}

@@ -1508,6 +1508,7 @@ immediately after the control sidebar -->
   });
 </script>
 
+<!--create faculty-->
 <script>
   function create_faculty()
   {
@@ -1518,6 +1519,42 @@ immediately after the control sidebar -->
 
     console.log(email+first_name+last_name+rank);
     
+  }
+</script>
+
+<!--change active/inactive status-->
+<script>
+  function editStatus(id)
+  {
+    var base = $('#base_url').val();
+    alert(base);
+    var status_button_id = id.id;
+    var status = $('#'+status_button_id).val();
+    alert(status); 
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/coordinator/update_user_status',
+      data: {'user_id':status_button_id, 'status': status},
+      success: function(data)
+      {
+        $('#status_section_'+status_button_id).empty();
+        if(data['is_active'] == 0)
+        {
+        $('#status_section_'+status_button_id).append('<button id="'+data['user_id']+'" class="btn btn-default" onclick="editStatus(this)" value="0">Inactive </button>');
+        }
+        else
+        {
+          $('#status_section_'+status_button_id).append('<button id="'+data['user_id']+'" class="btn btn-success" onclick="editStatus(this)" value="1">Active </button>');
+        }
+        console.log(data['is_active']);
+      },
+      error: function(err)
+      {
+        alert(err);
+      }
+    })
+    
+
   }
 </script>
 

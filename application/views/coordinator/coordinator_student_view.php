@@ -42,6 +42,7 @@
       <button id="addGroup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Add Group</button>
     </div>
   </div>
+  <input id="base_url" type="hidden" value="<?php echo base_url();?>">
   <!-- Modal 1 -->
   <form action="<?php echo site_url('coordinator/validate_student');?>" method="POST" class="form-horizontal">
     <div id="myModal" class="modal fade" role="dialog">
@@ -222,7 +223,9 @@
                     {
                       echo 'Inactive';
                     }
-                  ?></td>
+                  ?>
+                    
+                </td>
               </tr>
             <?php endforeach;?>
             

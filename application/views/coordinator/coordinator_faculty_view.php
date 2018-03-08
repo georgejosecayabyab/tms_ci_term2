@@ -110,7 +110,7 @@
     </div>
   </form>
 
-
+  <input type="hidden" id="base_url" value="<?php echo base_url();?>">
   <section id="tableSection" class="content container-fluid">
     <div class="row" id="scheduleRow">
       
@@ -165,15 +165,21 @@
               </td>
               <td>
                 <?php 
+                  echo '<div id="status_section_'.$row['USER_ID'].'">';
                   if($row['IS_ACTIVE'] == 1)
                   {
+                    echo '<button id="'.$row['USER_ID'].'" class="btn btn-success" onclick="editStatus(this)" value="1">';
                     echo 'Active';
-                  } 
+                    echo '</button>';
+                  }
                   else
                   {
+                    echo '<button id="'.$row['USER_ID'].'" class="btn btn-default" onclick="editStatus(this)" value="0">';
                     echo 'Inactive';
+                    echo '</button>';
                   }
-                ?>  
+                  echo '</div>';
+                ?> 
               </td>
             </tr>
           <?php endforeach;?>

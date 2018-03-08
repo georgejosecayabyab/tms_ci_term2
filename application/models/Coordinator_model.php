@@ -96,7 +96,7 @@ class coordinator_model extends CI_Model
 	//This function gets the student information note no section
 	public function get_student_info()
 	{
-		$sql = "SELECT CONCAT(U.LAST_NAME,', ', U.FIRST_NAME) AS 'NAME', U.USER_ID, S.COURSE_CODE, TG.GROUP_NAME, U.IS_ACTIVE
+		$sql = "SELECT CONCAT(U.LAST_NAME,', ', U.FIRST_NAME) AS 'NAME', U.USER_ID, S.COURSE_CODE, TG.GROUP_NAME, U.IS_ACTIVE, TG.GROUP_ID
 				FROM STUDENT S 	JOIN USER U
 								ON S.USER_ID = U.USER_ID
                 				LEFT JOIN STUDENT_GROUP SG 
@@ -839,10 +839,10 @@ class coordinator_model extends CI_Model
 		$this->db->query($sql);
 	}
 
-	public function update_student_status($user_id)
+	public function update_user_status($user_id, $status)
 	{
 		$sql = "update user 
-				set is_active=0
+				set is_active=".$status."
 				where user_id=".$user_id.";";
 		$this->db->query($sql);
 	}
