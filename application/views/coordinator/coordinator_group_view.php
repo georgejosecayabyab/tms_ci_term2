@@ -114,7 +114,7 @@
                     <?php 
                       $data_time = "";
                       $date_new = strtotime($row['DEFENSE_DATE']);
-                      $formatted_date_new = date('d/m/Y', $date_new);
+                      $formatted_date_new = date('m/d/Y', $date_new);
                       $time_new = strtotime($row['START']);
                       $formatted_time_new = date('g:i A', $time_new);
                       $date_time = $formatted_date_new.' - '.$formatted_time_new;
@@ -127,7 +127,7 @@
                   <?php 
                     $data_time = "";
                     $date_new = strtotime($row['DEFENSE_DATE']);
-                    $formatted_date_new = date('d/m/Y', $date_new);
+                    $formatted_date_new = date('m/d/Y', $date_new);
                     $time_new = strtotime($row['START']);
                     $formatted_time_new = date('g:i A', $time_new);
                     $date_time = $formatted_date_new.' - '.$formatted_time_new;
@@ -145,7 +145,7 @@
                     </button>
                   <?php else:?> <!-- MAY INITIAL VERDICT NA SIYA-->
                     <?php if($row['INITIAL_VERDICT'] == 'P'):?>
-                        <?php echo 'Pass <i class="fa fa-check-circle successCircle"></i>'; ?>
+                        <?php echo '<div align=center>Pass <i class="fa fa-check-circle successCircle"></i></div>'; ?>
                     <?php else:?>
                       <?php if($row['FINAL_VERDICT'] == 'NVY'):?>
                         <button id="<?php echo $row['INITIAL_VERDICT'];?>" value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState('no')"> 
@@ -179,27 +179,33 @@
                         <?php 
                           if($row['FINAL_VERDICT']=='CP')
                           {
-                            echo 'Conditional Pass <i class="fa fa-check-circle conditionalCircle">';
+                            echo '<div align=center>Conditional Pass <i class="fa fa-check-circle conditionalCircle"></i></div>';
                           }
                           else if($row['FINAL_VERDICT']=='F')
                           {
-                            echo 'Fail <i class="fa fa-times-circle failCircle"> </i>';
+                            echo '<div align=center>Fail <i class="fa fa-times-circle failCircle"> </i></div>';
                           }
                           else if($row['FINAL_VERDICT']=='SD')
                           {
+                            echo '<button id="'.$row["FINAL_VERDICT"].'" value="'.$row["GROUP_ID"].'" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState()"> ';
                             echo 'Special Defense <i class="fa fa-refresh redefenseCircle"> </i>';
+                            echo '</button>';
                           }
                           else if($row['FINAL_VERDICT']=='RD')
                           {
+                            echo '<button id="'.$row["FINAL_VERDICT"].'" value="'.$row["GROUP_ID"].'" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState()"> ';
                             echo 'Redefense <i class="fa fa-refresh redefenseCircle"> </i>';
+                            echo '</button>';
                           }
                           else if($row['FINAL_VERDICT']=='RM')
                           {
+                            echo '<button id="'.$row["FINAL_VERDICT"].'" value="'.$row["GROUP_ID"].'" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState()"> ';
                             echo 'Redemo <i class="fa fa-refresh redefenseCircle"> </i>';
+                            echo '</button>';
                           }
                           else
                           {
-                            echo 'No Verdict <i class="fa fa-question-circle noVerdictCircle"> </i> ';
+                            echo '<div align=center>Pass <i class="fa fa-check-circle successCircle"></i></div> ';
                           }
                         ?>
                       <?php endif;?>
@@ -761,7 +767,7 @@
             </div>
           </div>
           <div class="post">
-            <h4> <label>  Assigned Panelist: </label> </h4> 
+            <h4> <label>  Currently Assigned Panelist: </label> </h4> 
             <div class="row" id="assignedPanel">
               <div id="firstPanelBox">
                 <div class="col-md-4">
