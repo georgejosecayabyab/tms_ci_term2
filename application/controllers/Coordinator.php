@@ -212,8 +212,8 @@
 				'group' => "",
 				'faculty' => "",
 				'student' => "",
-				'home_announcement' => "",
-				'specific_announcement' => "active",
+				'home_announcement' => "active",
+				'specific_announcement' => "",
 				'form' => "",
 				'report' => "",
 				'archive' => "",
@@ -1186,6 +1186,8 @@
 			$g_client->revokeToken();
 			redirect("home/index");
 		}
+
+
 		public function view_set_time_slot()
 		{
 			$data['active_tab'] = array(
@@ -1210,6 +1212,15 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+
+		public function get_verdict($group_id)
+		{
+			$data = $this->coordinator_model->get_verdict($group_id);
+
+			header('Content-Type: application/json');
+			echo json_encode($data);
+
+		}
 
 	}
 ?>

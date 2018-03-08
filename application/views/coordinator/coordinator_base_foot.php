@@ -1253,8 +1253,31 @@ immediately after the control sidebar -->
     chosen_code = text_code;
     $('#modal-verdict-title').empty();
     $('#modal-verdict-title').append('Defense Verdict: '+ text);
+
     
   })
+
+  $("button").click(function() {
+    var group_id = $(this).val();
+    var base = $('#base').val();
+    //alert(group_id);
+    $.ajax({
+        type: 'POST',
+        url: base+'index.php/coordinator/get_verdict/'+group_id,
+        success: function(data)
+        {
+          console.log("hellok");
+          console.log(data['FINAL_VERDICT']);
+          $('#final_verdict_modal_head').empty();
+          $('#final_verdict_modal_head').append('Last Verdict: ' + data['FINAL']);
+          
+        },
+        error: function(err)
+        {
+          console.log(err);
+        }
+      })
+  });
 
   function verdictState(defenseType){
 
@@ -1286,6 +1309,9 @@ immediately after the control sidebar -->
         display: "inline",
         visibility: "visible"
       });
+      
+
+      
 
     }
 

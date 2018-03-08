@@ -52,6 +52,16 @@
               </div>
               <!-- /. tools -->
             </div>
+            <style type="text/css">
+              #save_discussion {
+                margin-left: 20px;
+                margin-top: 20px;
+
+              }
+              #exita {
+                margin-top: 20px;
+              }
+            </style>
             <!-- /.box-header -->
             <div class="box-body pad">
               <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
@@ -62,8 +72,9 @@
                   </div>
                   <div class="col-lg-3 col-xs-12">
                     <span></span>
+                    <a href="<?php echo site_url('coordinator/view_specific_announcement/');?>"><input id="exita" name="exit" type="button" class="btn btn-danger" value="Exit"></a>
                     <input onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">
-                    <a href="<?php echo site_url('faculty/view_announcement_specific/');?>"><input id="exit" name="exit" type="button" class="btn btn-danger" value="Exit"></a>
+                    
                   </div>
                 </div>
               </div>

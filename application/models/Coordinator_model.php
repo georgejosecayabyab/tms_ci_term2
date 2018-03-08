@@ -161,7 +161,7 @@ class coordinator_model extends CI_Model
 	////get all defense available 
 	public function get_all_open_meetings()
 	{
-		$sql = "SELECT DD.GROUP_ID, DATE(DD.DEFENSE_DATE) AS DEF_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS START, TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS END, DD.VENUE, DD.STATUS, DATEDIFF(DD.DEFENSE_DATE, CURDATE()) AS DIFF, CURDATE() AS 'NOW', T.THESIS_TITLE
+		$sql = "SELECT DD.GROUP_ID, DATE(DD.DEFENSE_DATE) AS DEF_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS START, TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS END, DD.VENUE, DD.STATUS, DATEDIFF(DD.DEFENSE_DATE, CURDATE()) AS DIFF, CURDATE() AS 'NOW', T.THESIS_TITLE, TG.GROUP_NAME
 				FROM DEFENSE_DATE DD
 				JOIN THESIS_GROUP TG
 				ON TG.GROUP_ID=DD.GROUP_ID
@@ -279,6 +279,19 @@ class coordinator_model extends CI_Model
 		);
 		$this->db->where('group_id', $group_id);
 		$this->db->update('thesis_group', $data); 
+	}
+
+	public function get_verdict($group_id)
+	{
+		$sql = "SELECT FV.VERDICT AS 'FINAL', IV.VERDICT AS 'INITIAL' 
+				FROM THESIS_GROUP TG 
+				JOIN INITIAL_VERDICT IV 
+				ON IV.VERDICT_CODE= TG.INITIAL_VERDICT
+				JOIN FINAL_VERDICT FV
+				ON FV.VERDICT_CODE = TG.FINAL_VERDICT
+				WHERE GROUP_ID=".$group_id.";";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
 	}
 
 	////returns time of defenses the panels needed to attend on that day 

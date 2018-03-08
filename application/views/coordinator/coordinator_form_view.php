@@ -108,6 +108,7 @@
         </tbody>
       </table>
     </div>
+    <div align="center">Note: Please upload .docx format only</div>
     
   </section>
 </div>

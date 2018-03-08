@@ -46,7 +46,7 @@
                   }
                   ?></h3>
                   <p> <b> Time: </b><?php echo $row['START'].'-'.$row['END'];?></p>
-                  <p> <b> Venue: </b><?php echo $row['VENUE'];?></p>
+                  <p> <b> Group Name: </b><?php echo $row['GROUP_NAME'];?></p>
                   <p> <b> Topic: </b><?php echo $row['THESIS_TITLE']?></p>
                 </div>
                 <div class="icon">
@@ -67,6 +67,10 @@
 
       <!-- /.box-body -->
     </section>
+    <div align="center"><h4><b>Legend for defense schedules:</b></h4></div>
+    <div align="center">Red: 1 week away</div>
+    <div align="center">Yellow: 2 weeks away</div>
+    <div align="center">Blue: 3 weeks away</div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

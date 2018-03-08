@@ -29,6 +29,7 @@
         <?php echo $this->session->flashdata('success'); ?></center>
       </div>
     <?php endif; ?> 
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
     <div class="row" id="scheduleRow">
       <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
@@ -179,7 +180,9 @@
                         <?php 
                           if($row['FINAL_VERDICT']=='CP')
                           {
+                            echo '<button id="'.$row["FINAL_VERDICT"].'" value="'.$row["GROUP_ID"].'" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-verdict" onclick="verdictState()"> ';
                             echo '<div align=center>Conditional Pass <i class="fa fa-check-circle conditionalCircle"></i></div>';
+                            echo '</button>';
                           }
                           else if($row['FINAL_VERDICT']=='F')
                           {
@@ -513,7 +516,7 @@
 
         </div>
         <div id="finalVerdict" value="1">
-          <h4> <label>Final Verdict: </label> </h4>
+          <h4 id="final_verdict_modal_head"> <label>Final Verdict: </label> </h4>
           <div class="row">
             <a id="f-modal-verdict-pass" value="P" class="btn btn-app successBtn">
               <i class="fa fa-check"></i> Pass
@@ -1104,7 +1107,7 @@
 
         <div class="modal-footer">
 
-          <a href="<?php echo site_url('coordinator/view_group');?>"><button id="modal_panel_button" type="button" class="btn btn-primary pull-left">Save changes</button> </a>
+          <a href="<?php echo site_url('coordinator/view_group');?>"><button id="modal_panel_button" type="button" class="btn btn-success pull-left">Save changes</button> </a>
         </div>
       </div>
       <!-- /.modal-content -->
