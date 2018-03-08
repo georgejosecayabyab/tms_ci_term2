@@ -33,11 +33,13 @@ class coordinator_model extends CI_Model
 	//This function gets the user information of the faculty (NAME, USER_ID, IS_ACTIVE)
 	public function get_faculty_info()
 	{
-		$sql = "SELECT CONCAT(U.LAST_NAME,', ',U.FIRST_NAME) AS 'NAME', U.IS_ACTIVE, U.USER_ID, U.EMAIL, R.RANK
+		$sql = "SELECT CONCAT(U.LAST_NAME,', ',U.FIRST_NAME) AS 'NAME', U.IS_ACTIVE, U.USER_ID, U.EMAIL, R.RANK, D.DEPARTMENT_NAME
 				FROM FACULTY F 	LEFT JOIN USER U
 								ON F.USER_ID = U.USER_ID
 								JOIN RANK R
-								ON R.RANK_CODE=F.RANK;";
+								ON R.RANK_CODE=F.RANK
+                                JOIN DEPARTMENT D
+                                ON 	F.DEPARTMENT_CODE = D.DEPARTMENT_CODE;";
 
 		$query = $this->db->query($sql);
 		return $query->result_array();

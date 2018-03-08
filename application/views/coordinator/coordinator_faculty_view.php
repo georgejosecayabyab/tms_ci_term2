@@ -101,7 +101,7 @@
           <div class="modal-footer">
             <div class="row" align="center">
               
-              <button id="ex" onclick="location.href='facultyViewProfile.html';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              <button id="ex" onclick="location.href='<?php echo site_url('coordinator/view_faculty')?>';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
               <button onclick=create_faculty() type="submit" class="btn btn-success">Save and Quit</button>
             </div>
           </div>
@@ -119,6 +119,7 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Department</th>
             <th>Rank</th>
             <th># of Panels Assigned</th>
             <th># of Groups Supervised</th>
@@ -131,6 +132,7 @@
             <tr>
               <td><?php echo $row['NAME'];?></td>
               <td><?php echo $row['EMAIL'];?></td>
+              <td><?php echo $row['DEPARTMENT_NAME'];?></td>
               <td><?php echo $row['RANK'];?></td>
               <td>
                 <?php
