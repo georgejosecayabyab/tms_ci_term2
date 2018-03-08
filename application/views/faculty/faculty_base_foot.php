@@ -10,7 +10,7 @@
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><?php echo $faculty_data['LAST_NAME'].','.$faculty_data['FIRST_NAME'];?><i class="fa fa-home"></i></a></li>
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-user"></i><?php echo $faculty_data['LAST_NAME'].','.$faculty_data['FIRST_NAME'];?></a></li>
 
     </ul>
     <!-- Tab panes -->

@@ -2,12 +2,12 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
       Schedule
-    </h1>
+    </h2>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="facultyPanelInitial.html">Schedule</a></li>
+      <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url("faculty/index");?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
+      <li class="<?php echo $active_tab['schedule'];?>"><a href="<?php echo site_url("faculty/view_schedule");?>"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
        
       
     </ol>
@@ -112,9 +112,7 @@
       
 
       <!-- /.box-body -->
-      <div class="box-footer">
-         
-      </div>
+      
       <!-- /.box-footer-->
     </div>
     <!-- /.box -->

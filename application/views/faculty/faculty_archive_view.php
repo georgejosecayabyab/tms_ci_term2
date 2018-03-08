@@ -2,13 +2,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 id="Title">
+      <h2>
         Thesis Archive
         
-      </h1>
+      </h2>
       <ol class="breadcrumb">
         <li><a href="studentHome"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="studentThesisArchive.html">Archive</a></li>
+        <li class="<?php echo $active_tab['archive'];?>"><a href="<?php echo site_url("faculty/view_archive");?>"><i class="fa fa-archive"></i> <span>Archive</span></a></li>
       </ol>
     </section>
 

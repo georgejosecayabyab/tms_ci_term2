@@ -2,12 +2,12 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1 id="Title">
+    <h2>
       Input Schedule
-    </h1>
+    </h2>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="facultyPanelInitial.html">Schedule</a></li>
+      <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i>Home</a>
+      <li><a href="<?php echo site_url("faculty/view_schedule");?>"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
       
       
     </ol>
@@ -16,10 +16,7 @@
   <section class="content">
     <!-- Default box -->
     <div class="box">
-      <div class="box-header with-border">
-
-
-      </div>
+     
 
       <div class="row">
 
@@ -42,7 +39,7 @@
             </div>
           </div>
           <div class="col-xs-5">
-            <div class="box box-primary">
+            <div class="box">
 
               <!-- /.box-header -->
               <div  class="box-body">
@@ -81,14 +78,21 @@
             <!-- /.box-body -->
 
           </div>
+          <style type="text/css">
+            #submitbtn2{
+              margin-right: 20px;
+            }
+
+          </style>
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-4 col-xs-12">
-              </div>
+              </div>  
               <div class="col-lg-3 col-xs-12">
                 <form>
-                  <button id="submitbtn"  type="button" class="btn btn-success">Save and Quit</button>
+                  
                   <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" type="button" class="btn btn-danger">Exit</button>
+                  <button id="submitbtn"  type="button" class="btn btn-success">Save and Quit</button>
 
                 </form>
               </div>
