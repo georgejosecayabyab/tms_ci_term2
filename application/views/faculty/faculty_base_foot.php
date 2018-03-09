@@ -550,6 +550,8 @@ immediately after the control sidebar -->
           }
 
           console.log('Schedule has been uploaded!');
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>Schedule has been updated!</center></div>');
         },
         error: function(err)
         {

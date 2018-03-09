@@ -342,7 +342,7 @@
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
                     <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submit_tag" type="button" class="btn btn-success">Save and Quit</button></a>
-                    <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" type="button" class="btn btn-danger">Exit</button>
+                    <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
                     
                   </div>
                 </div>

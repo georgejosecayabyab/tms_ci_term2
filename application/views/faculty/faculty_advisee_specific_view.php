@@ -283,6 +283,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="start_time" class="control-label">Start Time</label>
+                  <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Start Time">
+                </div>
+
+                <div class="form-group">
                   <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
                   <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
                 </div>
