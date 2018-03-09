@@ -816,6 +816,54 @@
 			}
 		}
 
+		//////validate
+		public function validate_comment() 
+		{
+			$session = $this->session->userdata();
+			$user_id = $session['user_id'];
+
+			$comment = $this->input->post("comment");
+			$group_id = $this->input->post("group_id");
+			$thesis_title = $this->input->post("thesis_title");
+			date_default_timezone_set('Asia/Manila');
+			$date_time = date("Y-m-d H:i:s");
+
+			$this->form_validation->set_rules('comment', 'Comment', 'required|trim');
+
+			if($this->form_validation->run() == FALSE)
+			{
+				redirect('student/view_group/'.$group_id);
+			}
+			else
+			{
+				if($this->input->post('submit_comment') == "Submit")
+				{
+					$panel_group_id = $this->faculty_model->get_panel_group_id($user_id, $group_id);
+					$data = array(
+						'thesis_comment' =>  $comment,
+						'panel_group_id' => $panel_group_id['panel_group_id'],
+						'date_time' => $date_time
+					);
+					$this->faculty_model->insert_thesis_comment($data);
+					$result = $this->faculty_model->get_all_thesis_comment_notification_target($group_id, $user_id);
+					foreach($result as $row)
+					{
+						$this->insert_notification("New Comment from ".$thesis_title, $row['user_id']);
+						// $this->email->from('george_cayabyab@dlsu.edu.ph', $faculty_data['FIRST_NAME'].' '.$faculty_data['LAST_NAME']);
+						// $this->email->to('george_cayabyab@dlsu.edu.ph');
+
+						// $this->email->subject('CT Thesis');
+						// $this->email->message("New Reply in discussion: ".$thesis_title);
+
+						// $this->email->send();
+					}
+					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Successful comment</div>');
+                  	redirect('faculty/view_panel_specific/'.$group_id);
+				}
+			}
+
+		}
+
 
 	}
 

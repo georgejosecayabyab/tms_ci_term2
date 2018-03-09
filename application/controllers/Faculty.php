@@ -522,6 +522,7 @@
 
 					// $this->email->send();
 				}
+				$this->session->set_flashdata('success', 'A new discussion has been created!');
               	redirect('faculty/view_advisee_specific/'.$group_id);
 			}
 		}

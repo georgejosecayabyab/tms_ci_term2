@@ -312,6 +312,34 @@
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
+
+                <li class="time-label">
+                    <span class="bg-gray" id="panelComments">
+                        Post a comment
+                    </span>
+                </li>
+
+                <li id="inputComment">
+                  <i class="fa  fa-pencil-square-o bg-blue"></i>
+
+                  <div class="timeline-item">
+                   
+                    <h3 class="timeline-header">Post a Comment</h3>
+                    <?php echo form_open('faculty/validate_comment');?>
+                      <input type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
+                      <input type="hidden" name="thesis_title" value="<?php echo $group['thesis_title'];?>">
+                      <div class="timeline-body">
+                        <div class="form-group">
+                          <label></label>
+                          <textarea name="comment" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
+                        </div>
+                      </div>
+                      <div class="timeline-footer">
+                        <input type="submit" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
+                      </div>
+                    </form>
+                  </div>
+                </li>
                 
               </ul>
             </div>

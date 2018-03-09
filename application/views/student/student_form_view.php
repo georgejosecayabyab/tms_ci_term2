@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h2>
-        Forms
+        <?php echo $course['course_code'];?> Forms 
         
       </h2>
       <ol class="breadcrumb">
@@ -38,9 +38,9 @@
           </div>
         </div>    
 
-        <div class="col-lg-10 col-xs-8">
+        <div class="col-lg-12 col-xs-12">
           <div class="form-group">
-            <h2><?php echo $course['course_code'];?></h2>
+            <h2></h2>
           </div>
           <div class="form-group">
             <?php if(sizeof($form) > 0):?>
