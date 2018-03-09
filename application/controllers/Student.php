@@ -838,14 +838,14 @@
 			{
 				if($this->input->post('submit_comment') == "Submit")
 				{
-					$panel_group_id = $this->faculty_model->get_panel_group_id($user_id, $group_id);
+					$student_group_id = $this->student_model->get_student_group_id($user_id, $group_id);
 					$data = array(
 						'thesis_comment' =>  $comment,
-						'panel_group_id' => $panel_group_id['panel_group_id'],
+						'student_group_id' => $student_group_id['student_group_id'],
 						'date_time' => $date_time
 					);
-					$this->faculty_model->insert_thesis_comment($data);
-					$result = $this->faculty_model->get_all_thesis_comment_notification_target($group_id, $user_id);
+					$this->student_model->insert_thesis_comment($data);
+					$result = $this->student_model->get_all_thesis_comment_notification_target($group_id, $user_id);
 					foreach($result as $row)
 					{
 						$this->insert_notification("New Comment from ".$thesis_title, $row['user_id']);
@@ -858,7 +858,7 @@
 						// $this->email->send();
 					}
 					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Successful comment</div>');
-                  	redirect('faculty/view_panel_specific/'.$group_id);
+                  	redirect('student/view_group/'.$group_id);
 				}
 			}
 

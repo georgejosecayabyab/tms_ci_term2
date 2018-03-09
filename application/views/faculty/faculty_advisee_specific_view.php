@@ -202,6 +202,15 @@
                     $date = '';
                     foreach($comment as $row)
                     {
+                      $type = "";
+                      if($row['TYPE'] == 0)
+                      {
+                        $type="(Student)";
+                      }
+                      else
+                      {
+                        $type="(Faculty)";
+                      }
                       if($date != $row['DATE'])
                       {
                         $date_new = strtotime($row['DATE']);
@@ -218,7 +227,7 @@
                           <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i>'.$row['TIME'].'</span>
 
-                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].'</a> commented</h3>
+                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].' '.$type.'</a> commented</h3>
 
                             <div class="timeline-body">'
                               .$row['THESIS_COMMENT'].
@@ -234,7 +243,7 @@
                           <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i>'.$row['TIME'].'</span>
 
-                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].'</a> commented</h3>
+                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].' '.$type.'</a> commented</h3>
 
                             <div class="timeline-body">'
                               .$row['THESIS_COMMENT'].

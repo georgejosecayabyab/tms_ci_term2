@@ -252,6 +252,15 @@
                     $date = '';
                     foreach($comment as $row)
                     {
+                      $type = "";
+                      if($row['TYPE'] == 0)
+                      {
+                        $type="(Student)";
+                      }
+                      else
+                      {
+                        $type="(Faculty)";
+                      }
                       if($date != $row['DATE'])
                       {
                         $date_new = strtotime($row['DATE']);
@@ -268,7 +277,7 @@
                           <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i>'.$row['TIME'].'</span>
 
-                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].'</a> commented</h3>
+                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].' '.$type.'</a> commented</h3>
 
                             <div class="timeline-body">'
                               .$row['THESIS_COMMENT'].
@@ -284,7 +293,7 @@
                           <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i>'.$row['TIME'].'</span>
 
-                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].'</a> commented</h3>
+                            <h3 class="timeline-header"><a href="#">'.$row['COMMENTED BY'].' '.$type.'</a> commented</h3>
 
                             <div class="timeline-body">'
                               .$row['THESIS_COMMENT'].
@@ -309,9 +318,7 @@
                   }
                   //echo '</form>';
                 ?>
-                <li>
-                  <i class="fa fa-clock-o bg-gray"></i>
-                </li>
+                
 
                 <li class="time-label">
                     <span class="bg-gray" id="panelComments">
@@ -325,7 +332,7 @@
                   <div class="timeline-item">
                    
                     <h3 class="timeline-header">Post a Comment</h3>
-                    <?php echo form_open('faculty/validate_comment');?>
+                    <?php echo form_open('student/validate_comment');?>
                       <input type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
                       <input type="hidden" name="thesis_title" value="<?php echo $group['thesis_title'];?>">
                       <div class="timeline-body">
@@ -341,6 +348,9 @@
                   </div>
                 </li>
                 
+                <li>
+                  <i class="fa fa-clock-o bg-gray"></i>
+                </li>
               </ul>
             </div>
             <!-- /.tab-pane -->

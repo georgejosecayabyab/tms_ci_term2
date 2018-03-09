@@ -454,7 +454,7 @@
 
 		public function get_thesis_comment($group_id)
 		{
-			$sql = "SELECT TC.THESIS_COMMENT_ID, TC.THESIS_COMMENT, PG.PANEL_GROUP_ID, PG.GROUP_ID, TG.GROUP_NAME, U.USER_ID, CONCAT(U.FIRST_NAME,' ', U.LAST_NAME) AS 'COMMENTED BY', DATE(TC.DATE_TIME) AS 'DATE', TIME_FORMAT(TIME(TC.DATE_TIME), '%h:%i %p') AS 'TIME'
+			$sql = "SELECT * FROM ((SELECT TC.THESIS_COMMENT_ID AS 'COMMENT_ID', TC.THESIS_COMMENT AS 'THESIS_COMMENT', PG.PANEL_GROUP_ID AS 'GROUP_GROUP_ID', PG.GROUP_ID AS 'GROUP_ID', TG.GROUP_NAME AS 'GROUP_NAME', U.USER_ID AS 'USER_ID', CONCAT(U.FIRST_NAME,' ', U.LAST_NAME) AS 'COMMENTED BY', DATE(TC.DATE_TIME) AS 'DATE', TIME_FORMAT(TIME(TC.DATE_TIME), '%h:%i %p') AS 'TIME', U.USER_TYPE AS 'TYPE'
 					FROM THESIS_COMMENT TC 
 					JOIN PANEL_GROUP PG
 					ON PG.PANEL_GROUP_ID=TC.PANEL_GROUP_ID
@@ -463,7 +463,19 @@
 					JOIN THESIS_GROUP TG
 					ON TG.GROUP_ID=PG.GROUP_ID
 					WHERE PG.GROUP_ID=".$group_id."
-					ORDER BY DATE, TIME ASC;";
+					ORDER BY DATE, TIME ASC) 
+				UNION 
+				(SELECT TC.THESIS_COMMENT_ID AS 'COMMENT_ID', TC.THESIS_COMMENT AS 'THESIS_COMMENT', SG.STUDENT_GROUP_ID AS 'GROUP_GROUP_ID', SG.GROUP_ID AS 'GROUP_ID', TG.GROUP_NAME AS 'GROUP_NAME', U.USER_ID AS 'USER_ID', CONCAT(U.FIRST_NAME,' ', U.LAST_NAME) AS 'COMMENTED BY', DATE(TC.DATE_TIME) AS 'DATE', TIME_FORMAT(TIME(TC.DATE_TIME), '%h:%i %p') AS 'TIME', U.USER_TYPE AS 'TYPE'
+					FROM THESIS_COMMENT TC 
+					JOIN STUDENT_GROUP SG
+					ON SG.STUDENT_GROUP_ID=TC.STUDENT_GROUP_ID
+					JOIN USER U
+					ON U.USER_ID=SG.STUDENT_ID
+					JOIN THESIS_GROUP TG
+					ON TG.GROUP_ID=SG.GROUP_ID
+					WHERE SG.GROUP_ID=".$group_id."
+					ORDER BY DATE, TIME ASC) ) T
+				ORDER BY T.DATE, T.TIME ASC;";
 			$query = $this->db->query($sql);
 			return $query->result_array();
 
@@ -561,6 +573,28 @@
 			$this->db->insert('meeting', $data);
 		}
 
+		public function get_student_group_id($user_id, $group_id)
+		{
+			$sql = "SELECT * FROM STUDENT_GROUP WHERE STUDENT_ID=".$user_id." AND GROUP_ID=".$group_id.";";
+			$query = $this->db->query($sql);
+			return $query->first_row('array');
+		}
+
+		public function get_all_thesis_comment_notification_target($group_id, $user_id)
+		{
+			$sql = "SELECT * 
+					FROM USER U
+					WHERE USER_ID!=".$user_id."
+					AND USER_ID IN (SELECT PANEL_ID FROM PANEL_GROUP WHERE GROUP_ID=".$group_id.")
+					OR USER_ID!=".$user_id."
+					AND USER_ID IN (SELECT STUDENT_ID FROM STUDENT_GROUP WHERE GROUP_ID=".$group_id.")
+					OR USER_ID!=".$user_id."
+					AND USER_ID IN (SELECT ADVISER_ID FROM THESIS_GROUP WHERE GROUP_ID=".$group_id.");";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
+		
 
 	}
 
