@@ -437,8 +437,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="Venue" class="control-label">Venue</label>
+                  <label for="venue" class="control-label">Venue</label>
                   <input class="form-control" id="venue" name="venue" placeholder="venue">
+                </div>
+
+                <div class="form-group">
+                  <label for="start_time" class="control-label">Start Time</label>
+                  <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Start Time">
                 </div>
 
                 <div class="form-group">

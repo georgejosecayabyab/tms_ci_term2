@@ -783,11 +783,14 @@
 			$group_id = $this->student_model->get_group($user_id);
 			$date = $this->input->post('datepicker');
 			$venue = $this->input->post('venue');
+			$time = $this->input->post('start_time');
 
 			$new_date = date('Y-m-d H:i:s', strtotime($date));
 
 
 			$this->form_validation->set_rules('venue', 'Venue', 'required|trim');
+			$this->form_validation->set_rules('datepicker', 'Date', 'required|trim');
+			$this->form_validation->set_rules('start_time', 'Start', 'required|trim');
 
 			if($this->form_validation->run() == FALSE)
 			{
@@ -800,7 +803,8 @@
 					'date' => $new_date,
 					'group_id' => $group_id['group_id'],
 					'created_by' => $user_id,
-					'venue' => $venue
+					'venue' => $venue,
+					'start_time' => $time
 				);
 
 				$this->student_model->insert_meeting($data);
