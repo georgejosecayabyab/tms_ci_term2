@@ -11,6 +11,23 @@
       
       
     </ol>
+    <br>
+    <div id="flash_message">
+      <?php if($this->session->flashdata('fail')): ?>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('fail'); ?></center>
+        </div>
+      <?php endif; ?>
+      <?php if($this->session->flashdata('success')): ?>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('success'); ?></center>
+        </div>
+      <?php endif; ?> 
+    </div>
   </section>
   <!-- Main content -->
   <section class="content">
@@ -88,7 +105,7 @@
               <div class="col-lg-3 col-xs-12">
                 <form>
                   <button id="submitbtn"  type="button" class="btn btn-success">Save and Quit</button>
-                  <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" type="button" class="btn btn-danger">Exit</button>
+                  <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
 
                 </form>
               </div>
@@ -130,7 +147,7 @@
                 <div class="col-lg-3 col-xs-12">
                   <form>
                     <button id="editSched"  type="button" class="btn btn-success">Edit schedule</button>
-                    <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" type="button" class="btn btn-danger">Exit</button>
+                    <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
 
                   </form>
                 </div>

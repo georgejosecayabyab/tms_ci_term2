@@ -16,25 +16,19 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
+      <!--aguy -->
+      <section class="content container-fluid">
+        <div class="row" id="scheduleRow">
 
 
-<!--aguy -->
-<section class="content container-fluid">
+           
+        </div>
 
-
-
-
-      <div class="row" id="scheduleRow">
-
-
-         
-      </div>
-
-      <div class="row">
-      <div class="col-lg-12 col-xs-8">
-      <div class="box box-primary">
+        <div class="row">
+          <div class="col-lg-12 col-xs-8">
+            <div class="box box-primary">
             
-            <!-- /.box-header -->
+              <!-- /.box-header -->
             
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               
@@ -42,54 +36,37 @@
             <!-- /.box-body -->
             
           </div>
-      </div>    
+        </div>    
 
-       <div class="col-lg-10 col-xs-8">
-        <div class="form-group">
-          <h2><?php echo $course['course_code'];?></h2>
-        </div>
+        <div class="col-lg-10 col-xs-8">
+          <div class="form-group">
+            <h2><?php echo $course['course_code'];?></h2>
+          </div>
+          <div class="form-group">
+            <?php if(sizeof($form) > 0):?>
+              <?php foreach($form as $row):?>
+                <div class="box-header with-border">
+                  <h3 class="box-title"><a href="<?php echo site_url('student/download_form/'.$row['form_name']);?>"><?php echo $row['form_name'];?></a>
+                </div>
+              <?php endforeach;?>
+            <?php else:?>
+              <div class="alert alert-info alert-dismissible">
+                <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+                <?php echo "No Forms"; ?></center>
+              </div>
+            <?php endif;?>
+          </div>
 
-        
-        <div class="form-group">
-          <?php foreach($form as $row):?>
-            <div class="box-header with-border">
-              <h3 class="box-title"><a href="<?php echo site_url('student/download_form/'.$row['form_name']);?>"><?php echo $row['form_name'];?></a>
-            </div>
-          <?php endforeach;?>
-        </div>
-
-        
-
-
-      
             <!-- /.box-header -->
           
-            </div>
+        </div>
             <!-- /.box-body -->
-          </section>
+      </section>
       <div class="row" id="scheduleRow">
-
-
-         
       </div>
 
-      <div class="row">
-      <div class="col-lg-12 col-xs-8">
-      <div class="box box-primary">
-            
-            <!-- /.box-header -->
-            
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-              
-            </div>
-            <!-- /.box-body -->
-            
-          </div>
-      </div>    
-
-       
-
-
+          
    
     </section>
     <!-- /.content -->

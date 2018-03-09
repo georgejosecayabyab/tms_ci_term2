@@ -640,6 +640,7 @@
 					'abstract' => $abstract_text
 				);
 				$this->student_model->update_abstract($data, $thesis_id);
+				$this->session->set_flashdata('success', 'Abstract has been updated!');
 				redirect('student/view_group/'.$group_id);
 			}
 		}
@@ -733,6 +734,8 @@
 				$retime = date("G:i", strtotime((string)$time));
 				$this->student_model->insert_schedule($user_id, $retime, $day);
 			}
+
+			$this->session->set_flashdata('success', 'Schedule has been updated!');
 
 			header("Content-type: application/json");
 			echo json_encode($sched_per_day);
