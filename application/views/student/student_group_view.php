@@ -240,6 +240,8 @@
             <!-- /.tab-pane -->
 
             <div class="tab-pane" id="timeline"><!--current upload tab-->
+
+              <h3>Current Version: Revised Document #<?php echo sizeof($uploads);?></h3><br>
               
               <!-- The timeline -->
               <ul class="timeline timeline-inverse">
