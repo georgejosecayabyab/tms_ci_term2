@@ -1260,7 +1260,6 @@ immediately after the control sidebar -->
   $("button").click(function() {
     var group_id = $(this).val();
     var base = $('#base').val();
-    //alert(group_id);
     $.ajax({
         type: 'POST',
         url: base+'index.php/coordinator/get_verdict/'+group_id,
@@ -1528,10 +1527,8 @@ immediately after the control sidebar -->
   function editStatus(id)
   {
     var base = $('#base_url').val();
-    alert(base);
     var status_button_id = id.id;
     var status = $('#'+status_button_id).val();
-    alert(status); 
     $.ajax({
       type: 'POST',
       url: base+'index.php/coordinator/update_user_status',
@@ -1551,12 +1548,43 @@ immediately after the control sidebar -->
       },
       error: function(err)
       {
-        alert(err);
+        console.log(err);
       }
     })
     
 
   }
+</script>
+
+
+<script>
+  function move_to_next_term()
+  {
+    var term = $('#term1 :selected').text();
+    var year = $('#schoolyr :selected').text();
+    var base = $('#base_url').val();
+    console.log(term + '   ' + year);
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/coordinator/move_to_next_term',
+      data: {'term':term, 'year':year},
+      success: function(data)
+      {
+        console.log('succes term hase been moved');
+        $('#flash_message').empty();
+        $('#flash_message').append('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>A new term has been set!</center></div>');
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
+
+  }
+  
+
 </script>
 
 </body>

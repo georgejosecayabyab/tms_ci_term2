@@ -14,25 +14,28 @@
   <!-- Main content -->
   
   <section class="content container-fluid">
-    <?php if($this->session->flashdata('fail')): ?>
+    <div id="flash_message">
+      <?php if($this->session->flashdata('fail')): ?>
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
           <?php echo $this->session->flashdata('fail'); ?></center>
         </div>
-    <?php endif; ?>
-    <?php if($this->session->flashdata('success')): ?>
-      <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('success'); ?></center>
-      </div>
-    <?php endif; ?>
+      <?php endif; ?>
+      <?php if($this->session->flashdata('success')): ?>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('success'); ?></center>
+        </div>
+      <?php endif; ?>
+    </div>
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>"> 
     <div class="row">
       <div class="col-lg-8 col-xs-8">
         <div class="box box-primary">
           <div class="box-header"></div>
-          <form action="<?php echo site_url('coordinator/move_to_next_term');?>" method="post" class="form-horizontal">
+          <div class="form-horizontal">
             <!-- /.box-header -->
             <div  class="box-body">
               <div class="form-group">
@@ -91,7 +94,7 @@
                   
                   <div class="col-lg-12 col-xs-12">
                     <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
-                    <button type="submit" class="btn btn-success">Save and Quit</button>
+                    <a><button data-toggle="modal" data-target="#myModal" class="btn btn-primary" >Save and Quit</button></a>
                     
                   </div>
                 </div>
@@ -111,7 +114,30 @@
 
             </style>
             <!-- /.box-body -->
-          </form>
+
+            <!--modal start-->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Move to Next Term</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="col-sm-8">
+                        <h5>Move to Next Term?</h5>
+                      </div>
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--modal end-->
+          </div>
         </div>
       </div>
     </div>
