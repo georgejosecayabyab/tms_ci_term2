@@ -108,38 +108,11 @@
     <!-- /Hero -->
     
   <!-- Header -->
-  <header id="header">
-    <div class="container">
-    
-      <div id="logo" class="pull-left">
-        <a href="index.html"><img src="<?php echo base_url();?>img/logo-nav.png" alt="" title="" /></img></a>
-        <!-- Uncomment below if you prefer to use a text image -->
-        <!--<h1><a href="#hero">Bell</a></h1>-->
-      </div>
-        
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="#about">Schedule</a></li>
-          <li><a href="#awards">Awards</a></li>
-          <li><a href="#news">News</a></li>
-          
-        
-        </ul>
-      </nav><!-- #nav-menu-container -->
-      
-      <nav class="nav-menu pull-right">
-         <li><a href="#">Login</a></li>
-          <li><a href="index.html">Home</a></li>
-        
-      </nav>
-    </div>
-  </header><!-- #header -->
-  
     <!-- About -->
 
 
 
-    <section id="announcements">
+    <header id="announcements">
       <div class="container">
         
         <div class="row">
@@ -182,7 +155,7 @@
 
         
       </div>
-    </section>
+    </header>
 
        <!-- /About -->
     <!-- Parallax -->
