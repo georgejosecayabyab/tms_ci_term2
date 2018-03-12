@@ -179,6 +179,7 @@
           <tr>
             <th></th>
             <th>Name</th>
+            <th>Email Address</th>
             <th>Course</th>
             <th>Group</th>
             <th>Status</th>
@@ -206,7 +207,8 @@
 
                 ?>
 
-                <td><?php echo $row['NAME'];?></a></td>
+                <td><?php echo $row['NAME'];?></td>
+                <td><?php echo $row['EMAIL'];?></td>
                 <td>
                   <?php
                     echo $row['COURSE_CODE'];
