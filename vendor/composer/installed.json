@@ -240,17 +240,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.10",
-        "version_normalized": "2.0.10.0",
+        "version": "2.0.9",
+        "version_normalized": "2.0.9.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "d305b780829ea4252ed9400b3f5937c2c99b51d4"
+            "reference": "c9a3fe35e20eb6eeaca716d6a23cde03f52d1558"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d305b780829ea4252ed9400b3f5937c2c99b51d4",
-            "reference": "d305b780829ea4252ed9400b3f5937c2c99b51d4",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c9a3fe35e20eb6eeaca716d6a23cde03f52d1558",
+            "reference": "c9a3fe35e20eb6eeaca716d6a23cde03f52d1558",
             "shasum": ""
         },
         "require": {
@@ -258,7 +258,7 @@
         },
         "require-dev": {
             "phing/phing": "~2.7",
-            "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+            "phpunit/phpunit": "~4.0",
             "sami/sami": "~2.0",
             "squizlabs/php_codesniffer": "~2.0"
         },
@@ -268,7 +268,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2018-02-19T04:29:13+00:00",
+        "time": "2017-11-29T06:38:08+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1914,17 +1914,17 @@
     },
     {
         "name": "phpspec/prophecy",
-        "version": "1.7.5",
-        "version_normalized": "1.7.5.0",
+        "version": "1.7.4",
+        "version_normalized": "1.7.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
+            "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
-            "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
+            "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
             "shasum": ""
         },
         "require": {
@@ -1938,7 +1938,7 @@
             "phpspec/phpspec": "^2.5|^3.2",
             "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
         },
-        "time": "2018-02-19T10:16:54+00:00",
+        "time": "2018-02-11T18:49:29+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
