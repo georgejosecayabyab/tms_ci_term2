@@ -93,8 +93,8 @@
                 <div class="row">
                   
                   <div class="col-lg-12 col-xs-12">
-                    <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
-                    <a><button data-toggle="modal" data-target="#myModal" class="btn btn-primary" >Save and Quit</button></a>
+                    <a href="#"><button type="button" class="btn btn-danger">Exit</button></a>
+                    <a><button data-toggle="modal" data-target="#myModal" class="btn btn-success" >Save and Quit</button></a>
                     
                   </div>
                 </div>

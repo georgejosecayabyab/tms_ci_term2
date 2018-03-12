@@ -46,7 +46,7 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><?php echo $row['TOPIC'];?></td><!--palitan mo to george-->
+              <td><?php ?></td><!--palitan mo to george-->
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
@@ -461,7 +461,7 @@
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a  href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-defense-button" type="button" class="btn btn-primary pull-left">Save changes</button></a>
+        <a  href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-defense-button" type="button" class="btn btn-success pull-left">Save changes</button></a>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -537,7 +537,7 @@
         </div>
       </div>
         <div class="modal-footer">
-          <a href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-verdict-button" onclick="edit_verdict()" type="button" class="btn btn-primary pull-left">Save changes</button></a>
+          <a href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-verdict-button" onclick="edit_verdict()" type="button" class="btn btn-success pull-left">Save changes</button></a>
         </div>
       </div>
       <!-- /.modal-content -->
