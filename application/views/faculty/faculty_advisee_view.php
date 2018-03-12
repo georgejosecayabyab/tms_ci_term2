@@ -107,16 +107,12 @@
           <?php endforeach;?>
         <?php else:?>
           <div class="col-lg-12 col-xs-6">
-              <!-- small box -->
-             
-
-
-          <div class="alert alert-info alert-dismissible">
-            <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-            <?php echo "No Advisees"; ?></center>
+            <div class="alert alert-info alert-dismissible">
+              <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+              <?php echo "No Advisees"; ?></center>
+            </div>
           </div>
-        </div>
         <?php endif;?>
       </div>
 
