@@ -18,7 +18,8 @@
             <table id="table" class="display" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Thesis Title</th>
+                  <th>Department</th>
                   <th>Specialization</th>
                   <th>Members</th>
                   <th>Panel</th>
@@ -30,6 +31,17 @@
                 <?php foreach($thesis as $trow):?>
                   <tr>
                     <td><a href="<?php echo site_url('coordinator/view_archive_specific/'.$trow['thesis_id']);?>"><?php echo $trow['thesis_title'];?></a></td>
+                    <td>
+                      <?php 
+                       $course_code = $trow['course_code'];
+                       if(strpos($course_code, "IT") !== FALSE){
+                          echo "Information Technology";
+                       }
+                       if(strpos($course_code, "CT") !== FALSE){
+                          echo "Computer Technology";
+                       }
+                      ?>
+                    </td>
                     <td>
                       <?php
                         $tags = '';

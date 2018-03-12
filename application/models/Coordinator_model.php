@@ -177,7 +177,7 @@ class coordinator_model extends CI_Model
 	///coordinator archive
 	public function archive_thesis()
 	{
-		$sql = "select t.thesis_id, t.thesis_title, tg.group_id, t.abstract
+		$sql = "select t.thesis_id, t.thesis_title, tg.group_id, t.abstract, tg.course_code
 				from thesis t 
 				left join thesis_group tg
 				on tg.thesis_id=t.thesis_id
