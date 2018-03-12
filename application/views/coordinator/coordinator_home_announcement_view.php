@@ -3,7 +3,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h2>
-          Announcement Home
+          Home Announcements
           
           </h2>
           <ol class="breadcrumb">
@@ -25,7 +25,7 @@
             <table id="table" class="display" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Announcement Title</th>
                 
                   <th></th>
                   

@@ -51,8 +51,9 @@
                 </div>
                 <div class="icon">
                 <i class="fa fa-calendar"></i>
+
                 </div>
-               
+               <a href="<?php echo site_url('coordinator/view_group');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
           <?php endforeach;?>
@@ -70,7 +71,7 @@
     <div align="center"><h4><b>Legend for defense schedules:</b></h4></div>
     <div align="center">Red: 1 week away</div>
     <div align="center">Yellow: 2 weeks away</div>
-    <div align="center">Blue: 3 weeks away</div>
+    <div align="center">Blue: beyond 2 weeks</div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

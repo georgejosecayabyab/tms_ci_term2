@@ -34,8 +34,7 @@
       <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th>Group Name</th>
-            <th>Course</th>
+            <th>Topic</th>
             <th>Panel</th>
             <th>Defense Type</th>
             <th>Defense Date (mm/dd/yy)</th>
@@ -47,7 +46,7 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><?php echo $row['GROUP_NAME'];?></td><!--isn't better to have it as thesis?-->
+              <td><?php echo $row['TOPIC'];?></td><!--palitan mo to george-->
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
@@ -100,11 +99,7 @@
                   </button>
                 <?php endif;?>
               </td>
-              <td>
-                <?php 
-                  echo $row['DEFENSE_TYPE'];
-                ?>
-              </td>
+              
               <td>
                 <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F" && $row['INITIAL_VERDICT']!="CP"):?>
                   <?php if($row['DEFENSE_DATE']==null):?>

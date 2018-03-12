@@ -121,8 +121,8 @@
             <th>Email</th>
             <th>Department</th>
             <th>Rank</th>
-            <th># of Panels Assigned</th>
-            <th># of Groups Supervised</th>
+            <th>Number of Panels Assigned</th>
+            <th>Number of Groups Supervised</th>
             <th>Status</th>
           </tr>
         </thead>

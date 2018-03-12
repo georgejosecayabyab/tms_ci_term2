@@ -18,7 +18,7 @@
 
       <div class="alert alert-info alert-dismissible">
         <h4><i class="icon fa fa-info"></i> Alert!</h4>
-        You have no group yet! Ask for thesis coordinator's help!
+        No group has been assigned yet! Ask for thesis coordinator's help!
       </div>
     </section>
     <!-- /.content -->

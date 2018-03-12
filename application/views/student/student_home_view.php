@@ -67,7 +67,7 @@
             
             <!-- /.box-header -->
             <div  class="box-body">
-            <h1>Important Dates for <?php echo $student_data['course_code']?></h1></div >
+            <h2>Announcements for <?php echo $student_data['course_code']?></h2></div >
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <ul class="todo-list">
                   <?php foreach($announcement as $row):?>
@@ -84,13 +84,7 @@
           </div>
       </div>    
 
-       <div class="col-lg-12 col-xs-8">
-      <div class="box box-primary">
-           
-            </div>
-            <!-- /.box-header -->
-          
-            </div>
+       
             <!-- /.box-body -->
           </div>
       </div>    
