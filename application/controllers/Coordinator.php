@@ -323,6 +323,9 @@
 
 		public function view_archive()
 		{
+			
+		
+
 			$data['thesis'] = $this->coordinator_model->archive_thesis();
 			$data['member'] = $this->coordinator_model->archive_members();
 			$data['panel'] = $this->coordinator_model->archive_panels();

@@ -30,7 +30,7 @@
       <!-- Trigger the modal with a button -->
        <div class="row">
         <div class="col-lg-6 col-xs-4">
-          <button id="addFaculty" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Specialization</button>
+          <button id="addFaculty" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Specialization</button>
         </div>
       </div>
       <!-- Modal -->
