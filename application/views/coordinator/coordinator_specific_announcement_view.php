@@ -21,7 +21,7 @@
 
         </style>
         <div class="col-lg-1 col-xs-1">
-          <a href="<?php echo site_url('coordinator/view_new_specific_announcement');?>"><button id="newAnn" type="button" class="btn btn-block btn-success">New Announcement</button></a>
+          <a href="<?php echo site_url('coordinator/view_new_specific_announcement');?>"><button id="newAnn" type="button" class="btn btn-block btn-primary">New Announcement</button></a>
         </div>
         <section id="tableSection" class="content container-fluid">
           <div class="row" id="scheduleRow">

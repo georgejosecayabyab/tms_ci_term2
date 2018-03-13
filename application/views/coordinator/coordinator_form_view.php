@@ -35,7 +35,7 @@
   </style>
   <div class="row">
     <div class="col-lg-12 col-xs-8">
-      <button id="addForm" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Form</button>
+      <button id="addForm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Form</button>
     </div>
   </div>
   <!-- Modal -->

@@ -38,8 +38,8 @@
   </style>
   <div class="row">
     <div class="col-lg-12 col-xs-8">
-      <button id="addStu" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Student</button>
-      <button id="addGroup" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal2">Add Group</button>
+      <button id="addStu" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Student</button>
+      <button id="addGroup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Add Group</button>
     </div>
   </div>
   <input id="base_url" type="hidden" value="<?php echo base_url();?>">
