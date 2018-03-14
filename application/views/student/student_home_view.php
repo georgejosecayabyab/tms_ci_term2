@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h2>
-        Meetings
+        Upcoming Meetings
         
       </h2>
       <ol class="breadcrumb">
@@ -11,14 +11,8 @@
         
       </ol>
     </section>
-    
-
     <!-- Main content -->
     <section class="content container-fluid">
-
-
-
-
       <div class="row" id="scheduleRow">
         <?php foreach($meeting as $row):?>
           <div class="col-lg-4 col-xs-4">
@@ -62,12 +56,12 @@
       </div>
 
       <div class="row">
-      <div class="col-lg-12 col-xs-8">
-      <div class="box box-primary">
-            
+        <div class="col-lg-12 col-xs-8">
+          <div class="box box-primary">
             <!-- /.box-header -->
             <div  class="box-body">
-            <h2>Announcements for <?php echo $student_data['course_code']?></h2></div >
+              <h2>Announcements for <?php echo $student_data['course_code']?></h2>
+            </div >
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <ul class="todo-list">
                   <?php foreach($announcement as $row):?>
@@ -93,6 +87,10 @@
 
    
     </section>
+       <div align="center"><h4><b>Legend for defense schedules:</b></h4></div>
+    <div align="center">Red: 1 week away</div>
+    <div align="center">Yellow: 2 weeks away</div>
+    <div align="center">Blue: beyond 2 weeks</div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

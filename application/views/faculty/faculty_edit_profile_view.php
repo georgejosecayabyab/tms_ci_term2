@@ -4,7 +4,6 @@
       <section class="content-header">
         <h2>
         Edit Faculty Profile
-        
         </h2>
       </section>
       <!-- Main content -->

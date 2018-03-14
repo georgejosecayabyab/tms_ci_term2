@@ -381,9 +381,9 @@
                 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submit_tag" type="button" class="btn btn-success">Save and Quit</button></a>
-                    <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
                     
+                    <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
+                    <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submit_tag" type="button" class="btn btn-success">Save and Quit</button></a>
                   </div>
                 </div>
               </form>
@@ -458,8 +458,9 @@
                         <textarea name="abstract_text" rows="10" cols="110"><?php echo $group['abstract'];?></textarea>
                         <div class="col-lg-1">
                         </div>
-                        <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
+                        
                         <a href=""><button id="submitbtn2" type="button" class="btn btn-danger">Exit</button></a>
+                        <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
                       </div>
                     </div>
                   </div>
@@ -487,10 +488,16 @@
                   <label for="start_time" class="control-label">Start Time</label>
                   <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Start Time">
                 </div>
+                <style type="text/css">
+                  #submitbtn2{
+                    margin-right: 20px;
+                  }
 
+                </style>
                 <div class="form-group">
-                  <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
                   <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
+                  <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
+                  
                 </div>
 
                 

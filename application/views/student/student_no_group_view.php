@@ -4,7 +4,6 @@
     <section class="content-header">
       <h2>
         No Group Assigned
-        
       </h2>
       <ol class="breadcrumb">
          <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url('student/index');?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
@@ -15,7 +14,6 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
-
       <div class="alert alert-info alert-dismissible">
         <h4><i class="icon fa fa-info"></i> Alert!</h4>
         No group has been assigned yet! Ask for thesis coordinator's help!

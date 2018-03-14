@@ -19,6 +19,7 @@
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Department</th>
                   <th>Specialization</th>
                   <th>Members</th>
                   <th>Panel</th>
@@ -30,6 +31,7 @@
                 <?php foreach($thesis as $trow):?>
                   <tr>
                     <td><a href="<?php echo site_url('faculty/view_archive_specific/'.$trow['thesis_id']);?>"><?php echo $trow['thesis_title'];?></a></td>
+                    <td></td>
                     <td>
                       <?php
                         $tags = '';
@@ -75,52 +77,8 @@
                 
               </tbody>
             </table>
-            <div class="col-lg-4 col-xs-4">
-              <!-- small box -->
-              <div class="small-box bg-red">
-                
-                
-              </div>
-              
-              
-            </div>
-            <div class="col-lg-4 col-xs-4">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                
-                
-              </div>
-              
-              
-              <div class="col-lg-4 col-xs-4">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                  
-                  
-                </div>
-                
-              </div>
-              <div class="row">
-                <div class="col-lg-6 col-xs-4">
-                  
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-                    <ul class="todo-list">
-                      
-                    </ul>
-                  </div>
-                  <!-- /.box-body -->
-                  
-                </div>
-              </div>
-              <div class="col-lg-6 col-xs-4">
-                
-                <!-- /.box-header -->
-                
-              </div>
-              <!-- /.box-body -->
-            </div>
+            
+            
           </div>
           </div>
         

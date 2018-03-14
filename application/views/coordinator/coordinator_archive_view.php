@@ -87,52 +87,8 @@
                 
               </tbody>
             </table>
-            <div class="col-lg-4 col-xs-4">
-              <!-- small box -->
-              <div class="small-box bg-red">
-                
-                
-              </div>
-              
-              
-            </div>
-            <div class="col-lg-4 col-xs-4">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                
-                
-              </div>
-              
-              
-              <div class="col-lg-4 col-xs-4">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                  
-                  
-                </div>
-                
-              </div>
-              <div class="row">
-                <div class="col-lg-6 col-xs-4">
-                  
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-                    <ul class="todo-list">
-                      
-                    </ul>
-                  </div>
-                  <!-- /.box-body -->
-                  
-                </div>
-              </div>
-              <div class="col-lg-6 col-xs-4">
-                
-                <!-- /.box-header -->
-                
-              </div>
-              <!-- /.box-body -->
-            </div>
+            
+            
           </div>
           </div>
         

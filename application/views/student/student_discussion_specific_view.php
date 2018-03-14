@@ -16,7 +16,7 @@
     <ul class="timeline timeline-inverse">
       <div class="col-lg-12 col-xs-8">
         <div class ="box box-primary">
-          <div class="box-header"><h3 class="timeline-header"><?php echo $topic_data['first_name'].' '.$topic_data['last_name'];?><a href="#"></a> posted</h3></div>
+          <div class="box-header"><h3 class="timeline-header"><?php echo $topic_data['first_name'].' '.$topic_data['last_name'];?> posted</h3></div>
             <!-- /.box-header -->
           <div class="box-body">
             <p><?php echo $topic_data['topic_info'];?></p>

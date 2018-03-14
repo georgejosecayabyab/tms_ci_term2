@@ -43,8 +43,9 @@
                   </div>
                   <div class="col-lg-3 col-xs-12">
                     <span></span>
-                    <input onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" onclick="fill_in()" value="Save and Quit">
+                    
                     <a href="<?php echo site_url('faculty/view_advisee_specific/'.$group['group_id']);?>"><input id="exit" name="exit" type="button" class="btn btn-danger" value="Exit"></a>
+                    <input onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" onclick="fill_in()" value="Save and Quit">
                   </div>
                 </div>
               </div>
