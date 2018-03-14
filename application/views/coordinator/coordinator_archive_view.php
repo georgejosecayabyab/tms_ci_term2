@@ -40,6 +40,9 @@
                        if(strpos($course_code, "CT") !== FALSE){
                           echo "Computer Technology";
                        }
+                       if(strpos($course_code, "ST") !== FALSE){
+                          echo "Software Technology";
+                       }
                       ?>
                     </td>
                     <td>
