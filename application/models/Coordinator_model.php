@@ -80,11 +80,13 @@ class coordinator_model extends CI_Model
 	//This functions gets the group information
 	public function get_group_info()
 	{
-		$sql = "SELECT TG.GROUP_ID, TG.GROUP_NAME, TG.ADVISER_ID, TG.THESIS_ID, TG.COURSE_CODE, TG.INITIAL_VERDICT, TG.FINAL_VERDICT, TG.IS_ACTIVE, DD.DEFENSE_DATE_ID, DD.DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS 'END', DD.VENUE, TG.SECTION, DD.DEFENSE_TYPE
+		$sql = "SELECT TG.GROUP_ID, TG.GROUP_NAME, TG.ADVISER_ID, TG.THESIS_ID, TG.COURSE_CODE, TG.INITIAL_VERDICT, TG.FINAL_VERDICT, TG.IS_ACTIVE, DD.DEFENSE_DATE_ID, DD.DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS 'END', DD.VENUE, TG.SECTION, DD.DEFENSE_TYPE, T.THESIS_TITLE
 				FROM THESIS_GROUP TG	LEFT JOIN DEFENSE_DATE DD
 										ON TG.GROUP_ID = DD.GROUP_ID
                         				JOIN COURSE C
                         				ON TG.COURSE_CODE=C.COURSE_CODE
+                        				JOIN THESIS T
+                        				ON T.THESIS_ID=TG.THESIS_ID
                         				WHERE TG.IS_ACTIVE=1;";
 
 		$query = $this->db->query($sql);
@@ -863,6 +865,13 @@ class coordinator_model extends CI_Model
 		$this->db->query($sql);
 	}
 
+	public function get_specific_user_info($email)
+	{
+		$sql = "select * from user 
+				where email='".$email."';";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
 }
 
 
