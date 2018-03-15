@@ -46,7 +46,7 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><?php ?></td><!--palitan mo to george-->
+              <td><?php echo $row['THESIS_TITLE'];?></td><!--palitan mo to george-->
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
@@ -99,9 +99,8 @@
                   </button>
                 <?php endif;?>
               </td>
-              
               <td>
-                <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F" && $row['INITIAL_VERDICT']!="CP"):?>
+                <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F"):?>
                   <?php if($row['DEFENSE_DATE']==null):?>
                     <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate">
                     Set Date <i class="fa fa-fw fa-calendar-plus-o"> </i>
@@ -212,7 +211,6 @@
                 <?php else:?>
 
                 <?php endif;?>
-
               </td>
             </tr>
           <?php endforeach;?>
@@ -220,6 +218,7 @@
       </table>
     </div>
   </section>
+
 
 <div class="modal fade" id="modal-defensedate">
   <div class="modal-dialog modal-lg">
@@ -370,6 +369,28 @@
 
 </div>
 
+<!--modal start-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Move to Next Term</h4>
+      </div>
+      <div class="modal-body">
+          <div class="col-sm-8">
+            <h5>Move to Next Term?</h5>
+          </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal end-->
 
 <!-- /.input group -->
 
@@ -621,7 +642,7 @@
               <div  class="col-xs-4" id="suggestionThree">
 
                 <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i> Fritz Flores  a href="#"><i id="addPanel3" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
+                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i> Fritz Flores<i id="addPanel3" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
                   <h5> Assistant Professor </h5>
 
               <div> 

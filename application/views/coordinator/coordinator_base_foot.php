@@ -746,7 +746,7 @@ immediately after the control sidebar -->
 
               $('#suggestionOne').append('\
                 <div class="alert alert-success alert-dismissible">\
-                  <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>'+data['tag_count'][0]['NAME']+'<a href="#"><i id="addPanel1" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>\
+                  <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>'+data['tag_count'][0]['NAME']+'<a href="#"><i id="addPanel1" ></i></a></h4>\
                   <h5> Assistant Professor </h5>\
                   <div> \
                     <p>\
@@ -786,7 +786,7 @@ immediately after the control sidebar -->
 
               $('#suggestionTwo').append('\
                 <div class="alert alert-success alert-dismissible">\
-                  <h4 id="suggestion2Name"><i class="icon fa fa-user"></i>'+data['tag_count'][1]['NAME']+'<a href="#"><i id="addPanel2" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>\
+                  <h4 id="suggestion2Name"><i class="icon fa fa-user"></i>'+data['tag_count'][1]['NAME']+'<a href="#"><i id="addPanel2" ></i></a></h4>\
                   <h5> Assistant Professor </h5>\
                   <div> \
                     <p>\
@@ -826,7 +826,7 @@ immediately after the control sidebar -->
 
               $('#suggestionThree').append('\
                 <div class="alert alert-success alert-dismissible">\
-                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i>'+data['tag_count'][2]['NAME']+'<a href="#"><i id="addPanel3" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>\
+                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i>'+data['tag_count'][2]['NAME']+'<a href="#"><i id="addPanel3"></i></a></h4>\
                   <h5> Assistant Professor </h5>\
                   <div> \
                     <p>\
@@ -1184,35 +1184,35 @@ immediately after the control sidebar -->
       });
 
       
-      $('#modal-defense-button').click(function(){
+      // $('#modal-defense-button').click(function(){
         
-        var dateVal =  $('#datepicker').val();
-        var formattedDate = new Date(dateVal);
-        var d = formattedDate.getDate();
-        var m =  formattedDate.getMonth();
-        m += 1;  // JavaScript months are 0-11
-        var y = formattedDate.getFullYear();
-        var new_date = y + "-" + m + "-" + d;
+      //   var dateVal =  $('#datepicker').val();
+      //   var formattedDate = new Date(dateVal);
+      //   var d = formattedDate.getDate();
+      //   var m =  formattedDate.getMonth();
+      //   m += 1;  // JavaScript months are 0-11
+      //   var y = formattedDate.getFullYear();
+      //   var new_date = y + "-" + m + "-" + d;
 
-        var start = $('#startHour').val()+':'+$('#startMinute').val()+$('#startMedDynamic').val();
-        var end = $('#endHour').val()+':'+$('#endMinute').val()+$('#endMedDynamic').val();
-        console.log(start+'-'+end);
+      //   var start = $('#startHour').val()+':'+$('#startMinute').val()+$('#startMedDynamic').val();
+      //   var end = $('#endHour').val()+':'+$('#endMinute').val()+$('#endMedDynamic').val();
+      //   console.log(start+'-'+end);
 
-        $.ajax({
-          type: 'POST',
-          url: '/tms_ci/index.php/coordinator/set_defense_date',
-          data: {'group_id': group_id, 'date': new_date, 'start': start, 'end':end},
-          success: function()
-          {
-            console.log('succ defendse');
-          },
-          error: function(err)
-          {
-            console.log(err);
-          }
-        });
+      //   $.ajax({
+      //     type: 'POST',
+      //     url: '/tms_ci/index.php/coordinator/set_defense_date',
+      //     data: {'group_id': group_id, 'date': new_date, 'start': start, 'end':end},
+      //     success: function()
+      //     {
+      //       console.log('succ defendse');
+      //     },
+      //     error: function(err)
+      //     {
+      //       console.log(err);
+      //     }
+      //   });
 
-      });
+      // });
 
     })
   

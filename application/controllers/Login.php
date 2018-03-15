@@ -162,7 +162,8 @@
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Invalid email and password!</div>');
+
+				$this->session->set_flashdata('fail', 'Invalid email or password!');
                 redirect('home');
 			}
 		}

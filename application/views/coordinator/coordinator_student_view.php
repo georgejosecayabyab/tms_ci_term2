@@ -155,7 +155,11 @@
             <div class="form-group">
               <label for="inputName" class="col-sm-2 control-label">Members</label>
               <div id="group_members" class="col-sm-8">
-                <h5>None</h5>
+                <select class="form-control select2" name="adviser" multiple="multiple" id="adviser" style="width: 100%;">
+                  <?php foreach($faculty as $row):?>
+                    <option value="<?php echo $row['user_id'];?>"><?php echo $row['last_name'].', '.$row['first_name'];?></option>
+                  <?php endforeach;?>
+                </select> 
               </div>
             </div>
           </div>
