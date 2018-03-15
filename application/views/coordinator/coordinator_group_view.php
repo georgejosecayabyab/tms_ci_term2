@@ -254,85 +254,12 @@
                Select a date for suggestions
               </div>
 
-              <div id="conflict"> 
-              </div>
+              
             </div>
-            <h4> <label>Time:</label> </h4>
-            <div id="timePickedSuggested">
-            </div>
+            
             <br>
 
-            <div class="row">
-              <div class="col-xs-2">
-                <select class="form-control" id="startHour">
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-
-                </select>
-              </div>
-
-              <div class="col-xs-2">
-                <select class="form-control" id="startMinute">
-                  <option>00</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>45</option>
-
-                </select>
-              </div>
-
-              <div class="col-xs-1">
-                <select class="median" id="startMedDynamic">
-                  <option>AM</option>
-                  <option>PM</option>                 
-                </select>
-              </div>
-
-              <div class="col-xs-2">
-                <select class="form-control" id="endHour">
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                </select>
-              </div>
-
-              <div class="col-xs-2">
-                <select class="form-control" id="endMinute">
-                  <option>00</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>45</option>
-
-                </select>
-              </div>
-
-              <div class="col-xs-1">
-                <select class="median" id="endMedDynamic">
-                  <option>AM</option>
-                  <option>PM</option>                 
-                </select>
-              </div>
-
-            </div>
+            
 
 
       <!-- /.input group -->

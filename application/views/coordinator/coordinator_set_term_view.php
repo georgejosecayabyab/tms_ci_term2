@@ -93,7 +93,7 @@
                 <div class="row">
                   
                   <div class="col-lg-12 col-xs-12">
-                    <a href="#"><button type="button" class="btn btn-danger">Exit</button></a>
+                    <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
                     <a><button data-toggle="modal" data-target="#myModal" class="btn btn-success" >Save and Quit</button></a>
                     
                   </div>
@@ -122,16 +122,32 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Move to Next Term</h4>
+                    <h4 class="modal-title">Move to Next Term?</h4>
                   </div>
                   <div class="modal-body">
                       <div class="col-sm-8">
-                        <h5>Move to Next Term?</h5>
+                        <h5><b>Things altered by set term: <br>
+<br>
+1. All schedules are reset
+<br>
+2. All groups who are "passed" will proceed to next stage (THS-1 to THS-2, THS-4 to Graduate)
+<br>
+3. Graduated students' works are imported to archive
+<br>
+4. Graduated students are removed from panel list/advicee list of faculty
+<br>
+5. Graduated students status are changed to inactive
+<br>
+6. All notifications are reset</b>
+<br>
+</h5>
+<a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
+<button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
                       </div>
                   </div>
                   
                   <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
+                    
                   </div>
                 </div>
               </div>

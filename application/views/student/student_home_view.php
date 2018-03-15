@@ -78,7 +78,10 @@
           </div>
       </div>    
 
-       
+       <div align="center"><h4><b>Legend for defense schedules:</b></h4></div>
+    <div align="center">Red: 1 week away</div>
+    <div align="center">Yellow: 2 weeks away</div>
+    <div align="center">Blue: beyond 2 weeks</div>
             <!-- /.box-body -->
           </div>
       </div>    
@@ -87,10 +90,7 @@
 
    
     </section>
-       <div align="center"><h4><b>Legend for defense schedules:</b></h4></div>
-    <div align="center">Red: 1 week away</div>
-    <div align="center">Yellow: 2 weeks away</div>
-    <div align="center">Blue: beyond 2 weeks</div>
+       
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

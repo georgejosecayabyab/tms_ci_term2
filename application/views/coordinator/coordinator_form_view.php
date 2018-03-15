@@ -51,7 +51,7 @@
           <div class="modal-body">
             <div class="col-sm-8">
               <div id="upload" class="form-group">
-                <label for="exampleInputFile">Upload new form</label>
+                <label for="exampleInputFile">Upload <b>.docx or .pdf</b> form </label> 
                 <input id="submission" type="file" name="userfile" size="20">
               </div>
             </div>
@@ -88,7 +88,7 @@
       <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th>Form</th>
+            <th>Form (click to download)</th>
             <th>Course</th>
             <th></th>
           
@@ -108,7 +108,7 @@
         </tbody>
       </table>
     </div>
-    <div align="center">Note: Please upload .docx format only</div>
+    <div align="center"><b>Note: Only .docx and .pdf file types are accepted</b></div>
     
   </section>
 </div>
