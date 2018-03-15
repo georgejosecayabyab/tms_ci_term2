@@ -101,7 +101,7 @@
           <div class="modal-footer">
             <div class="row" align="center">
               
-              <button id="ex" onclick="location.href='<?php echo site_url('coordinator/view_faculty')?>';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              <button id="ex" onclick="location.href='#';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
               <button onclick=create_faculty() type="submit" class="btn btn-success">Save and Quit</button>
             </div>
           </div>

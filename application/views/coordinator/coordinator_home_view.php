@@ -61,7 +61,7 @@
           <div class="alert alert-info alert-dismissible">
             <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-            <?php echo "No Defense"; ?></center>
+            <?php echo "No Upcoming Defense Dates"; ?></center>
           </div>
         <?php endif;?>
       </div>
