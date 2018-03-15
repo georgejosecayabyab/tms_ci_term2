@@ -170,6 +170,7 @@ immediately after the control sidebar -->
     var firstPan = "";
     var secondPan = "";
     var thirdPan = "";
+    var base = $('#base_url').val();
 
     $('.modal').on('shown.bs.modal', function (e) {
       trigger = $(e.relatedTarget);
@@ -185,7 +186,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/update_group_panelist',
+          url: base+'index.php/coordinator/update_group_panelist',
           data: {'fid': fid, 'sid': sid, 'tid': tid, 'group_id': group_id},
           success: function(data)
           {
@@ -214,7 +215,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -286,7 +287,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_tags/'+first_id,
+          url: base+'index.php/coordinator/get_panel_tags/'+first_id,
           success: function(data)
           {
             tags = "";
@@ -349,7 +350,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -421,7 +422,7 @@ immediately after the control sidebar -->
         
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_tags/'+second_id,
+          url: base+'index.php/coordinator/get_panel_tags/'+second_id,
           success: function(data)
           {
             tags = "";
@@ -484,7 +485,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -556,7 +557,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_tags/'+third_id,
+          url: base+'index.php/coordinator/get_panel_tags/'+third_id,
           success: function(data)
           {
             tags = "";
@@ -699,7 +700,7 @@ immediately after the control sidebar -->
       {
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_group_tags/'+group_id,
+          url: base+'index.php/coordinator/get_group_tags/'+group_id,
           success: function(data)
           {
             console.log('got tags');
@@ -747,7 +748,7 @@ immediately after the control sidebar -->
               $('#suggestionOne').append('\
                 <div class="alert alert-success alert-dismissible">\
                   <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>'+data['tag_count'][0]['NAME']+'<a href="#"><i id="addPanel1" ></i></a></h4>\
-                  <h5> Assistant Professor </h5>\
+                  <h5>'+data['tag_common'][0]['RANK_NAME']+'</h5>\
                   <div> \
                     <p>\
                     <b> Specialization: </b> <br>\
@@ -787,7 +788,7 @@ immediately after the control sidebar -->
               $('#suggestionTwo').append('\
                 <div class="alert alert-success alert-dismissible">\
                   <h4 id="suggestion2Name"><i class="icon fa fa-user"></i>'+data['tag_count'][1]['NAME']+'<a href="#"><i id="addPanel2" ></i></a></h4>\
-                  <h5> Assistant Professor </h5>\
+                  <h5>'+data['tag_common'][1]['RANK_NAME']+'</h5>\
                   <div> \
                     <p>\
                     <b> Specialization: </b> <br>\
@@ -797,7 +798,7 @@ immediately after the control sidebar -->
                   </div>\
                   <div> \
                     <p>\
-                    <b> Common (2): </b> <br>\
+                    <b> Common ('+data['tag_count'][1]['COUNT']+'): </b> <br>\
                     <span></span>'
                     +common+
                     '</p>\
@@ -827,7 +828,7 @@ immediately after the control sidebar -->
               $('#suggestionThree').append('\
                 <div class="alert alert-success alert-dismissible">\
                   <h4 id="suggestion3Name"><i class="icon fa fa-user"></i>'+data['tag_count'][2]['NAME']+'<a href="#"><i id="addPanel3"></i></a></h4>\
-                  <h5> Assistant Professor </h5>\
+                  <h5>'+data['tag_common'][2]['RANK_NAME']+'</h5>\
                   <div> \
                     <p>\
                     <b> Specialization: </b> <br>\
@@ -837,7 +838,7 @@ immediately after the control sidebar -->
                   </div>\
                   <div> \
                     <p>\
-                    <b> Common (2): </b> <br>\
+                    <b> Common ('+data['tag_count'][2]['COUNT']+'): </b> <br>\
                     <span></span>'
                     +common+
                     '</p>\
@@ -862,7 +863,7 @@ immediately after the control sidebar -->
       {
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -923,7 +924,7 @@ immediately after the control sidebar -->
 
             $.ajax({
               type: 'POST',
-              url: '/tms_ci/index.php/coordinator/get_panel_tags/'+first_id,
+              url: base+'index.php/coordinator/get_panel_tags/'+first_id,
               success: function(data)
               {
                 tags = "";
@@ -952,7 +953,7 @@ immediately after the control sidebar -->
 
             $.ajax({
               type: 'POST',
-              url: '/tms_ci/index.php/coordinator/get_panel_tags/'+second_id,
+              url: base+'index.php/coordinator/get_panel_tags/'+second_id,
               success: function(data)
               {
                 tags = "";
@@ -981,7 +982,7 @@ immediately after the control sidebar -->
 
             $.ajax({
               type: 'POST',
-              url: '/tms_ci/index.php/coordinator/get_panel_tags/'+third_id,
+              url: base+'index.php/coordinator/get_panel_tags/'+third_id,
               success: function(data)
               {
                 tags = "";
