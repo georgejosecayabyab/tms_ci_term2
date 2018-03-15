@@ -15,24 +15,23 @@
   <!-- Main content -->
   <section class="content">
     <?php if($this->session->flashdata('fail')): ?>
-      <div class="alert alert-info alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('fail'); ?>
-      </div>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('fail'); ?></center>
+        </div>
     <?php endif; ?>
     <?php if($this->session->flashdata('success')): ?>
-      <?php echo $this->session->flashdata('success'); ?>
-      <div class="alert alert-info alert-dismissible">
+      <div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('success'); ?>
+        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+        <?php echo $this->session->flashdata('success'); ?></center>
       </div>
-    <?php endif; ?>
+    <?php endif; ?> 
     <div class="row">
       <div class="col-md-12">
         <div class="box box-info">
-          <form action="<?php echo site_url('coordinator/validate_specific_announcement');?>" method="POST">
+          <form action="<?php echo site_url('coordinator/validate_edited_specific_announcement/'.$related_news['event_id']);?>" method="POST">
             <div class="box-header">
             
               <div class="form-group">
@@ -40,7 +39,12 @@
                 <span>
                   <select class="form-control select2" name="course" style="width: 50%;">
                     <?php foreach($course as $row):?>
-                      <option><?php echo $row['course_code'];?></option>
+                      <?php if($row['course_code'] == $related_news['course_code']):?>
+                        <option selected><?php echo $row['course_code'];?></option>
+                      <?php else:?>
+                        <option><?php echo $row['course_code'];?></option>
+                      <?php endif;?>
+                      
                     <?php endforeach;?>  
                   </select>
                 </span>
@@ -64,7 +68,7 @@
             </style>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
+              <textarea id="editor1" name="editor1" rows="10" cols="80"><?php echo $related_news['event_desc'];?></textarea>
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-lg-4 col-xs-12">

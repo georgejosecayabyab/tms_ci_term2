@@ -603,11 +603,26 @@ class coordinator_model extends CI_Model
 
 	}
 
+	public function get_specific_related_news($event_id)
+	{
+		$sql = "SELECT * FROM THESIS_RELATED_EVENT WHERE EVENT_ID=".$event_id.";";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
 	public function delete_related_news($event_id)
 	{
 		//escape all variable
 		$this->db->where('event_id', $event_id);
 		$this->db->delete('thesis_related_event');
+	}
+
+	public function update_related_news($data)
+	{
+		$sql = "update thesis_related_event
+				set event_desc='".$data['event_desc']."', course_code='".$data['course_code']."'
+				where event_id='".$data['event_id']."';";
+		$this->db->query($sql);
 	}
 
 	public function insert_new_home_announcement($data)

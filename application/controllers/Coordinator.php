@@ -273,6 +273,31 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		public function view_edit_specific_announcement($event_id)
+		{
+			$data['related_news'] = $this->coordinator_model->get_specific_related_news($event_id);
+			$data['course'] = $this->coordinator_model->get_all_course();
+			$data['active_tab'] = array(
+				'home' => "",
+				'group' => "",
+				'faculty' => "",
+				'student' => "",
+				'home_announcement' => "",
+				'specific_announcement' => "active",
+				'form' => "",
+				'report' => "",
+				'archive' => "",
+				'specialization' => "",
+				'term' => ""  ,
+				'time' => "" 
+			);
+
+			$this->load->view('coordinator/coordinator_base_head', $data);
+			$this->load->view('coordinator/coordinator_edit_specific_announcement_view', $data);
+			$this->load->view('coordinator/coordinator_base_foot', $data);
+		
+		}
+
 		public function view_form()
 		{
 			$data['form'] = $this->coordinator_model->get_form();
@@ -938,6 +963,7 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
+				$this->session->set_flashdata('fail', 'Please fill up the Title!');
 				redirect('coordinator/view_new_home_announcement');
 			}
 			else
@@ -949,6 +975,7 @@
 					'is_featured' => 0,
 				);
 				$this->coordinator_model->insert_new_home_announcement($data);
+				$this->session->set_flashdata('success', 'A new home announcement has been made!');
 				redirect('coordinator/view_home_announcement');
 
 			}
@@ -968,6 +995,8 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
+
+				$this->session->set_flashdata('fail', 'Please fill up all fields!');
 				redirect('coordinator/view_specific_home_announcement/'.$news_id);
 			}
 			else
@@ -980,6 +1009,7 @@
 					'news_id' => $news_id
 				);
 				$this->coordinator_model->update_specific_news($data);
+				$this->session->set_flashdata('success', 'Home announcement has been updated!');
 				redirect('coordinator/view_home_announcement');
 
 			}
@@ -996,6 +1026,7 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
+				$this->session->set_flashdata('fail', 'Please fill up all fields!');
 				redirect('coordinator/view_new_specific_announcement');
 			}
 			else
@@ -1005,6 +1036,36 @@
 					'course_code' => $course
 				);
 				$this->coordinator_model->insert_new_specific_announcement($data);
+				$this->session->set_flashdata('success', 'A new announcement has been made!');
+				redirect('coordinator/view_specific_announcement');
+
+			}
+		}
+
+		public function validate_edited_specific_announcement($event_id)
+		{
+			$course = $this->input->post("course");
+			$event_desc = $this->input->post("editor1");
+			date_default_timezone_set('Asia/Manila');
+			$date_time = date("Y-m-d H:i:s");
+
+			$this->form_validation->set_rules('editor1', 'Information', 'required|trim');
+
+			if($this->form_validation->run() == FALSE)
+			{
+
+				$this->session->set_flashdata('fail', 'Please fill up all fields!');
+				redirect('coordinator/view_specific_announcement');
+			}
+			else
+			{
+				$data = array(
+					'event_id' => $event_id,
+					'event_desc' => $event_desc,
+					'course_code' => $course
+				);
+				$this->coordinator_model->update_related_news($data);
+				$this->session->set_flashdata('success', 'Specific announcement has been updated!');
 				redirect('coordinator/view_specific_announcement');
 
 			}
