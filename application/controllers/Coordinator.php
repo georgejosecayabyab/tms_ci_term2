@@ -1126,12 +1126,15 @@
 
 		public function insert_group()
 		{
-			$users = $this->input->post('users');
+			$users = $this->input->post('members');
 			$group_name = $this->input->post('group_name');
 			$thesis_title = $this->input->post('thesis_title');
 			$adviser = $this->input->post('adviser');
 			$adviser_id = $this->input->post('adviser_id');
 			$course = $this->input->post('course');
+
+			var_dump($users);
+			echo $group_name.' '.$thesis_title.' '.$adviser.' '.$course;
 
 			//// validations
 			if(sizeof($users) > 4 || sizeof($users) < 1)
@@ -1166,14 +1169,14 @@
 			else
 			{
 				$this->coordinator_model->insert_thesis($thesis_title);
-				$this->coordinator_model->insert_thesis_group($group_name, $adviser_id, $thesis_title, $course);
-				$thesis_group_id = $this->coordinator_model->get_thesis_group($group_name, $adviser_id);
+				$this->coordinator_model->insert_thesis_group($group_name, $adviser, $thesis_title, $course);
+				$thesis_group_id = $this->coordinator_model->get_thesis_group($group_name, $adviser);
 				for($x = 0; $x < sizeof($users); $x++)
 				{
 					$this->coordinator_model->insert_student_group($users[$x], $thesis_group_id['group_id']);
 				}
 				$this->session->set_flashdata('success', 'Group has been created!');
-				redirect('coordinator/view_student');
+				//redirect('coordinator/view_student');
 			}
 
 			foreach($users as $row)
@@ -1251,6 +1254,15 @@
 			}
 			$this->coordinator_model->update_user_status($user_id, $status_to_be);
 			$data = $this->coordinator_model->get_user_info($user_id);
+
+			header('Content-Type: application/json');
+			echo json_encode($data);
+		}
+
+		public function get_specific_course_students()
+		{
+			$course_code = $this->input->post("course_code");
+			$data = $this->coordinator_model->get_specific_course_students($course_code);
 
 			header('Content-Type: application/json');
 			echo json_encode($data);

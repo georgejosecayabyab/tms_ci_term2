@@ -48,45 +48,45 @@ immediately after the control sidebar -->
   
   var member = "";
 
-  $('#table').change(function(){
-    var student = $('#student_box').attr('name');
-    var member = "";
-    var id = [];
-    $('#user_id').empty();
-    $('#users').empty();
+  // $('#table').change(function(){
+  //   var student = $('#student_box').attr('name');
+  //   var member = "";
+  //   var id = [];
+  //   $('#user_id').empty();
+  //   $('#users').empty();
 
-    //$('#user_id').empty();
-    $('table [type="checkbox"]').each(function(i, chk) {
-      if (chk.checked) {
-        console.log("Checked!", i, chk);
-        var name = $(this).attr("name");
-        console.log('id:' + name);
-        $.ajax({
-          type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_user_info/'+name,
-          success: function(data)
-          {
-            console.log(data);
-            member = member + data['user']['first_name']+' '+data['user']['last_name']+', ';
-            id.push(data['user']['user_id']);
-            console.log('senpai '+member);
-            $('#group_members').empty();
-            $('#group_members').append(member.substring(0, member.length -2));
-            $('#user_id').append('<input value="'+ data['user']['user_id']+'" name="users[]">');
-            $('#adviser_id').append('<input value="'+ $('#adviser').val()+'" name="adviser_id">');
-            console.log('kill: '+$('#users').attr("value"));
-            console.log('adviser id: '+$('#adviser').val());
-          },
-          error: function(err)
-          {
-            console.log(err);
-          }
-        });
-      }
+  //   $('#user_id').empty();
+  //   $('table [type="checkbox"]').each(function(i, chk) {
+  //     if (chk.checked) {
+  //       console.log("Checked!", i, chk);
+  //       var name = $(this).attr("name");
+  //       console.log('id:' + name);
+  //       $.ajax({
+  //         type: 'POST',
+  //         url: '/tms_ci/index.php/coordinator/get_user_info/'+name,
+  //         success: function(data)
+  //         {
+  //           console.log(data);
+  //           member = member + data['user']['first_name']+' '+data['user']['last_name']+', ';
+  //           id.push(data['user']['user_id']);
+  //           console.log('senpai '+member);
+  //           $('#group_members').empty();
+  //           $('#group_members').append(member.substring(0, member.length -2));
+  //           $('#user_id').append('<input value="'+ data['user']['user_id']+'" name="users[]">');
+  //           $('#adviser_id').append('<input value="'+ $('#adviser').val()+'" name="adviser_id">');
+  //           console.log('kill: '+$('#users').attr("value"));
+  //           console.log('adviser id: '+$('#adviser').val());
+  //         },
+  //         error: function(err)
+  //         {
+  //           console.log(err);
+  //         }
+  //       });
+  //     }
       
-    });
+  //   });
 
-  });
+  // });
   
 </script>
 
@@ -1584,7 +1584,63 @@ immediately after the control sidebar -->
 
   }
   
+</script>
 
+<script>
+  function update_group_members()
+  {
+    var base  = $('#base_url').val();
+    var course_code = $('#group_course option:selected').text();
+    $.ajax({
+      type: 'POST',
+      url: base+'/index.php/coordinator/get_specific_course_students',
+      data: {'course_code':course_code},
+      success: function(data)
+      {
+        var options = "";
+        for(var x =0; x<data.length; x++)
+        {
+          var name = data[x]['NAME'];
+          options += '<option value="'+data[x]['USER_ID']+'">'+name+'</option>';
+        }
+        $('#members').empty();
+        $('#members').append(options);
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
+  }
+
+  function get_group_members()
+  {
+    var members = $('#members').val();
+    var base = $('#base_url').val();
+    var group_name = $('#group_name').val();
+    var thesis_title = $('#thesis_title').val();
+    var adviser = $('#adviser').val();
+    var adviser_id = $('#adviser_id').val();
+    var course = $('#group_course').val();
+
+    $.ajax({
+      type: 'POST',
+      url: base +'index.php/coordinator/insert_group',
+      data: {'members': members, 'group_name': group_name, 'thesis_title': thesis_title, 'adviser': adviser,'course': course},
+      success: function(data)
+      {
+        console.log('insert is a success');
+        window.location.replace(base+'index.php/coordinator/view_student');
+      },
+      error: function(err)
+      {
+
+      }
+    });
+
+    console.log('THE VALUE! ' + members);
+  }
 </script>
 
 </body>

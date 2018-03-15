@@ -872,6 +872,17 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
+
+	public function get_specific_course_students($course_code)
+	{
+		$sql = "SELECT CONCAT(U.LAST_NAME, ', ', U.FIRST_NAME) AS 'NAME', S.COURSE_CODE, U.USER_ID 
+				FROM STUDENT S JOIN USER U
+				ON U.USER_ID=S.USER_ID
+				WHERE COURSE_CODE='".$course_code."'
+				AND U.IS_ACTIVE=1;";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
 }
 
 

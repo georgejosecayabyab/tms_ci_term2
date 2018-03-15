@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-lg-12 col-xs-8">
       <button id="addStu" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Student</button>
-      <button id="addGroup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Add Group</button>
+      <button id="addGroup" type="button" onclick="update_group_members()" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Add Group</button>
     </div>
   </div>
   <input id="base_url" type="hidden" value="<?php echo base_url();?>">
@@ -104,13 +104,14 @@
   </form>
   <!-- Modal2 -->
 
-  <form method="POST" action="<?php echo site_url('coordinator/insert_group');?>" class="form-horizontal">
+  <div class="form-horizontal">
     <div id="user_id" hidden>
 
     </div>
     <div id="adviser_id" hidden>
 
     </div>
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
     <div id="myModal2" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
@@ -135,7 +136,7 @@
             <div class="form-group">
               <label for="course" class="col-sm-2 control-label">Course</label>
               <div class="col-sm-8">
-                <select class="form-control" id="course" name="course" style="width: 100%;">
+                <select class="form-control" onchange="update_group_members()" id="group_course" name="course" style="width: 100%;">
                   <?php foreach($course as $row):?>
                     <option><?php echo $row['course_code'];?></option>
                   <?php endforeach;?>
@@ -155,7 +156,7 @@
             <div class="form-group">
               <label for="inputName" class="col-sm-2 control-label">Members</label>
               <div id="group_members" class="col-sm-8">
-                <select class="form-control select2" name="adviser" multiple="multiple" id="adviser" style="width: 100%;">
+                <select class="form-control select2" name="members[]" multiple="multiple" id="members" style="width: 100%;">
                   <?php foreach($faculty as $row):?>
                     <option value="<?php echo $row['user_id'];?>"><?php echo $row['last_name'].', '.$row['first_name'];?></option>
                   <?php endforeach;?>
@@ -166,14 +167,15 @@
           <div class="modal-footer">
             <div class="row" align="center">
               <button id="ex2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
-              <button id="add_group_submit" onclick="" type="submit" class="btn btn-success">Save and Quit</button>
+              <button id="add_group_submit"  onclick="get_group_members()" class="btn btn-success">Save and Quit</button>
+              <button type="submit">sample</button>
               
             </div>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
   <!-- Main content -->
   <section id="tableSection" class="content container-fluid">
     <div class="row" id="scheduleRow">
