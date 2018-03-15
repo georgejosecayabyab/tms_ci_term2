@@ -540,6 +540,7 @@
 			$this->form_validation->set_rules('editor1', 'Information', 'required|trim');
 			if($this->form_validation->run() == FALSE)
 			{
+				$this->session->set_flashdata('fail', 'Please fill up all fields!');
 				redirect('student/view_new_discussion/');
 			}
 			else
@@ -565,6 +566,7 @@
 
 					// $this->email->send();
 				}
+				$this->session->set_flashdata('success', 'A new discussion has been made!');
               	redirect('student/view_group/'.$group_id['group_id']);
 			}
 		}
