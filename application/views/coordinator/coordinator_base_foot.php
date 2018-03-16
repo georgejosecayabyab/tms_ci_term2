@@ -722,6 +722,9 @@ immediately after the control sidebar -->
 
       function fill_group_tags()
       {
+        $('#suggestionOne').empty();
+        $('#suggestionTwo').empty();
+        $('#suggestionThree').empty();
         $.ajax({
           type: 'POST',
           url: base+'index.php/coordinator/get_group_tags/'+group_id,

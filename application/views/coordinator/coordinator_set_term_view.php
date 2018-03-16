@@ -73,9 +73,9 @@
                   <select id="schoolyr" class="form-control select2" name="year">
                     <?php foreach($all_year as $row):?>
                       <?php if($year==$row['year']):?>
-                        <option selected><?php echo $year;?></option>
+                        <option selected><?php echo $row['year_code'];?></option>
                       <?php else:?>
-                        <option><?php echo $row['year'];?></option>
+                        <option><?php echo $row['year_code'];?></option>
                       <?php endif;?>
                     <?php endforeach;?>
                   </select>
@@ -106,10 +106,10 @@
                 margin-right: 20px;
               }
               #schoolyr{
-                width: 100px;
+                width: 150px;
               }
               #term1{
-                width: 100px;
+                width: 150px;
               }
 
             </style>

@@ -35,8 +35,8 @@
         <thead>
           <tr>
             <th>Topic</th>
+            <th>Course</th>
             <th>Panel</th>
-            <th>Defense Type</th>
             <th>Defense Date (mm/dd/yy)</th>
             <th>Verdict</th>
             
@@ -576,101 +576,25 @@
 
               <div  class="col-xs-4" id="suggestionOne">
 
-                <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>Geanne Franco<a href="#"><i id="addPanel1" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
-                  <h5> Assistant Professor </h5>
-
-              <div> 
-                 <p>
-                <b> Specialization: </b> <br>
-                <span></span>
-                <span class="label regularLabel">Web Platform</span>
-                <span class="label regularLabel">Web Application</span>
-                <span class="label regularLabel">Information Technology</span>
-                <span class="label regularLabel">Information Systems</span>
-                <span class="label regularLabel">Django Framework</span>
                 
-                </p>
 
-              </div>
+              
 
-
-              <div> 
-                 <p>
-                <b> Common (3): </b> <br>
-                <span></span>
-                <span class="label regularLabel">Web Platform</span>
-                <span class="label regularLabel">Web Application</span>
-                <span class="label regularLabel">Information Technology</span>
-                
-                </p>
-
-              </div>
-
-
-
-                </div>
+              
 
 
               </div>
 
 
               <div  class="col-xs-4" id="suggestionTwo">
-                <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion2Name"><i class="icon fa fa-user"></i> Oliver Malabanan <a href="#"><i id="addPanel2" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
-                  <h5> Assistant Professor </h5>
-                  <div> 
-                    <p>
-                    <b> Specialization: </b> <br>
-                    <span></span>
-                    <span class="label regularLabel">Web Platform</span>
-                    <span class="label regularLabel">Information Technology</span>
-                    <span class="label regularLabel">Information Systems</span>
-                    <span class="label regularLabel">Django Framework</span>
-                    </p>
-                  </div>
-                  <div> 
-                     <p>
-                    <b> Common (2): </b> <br>
-                    <span></span>
-                    <span class="label regularLabel">Web Platform</span>
-                    <span class="label regularLabel">Information Technology</span>
-                    </p>
-                  </div>
-                </div>
+                
               </div>
               <div  class="col-xs-4" id="suggestionThree">
 
-                <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i> Fritz Flores<i id="addPanel3" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
-                  <h5> Assistant Professor </h5>
-
-              <div> 
-                 <p>
-                <b> Specialization: </b> <br>
-                <span></span>
-                <span class="label regularLabel">Information Technology</span>
-                <span class="label regularLabel">Information Systems</span>
-                <span class="label regularLabel">Django Framework</span>
                 
-                </p>
+
 
               </div>
-
-
-              <div> 
-                 <p>
-                <b> Common (1): </b> <br>
-                <span></span>
-                <span class="label regularLabel">Information Technology</span>
-                
-                </p>
-
-              </div>
-
-
-
-                </div>
 
 
               </div>    

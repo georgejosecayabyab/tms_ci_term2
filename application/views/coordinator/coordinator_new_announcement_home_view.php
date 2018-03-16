@@ -71,7 +71,7 @@
                     <span></span>
                     
                     <a href="<?php echo site_url('coordinator/view_home_announcement');?>"><button id="exit" name="exit" type="button" class="btn btn-danger" value="Exit">Exit</button></a>
-                    <input onclick="home_fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">
+                    <button onclick="home_fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">Save and Quit</button>
                   </div>
                 </div>
               </div>

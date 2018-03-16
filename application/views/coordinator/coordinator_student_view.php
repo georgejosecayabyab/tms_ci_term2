@@ -168,7 +168,6 @@
             <div class="row" align="center">
               <button id="ex2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
               <button id="add_group_submit"  onclick="get_group_members()" class="btn btn-success">Save and Quit</button>
-              <button type="submit">sample</button>
               
             </div>
           </div>

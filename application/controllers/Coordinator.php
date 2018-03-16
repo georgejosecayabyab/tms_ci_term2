@@ -692,9 +692,9 @@
 			
 			$config['upload_path']          = './forms/';
             $config['allowed_types']        = 'pdf|docx';
-            $config['max_size']             = 2000;
-            $config['max_width']            = 4096;
-            $config['max_height']           = 2048;
+            $config['max_size']             = 30000;
+            $config['max_width']            = 8192;
+            $config['max_height']           = 8192;
 
             $this->load->library('upload', $config);
 
@@ -947,6 +947,7 @@
 		public function delete_related_news($event_id)
 		{
 			$this->coordinator_model->delete_related_news($event_id);
+			$this->session->set_flashdata('success', 'Announcement has been deleted!');
 			redirect('coordinator/view_specific_announcement');
 		}
 
@@ -1093,8 +1094,10 @@
 		}
 
 		////download
-		public function download_form($form_name)
+		public function download_form($form_id)
 		{
+			$form = $this->coordinator_model->get_specific_form($form_id);
+			$form_name = $form['form_name'];
 			if($form_name)
 			{
 				$file = realpath("forms")."\\".$form_name;

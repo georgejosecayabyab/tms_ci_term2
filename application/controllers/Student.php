@@ -801,8 +801,7 @@
 				$this->student_model->insert_thesis_tag($thesis_id['thesis_id'], $ar[$x]);
 			}
 			$this->session->set_flashdata('success', 'Specialization has been updated!');
-			header('Content-Type: application/json');
-			echo json_encode($ar);
+			redirect('student/view_group/'.$group_id['group_id']);
 		}
 
 		public function validate_meeting()
@@ -869,37 +868,37 @@
 
 			$this->form_validation->set_rules('comment', 'Comment', 'required|trim');
 
-			if($this->form_validation->run() == FALSE)
-			{
-				redirect('student/view_group/'.$group_id);
-			}
-			else
-			{
-				if($this->input->post('submit_comment') == "Submit")
-				{
-					$student_group_id = $this->student_model->get_student_group_id($user_id, $group_id);
-					$data = array(
-						'thesis_comment' =>  $comment,
-						'student_group_id' => $student_group_id['student_group_id'],
-						'date_time' => $date_time
-					);
-					$this->student_model->insert_thesis_comment($data);
-					$result = $this->student_model->get_all_thesis_comment_notification_target($group_id, $user_id);
-					foreach($result as $row)
-					{
-						$this->insert_notification("New Comment from ".$thesis_title, $row['user_id']);
-						// $this->email->from('george_cayabyab@dlsu.edu.ph', $faculty_data['FIRST_NAME'].' '.$faculty_data['LAST_NAME']);
-						// $this->email->to('george_cayabyab@dlsu.edu.ph');
+			// if($this->form_validation->run() == FALSE)
+			// {
+			// 	redirect('student/view_group/'.$group_id);
+			// }
+			// else
+			// {
+			// 	if($this->input->post('submit_comment') == "Submit")
+			// 	{
+			// 		$student_group_id = $this->student_model->get_student_group_id($user_id, $group_id);
+			// 		$data = array(
+			// 			'thesis_comment' =>  $comment,
+			// 			'student_group_id' => $student_group_id['student_group_id'],
+			// 			'date_time' => $date_time
+			// 		);
+			// 		$this->student_model->insert_thesis_comment($data);
+			// 		$result = $this->student_model->get_all_thesis_comment_notification_target($group_id, $user_id);
+			// 		foreach($result as $row)
+			// 		{
+			// 			$this->insert_notification("New Comment from ".$thesis_title, $row['user_id']);
+			// 			// $this->email->from('george_cayabyab@dlsu.edu.ph', $faculty_data['FIRST_NAME'].' '.$faculty_data['LAST_NAME']);
+			// 			// $this->email->to('george_cayabyab@dlsu.edu.ph');
 
-						// $this->email->subject('CT Thesis');
-						// $this->email->message("New Reply in discussion: ".$thesis_title);
+			// 			// $this->email->subject('CT Thesis');
+			// 			// $this->email->message("New Reply in discussion: ".$thesis_title);
 
-						// $this->email->send();
-					}
-					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Successful comment</div>');
-                  	redirect('student/view_group/'.$group_id);
-				}
-			}
+			// 			// $this->email->send();
+			// 		}
+			// 		$this->session->set_flashdata('success', 'Successful comment');
+   //                	redirect('student/view_group/'.$group_id);
+			// 	}
+			// }
 
 		}
 

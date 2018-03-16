@@ -14,19 +14,19 @@
   </section>
   <!-- Main content -->
   <?php if($this->session->flashdata('fail')): ?>
-      <div class="alert alert-danger alert-dismissible">
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('fail'); ?></center>
+        </div>
+    <?php endif; ?>
+    <?php if($this->session->flashdata('success')): ?>
+      <div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('fail'); ?></center>
+        <?php echo $this->session->flashdata('success'); ?></center>
       </div>
-  <?php endif; ?>
-  <?php if($this->session->flashdata('success')): ?>
-    <div class="alert alert-info alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-      <?php echo $this->session->flashdata('success'); ?></center>
-    </div>
-  <?php endif; ?>
+    <?php endif; ?>
   <style type="text/css">
     #addForm{
       margin-left: 30px;
@@ -98,7 +98,7 @@
         <tbody>
           <?php foreach($form as $row):?>
             <tr>
-              <td><a href="<?php echo site_url('coordinator/download_form/'.$row['form_name']);?>"><?php echo $row['form_name'];?></a></td>
+              <td><a href="<?php echo site_url('coordinator/download_form/'.$row['form_id']);?>"><?php echo $row['form_name'];?></a></td>
               <td><?php echo $row['course_code'];?></td>
               <td><a href="<?php echo site_url('coordinator/delete_form/'.$row['form_id']);?>"><button id="delete" type="button" class="btn btn-block btn-danger">Delete</button></a></td>
               

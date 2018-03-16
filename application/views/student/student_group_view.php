@@ -359,7 +359,7 @@
             <!-- /.tab-pane -->
 
             <div class="tab-pane" id="settings"><!--settings tab-->
-              <form class="form-horizontal" action="<?php echo site_url('student');?>"  method="post">
+              <form class="form-horizontal" action="<?php echo site_url('student/add_tags');?>"  method="post">
               <div id="select_tags" hidden></div>
                 
                 
@@ -367,7 +367,7 @@
                   <label for="inputName" class="col-sm-2 control-label">Specialization</label>
                   
                   <div class="col-sm-10">
-                    <select class="form-control select2" name="tags" id="tags" multiple="multiple" data-placeholder="Select an area of specialization"
+                    <select class="form-control select2" name="tags[]" id="tags" multiple="multiple" data-placeholder="Select an area of specialization"
                       style="width: 100%;">
                       <?php foreach($tag as $row):?>
                         <option selected><?php echo $row['specialization'];?></option>
@@ -384,7 +384,9 @@
                   <div class="col-sm-offset-2 col-sm-10">
                     
                     <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
-                    <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submit_tag" type="button" class="btn btn-success">Save and Quit</button></a>
+                    <!-- <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"> -->
+                      <button id="submit_tag" type="submit" class="btn btn-success">Save and Quit</button>
+                    <!-- </a> -->
                   </div>
                 </div>
               </form>
@@ -400,7 +402,11 @@
                     <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?></font></p>
                   </div>
                 </div>
-                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                  <input id="upload_comment" name="upload_comment" type="hidden" value="Revised Document #<?php echo sizeof($uploads)+1;?> and Revisions List #<?php echo sizeof($uploads)+1;?> has been uploaded">
+                  <input id="group_id" type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
+                  <input type="hidden" id="upload_thesis_title" name="upload_thesis_title" value="<?php echo $group['thesis_title'];?>">
+                </div>
                 <div class="col-md-6"> <!--upload revisions list-->
                   <div class="form-group">
                     <label for="revision_file"><font size="+1">Upload Associated Revisions List</font></label>
@@ -410,7 +416,7 @@
                 </div>
                 <div style="center">
                    <h4>Note: upload only in pdf format</h4>
-                  <button id="uploadForm" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>  
+                  <button id="uploadForm" onclick="comment_upload()" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>  
                 </div>
               </form>
               <section id="tableSection" class="content container-fluid">

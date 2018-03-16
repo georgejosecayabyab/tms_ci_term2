@@ -54,7 +54,10 @@ class coordinator_model extends CI_Model
 								ON F.USER_ID = U.USER_ID
                 				LEFT JOIN PANEL_GROUP PG
                 				ON F.USER_ID = PG.PANEL_ID
+                				JOIN THESIS_GROUP TG
+                				ON TG.GROUP_ID=PG.GROUP_ID
                 WHERE PG.STATUS=1
+                AND TG.IS_ACTIVE=1
 				GROUP BY F.USER_ID;";
 
 		$query = $this->db->query($sql);
@@ -69,6 +72,7 @@ class coordinator_model extends CI_Model
 								ON F.USER_ID = U.USER_ID
                 				JOIN THESIS_GROUP TG 
                 				ON F.USER_ID = TG.ADVISER_ID
+                WHERE TG.IS_ACTIVE=1
 				GROUP BY U.USER_ID;";
 
 		$query = $this->db->query($sql);
@@ -386,6 +390,13 @@ class coordinator_model extends CI_Model
 		//escape all variable
 		$this->db->where('form_id', $form_id);
 		$this->db->delete('form');
+	}
+
+	public function get_specific_form($form_id)
+	{
+		$sql = "SELECT * FROM FORM WHERE FORM_ID=".$form_id.";";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
 	}
 
 	public function get_group_tags($group_id)

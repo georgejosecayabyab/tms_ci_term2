@@ -63,36 +63,30 @@
         <?php endif;?>
       </div>
 
-      <div class="row">
-        <div class="col-lg-12 col-xs-8">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <div  class="box-body">
-              <h2>Announcements for <?php echo $student_data['course_code']?></h2>
-            </div >
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-              <ul class="todo-list">
-                <?php if(sizeof($announcement)>0):?>
-                  <?php foreach($announcement as $row):?>
-                    <li>
-                      <div class="box-header with-border">
-                        <h3 class="box-title"><?php echo $row['event_desc'];?></h3>
-                      </div>
-                    </li>
-                  <?php endforeach;?>
-                <?php else:?>
-                  <div class="alert alert-info alert-dismissible">
-                    <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-                    <?php echo "No Announcements"; ?></center>
-                  </div>
-                <?php endif;?>
-              </ul>
+      <?php if(sizeof($announcement)>0):?>
+        <div class="row">
+          <div class="col-lg-12 col-xs-8">
+            <div class="box box-primary">
+              <!-- /.box-header -->
+              <div  class="box-body">
+                <h2>Announcements for <?php echo $student_data['course_code']?></h2>
+              </div >
+                <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                <ul class="todo-list">
+                    <?php foreach($announcement as $row):?>
+                      <li>
+                        <div class="box-header with-border">
+                          <h3 class="box-title"><?php echo $row['event_desc'];?></h3>
+                        </div>
+                      </li>
+                    <?php endforeach;?>
+                </ul>
+              </div>
+              <!-- /.box-body -->
+              
             </div>
-            <!-- /.box-body -->
-            
-          </div>
-      </div>    
+        </div>   
+      <?php endif;?> 
 
        <div align="center"><h4><b>Legend for defense schedules:</b></h4></div>
     <div align="center">Red: 1 week away</div>

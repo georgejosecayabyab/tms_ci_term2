@@ -48,27 +48,29 @@
     $('#select_tags').append('<input value="'+ sel+'" name="selected_tags_value">');
   });
 
-  $('#submit_tag').click(function(){
-    var sel = $('#tags').select2("val");
-    console.log(sel);
+  // $('#submit_tag').click(function(){
+  //   var sel = $('#tags').select2("val");
+  //   console.log(sel);
 
-    $.ajax({
-      type:'POST',
-      url: '/tms_ci/index.php/student/add_tags',
-      data: {'tags': sel},
-      success: function(data)
-      {
-        for(var x =0; x<data.length; x++)
-        {
-          console.log('tag is '+data[x]);
-        }
-      },
-      error: function(err)
-      {
-        console.log(err);
-      }
-    });
-  });
+  //   $.ajax({
+  //     type:'POST',
+  //     url: '/tms_ci/index.php/student/add_tags',
+  //     data: {'tags': sel},
+  //     success: function(data)
+  //     {
+  //       for(var x =0; x<data.length; x++)
+  //       {
+  //         console.log('tag is '+data[x]);
+  //       }
+  //       $('#flash_message').empty();
+  //       $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+ram['message']+'</center></div>');
+  //     },
+  //     error: function(err)
+  //     {
+  //       console.log(err);
+  //     }
+  //   });
+  // });
 </script>
 
 <script>
@@ -158,6 +160,35 @@
     
   });
 </script> -->
+
+
+<script>
+  function comment_upload()
+  {
+    var base = $('#base_url').val();
+    var comment = $('#upload_comment').val();
+    var group_id = $('#group_id').val();
+    var title = $('#upload_thesis_title').val();
+    alert(comment+' IS THE COMMENT');
+    alert(group_id+' IS THE ID');
+    alert(base);
+    $.ajax({
+      type:'POST',
+      url:base+'index.php/student/validate_comment',
+      data:{'comment':comment, 'group_id':group_id, 'thesis_title':title},
+      success: function(data)
+      {
+        console.log('comment is a success');
+      },
+      error: function(data)
+      {
+        console.log('179 error log');
+        console.log(data);
+      }
+    });
+
+  }
+</script>
 
 <!--notification refresh-->
 <script>
