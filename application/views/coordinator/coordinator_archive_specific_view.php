@@ -48,6 +48,24 @@
             
             <div class="form-group">
               <div class="box-header with-border">
+                <h3 class="box-title"> Department: </h3> 
+                <h5> 
+                  <?php 
+                       $course_code = $member[0]['course_code'];
+                       if(strpos($course_code, "IT") !== FALSE){
+                          echo "Information Technology";
+                       }
+                       if(strpos($course_code, "CT") !== FALSE){
+                          echo "Computer Technology";
+                       }
+                  ?>
+                  
+                </h5>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="box-header with-border">
                 <h3 class="box-title"> Members: </h3> 
                 <h5> 
                   <?php
@@ -65,7 +83,7 @@
               </div>
             </div>
 
-               <div class="form-group">
+            <div class="form-group">
               <div class="box-header with-border">
                 <h3 class="box-title"> Panel List:  </h3> 
                 <h5>

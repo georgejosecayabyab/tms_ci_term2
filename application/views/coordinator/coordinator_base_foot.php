@@ -108,12 +108,39 @@ immediately after the control sidebar -->
   {
     var topic_info = editor.getData();
     var topic_name = $('#discussion_title').val();
+    var base = $('#base_url').val();
+    var event_id = $('#event_id').val();
     $('#discussion_title').val(topic_name);
     $('#editor1').val(topic_info);
     console.log('succe');
     console.log($('#editor1').val());
     console.log($('#discussion_title').val());
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/coordinator/validate_edited_specific_announcement/'+event_id,
+      data: {'discussion_title':topic_name, 'editor1':topic_info},
+      success: function(data)
+      {
+        if(data['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+data['message']+'</center></div>');
+        }
+        else if(data['type']=1)
+        {
+          window.location.replace(base+'index.php/'+data['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
   }
+
+
 </script>
 
 <script src="<?php echo base_url();?>jquery-1.11.2.js"></script>
@@ -130,6 +157,10 @@ immediately after the control sidebar -->
 
 <script>
   ////NONE
+</script>
+
+<script>
+  
 </script>
 
 <script type="text/javascript">
@@ -1482,15 +1513,54 @@ immediately after the control sidebar -->
     $('#editor1').val(topic_info);
   });
 
+  // function validate_home_announcement()
+  // {
+  //   var base = $('#base_url').val();
+  //   var news_id = $('#news_id').val();
+  //   var base = $('#base_url').val(); 
+  //   $('#discussion_title').val(topic_name);
+  //   $('#editor1').val(topic_info);
+  //   console.log('succe');
+  //   console.log($('#editor1').val());
+  //   console.log($('#discussion_title').val());
+
+    
+  // }
   function home_fill_in()
   {
     var topic_info = editor.getData();
     var topic_name = $('#discussion_title').val();
+    var base = $('#base_url').val();
+    var news_id = $('#news_id').val();
     $('#discussion_title').val(topic_name);
     $('#editor1').val(topic_info);
     console.log('succe');
     console.log($('#editor1').val());
     console.log($('#discussion_title').val());
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/coordinator/validate_edited_home_announcement/'+news_id,
+      data: {'discussion_title':topic_name, 'editor1':topic_info},
+      success: function(data)
+      {
+        if(data['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+data['message']+'</center></div>');
+        }
+        else if(data['type']=1)
+        {
+          window.location.replace(base+'index.php/'+data['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
   }
 </script>
 

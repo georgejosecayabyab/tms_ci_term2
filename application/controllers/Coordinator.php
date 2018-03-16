@@ -963,7 +963,7 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
-				$this->session->set_flashdata('fail', 'Please fill up the Title!');
+				$this->session->set_flashdata('fail', validation_errors());
 				redirect('coordinator/view_new_home_announcement');
 			}
 			else
@@ -996,8 +996,13 @@
 			if($this->form_validation->run() == FALSE)
 			{
 
-				$this->session->set_flashdata('fail', 'Please fill up all fields!');
-				redirect('coordinator/view_specific_home_announcement/'.$news_id);
+				$this->session->set_flashdata('fail', validation_errors());
+				$data['type'] = 0;
+				$data['message'] = validation_errors();
+
+				header("Content-type: application/json");
+				echo json_encode($data);
+				//redirect('coordinator/view_specific_home_announcement/'.$news_id);
 			}
 			else
 			{
@@ -1010,7 +1015,13 @@
 				);
 				$this->coordinator_model->update_specific_news($data);
 				$this->session->set_flashdata('success', 'Home announcement has been updated!');
-				redirect('coordinator/view_home_announcement');
+				$data['type'] = 1;
+				$data['message'] = validation_errors();
+
+				$data['link'] = 'coordinator/view_home_announcement';
+				header("Content-type: application/json");
+				echo json_encode($data);
+				//redirect('coordinator/view_home_announcement');
 
 			}
 		}
@@ -1026,7 +1037,7 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
-				$this->session->set_flashdata('fail', 'Please fill up all fields!');
+				$this->session->set_flashdata('fail', validation_errors());
 				redirect('coordinator/view_new_specific_announcement');
 			}
 			else
@@ -1054,8 +1065,13 @@
 			if($this->form_validation->run() == FALSE)
 			{
 
-				$this->session->set_flashdata('fail', 'Please fill up all fields!');
-				redirect('coordinator/view_specific_announcement');
+				$this->session->set_flashdata('fail', validation_errors());
+				$data['type'] = 0;
+				$data['message'] = validation_errors();
+
+				header("Content-type: application/json");
+				echo json_encode($data);
+				//redirect('coordinator/view_specific_announcement');
 			}
 			else
 			{
@@ -1066,7 +1082,12 @@
 				);
 				$this->coordinator_model->update_related_news($data);
 				$this->session->set_flashdata('success', 'Specific announcement has been updated!');
-				redirect('coordinator/view_specific_announcement');
+				$data['type'] = 1;
+				$data['message'] = validation_errors();
+
+				$data['link'] = 'coordinator/view_specific_announcement';
+				header("Content-type: application/json");
+				echo json_encode($data);
 
 			}
 		}

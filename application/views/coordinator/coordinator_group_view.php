@@ -409,7 +409,7 @@
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a  href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-defense-button" type="button" class="btn btn-success pull-left">Save changes</button></a>
+        <!-- <a  href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-defense-button" type="button" class="btn btn-success pull-left">Save changes</button></a> -->
       </div>
     </div>
     <!-- /.modal-content -->

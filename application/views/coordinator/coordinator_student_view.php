@@ -183,7 +183,6 @@
       <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th></th>
             <th>Name</th>
             <th>Email Address</th>
             <th>Course</th>
@@ -197,22 +196,7 @@
 
 
               <tr>
-              <?php 
-                if($row['IS_ACTIVE'] == 1 && $row['GROUP_NAME'] == null)
-                {
-                  ?>
-                <td><input name="<?php echo $row['USER_ID'];?>" type="checkbox" id="student_box"></td>
-
-                <?php } 
-                else
-                {
-                  echo '<td></td>';
-
-                }
-
-
-                ?>
-
+              
                 <td><?php echo $row['NAME'];?></td>
                 <td><?php echo $row['EMAIL'];?></td>
                 <td>

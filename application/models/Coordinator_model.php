@@ -190,7 +190,7 @@ class coordinator_model extends CI_Model
 
 	public function archive_members()
 	{
-		$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name'
+		$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name', tg.course_code
 				from student_group sg
 				join student s
 				on s.user_id=sg.student_id

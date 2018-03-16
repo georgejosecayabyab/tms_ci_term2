@@ -14,24 +14,29 @@
   </section>
   <!-- Main content -->
   <section class="content">
-    <?php if($this->session->flashdata('fail')): ?>
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
+
+    <div id="flash_message">
+      <?php if($this->session->flashdata('fail')): ?>
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
           <?php echo $this->session->flashdata('fail'); ?></center>
         </div>
-    <?php endif; ?>
-    <?php if($this->session->flashdata('success')): ?>
-      <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('success'); ?></center>
-      </div>
-    <?php endif; ?> 
+      <?php endif; ?>
+      <?php if($this->session->flashdata('success')): ?>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('success'); ?></center>
+        </div>
+      <?php endif; ?> 
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="box box-info">
-          <form action="<?php echo site_url('coordinator/validate_edited_specific_announcement/'.$related_news['event_id']);?>" method="POST">
+          <input type="hidden" id="event_id" value="<?php echo $related_news['event_id'];?>">
+          <div>
             <div class="box-header">
             
               <div class="form-group">
@@ -76,14 +81,14 @@
                   </div>
                   <div class="col-lg-3 col-xs-12">
                     <span></span>
-                    <a href="<?php echo site_url('coordinator/view_specific_announcement/');?>"><input id="exita" name="exit" type="button" class="btn btn-danger" value="Exit"></a>
-                    <input onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">
+                    <a href="<?php echo site_url('coordinator/view_specific_announcement/');?>"><button id="exita" name="exit" type="button" class="btn btn-danger" value="Exit">Exit</button></a>
+                    <button onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" value="Save and Quit">Save and Quit</button>
                     
                   </div>
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         <!-- /.box -->
       </div>
