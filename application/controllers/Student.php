@@ -800,7 +800,7 @@
 			{
 				$this->student_model->insert_thesis_tag($thesis_id['thesis_id'], $ar[$x]);
 			}
-
+			$this->session->set_flashdata('success', 'Specialization has been updated!');
 			header('Content-Type: application/json');
 			echo json_encode($ar);
 		}

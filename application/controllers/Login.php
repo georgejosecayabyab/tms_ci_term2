@@ -48,29 +48,40 @@
 					{
 						//user exist and correct
 						//set session
-						$is_student = $this->login_model->is_student($result['user_id']);
-						$data = array(
-								'user_id' => $result['user_id'],
-								'user_type' => $is_student
-						);
+						$user_type = $this->login_model->is_student($result['user_id']);
+						//This is an array
+						$data = [
+							'access_token' => $token,
+							'user_id' => $result['user_id'],
+							'user_type' => $user_type['user_type']
+						];
 
 						$this->session->set_userdata($data);
+
+						var_dump($this->session->userdata());
 						//student or faculty
-						if($is_student == 0)
+						if($user_type['user_type'] == 0)
 						{
+							//var_dump($this->session->userdata());
 							redirect("student");//student
+						}
+						else if($user_type['user_type'] == 1)
+						{
+							redirect("faculty");//faculty
 						}
 						else
 						{
-							$if_coordinator = $this->login_model->if_coordinator($result['user_id']);
-							if(sizeof($if_coordinator) > 0)
-							{
-								redirect("coordinator");
-							}
-							else
-							{
-								redirect("faculty");//faculty
-							}
+							//var_dump($this->session->userdata());
+							redirect("coordinator");
+							// $if_coordinator = $this->login_model->if_coordinator($result['user_id']);
+							// if(sizeof($if_coordinator) > 0)
+							// {
+							// 	redirect("coordinator");
+							// }
+							// else
+							// {
+							// 	redirect("faculty");//faculty
+							// }
 							
 						}
 					}
@@ -130,23 +141,23 @@
 			{
 				//user exist and correct
 				//set session
-				$is_student = $this->login_model->is_student($result['user_id']);
+				$user_type = $this->login_model->is_student($result['user_id']);
 				//This is an array
 				$data = [
 					'access_token' => $token,
 					'user_id' => $result['user_id'],
-					'user_type' => $is_student
+					'user_type' => $user_type['user_type']
 				];
 
 				$this->session->set_userdata($data);
 
 				//student or faculty
-				if($is_student == 0)
+				if($user_type['user_type']  == 0)
 				{
 					//var_dump($this->session->userdata());
 					redirect("student");//student
 				}
-				else if($is_student == 1)
+				else if($user_type['user_type']  == 1)
 				{
 					redirect("faculty");//faculty
 				}

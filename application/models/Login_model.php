@@ -22,17 +22,20 @@
 		public function is_student($user_id)
 		{
 			//SELECT * FROM STUDENT WHERE USER_ID=$USER_ID;
-			$this->db->where('user_id', $user_id);
-			$query = $this->db->get('student');
-			$num = $query->num_rows();
-			if ($num > 0)
-			{
-				return 0;//student
-			}
-			else 
-			{
-				return 1;//faculty
-			}
+			// $this->db->where('user_id', $user_id);
+			// $query = $this->db->get('student');
+			// $num = $query->num_rows();
+			// if ($num > 0)
+			// {
+			// 	return 0;//student
+			// }
+			// else 
+			// {
+			// 	return 1;//faculty
+			// }
+			$sql = "SELECT * FROM USER WHERE USER_ID=".$user_id.";";
+			$query = $this->db->query($sql);
+			return $query->first_row('array');
 		}
 
 		//check if user exist
