@@ -146,17 +146,22 @@
 					//var_dump($this->session->userdata());
 					redirect("student");//student
 				}
+				else if($is_student == 1)
+				{
+					redirect("faculty");//faculty
+				}
 				else
 				{
-					$if_coordinator = $this->login_model->if_coordinator($result['user_id']);
-					if(sizeof($if_coordinator) > 0)
-					{
-						redirect("coordinator");
-					}
-					else
-					{
-						redirect("faculty");//faculty
-					}
+					redirect("coordinator");
+					// $if_coordinator = $this->login_model->if_coordinator($result['user_id']);
+					// if(sizeof($if_coordinator) > 0)
+					// {
+					// 	redirect("coordinator");
+					// }
+					// else
+					// {
+					// 	redirect("faculty");//faculty
+					// }
 					
 				}
 			}

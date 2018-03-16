@@ -16,6 +16,7 @@
 
   <!-- Main content -->
   <section class="content">
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
     <div id="flash_message">
       <?php if($this->session->flashdata('fail')): ?>
         <div class="alert alert-danger alert-dismissible">
@@ -469,7 +470,7 @@
             </div>
 
             <div class="tab-pane" id="setMeeting">
-              <form method="post" action="<?php echo site_url('student/validate_meeting');?>">
+              <div>
                 <div class="form-group">
                   <div class="input-group date">
                     <div class="input-group-addon">
@@ -488,6 +489,11 @@
                   <label for="start_time" class="control-label">Start Time</label>
                   <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Start Time">
                 </div>
+
+                <div class="form-group">
+                  <label for="end_time" class="control-label">End Time</label>
+                  <input type="time" class="form-control" id="end_time" name="end_time" placeholder="End Time">
+                </div>
                 <style type="text/css">
                   #submitbtn2{
                     margin-right: 20px;
@@ -496,12 +502,12 @@
                 </style>
                 <div class="form-group">
                   <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
-                  <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
+                  <button onclick="meeting()" id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
                   
                 </div>
 
                 
-              </form>
+              </div>
             </div>
 
   </section>
