@@ -241,7 +241,7 @@
 
 <!--editor-->
 <script>
-  $(function () {
+  $(function() {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace('editor1')
@@ -260,15 +260,77 @@
     $('#editor1').val(topic_info);
   });
 
+
+
   function fill_in()
   {
     var topic_info = editor.getData();
     var topic_name = $('#discussion_title').val();
+    var base = $('#base_url').val(); 
     $('#discussion_title').val(topic_name);
     $('#editor1').val(topic_info);
     console.log('succe');
     console.log($('#editor1').val());
     console.log($('#discussion_title').val());
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/student/validate_discussion',
+      data: {'discussion_title':topic_name, 'editor1':topic_info},
+      success: function(ram)
+      {
+        if(ram['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+ram['message']+'</center></div>');
+        }
+        else if(ram['type']=1)
+        {
+          window.location.replace(base+'index.php/'+ram['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
+
+  }
+</script>
+
+<script>
+  function meeting()
+  {
+    var base = $('#base_url').val();
+    var date = $('#datepicker').val();
+    var venue = $('#venue').val();
+    var start = $('#start_time').val();
+    var end = $('#end_time').val();
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/student/validate_meeting',
+      data: {'datepicker':date, 'venue':venue, 'start_time':start, 'end_time':end},
+      success: function(data)
+      {
+        if(data['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+data['message']+'</center></div>');
+        }
+        else if(data['type']=1)
+        {
+          window.location.replace(base+'index.php/'+data['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
   }
 </script>
 

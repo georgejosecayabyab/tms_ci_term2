@@ -20,7 +20,7 @@
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
 			$user_type = $session['user_type'];
-			if($user_type != 1) exit('Access not allowed');
+			if($user_type != 2) exit('Access not allowed');
 			$if_coordinator = $this->coordinator_model->if_coordinator($user_id);
 			if(sizeof($if_coordinator) == 0)
 			{
