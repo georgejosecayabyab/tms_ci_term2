@@ -1,42 +1,10 @@
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-      
-    <!-- Default to the left -->
-    
-  </footer>
+  
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><?php echo $student_data['last_name'].','.$student_data['first_name'];?><i class="fa fa-user"></i></a></li>
-      
-    </ul>
-    <!-- Tab panes -->
-      <div class="tab-content">
-        <!-- Home tab content -->
-        <div class="tab-pane active" id="control-sidebar-home-tab">
-           <ul class="control-sidebar-menu">
-            <li>
-              <a href="<?php echo site_url('student/logout');?>">
-                <i class="menu-icon fa fa-sign-out bg-green"></i>
 
-                <div class="menu-info">
-                  <h4 class="control-sidebar-subheading">Logout</h4>
+  
 
-                
-                </div>
-              </a>
-            </li>
-          </ul>
-          
-          <!-- /.control-sidebar-menu -->
-
-        </div>
-        <!-- /.tab-pane -->
-      </div>
-  </aside>
   <!-- /.control-sidebar -->
 
   <!-- Add the sidebar's background. This div must be placed

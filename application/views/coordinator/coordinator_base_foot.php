@@ -11,14 +11,7 @@
     <div class="tab-pane active" id="control-sidebar-home-tab">
       
       <ul class="control-sidebar-menu">
-        <li>
-          <a href="<?php echo site_url('coordinator/logout');?>">
-            <i class="menu-icon fa fa-sign-out bg-green"></i>
-            <div class="menu-info">
-              <h4 class="control-sidebar-subheading">Logout Profile</h4>
-            </div>
-          </a>
-        </li>
+        
       </ul>
     <!-- /.control-sidebar-menu -->
     </div>

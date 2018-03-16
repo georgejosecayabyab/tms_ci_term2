@@ -200,8 +200,7 @@ desired effect
           <li id="notification" class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span id="new_notification_number" class="label label-warning"></span>
+            
             </a>
             <ul class="dropdown-menu">
               <li class="header"></li>
@@ -220,8 +219,19 @@ desired effect
         
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-user"></i></a>
-          </li>
+            
+              <a href="<?php echo site_url('student/logout');?>">
+               
+
+                <div class="menu-info">
+              
+                  <h10 class="control-sidebar-subheading">Logout</h10>
+
+                
+                </div>
+              </a>
+            
+          
         </ul>
       </div>
     </nav>
