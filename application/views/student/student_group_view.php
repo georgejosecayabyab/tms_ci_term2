@@ -408,7 +408,8 @@
                   </div>
                 </div>
                 <div style="center">
-                  <button id="uploadForm" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>
+                   <h4>Note: upload only in pdf format</h4>
+                  <button id="uploadForm" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>  
                 </div>
               </form>
               <section id="tableSection" class="content container-fluid">
@@ -442,6 +443,7 @@
                   <!-- END timeline item -->
                   <!-- timeline item -->
                 </div>
+
               </section>
             </div>
             <!-- /.tab-pane -->
