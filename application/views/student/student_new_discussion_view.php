@@ -62,6 +62,11 @@
                     <style type="text/css">
                       #exit{
                         margin-right: 20px;
+                        margin-top: 20px;
+
+                      }
+                      #save_discussion{
+                        margin-top: 20px;
                       }
 
                     </style>

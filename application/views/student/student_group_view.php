@@ -168,7 +168,7 @@
               <!-- discussion button-->
               <div class="row">
                 <div class="col-md-3">
-                  <button type="button" class="btn btn-block btn-success" onclick="location.href='<?php echo site_url('student/view_new_discussion');?>';" id="discussion">Create New Discussion </button>
+                  <button type="button" class="btn btn-block btn-primary" onclick="location.href='<?php echo site_url('student/view_new_discussion');?>';" id="discussion">Create New Discussion </button>
                 </div>
               </div>
               <!-- end of discussion button-->

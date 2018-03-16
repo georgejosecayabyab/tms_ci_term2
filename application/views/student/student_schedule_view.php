@@ -76,14 +76,9 @@
                       <h3 class="box-title"> <canvas id="myCanvas" width="50" height="10" style="border:1px solid #000000; background: #6fa6dc">
                       </canvas> - Occupied Schedule</h3> </h3>
                       <div>
-                        <div>
-                          <br>
-                          <a href="#" id="specialCase"> + Add a Special Case Schedule</a>
-                          <br> ex: LASARE3/Nov 24/8AM-5PM
-                        </div>
+                        
                         <br>
-                        <div class="col-xs-10" id="specialField">
-                        </div>
+                       
 
                       </div>
                     </div>
@@ -98,15 +93,21 @@
             <!-- /.box-body -->
 
           </div>
+          <style type="text/css">
+            #submitbtn{
+              margin-left: 20px;
+            }
+
+          </style>
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-4 col-xs-12">
               </div>
               <div class="col-lg-3 col-xs-12">
                 <form>
-                  <button id="submitbtn"  type="button" class="btn btn-success">Save and Quit</button>
+                  
                   <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
-
+                  <button id="submitbtn"  type="button" class="btn btn-success">Save and Quit</button>
                 </form>
               </div>
             </div>

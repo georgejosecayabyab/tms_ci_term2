@@ -85,7 +85,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar"> <i class="fa fa-user"></i> </a>
+                <li>
+          <a href="<?php echo site_url('coordinator/logout');?>">
+            <i class="menu-icon fa fa-sign-out bg-green"></i>
+            <div class="menu-info">
+              <h4 class="control-sidebar-subheading">Logout Profile</h4>
+            </div>
+          </a>
+        </li>
               </li>
             </ul>
           </div>
