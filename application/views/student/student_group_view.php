@@ -341,16 +341,28 @@
                       <div class="timeline-body">
                         <div class="form-group">
                           <label></label>
-                          <textarea name="comment" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
+                          <textarea id="com" name="comment" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
                         </div>
                       </div>
                       <div class="timeline-footer">
-                        <input type="submit" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
+                        <input id="sub" type="submit" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
                       </div>
                     </form>
                   </div>
                 </li>
-                
+                <style type="text/css">
+                  #com{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    width: 90%;
+                  }
+                  #sub{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                  }
+
+                </style>
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
@@ -391,33 +403,73 @@
                 </div>
               </form>
             </div>
-            
+            <style type="text/css">
+              
+              #up{
+                margin-left: -25px;
+              }
+
+            </style>
             <div class="tab-pane" id="newUpload"><!--new upload tab-->
               
               <form action="<?php echo site_url('student/validate_thesis_uploads');?>" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-                <div class="col-md-6"><!--upload document-->
-                  <div class="form-group">
-                    <label for="thesis_file"><font size="+1">Upload New Revised Document Submission</font></label>
-                    <input id="thesis_file" type="file" name="thesis_file" size="20"> <!--document file to be uploaded-->
-                    <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?></font></p>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <input id="upload_comment" name="upload_comment" type="hidden" value="Revised Document #<?php echo sizeof($uploads)+1;?> and Revisions List #<?php echo sizeof($uploads)+1;?> has been uploaded">
-                  <input id="group_id" type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
-                  <input type="hidden" id="upload_thesis_title" name="upload_thesis_title" value="<?php echo $group['thesis_title'];?>">
-                </div>
-                <div class="col-md-6"> <!--upload revisions list-->
-                  <div class="form-group">
-                    <label for="revision_file"><font size="+1">Upload Associated Revisions List</font></label>
-                    <input id="revision_file" type="file" name="revision_file" size="20" />
-                    <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?></font></p>
-                  </div>
-                </div>
-                <div style="center">
-                   <h4>Note: upload only in pdf format</h4>
-                  <button id="uploadForm" onclick="comment_upload()" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>  
-                </div>
+               
+                  
+                  <button id="up" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
+
+                    
+                   
+                    
+                    <div id="myModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Upload Documents</h4>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-6"><!--upload document-->
+                                  <div class="form-group">
+                                    <label for="thesis_file"><font size="+1">Upload New Revised Document</font></label>
+                                    <input id="thesis_file" type="file" name="thesis_file" size="20"> <!--document file to be uploaded-->
+                                    <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?><br>
+
+                                      Note: upload must be in pairs and ONLY in pdf format </font>
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <input id="upload_comment" name="upload_comment" type="hidden" value="Revised Document #<?php echo sizeof($uploads)+1;?> and Revisions List #<?php echo sizeof($uploads)+1;?> has been uploaded">
+                                  <input id="group_id" type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
+                                  <input type="hidden" id="upload_thesis_title" name="upload_thesis_title" value="<?php echo $group['thesis_title'];?>">
+                                </div>
+                                <div class="col-md-6"> <!--upload revisions list-->
+                                  <div class="form-group">
+                                    <label for="revision_file"><font size="+1">Upload Revisions List</font></label>
+                                    <input id="revision_file" type="file" name="revision_file" size="20" />
+                                   
+                                  </div>
+                                </div>
+                                
+                              </div>
+
+                              
+                              <div class="row">
+                          
+                      
+                                  <button id="uploadForm" style="margin-bottom: 20px" onclick="comment_upload()" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>  
+                                
+                                  
+                              
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                
+                
+                
               </form>
               <section id="tableSection" class="content container-fluid">
                 <div class="col-lg-14">
@@ -425,7 +477,7 @@
                   <table id="table" class="display" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        <th>Document Name</th>
+                        <th>Document Name (click to download)</th>
                         <th>Date Uploaded</th>
                         
                         <th>Revisions List</th>

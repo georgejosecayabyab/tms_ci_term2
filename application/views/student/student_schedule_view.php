@@ -70,7 +70,7 @@
 
 
                     <div class="box-header with-border">
-                      <h3 class="box-title">  Each Block Represent 1 Class Schedule</h3> <br><br>
+                      <h3 class="box-title">  Each Block Represent 1 Class Schedule <br> <br>Schedule is Shared with Other Members of the Group</h3><br><br>
                       <h3 class="box-title">  <canvas id="myCanvas" width="50" height="10" style="border:1px solid #000000; background: #bfbfbf">
                       </canvas> - Free Schedule</h3> <br>
                       <h3 class="box-title"> <canvas id="myCanvas" width="50" height="10" style="border:1px solid #000000; background: #6fa6dc">

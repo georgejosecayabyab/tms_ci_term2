@@ -111,14 +111,27 @@
             <div class="timeline-body">
               <div class="form-group">
                 <label></label>
-                <textarea name="reply" class="form-control" rows="3" placeholder="Post a reply about the discussion."></textarea>
+                <textarea id="com" name="reply" class="form-control" rows="3" placeholder="Post a reply about the discussion."></textarea>
               </div>
             </div>
             <div class="timeline-footer">
-              <input type="submit" name="submit_reply" value="Submit" class="btn btn-primary btn-xs">
+              <input id="sub" type="submit" name="submit_reply" value="Submit" class="btn btn-primary btn-xs">
             </div>
           </form>
         </div>
+        <style type="text/css">
+                  #com{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    width: 90%;
+                  }
+                  #sub{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                  }
+
+        </style>
       </li>
     </ul>
   </div>
