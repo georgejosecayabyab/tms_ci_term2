@@ -379,7 +379,7 @@
                   <label for="inputName" class="col-sm-2 control-label">Specialization</label>
                   
                   <div class="col-sm-10">
-                    <select class="form-control select2" name="tags[]" id="tags" multiple="multiple" data-placeholder="Select an area of specialization"
+                    <select class="form-control select2" name="tags[]" id="tags" multiple="multiple" data-placeholder="Select areas of specialization"
                       style="width: 100%;">
                       <?php foreach($tag as $row):?>
                         <option selected><?php echo $row['specialization'];?></option>

@@ -18,12 +18,28 @@
       <section class="content container-fluid">
         <div class="col-lg-12 col-xs-12">
           <div class="form-group">
+            <table id="table" class="display" cellspacing="0" width="100%">
+                <tbody>
+                  <tr>
+                  
+                  <th>Form</th>
+                  
+                 
+                </tr>
+
+
+
             <?php if(sizeof($form) > 0):?>
               <?php foreach($form as $row):?>
-                <div class="box-header with-border">
-                  <h3 class="box-title"><a href="<?php echo site_url('student/download_form/'.$row['form_name']);?>"><?php echo $row['form_name'];?></a>
-                </div>
+                <tr>
+                  <td><a href="<?php echo site_url('student/download_form/'.$row['form_name']);?>"><?php echo $row['form_name'];?></a>
+                  </td>
+                </tr>
+                
+
               <?php endforeach;?>
+               </tbody>
+            </table>
             <?php else:?>
               <div class="alert alert-info alert-dismissible">
                 <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,6 +48,11 @@
               </div>
             <?php endif;?>
           </div>
+
+
+
+
+
 
             <!-- /.box-header -->
           
