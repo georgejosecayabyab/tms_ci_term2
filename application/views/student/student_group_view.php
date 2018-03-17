@@ -509,7 +509,7 @@
 
                 </style>
                 <div class="form-group">
-                  <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
+                  <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submitbtn2" type="button" class="btn btn-danger">Exit</button></a>
                   <button onclick="meeting()" id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
                   
                 </div>

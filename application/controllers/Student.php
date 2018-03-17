@@ -668,7 +668,7 @@
 					'abstract' => $abstract_text
 				);
 				$this->student_model->update_abstract($data, $thesis_id);
-				//$this->session->set_flashdata('success', 'Abstract has been updated!');
+				$this->session->set_flashdata('success', 'Abstract has been updated!');
 				redirect('student/view_group/'.$group_id);
 			}
 		}
