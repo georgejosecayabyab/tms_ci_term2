@@ -498,7 +498,7 @@
 
 		public function archive_thesis()
 		{
-			$sql = "select t.thesis_id, t.thesis_title, tg.group_id, t.abstract
+			$sql = "select t.thesis_id, t.thesis_title, tg.group_id, t.abstract, tg.course_code
 					from thesis t 
 					join thesis_group tg
 					on tg.thesis_id=t.thesis_id
@@ -509,7 +509,7 @@
 
 		public function archive_members()
 		{
-			$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name'
+			$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name', tg.course_code
 					from student_group sg
 					join student s
 					on s.user_id=sg.student_id

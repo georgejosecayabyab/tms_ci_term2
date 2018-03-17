@@ -31,7 +31,17 @@
                 <?php foreach($thesis as $trow):?>
                   <tr>
                     <td><a href="<?php echo site_url('faculty/view_archive_specific/'.$trow['thesis_id']);?>"><?php echo $trow['thesis_title'];?></a></td>
-                    <td></td>
+                    <td>
+                      <?php 
+                       $course_code = $trow['course_code'];
+                       if(strpos($course_code, "IT") !== FALSE){
+                          echo "Information Technology";
+                       }
+                       if(strpos($course_code, "CT") !== FALSE){
+                          echo "Computer Technology";
+                       }
+                      ?>
+                    </td>
                     <td>
                       <?php
                         $tags = '';

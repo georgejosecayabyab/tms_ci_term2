@@ -1205,7 +1205,7 @@
 			}
 
 			$this->session->set_flashdata('success', 'A new term has been set!');			
-			redirect('coordinator/view_set_term');
+			//redirect('coordinator/view_set_term');
 
 		}
 

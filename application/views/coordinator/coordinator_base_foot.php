@@ -1639,8 +1639,9 @@ immediately after the control sidebar -->
       success: function(data)
       {
         console.log('succes term hase been moved');
-        $('#flash_message').empty();
-        $('#flash_message').append('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>A new term has been set!</center></div>');
+        // $('#flash_message').empty();
+        // $('#flash_message').append('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>A new term has been set!</center></div>');
+        window.location.replace(base+'index.php/coordinator/view_set_term');
       },
       error: function(err)
       {

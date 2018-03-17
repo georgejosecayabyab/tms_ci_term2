@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -56,12 +56,31 @@
                 <div class="col-sm-8">
                   <span>
                     <select id="term1" class="form-control select2" name="term">
+                      
                       <?php foreach($all_term as $row):?>
-                        <?php if($term['term']==$row['term']):?>
+                        <?php if($term['term']==$row['term']):?><!--removes actived term-->
+                          <option selected><?php echo $term['term'];?></option>
+                        <?php else:?>
+                          <?php if($term['order']==0):?><!--sets all term except special term available-->
+                            <option><?php echo $row['term'];?></option>
+                          <?php else:?><!---->
+                            <?php if($term['order']==3):?><!--if activated is 3, next will be 1-->
+                              <?php if($row['order']==1 || $row['order']==0):?>
+                                <option><?php echo $row['term'];?></option>
+                              <?php endif;?>
+                            <?php else:?><!--always show the next higher order term-->
+                              <?php if($row['order']==$term['order']+1 || $row['order']==0):?>
+                                <option><?php echo $row['term'];?></option>
+                              <?php endif;?>
+                            <?php endif;?>
+                          <?php endif;?>
+                        <?php endif;?>
+
+                        <!-- <?php if($term['term']==$row['term']):?>
                           <option selected><?php echo $term['term'];?></option>
                         <?php else:?>
                           <option><?php echo $row['term'];?></option>
-                        <?php endif;?>
+                        <?php endif;?> -->
                       <?php endforeach;?>
                     </select>
                   </span>
@@ -75,7 +94,9 @@
                       <?php if($year==$row['year']):?>
                         <option selected><?php echo $row['year_code'];?></option>
                       <?php else:?>
-                        <option><?php echo $row['year_code'];?></option>
+                        <?php if($row['year']>$year):?>
+                          <option><?php echo $row['year_code'];?></option>
+                        <?php endif;?>
                       <?php endif;?>
                     <?php endforeach;?>
                   </select>
@@ -127,22 +148,22 @@
                   <div class="modal-body">
                       <div class="col-sm-8">
                         <h5><b>Things altered by set term: <br>
-<br>
-1. All schedules are reset
-<br>
-2. All groups who are "passed" will proceed to next stage (THS-1 to THS-2, THS-4 to Graduate)
-<br>
-3. Graduated students' works are imported to archive
-<br>
-4. Graduated students are removed from panel list/advicee list of faculty
-<br>
-5. Graduated students status are changed to inactive
-<br>
-6. All notifications are reset</b>
-<br>
-</h5>
-<a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
-<button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
+                          <br>
+                          1. All schedules are reset
+                          <br>
+                          2. All groups who are "passed" will proceed to next stage (THS-1 to THS-2, THS-4 to Graduate)
+                          <br>
+                          3. Graduated students' works are imported to archive
+                          <br>
+                          4. Graduated students are removed from panel list/advicee list of faculty
+                          <br>
+                          5. Graduated students status are changed to inactive
+                          <br>
+                          6. All notifications are reset</b>
+                          <br>
+                          </h5>
+                          <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
+                          <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
                       </div>
                   </div>
                   
@@ -161,4 +182,4 @@
   </section>
   <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.content-wrapper

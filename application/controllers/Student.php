@@ -350,7 +350,7 @@
             	//$d2 = $this->upload->do_upload('revision_file');
             	if($_FILES['thesis_file']['type'] != 'application/pdf' || $_FILES['revision_file']['type'] != 'application/pdf')////|| ! $this->upload->do_upload('revision_file') ! $this->upload->do_upload('thesis_file') 
             	{
-            		$error = array('error' => $this->upload->display_errors());
+            		//$error = array('error' => $this->upload->display_errors());
             		$this->session->set_flashdata('fail', "PDFs only");
             		redirect('student/view_group/'.$group['group_id']);
             		
