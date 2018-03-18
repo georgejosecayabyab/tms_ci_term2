@@ -12,11 +12,6 @@
       <li class="<?php echo $active_tab['group'];?>"><a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><i class="fa fa-users"></i> <span>Group</span></a></li>
       <li class="active"><?php echo $group['group_name'];?></li>
     </ol>
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
-    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
     <div id="flash_message">
       <?php if($this->session->flashdata('fail')): ?>
         <div class="alert alert-danger alert-dismissible">
@@ -33,6 +28,12 @@
         </div>
       <?php endif; ?> 
     </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
+    
     <div class="row">
       <div class="col-md-3">
         <!-- Profile Image -->
@@ -412,7 +413,7 @@
             </style>
             <div class="tab-pane" id="newUpload"><!--new upload tab-->
               
-              <form action="<?php echo site_url('student/validate_thesis_uploads');?>" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+             
                
                   
                   <button id="up" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
@@ -421,6 +422,7 @@
                    
                     
                     <div id="myModal" class="modal fade" role="dialog">
+                      <form action="<?php echo site_url('student/validate_thesis_uploads');?>" class="form-horizontal" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
                           <div class="modal-dialog">
                             <!-- Modal content-->
                             <div class="modal-content">
@@ -440,14 +442,14 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6">
-                                  <input id="upload_comment" name="upload_comment" type="hidden" value="Revised Document #<?php echo sizeof($uploads)+1;?> and Revisions List #<?php echo sizeof($uploads)+1;?> has been uploaded">
+                                  <input id="comment" name="comment" type="hidden" value="Revised Document #<?php echo sizeof($uploads)+1;?> and Revisions List #<?php echo sizeof($uploads)+1;?> has been uploaded">
                                   <input id="group_id" type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
-                                  <input type="hidden" id="upload_thesis_title" name="upload_thesis_title" value="<?php echo $group['thesis_title'];?>">
+                                  <input type="hidden" id="thesis_title" name="thesis_title" value="<?php echo $group['thesis_title'];?>">
                                 </div>
                                 <div class="col-md-6"> <!--upload revisions list-->
                                   <div class="form-group">
                                     <label for="revision_file"><font size="+1">Upload Revisions List</font></label>
-                                    <input id="revision_file" type="file" name="revision_file" size="20" />
+                                    <input id="revision_file" type="file" name="revision_file" size="20">
                                    
                                   </div>
                                 </div>
@@ -458,19 +460,20 @@
                               <div class="row">
                           
                       
-                                  <button id="uploadForm" style="margin-bottom: 20px" onclick="comment_upload()" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>  
+                                  <button id="uploadForm" style="margin-bottom: 20px"  type="submit" name="upload_thesis_revision" class="btn btn-success" value="upload forms">Upload Forms</button>
                                 
                                   
                               
                               </div>
                             </div>
                           </div>
-                        </div>
+                      </form>
+                    </div>
 
                 
                 
                 
-              </form>
+              
               <section id="tableSection" class="content container-fluid">
                 <div class="col-lg-14">
                   <label for="table"> Archive</label>

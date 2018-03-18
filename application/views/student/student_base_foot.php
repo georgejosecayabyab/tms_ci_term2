@@ -163,31 +163,31 @@
 
 
 <script>
-  function comment_upload()
-  {
-    var base = $('#base_url').val();
-    var comment = $('#upload_comment').val();
-    var group_id = $('#group_id').val();
-    var title = $('#upload_thesis_title').val();
-    alert(comment+' IS THE COMMENT');
-    alert(group_id+' IS THE ID');
-    alert(base);
-    $.ajax({
-      type:'POST',
-      url:base+'index.php/student/validate_comment',
-      data:{'comment':comment, 'group_id':group_id, 'thesis_title':title},
-      success: function(data)
-      {
-        console.log('comment is a success');
-      },
-      error: function(data)
-      {
-        console.log('179 error log');
-        console.log(data);
-      }
-    });
+  // function comment_upload()
+  // {
+  //   var base = $('#base_url').val();
+  //   var comment = $('#upload_comment').val();
+  //   var group_id = $('#group_id').val();
+  //   var title = $('#upload_thesis_title').val();
+  //   // alert(comment+' IS THE COMMENT');
+  //   // alert(group_id+' IS THE ID');
+  //   // alert(base);
+  //   $.ajax({
+  //     type:'POST',
+  //     url:base+'index.php/student/validate_comment',
+  //     data:{'comment':comment, 'group_id':group_id, 'thesis_title':title},
+  //     success: function(data)
+  //     {
+  //       console.log('comment is a success');
+  //     },
+  //     error: function(data)
+  //     {
+  //       console.log('179 error log');
+  //       console.log(data);
+  //     }
+  //   });
 
-  }
+  // }
 </script>
 
 <!--notification refresh-->
