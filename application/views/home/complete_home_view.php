@@ -135,7 +135,7 @@
              
               <div>
                 <h2>
-                <i class="fa fa-calendar"></i><?php echo $news_1['news_title'];?>
+                <?php echo $news_1['news_title'];?>
                 </h2>
                 <?php echo $news_1['news_details'];?>
               </div>
@@ -147,7 +147,7 @@
              
               <div>
                 <h2>
-                <i class="fa fa-trophy"></i><?php echo $news_2['news_title'];?>
+                <?php echo $news_2['news_title'];?>
                 </h2>
                 <?php echo $news_2['news_details'];?>
               </div>
@@ -159,7 +159,7 @@
              
               <div>
                 <h2>
-                <i class="fa fa-newspaper-o"></i><?php echo $news_3['news_title'];?>
+                <?php echo $news_3['news_title'];?>
                 </h2>
                 <?php echo $news_3['news_details'];?>
               </div>
