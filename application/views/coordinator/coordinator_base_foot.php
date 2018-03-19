@@ -1050,6 +1050,12 @@ immediately after the control sidebar -->
 
 <!--modal-defense-->
 <script type="text/javascript">
+  function change_date_val(button)
+  {
+    var date = button.id;
+    document.getElementById("datepicker").value = date;
+    $("#datepicker").change();
+  }
 
   $(document).ready(function() {
     var group_id = "";
@@ -1134,6 +1140,7 @@ immediately after the control sidebar -->
       $("#datepicker").change(function () {
        
         var dateVal =  $('#datepicker').val();
+        //alert(dateVal);
         var weekday = ["SU","MO","TU","WE","TH","F","S"];
         var new_day = new Date(dateVal);
         var day = weekday[new_day.getDay()];

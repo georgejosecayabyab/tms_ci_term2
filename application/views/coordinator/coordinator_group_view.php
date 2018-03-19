@@ -91,8 +91,8 @@
                           {
                             $active = "(Inactive)";
                           }
-                          $panels.=$prow['name'].$active.', ';
-                          $panels2.=$prow['name'].$active.', ';
+                          $panels.=ucwords(strtolower($prow['name'])).$active.', ';
+                          $panels2.=ucwords(strtolower($prow['name'])).$active.', ';
                         }
                       }
                       if($panels=='None -'){
@@ -111,7 +111,7 @@
               <td>
                 <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F"):?>
                   <?php if($row['DEFENSE_DATE']==null):?>
-                    <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate">
+                    <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate" onclick="change_date_val(this)">
                     Set Date <i class="fa fa-fw fa-calendar-plus-o"> </i>
                     </button>
                   <?php else:?>
@@ -123,7 +123,7 @@
                       $formatted_time_new = date('g:i A', $time_new);
                       $date_time = $formatted_date_new.' - '.$formatted_time_new;
                     ?>
-                    <button value="<?php echo $row['GROUP_ID'];?>" id="<?php echo $formatted_date_new;?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate">
+                    <button value="<?php echo $row['GROUP_ID'];?>" id="<?php echo $formatted_date_new;?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate" onclick="change_date_val(this)">
                     <?php echo $date_time;?> <i class="fa fa-fw fa-calendar-check-o"> </i>
                     </button>
                   <?php endif;?>
@@ -249,6 +249,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
+
                   <input type="text" class="form-control pull-right" id="datepicker">
                   <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                 </div>
@@ -265,7 +266,7 @@
 
               <div id="conflict"> 
               </div>
-                            
+
             </div>
             
             <br>
