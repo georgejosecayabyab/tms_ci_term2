@@ -36,6 +36,8 @@ immediately after the control sidebar -->
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>js/adminlte.min.js"></script>
 
+<script src="<?php echo base_url();?>js/bootstrap-timepicker.min.js"></script>
+
 <!--add student group-->
 <script>
   
@@ -1729,6 +1731,171 @@ immediately after the control sidebar -->
     console.log('THE VALUE! ' + members);
   }
 </script>
+
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+    
+
+    $('.timepicker').timepicker({
+      showInputs: false,
+      defaultTime: false
+    });
+
+
+    $('.timepicker2').timepicker({
+      showInputs: false,
+      showMeridian: false,
+      maxHours: 3,
+      defaultTime: false
+    });
+
+
+
+    var hour;
+    var min;
+    var interval;
+    var durationHour;
+    var durationMin;
+    var meridian; 
+
+    $('#startTime').timepicker().on('changeTime.timepicker', function(e) {
+
+      hour = e.time.hours;
+      min = e.time.minutes;
+      meridian = e.time.meridian;
+
+
+
+
+    });
+
+    $('#duration').timepicker().on('changeTime.timepicker', function(e) {
+
+
+      durationHour = e.time.hours;
+      durationMin = e.time.minutes;
+
+
+
+    });
+
+
+
+
+    $('#generate').click(
+
+
+      function generateSched () {
+
+        interval = $('#interval').val();
+
+        // ADD 720 IF PM 
+
+        console.log(hour);
+        console.log(min);
+        console.log(meridian);
+        console.log(interval);
+        console.log(durationHour);
+        console.log(durationMin);
+        console.log("===============");
+
+        
+        function translateToMin (hour,min){
+
+          var transHour;
+          var transTime;
+
+          if (meridian == "AM"){
+
+            transHour = hour * 60;
+            transTime = transHour + min;
+
+          }
+
+          else if (meridian == "PM"){
+
+            transHour = hour * 60;
+            transTime = transHour + min + 720;
+
+
+          }
+
+          return transTime;
+
+        }
+
+        console.log(translateToMin(hour,min) + " HOUR");
+        console.log("==============");
+
+
+        console.log(translateToMin(durationHour,durationMin) + " INTERVAL");
+        console.log("==============");
+
+        var i = 2;
+        var translatedStartTime = translateToMin(hour,min);
+        var translatedDurationTime = translateToMin(durationHour,durationMin);
+
+        $('#timeslot1').timepicker('setTime', hour + ':' + min +  meridian);
+
+        while (i <= 8){
+
+            var newTime = parseInt(translatedStartTime + translatedDurationTime + parseInt(interval));
+            var newMeridian ;
+            console.log(" YOUR NEW TIME IS BEFORE REDUCTION " + newTime);
+  
+
+
+            if (newTime > 1440){
+
+              newMeridian = "AM"; 
+              
+              newTime = parseInt(newTime - 1440);
+
+              console.log("YOU WENT HERE EXCEEDED " + newTime);
+            }
+
+             if(newTime > 720){
+          
+              newMeridian = "PM";
+
+              console.log("YOU WENT HERE EXEEDED 720 " + newTime);
+
+            }
+
+            else{
+
+              newMeridian = "AM";
+
+              console.log("JUST EBLOW 720" + newTime);
+            }
+
+            console.log(i + "=====================");
+
+
+            var newHour = parseInt(newTime/60);
+            var newMin = parseInt(newTime%60);
+      
+         
+
+            $('#timeslot' + i).timepicker('setTime', newHour + ':' + newMin +  newMeridian);
+
+            translatedStartTime = newTime;
+
+            i++;
+
+        
+
+          }
+
+
+
+
+      }
+      );
+  });
+</script>
+
 
 </body>
 </html>
