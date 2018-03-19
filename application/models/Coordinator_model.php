@@ -219,7 +219,7 @@ class coordinator_model extends CI_Model
 
 	public function archive_panels()
 	{
-		$sql = "select tg.thesis_id, pg.group_id, concat(u.first_name,' ', u.last_name) as 'name'
+		$sql = "select tg.thesis_id, pg.group_id, concat(u.first_name,' ', u.last_name) as 'name', u.is_active
 				from panel_group pg
 				join faculty f
 				on f.user_id=pg.panel_id

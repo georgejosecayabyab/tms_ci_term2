@@ -82,8 +82,17 @@
                       {
                         if($row['GROUP_ID']==$prow['group_id'])
                         {
-                          $panels.=$prow['name'].', ';
-                          $panels2.=$prow['name'].', ';
+                          $active = "";
+                          if($prow['is_active'] == 1)
+                          {
+                            $active = "";
+                          }
+                          else
+                          {
+                            $active = "(Inactive)";
+                          }
+                          $panels.=$prow['name'].$active.', ';
+                          $panels2.=$prow['name'].$active.', ';
                         }
                       }
                       if($panels=='None -'){
@@ -254,7 +263,9 @@
                Select a date for suggestions
               </div>
 
-              
+              <div id="conflict"> 
+              </div>
+                            
             </div>
             
             <br>
