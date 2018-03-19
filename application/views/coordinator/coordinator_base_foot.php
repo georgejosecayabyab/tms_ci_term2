@@ -1055,7 +1055,15 @@ immediately after the control sidebar -->
     var date = button.id;
     var thesis_title = $('#group_thesis_title').val();
     document.getElementById("datepicker").value = date;
-    $("#datepicker").change();
+    if(date)
+    {
+      $("#datepicker").change();
+    }
+    else
+    {
+      $("#suggestion").empty();
+      $("#conflict").empty();
+    }
 
     $('#defense_date_group_name').empty();
     $('#defense_date_group_name').append('<h4 class="modal-title">Assign Defense Date For <b>'+thesis_title+'</b></h4>');
