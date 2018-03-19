@@ -462,6 +462,7 @@ class coordinator_model extends CI_Model
 				JOIN USER U
 				ON U.USER_ID=F.USER_ID
 				WHERE F.USER_ID NOT IN (SELECT ADVISER_ID FROM THESIS_GROUP WHERE GROUP_ID=".$group_id.")
+				AND U.IS_ACTIVE=1
 				ORDER BY U.LAST_NAME ASC;";
 		$query = $this->db->query($sql);
 		return $query->result_array();

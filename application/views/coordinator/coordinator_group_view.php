@@ -46,7 +46,7 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><?php echo $row['THESIS_TITLE'];?></td><!--palitan mo to george-->
+              <td><?php echo ucwords(strtolower($row['THESIS_TITLE']));?></td><!--palitan mo to george-->
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
@@ -58,8 +58,8 @@
                     {
                       if($row['GROUP_ID']==$prow['group_id'])
                       {
-                        $panels.=$prow['name'].', ';
-                        $panels2.=$prow['name'].', ';
+                        $panels.=ucwords(strtolower($prow['name'])).', ';
+                        $panels2.=ucwords(strtolower($prow['name'])).', ';
                       }
                     }
                     if($panels=='None -'){
