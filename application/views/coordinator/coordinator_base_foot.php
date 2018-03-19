@@ -1053,8 +1053,12 @@ immediately after the control sidebar -->
   function change_date_val(button)
   {
     var date = button.id;
+    var thesis_title = $('#group_thesis_title').val();
     document.getElementById("datepicker").value = date;
     $("#datepicker").change();
+
+    $('#defense_date_group_name').empty();
+    $('#defense_date_group_name').append('<h4 class="modal-title">Assign Defense Date For <b>'+thesis_title+'</b></h4>');
   }
 
   $(document).ready(function() {

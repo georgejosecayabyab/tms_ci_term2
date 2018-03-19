@@ -315,7 +315,7 @@ class coordinator_model extends CI_Model
 				ON U.USER_ID=F.USER_ID
 				WHERE PG.PANEL_ID IN (SELECT PANEL_ID FROM PANEL_GROUP WHERE GROUP_ID=".$group_id." AND STATUS=1)
 				AND DD.DEFENSE_DATE = '".$date."'
-				AND DD.GROUP_ID!=".$group_id.";";
+				AND DD.GROUP_ID !=".$group_id.";";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

@@ -109,6 +109,7 @@
                 <?php endif;?>
               </td>
               <td>
+                <input type="hidden" value="<?php echo ucwords(strtolower($row['THESIS_TITLE']));?>" id="group_thesis_title">
                 <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F"):?>
                   <?php if($row['DEFENSE_DATE']==null):?>
                     <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate" onclick="change_date_val(this)">
@@ -235,8 +236,10 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Assign Defense Date</h4>
+        </button> 
+        <div id="defense_date_group_name">
+          <h4 class="modal-title">Assign Defense Date</h4>
+        </div>
       </div>
 
       <div class="modal-body">
