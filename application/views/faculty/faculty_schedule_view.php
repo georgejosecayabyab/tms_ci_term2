@@ -6,7 +6,7 @@
       Input Schedule
     </h2>
     <ol class="breadcrumb">
-      <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i>Home</a>
+      <li class="<?php echo $active_tab['home'];?>"><a href="<?php echo site_url("faculty/index");?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
       <li><a href="<?php echo site_url("faculty/view_schedule");?>"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
       
       
@@ -72,17 +72,7 @@
                       </canvas> - Free Schedule</h3> <br>
                       <h3 class="box-title"> <canvas id="myCanvas" width="50" height="10" style="border:1px solid #000000; background: #6fa6dc">
                       </canvas> - Occupied Schedule</h3> </h3>
-                      <div>
-                        <div>
-                          <br>
-                          <a href="#" id="specialCase"> + Add a Special Case Schedule</a>
-                          <br> ex: LASARE3/Nov 24/8AM-5PM
-                        </div>
-                        <br>
-                        <div class="col-xs-10" id="specialField">
-                        </div>
-
-                      </div>
+                      
                     </div>
 
                   </a>
@@ -150,9 +140,9 @@
                 </div>
                 <div class="col-lg-3 col-xs-12">
                   <form>
-                    <button id="editSched"  type="button" class="btn btn-success">Edit schedule</button>
+                    
                     <button id="submitbtn2" onclick="location.href='facultyViewProfile.html';" type="button" class="btn btn-danger">Exit</button>
-
+                    <button id="editSched"  type="button" class="btn btn-success">Edit schedule</button>
                   </form>
                 </div>
               </div>

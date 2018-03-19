@@ -350,7 +350,7 @@
             	//$d2 = $this->upload->do_upload('revision_file');
             	if($_FILES['thesis_file']['type'] != 'application/pdf' || $_FILES['revision_file']['type'] != 'application/pdf')////|| ! $this->upload->do_upload('revision_file') ! $this->upload->do_upload('thesis_file') 
             	{
-            		$error = array('error' => $this->upload->display_errors());
+            		//$error = array('error' => $this->upload->display_errors());
             		$this->session->set_flashdata('fail', "PDFs only");
             		redirect('student/view_group/'.$group['group_id']);
             		
@@ -364,6 +364,25 @@
 					
 
 		            $this->session->set_flashdata('success', 'Documents have been uploaded!');
+		           	
+		            ///insert upload as comment
+		           	$student_group_id = $this->student_model->get_student_group_id($user_id, $group['group_id']);
+		           	date_default_timezone_set('Asia/Manila');
+					$date_time = date("Y-m-d H:i:s");
+					$data = array(
+						'thesis_comment' =>  $this->input->post('comment'),
+						'student_group_id' => $student_group_id['student_group_id'],
+						'date_time' => $date_time
+					);
+					$this->student_model->insert_thesis_comment($data);
+					$result = $this->student_model->get_all_thesis_comment_notification_target($group['group_id'], $user_id);
+					foreach($result as $row)
+					{
+						$this->insert_notification("New Comment from ".$this->input->post('thesis_title'), $row['user_id']);
+					}
+					////insert upload as comment end
+
+		            var_dump($this->session->flashdata());
 					redirect('student/view_group/'.$group['group_id']);
             	}
 				
@@ -540,7 +559,14 @@
 			$this->form_validation->set_rules('editor1', 'Information', 'required|trim');
 			if($this->form_validation->run() == FALSE)
 			{
-				redirect('student/view_new_discussion/');
+				$this->session->set_flashdata('fail', validation_errors());
+				//redirect('student/view_new_discussion/');
+				$ram['type'] = 0;
+				$ram['message'] = validation_errors();
+
+				$ram['link'] = 'student/view_group/'.$group_id['group_id'];
+				header("Content-type: application/json");
+				echo json_encode($ram);
 			}
 			else
 			{
@@ -552,11 +578,25 @@
 						'date_time' => $date_time
 					);
 				$this->student_model->insert_new_discussion($data);
-				///
+				// ///
 				$result = $this->student_model->get_all_discussion_target($group_id['group_id'], $user_id);
+
 				foreach($result as $row)
 				{
-					$this->insert_notification("New Discussion: ".$topic_name, $row['user_id']);
+					// $this->insert_notification("New Discussion: ".$topic_name, $row['user_id']);
+
+					// $group_id = $this->input->post("group_id");
+					date_default_timezone_set('Asia/Manila');
+					$date_time = date("Y-m-d H:i:s");
+					$data = array(
+								'notification_details' =>  "New Discussion: ".$topic_name,
+								'created_by' => $user_id,
+								'target_user_id' => $row['user_id'],
+								'is_read' => 0,
+								'date_created' => $date_time,
+								'group_id' => $group_id['group_id']
+							);
+					$this->student_model->insert_notification($data);
 					// $this->email->from('george_cayabyab@dlsu.edu.ph', $faculty_data['FIRST_NAME'].' '.$faculty_data['LAST_NAME']);
 					// $this->email->to('george_cayabyab@dlsu.edu.ph');
 
@@ -565,8 +605,15 @@
 
 					// $this->email->send();
 				}
-              	redirect('student/view_group/'.$group_id['group_id']);
+
+				$this->session->set_flashdata('success', 'A new discussion has been made!');
+				$ram['type'] = 1;
+				$ram['link'] = 'student/view_group/'.$group_id['group_id'];
+				header("Content-type: application/json");
+				echo json_encode($ram);
+              	//redirect('student/view_group/'.$group_id['group_id']);
 			}
+
 		}
 
 		public function validate_reply()
@@ -628,7 +675,7 @@
 			$group_id = $this->input->post("group_id");
 			$abstract_text = $this->input->post("abstract_text");
 
-			$this->form_validation->set_rules('abstract_text', 'Abstract', 'required|trim');
+			$this->form_validation->set_rules('abstract_text', 'Abstract', 'trim');
 
 			if($this->form_validation->run() == FALSE)
 			{
@@ -772,9 +819,8 @@
 			{
 				$this->student_model->insert_thesis_tag($thesis_id['thesis_id'], $ar[$x]);
 			}
-
-			header('Content-Type: application/json');
-			echo json_encode($ar);
+			$this->session->set_flashdata('success', 'Specialization has been updated!');
+			redirect('student/view_group/'.$group_id['group_id']);
 		}
 
 		public function validate_meeting()
@@ -786,19 +832,25 @@
 			$group_id = $this->student_model->get_group($user_id);
 			$date = $this->input->post('datepicker');
 			$venue = $this->input->post('venue');
-			$time = $this->input->post('start_time');
+			$start_time = $this->input->post('start_time');
+			$end_time = $this->input->post('end_time');
 
 			$new_date = date('Y-m-d H:i:s', strtotime($date));
 
 
 			$this->form_validation->set_rules('venue', 'Venue', 'required|trim');
 			$this->form_validation->set_rules('datepicker', 'Date', 'required|trim');
-			$this->form_validation->set_rules('start_time', 'Start', 'required|trim');
+			$this->form_validation->set_rules('start_time', 'Start TIme', 'required|trim');
+			$this->form_validation->set_rules('end_time', 'End Time', 'required|trim');
 
 			if($this->form_validation->run() == FALSE)
 			{
 				$this->session->set_flashdata('fail', validation_errors());
-				redirect('student/view_group/'.$group_id['group_id']);
+				$data['type'] = 0;
+				$data['message'] = validation_errors();
+				header('Content-Type: application/json');
+				echo json_encode($data);
+				//redirect('student/view_group/'.$group_id['group_id']);
 			}
 			else
 			{
@@ -807,12 +859,17 @@
 					'group_id' => $group_id['group_id'],
 					'created_by' => $user_id,
 					'venue' => $venue,
-					'start_time' => $time
+					'start_time' => $start_time,
+					'end_time' => $end_time
 				);
 
 				$this->student_model->insert_meeting($data);
 				$this->session->set_flashdata('success', 'Meeting has been created!');
-				redirect('student/view_group/'.$group_id['group_id']);
+				$data['type'] = 1;
+				$data['link'] = 'student/view_group/'.$group_id['group_id'];
+				header('Content-Type: application/json');
+				echo json_encode($data);
+				//redirect('student/view_group/'.$group_id['group_id']);
 			}
 		}
 
@@ -857,7 +914,7 @@
 
 						// $this->email->send();
 					}
-					$this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Successful comment</div>');
+					$this->session->set_flashdata('success', 'Successful comment');
                   	redirect('student/view_group/'.$group_id);
 				}
 			}

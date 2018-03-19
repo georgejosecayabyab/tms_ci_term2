@@ -41,6 +41,20 @@
         <div class="row">
           
         </div>
+        <?php if($this->session->flashdata('fail')): ?>
+          <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+            <?php echo $this->session->flashdata('fail'); ?></center>
+          </div>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('success')): ?>
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+            <?php echo $this->session->flashdata('success'); ?></center>
+          </div>
+        <?php endif; ?> 
 
         <div id="titleFace" class="col-md-12">
           <h1>
@@ -121,7 +135,7 @@
              
               <div>
                 <h2>
-                <i class="fa fa-calendar"></i><?php echo $news_1['news_title'];?>
+                <?php echo $news_1['news_title'];?>
                 </h2>
                 <?php echo $news_1['news_details'];?>
               </div>
@@ -133,7 +147,7 @@
              
               <div>
                 <h2>
-                <i class="fa fa-trophy"></i><?php echo $news_2['news_title'];?>
+                <?php echo $news_2['news_title'];?>
                 </h2>
                 <?php echo $news_2['news_details'];?>
               </div>
@@ -145,7 +159,7 @@
              
               <div>
                 <h2>
-                <i class="fa fa-newspaper-o"></i><?php echo $news_3['news_title'];?>
+                <?php echo $news_3['news_title'];?>
                 </h2>
                 <?php echo $news_3['news_details'];?>
               </div>

@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<!--Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -56,12 +56,31 @@
                 <div class="col-sm-8">
                   <span>
                     <select id="term1" class="form-control select2" name="term">
+                      
                       <?php foreach($all_term as $row):?>
-                        <?php if($term['term']==$row['term']):?>
+                        <?php if($term['term']==$row['term']):?><!--removes actived term-->
+                          <option selected><?php echo $term['term'];?></option>
+                        <?php else:?>
+                          <?php if($term['order']==0):?><!--sets all term except special term available-->
+                            <option><?php echo $row['term'];?></option>
+                          <?php else:?><!---->
+                            <?php if($term['order']==3):?><!--if activated is 3, next will be 1-->
+                              <?php if($row['order']==1 || $row['order']==0):?>
+                                <option><?php echo $row['term'];?></option>
+                              <?php endif;?>
+                            <?php else:?><!--always show the next higher order term-->
+                              <?php if($row['order']==$term['order']+1 || $row['order']==0):?>
+                                <option><?php echo $row['term'];?></option>
+                              <?php endif;?>
+                            <?php endif;?>
+                          <?php endif;?>
+                        <?php endif;?>
+
+                        <!-- <?php if($term['term']==$row['term']):?>
                           <option selected><?php echo $term['term'];?></option>
                         <?php else:?>
                           <option><?php echo $row['term'];?></option>
-                        <?php endif;?>
+                        <?php endif;?> -->
                       <?php endforeach;?>
                     </select>
                   </span>
@@ -73,9 +92,11 @@
                   <select id="schoolyr" class="form-control select2" name="year">
                     <?php foreach($all_year as $row):?>
                       <?php if($year==$row['year']):?>
-                        <option selected><?php echo $year;?></option>
+                        <option selected><?php echo $row['year_code'];?></option>
                       <?php else:?>
-                        <option><?php echo $row['year'];?></option>
+                        <?php if($row['year']>$year):?>
+                          <option><?php echo $row['year_code'];?></option>
+                        <?php endif;?>
                       <?php endif;?>
                     <?php endforeach;?>
                   </select>
@@ -94,7 +115,7 @@
                   
                   <div class="col-lg-12 col-xs-12">
                     <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
-                    <a><button data-toggle="modal" data-target="#myModal" class="btn btn-primary" >Save and Quit</button></a>
+                    <a><button data-toggle="modal" data-target="#myModal" class="btn btn-success" >Save and Quit</button></a>
                     
                   </div>
                 </div>
@@ -106,10 +127,10 @@
                 margin-right: 20px;
               }
               #schoolyr{
-                width: 100px;
+                width: 150px;
               }
               #term1{
-                width: 100px;
+                width: 150px;
               }
 
             </style>
@@ -122,16 +143,33 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Move to Next Term</h4>
+                    <h4 class="modal-title">Move to Next Term?</h4>
                   </div>
                   <div class="modal-body">
                       <div class="col-sm-8">
-                        <h5>Move to Next Term?</h5>
+                       <p> <h5><b>Things altered by set term: <br>
+                          <br>
+                          1. All schedules are reset
+                          <br>
+                          2. All groups who are "passed" will proceed to next stage (THS-1 to THS-2, THS-4 to Graduate)
+                          <br>
+                          3. Graduated students' works are imported to archive
+                          <br>
+                          4. Graduated students are removed from panel list/advicee list of faculty
+                          <br>
+                          5. Graduated students status are changed to inactive
+                          <br>
+                          6. All faculty notifications are reset</b>
+                          <br>
+                          7. Guest panelists are set to inactive
+                          </h5>
+                          <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
+                          <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button></p>
                       </div>
                   </div>
                   
                   <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
+                    
                   </div>
                 </div>
               </div>
@@ -145,4 +183,4 @@
   </section>
   <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.content-wrapper

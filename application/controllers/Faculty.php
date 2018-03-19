@@ -497,6 +497,7 @@
 			$this->form_validation->set_rules('editor1', 'Information', 'required|trim');
 			if($this->form_validation->run() == FALSE)
 			{
+				$this->session->set_flashdata('fail', validation_errors());
 				redirect('faculty/view_new_discussion/'.$group_id);
 			}
 			else

@@ -33,7 +33,7 @@
   <!-- Trigger the modal with a button -->
   <div class="row">
     <div class="col-lg-6 col-xs-4">
-      <button id="addFac" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Faculty</button>
+      <button id="addFac" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Faculty</button>
     </div>
   </div>
   <!-- Modal -->
@@ -101,7 +101,7 @@
           <div class="modal-footer">
             <div class="row" align="center">
               
-              <button id="ex" onclick="location.href='<?php echo site_url('coordinator/view_faculty')?>';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
+              <button id="ex" onclick="location.href='#';" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button>
               <button onclick=create_faculty() type="submit" class="btn btn-success">Save and Quit</button>
             </div>
           </div>

@@ -54,7 +54,10 @@ class coordinator_model extends CI_Model
 								ON F.USER_ID = U.USER_ID
                 				LEFT JOIN PANEL_GROUP PG
                 				ON F.USER_ID = PG.PANEL_ID
+                				JOIN THESIS_GROUP TG
+                				ON TG.GROUP_ID=PG.GROUP_ID
                 WHERE PG.STATUS=1
+                AND TG.IS_ACTIVE=1
 				GROUP BY F.USER_ID;";
 
 		$query = $this->db->query($sql);
@@ -69,6 +72,7 @@ class coordinator_model extends CI_Model
 								ON F.USER_ID = U.USER_ID
                 				JOIN THESIS_GROUP TG 
                 				ON F.USER_ID = TG.ADVISER_ID
+                WHERE TG.IS_ACTIVE=1
 				GROUP BY U.USER_ID;";
 
 		$query = $this->db->query($sql);
@@ -80,11 +84,13 @@ class coordinator_model extends CI_Model
 	//This functions gets the group information
 	public function get_group_info()
 	{
-		$sql = "SELECT TG.GROUP_ID, TG.GROUP_NAME, TG.ADVISER_ID, TG.THESIS_ID, TG.COURSE_CODE, TG.INITIAL_VERDICT, TG.FINAL_VERDICT, TG.IS_ACTIVE, DD.DEFENSE_DATE_ID, DD.DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS 'END', DD.VENUE, TG.SECTION, DD.DEFENSE_TYPE
+		$sql = "SELECT TG.GROUP_ID, TG.GROUP_NAME, TG.ADVISER_ID, TG.THESIS_ID, TG.COURSE_CODE, TG.INITIAL_VERDICT, TG.FINAL_VERDICT, TG.IS_ACTIVE, DD.DEFENSE_DATE_ID, DD.DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS 'END', DD.VENUE, TG.SECTION, DD.DEFENSE_TYPE, T.THESIS_TITLE
 				FROM THESIS_GROUP TG	LEFT JOIN DEFENSE_DATE DD
 										ON TG.GROUP_ID = DD.GROUP_ID
                         				JOIN COURSE C
                         				ON TG.COURSE_CODE=C.COURSE_CODE
+                        				JOIN THESIS T
+                        				ON T.THESIS_ID=TG.THESIS_ID
                         				WHERE TG.IS_ACTIVE=1;";
 
 		$query = $this->db->query($sql);
@@ -188,7 +194,7 @@ class coordinator_model extends CI_Model
 
 	public function archive_members()
 	{
-		$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name'
+		$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name', tg.course_code
 				from student_group sg
 				join student s
 				on s.user_id=sg.student_id
@@ -386,6 +392,13 @@ class coordinator_model extends CI_Model
 		$this->db->delete('form');
 	}
 
+	public function get_specific_form($form_id)
+	{
+		$sql = "SELECT * FROM FORM WHERE FORM_ID=".$form_id.";";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
 	public function get_group_tags($group_id)
 	{
 		$sql = "SELECT * 
@@ -407,6 +420,8 @@ class coordinator_model extends CI_Model
 				ON U.USER_ID=F.USER_ID
 				JOIN SPECIALIZATION S
 				ON S.SPECIALIZATION_ID=FS.SPECIALIZATION_ID
+                JOIN  (SELECT RANK AS 'RANK_NAME', RANK_CODE FROM RANK)R
+                ON R.RANK_CODE=F.RANK
 				WHERE FS.SPECIALIZATION_ID IN (SELECT SPECIALIZATION_ID FROM THESIS_SPECIALIZATION WHERE THESIS_ID IN 
 										(SELECT THESIS_ID FROM THESIS_GROUP WHERE GROUP_ID=".$group_id."));";
 		$query = $this->db->query($sql);
@@ -599,11 +614,26 @@ class coordinator_model extends CI_Model
 
 	}
 
+	public function get_specific_related_news($event_id)
+	{
+		$sql = "SELECT * FROM THESIS_RELATED_EVENT WHERE EVENT_ID=".$event_id.";";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
 	public function delete_related_news($event_id)
 	{
 		//escape all variable
 		$this->db->where('event_id', $event_id);
 		$this->db->delete('thesis_related_event');
+	}
+
+	public function update_related_news($data)
+	{
+		$sql = "update thesis_related_event
+				set event_desc='".$data['event_desc']."', course_code='".$data['course_code']."'
+				where event_id='".$data['event_id']."';";
+		$this->db->query($sql);
 	}
 
 	public function insert_new_home_announcement($data)
@@ -863,6 +893,24 @@ class coordinator_model extends CI_Model
 		$this->db->query($sql);
 	}
 
+	public function get_specific_user_info($email)
+	{
+		$sql = "select * from user 
+				where email='".$email."';";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
+	public function get_specific_course_students($course_code)
+	{
+		$sql = "SELECT CONCAT(U.LAST_NAME, ', ', U.FIRST_NAME) AS 'NAME', S.COURSE_CODE, U.USER_ID 
+				FROM STUDENT S JOIN USER U
+				ON U.USER_ID=S.USER_ID
+				WHERE COURSE_CODE='".$course_code."'
+				AND U.IS_ACTIVE=1;";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
 }
 
 

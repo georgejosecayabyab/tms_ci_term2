@@ -1,42 +1,10 @@
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-      
-    <!-- Default to the left -->
-    
-  </footer>
+  
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><?php echo $student_data['last_name'].','.$student_data['first_name'];?><i class="fa fa-user"></i></a></li>
-      
-    </ul>
-    <!-- Tab panes -->
-      <div class="tab-content">
-        <!-- Home tab content -->
-        <div class="tab-pane active" id="control-sidebar-home-tab">
-           <ul class="control-sidebar-menu">
-            <li>
-              <a href="<?php echo site_url('student/logout');?>">
-                <i class="menu-icon fa fa-sign-out bg-green"></i>
 
-                <div class="menu-info">
-                  <h4 class="control-sidebar-subheading">Logout</h4>
+  
 
-                
-                </div>
-              </a>
-            </li>
-          </ul>
-          
-          <!-- /.control-sidebar-menu -->
-
-        </div>
-        <!-- /.tab-pane -->
-      </div>
-  </aside>
   <!-- /.control-sidebar -->
 
   <!-- Add the sidebar's background. This div must be placed
@@ -80,27 +48,29 @@
     $('#select_tags').append('<input value="'+ sel+'" name="selected_tags_value">');
   });
 
-  $('#submit_tag').click(function(){
-    var sel = $('#tags').select2("val");
-    console.log(sel);
+  // $('#submit_tag').click(function(){
+  //   var sel = $('#tags').select2("val");
+  //   console.log(sel);
 
-    $.ajax({
-      type:'POST',
-      url: '/tms_ci/index.php/student/add_tags',
-      data: {'tags': sel},
-      success: function(data)
-      {
-        for(var x =0; x<data.length; x++)
-        {
-          console.log('tag is '+data[x]);
-        }
-      },
-      error: function(err)
-      {
-        console.log(err);
-      }
-    });
-  });
+  //   $.ajax({
+  //     type:'POST',
+  //     url: '/tms_ci/index.php/student/add_tags',
+  //     data: {'tags': sel},
+  //     success: function(data)
+  //     {
+  //       for(var x =0; x<data.length; x++)
+  //       {
+  //         console.log('tag is '+data[x]);
+  //       }
+  //       $('#flash_message').empty();
+  //       $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+ram['message']+'</center></div>');
+  //     },
+  //     error: function(err)
+  //     {
+  //       console.log(err);
+  //     }
+  //   });
+  // });
 </script>
 
 <script>
@@ -191,6 +161,35 @@
   });
 </script> -->
 
+
+<script>
+  // function comment_upload()
+  // {
+  //   var base = $('#base_url').val();
+  //   var comment = $('#upload_comment').val();
+  //   var group_id = $('#group_id').val();
+  //   var title = $('#upload_thesis_title').val();
+  //   // alert(comment+' IS THE COMMENT');
+  //   // alert(group_id+' IS THE ID');
+  //   // alert(base);
+  //   $.ajax({
+  //     type:'POST',
+  //     url:base+'index.php/student/validate_comment',
+  //     data:{'comment':comment, 'group_id':group_id, 'thesis_title':title},
+  //     success: function(data)
+  //     {
+  //       console.log('comment is a success');
+  //     },
+  //     error: function(data)
+  //     {
+  //       console.log('179 error log');
+  //       console.log(data);
+  //     }
+  //   });
+
+  // }
+</script>
+
 <!--notification refresh-->
 <script>
   var interval = 5000;
@@ -273,7 +272,7 @@
 
 <!--editor-->
 <script>
-  $(function () {
+  $(function() {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace('editor1')
@@ -292,15 +291,77 @@
     $('#editor1').val(topic_info);
   });
 
+
+
   function fill_in()
   {
     var topic_info = editor.getData();
     var topic_name = $('#discussion_title').val();
+    var base = $('#base_url').val(); 
     $('#discussion_title').val(topic_name);
     $('#editor1').val(topic_info);
     console.log('succe');
     console.log($('#editor1').val());
     console.log($('#discussion_title').val());
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/student/validate_discussion',
+      data: {'discussion_title':topic_name, 'editor1':topic_info},
+      success: function(ram)
+      {
+        if(ram['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+ram['message']+'</center></div>');
+        }
+        else if(ram['type']=1)
+        {
+          window.location.replace(base+'index.php/'+ram['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
+
+  }
+</script>
+
+<script>
+  function meeting()
+  {
+    var base = $('#base_url').val();
+    var date = $('#datepicker').val();
+    var venue = $('#venue').val();
+    var start = $('#start_time').val();
+    var end = $('#end_time').val();
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/student/validate_meeting',
+      data: {'datepicker':date, 'venue':venue, 'start_time':start, 'end_time':end},
+      success: function(data)
+      {
+        if(data['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+data['message']+'</center></div>');
+        }
+        else if(data['type']=1)
+        {
+          window.location.replace(base+'index.php/'+data['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
   }
 </script>
 

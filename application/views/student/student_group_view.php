@@ -12,10 +12,6 @@
       <li class="<?php echo $active_tab['group'];?>"><a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><i class="fa fa-users"></i> <span>Group</span></a></li>
       <li class="active"><?php echo $group['group_name'];?></li>
     </ol>
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
     <div id="flash_message">
       <?php if($this->session->flashdata('fail')): ?>
         <div class="alert alert-danger alert-dismissible">
@@ -32,6 +28,12 @@
         </div>
       <?php endif; ?> 
     </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <input type="hidden" id="base_url" value="<?php echo base_url();?>">
+    
     <div class="row">
       <div class="col-md-3">
         <!-- Profile Image -->
@@ -168,7 +170,7 @@
               <!-- discussion button-->
               <div class="row">
                 <div class="col-md-3">
-                  <button type="button" class="btn btn-block btn-success" onclick="location.href='<?php echo site_url('student/view_new_discussion');?>';" id="discussion">Create New Discussion </button>
+                  <button type="button" class="btn btn-block btn-primary" onclick="location.href='<?php echo site_url('student/view_new_discussion');?>';" id="discussion">Create New Discussion </button>
                 </div>
               </div>
               <!-- end of discussion button-->
@@ -340,16 +342,28 @@
                       <div class="timeline-body">
                         <div class="form-group">
                           <label></label>
-                          <textarea name="comment" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
+                          <textarea id="com" name="comment" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
                         </div>
                       </div>
                       <div class="timeline-footer">
-                        <input type="submit" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
+                        <input id="sub" type="submit" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
                       </div>
                     </form>
                   </div>
                 </li>
-                
+                <style type="text/css">
+                  #com{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    width: 90%;
+                  }
+                  #sub{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                  }
+
+                </style>
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
@@ -358,7 +372,7 @@
             <!-- /.tab-pane -->
 
             <div class="tab-pane" id="settings"><!--settings tab-->
-              <form class="form-horizontal" action="<?php echo site_url('student');?>"  method="post">
+              <form class="form-horizontal" action="<?php echo site_url('student/add_tags');?>"  method="post">
               <div id="select_tags" hidden></div>
                 
                 
@@ -366,7 +380,7 @@
                   <label for="inputName" class="col-sm-2 control-label">Specialization</label>
                   
                   <div class="col-sm-10">
-                    <select class="form-control select2" name="tags" id="tags" multiple="multiple" data-placeholder="Select an area of specialization"
+                    <select class="form-control select2" name="tags[]" id="tags" multiple="multiple" data-placeholder="Select areas of specialization"
                       style="width: 100%;">
                       <?php foreach($tag as $row):?>
                         <option selected><?php echo $row['specialization'];?></option>
@@ -381,43 +395,92 @@
                 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submit_tag" type="button" class="btn btn-success">Save and Quit</button></a>
-                    <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
                     
+                    <button id="submitbtn2" onclick="location.href='<?php echo site_url('student');?>';" type="button" class="btn btn-danger">Exit</button>
+                    <!-- <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"> -->
+                      <button id="submit_tag" type="submit" class="btn btn-success">Save and Quit</button>
+                    <!-- </a> -->
                   </div>
                 </div>
               </form>
             </div>
-            
+            <style type="text/css">
+              
+              #up{
+                margin-left: -25px;
+              }
+
+            </style>
             <div class="tab-pane" id="newUpload"><!--new upload tab-->
               
-              <form action="<?php echo site_url('student/validate_thesis_uploads');?>" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-                <div class="col-md-6"><!--upload document-->
-                  <div class="form-group">
-                    <label for="thesis_file"><font size="+1">Upload New Revised Document Submission</font></label>
-                    <input id="thesis_file" type="file" name="thesis_file" size="20"> <!--document file to be uploaded-->
-                    <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?></font></p>
-                  </div>
-                </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-6"> <!--upload revisions list-->
-                  <div class="form-group">
-                    <label for="revision_file"><font size="+1">Upload Associated Revisions List</font></label>
-                    <input id="revision_file" type="file" name="revision_file" size="20" />
-                    <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?></font></p>
-                  </div>
-                </div>
-                <div style="center">
-                  <button id="uploadForm" type="submit" name="upload_thesis_revision" class="btn btn-success">upload forms</button>
-                </div>
-              </form>
+             
+               
+                  
+                  <button id="up" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
+
+                    
+                   
+                    
+                    <div id="myModal" class="modal fade" role="dialog">
+                      <form action="<?php echo site_url('student/validate_thesis_uploads');?>" class="form-horizontal" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
+                          <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Upload Documents</h4>
+                              </div>
+                              <div class="modal-body">
+                                <div class="col-md-6"><!--upload document-->
+                                  <div class="form-group">
+                                    <label for="thesis_file"><font size="+1">Upload New Revised Document</font></label>
+                                    <input id="thesis_file" type="file" name="thesis_file" size="20"> <!--document file to be uploaded-->
+                                    <p class="help-block"><font size="-1"> Last upload was on:<?php echo $submit['upload_date_time'];?><br>
+
+                                      Note: upload must be in pairs and ONLY in pdf format </font>
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <input id="comment" name="comment" type="hidden" value="Revised Document #<?php echo sizeof($uploads)+1;?> and Revisions List #<?php echo sizeof($uploads)+1;?> has been uploaded">
+                                  <input id="group_id" type="hidden" name="group_id" value="<?php echo $group['group_id'];?>">
+                                  <input type="hidden" id="thesis_title" name="thesis_title" value="<?php echo $group['thesis_title'];?>">
+                                </div>
+                                <div class="col-md-6"> <!--upload revisions list-->
+                                  <div class="form-group">
+                                    <label for="revision_file"><font size="+1">Upload Revisions List</font></label>
+                                    <input id="revision_file" type="file" name="revision_file" size="20">
+                                   
+                                  </div>
+                                </div>
+                                
+                              </div>
+
+                              
+                              <div class="row">
+                          
+                      
+                                  <button id="uploadForm" style="margin-bottom: 20px"  type="submit" name="upload_thesis_revision" class="btn btn-success" value="upload forms">Upload Forms</button>
+                                
+                                  
+                              
+                              </div>
+                            </div>
+                          </div>
+                      </form>
+                    </div>
+
+                
+                
+                
+              
               <section id="tableSection" class="content container-fluid">
                 <div class="col-lg-14">
                   <label for="table"> Archive</label>
                   <table id="table" class="display" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        <th>Document Name</th>
+                        <th>Document Name (click to download)</th>
                         <th>Date Uploaded</th>
                         
                         <th>Revisions List</th>
@@ -442,6 +505,7 @@
                   <!-- END timeline item -->
                   <!-- timeline item -->
                 </div>
+
               </section>
             </div>
             <!-- /.tab-pane -->
@@ -458,8 +522,9 @@
                         <textarea name="abstract_text" rows="10" cols="110"><?php echo $group['abstract'];?></textarea>
                         <div class="col-lg-1">
                         </div>
-                        <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
+                        
                         <a href=""><button id="submitbtn2" type="button" class="btn btn-danger">Exit</button></a>
+                        <button id="submitbtn" type="submit" class="btn btn-success">Save and Quit</button>
                       </div>
                     </div>
                   </div>
@@ -468,7 +533,7 @@
             </div>
 
             <div class="tab-pane" id="setMeeting">
-              <form method="post" action="<?php echo site_url('student/validate_meeting');?>">
+              <div>
                 <div class="form-group">
                   <div class="input-group date">
                     <div class="input-group-addon">
@@ -489,12 +554,23 @@
                 </div>
 
                 <div class="form-group">
-                  <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
-                  <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
+                  <label for="end_time" class="control-label">End Time</label>
+                  <input type="time" class="form-control" id="end_time" name="end_time" placeholder="End Time">
+                </div>
+                <style type="text/css">
+                  #submitbtn2{
+                    margin-right: 20px;
+                  }
+
+                </style>
+                <div class="form-group">
+                  <a href="<?php echo site_url('student/view_group/'.$group_id['group_id']);?>"><button id="submitbtn2" type="button" class="btn btn-danger">Exit</button></a>
+                  <button onclick="meeting()" id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
+                  
                 </div>
 
                 
-              </form>
+              </div>
             </div>
 
   </section>

@@ -3,7 +3,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h2>
-          CT - Thesis Portal
+          Documents
           
           </h2>
           <ol class="breadcrumb">
@@ -18,7 +18,6 @@
           <!-- Default box -->
           <div class="box">
             <div class="box-header with-border">
-              
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                 title="Collapse">
@@ -136,11 +135,7 @@
               </ul>
             </div>
             
-            <!-- /.box-body -->
-            <div class="box-footer">
-              
-            </div>
-            <!-- /.box-footer-->
+
           </div>
           <!-- /.box -->
         </section>

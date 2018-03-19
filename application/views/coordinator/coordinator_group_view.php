@@ -35,8 +35,8 @@
         <thead>
           <tr>
             <th>Topic</th>
+            <th>Course</th>
             <th>Panel</th>
-            <th>Defense Type</th>
             <th>Defense Date (mm/dd/yy)</th>
             <th>Verdict</th>
             
@@ -46,7 +46,7 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><?php echo $row['TOPIC'];?></td><!--palitan mo to george-->
+              <td><?php echo $row['THESIS_TITLE'];?></td><!--palitan mo to george-->
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
@@ -99,9 +99,8 @@
                   </button>
                 <?php endif;?>
               </td>
-              
               <td>
-                <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F" && $row['INITIAL_VERDICT']!="CP"):?>
+                <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F"):?>
                   <?php if($row['DEFENSE_DATE']==null):?>
                     <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate">
                     Set Date <i class="fa fa-fw fa-calendar-plus-o"> </i>
@@ -212,7 +211,6 @@
                 <?php else:?>
 
                 <?php endif;?>
-
               </td>
             </tr>
           <?php endforeach;?>
@@ -220,6 +218,7 @@
       </table>
     </div>
   </section>
+
 
 <div class="modal fade" id="modal-defensedate">
   <div class="modal-dialog modal-lg">
@@ -255,85 +254,12 @@
                Select a date for suggestions
               </div>
 
-              <div id="conflict"> 
-              </div>
+              
             </div>
-            <h4> <label>Time:</label> </h4>
-            <div id="timePickedSuggested">
-            </div>
+            
             <br>
 
-            <div class="row">
-              <div class="col-xs-2">
-                <select class="form-control" id="startHour">
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-
-                </select>
-              </div>
-
-              <div class="col-xs-2">
-                <select class="form-control" id="startMinute">
-                  <option>00</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>45</option>
-
-                </select>
-              </div>
-
-              <div class="col-xs-1">
-                <select class="median" id="startMedDynamic">
-                  <option>AM</option>
-                  <option>PM</option>                 
-                </select>
-              </div>
-
-              <div class="col-xs-2">
-                <select class="form-control" id="endHour">
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                </select>
-              </div>
-
-              <div class="col-xs-2">
-                <select class="form-control" id="endMinute">
-                  <option>00</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>45</option>
-
-                </select>
-              </div>
-
-              <div class="col-xs-1">
-                <select class="median" id="endMedDynamic">
-                  <option>AM</option>
-                  <option>PM</option>                 
-                </select>
-              </div>
-
-            </div>
+            
 
 
       <!-- /.input group -->
@@ -443,6 +369,28 @@
 
 </div>
 
+<!--modal start-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Move to Next Term</h4>
+      </div>
+      <div class="modal-body">
+          <div class="col-sm-8">
+            <h5>Move to Next Term?</h5>
+          </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal end-->
 
 <!-- /.input group -->
 
@@ -461,7 +409,7 @@
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a  href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-defense-button" type="button" class="btn btn-primary pull-left">Save changes</button></a>
+        <!-- <a  href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-defense-button" type="button" class="btn btn-success pull-left">Save changes</button></a> -->
       </div>
     </div>
     <!-- /.modal-content -->
@@ -537,7 +485,7 @@
         </div>
       </div>
         <div class="modal-footer">
-          <a href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-verdict-button" onclick="edit_verdict()" type="button" class="btn btn-primary pull-left">Save changes</button></a>
+          <a href="<?php echo site_url('coordinator/view_group');?>"><button id="modal-verdict-button" onclick="edit_verdict()" type="button" class="btn btn-success pull-left">Save changes</button></a>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -628,101 +576,25 @@
 
               <div  class="col-xs-4" id="suggestionOne">
 
-                <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>Geanne Franco<a href="#"><i id="addPanel1" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
-                  <h5> Assistant Professor </h5>
-
-              <div> 
-                 <p>
-                <b> Specialization: </b> <br>
-                <span></span>
-                <span class="label regularLabel">Web Platform</span>
-                <span class="label regularLabel">Web Application</span>
-                <span class="label regularLabel">Information Technology</span>
-                <span class="label regularLabel">Information Systems</span>
-                <span class="label regularLabel">Django Framework</span>
                 
-                </p>
 
-              </div>
+              
 
-
-              <div> 
-                 <p>
-                <b> Common (3): </b> <br>
-                <span></span>
-                <span class="label regularLabel">Web Platform</span>
-                <span class="label regularLabel">Web Application</span>
-                <span class="label regularLabel">Information Technology</span>
-                
-                </p>
-
-              </div>
-
-
-
-                </div>
+              
 
 
               </div>
 
 
               <div  class="col-xs-4" id="suggestionTwo">
-                <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion2Name"><i class="icon fa fa-user"></i> Oliver Malabanan <a href="#"><i id="addPanel2" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
-                  <h5> Assistant Professor </h5>
-                  <div> 
-                    <p>
-                    <b> Specialization: </b> <br>
-                    <span></span>
-                    <span class="label regularLabel">Web Platform</span>
-                    <span class="label regularLabel">Information Technology</span>
-                    <span class="label regularLabel">Information Systems</span>
-                    <span class="label regularLabel">Django Framework</span>
-                    </p>
-                  </div>
-                  <div> 
-                     <p>
-                    <b> Common (2): </b> <br>
-                    <span></span>
-                    <span class="label regularLabel">Web Platform</span>
-                    <span class="label regularLabel">Information Technology</span>
-                    </p>
-                  </div>
-                </div>
+                
               </div>
               <div  class="col-xs-4" id="suggestionThree">
 
-                <div class="alert alert-success alert-dismissible">
-                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i> Fritz Flores  a href="#"><i id="addPanel3" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>
-                  <h5> Assistant Professor </h5>
-
-              <div> 
-                 <p>
-                <b> Specialization: </b> <br>
-                <span></span>
-                <span class="label regularLabel">Information Technology</span>
-                <span class="label regularLabel">Information Systems</span>
-                <span class="label regularLabel">Django Framework</span>
                 
-                </p>
+
 
               </div>
-
-
-              <div> 
-                 <p>
-                <b> Common (1): </b> <br>
-                <span></span>
-                <span class="label regularLabel">Information Technology</span>
-                
-                </p>
-
-              </div>
-
-
-
-                </div>
 
 
               </div>    

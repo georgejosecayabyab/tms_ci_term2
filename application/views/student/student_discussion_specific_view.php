@@ -16,7 +16,7 @@
     <ul class="timeline timeline-inverse">
       <div class="col-lg-12 col-xs-8">
         <div class ="box box-primary">
-          <div class="box-header"><h3 class="timeline-header"><?php echo $topic_data['first_name'].' '.$topic_data['last_name'];?><a href="#"></a> posted</h3></div>
+          <div class="box-header"><h3 class="timeline-header"><?php echo $topic_data['first_name'].' '.$topic_data['last_name'];?> posted</h3></div>
             <!-- /.box-header -->
           <div class="box-body">
             <p><?php echo $topic_data['topic_info'];?></p>
@@ -111,14 +111,27 @@
             <div class="timeline-body">
               <div class="form-group">
                 <label></label>
-                <textarea name="reply" class="form-control" rows="3" placeholder="Post a reply about the discussion."></textarea>
+                <textarea id="com" name="reply" class="form-control" rows="3" placeholder="Post a reply about the discussion."></textarea>
               </div>
             </div>
             <div class="timeline-footer">
-              <input type="submit" name="submit_reply" value="Submit" class="btn btn-primary btn-xs">
+              <input id="sub" type="submit" name="submit_reply" value="Submit" class="btn btn-primary btn-xs">
             </div>
           </form>
         </div>
+        <style type="text/css">
+                  #com{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    width: 90%;
+                  }
+                  #sub{
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                  }
+
+        </style>
       </li>
     </ul>
   </div>

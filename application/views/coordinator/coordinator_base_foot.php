@@ -11,14 +11,7 @@
     <div class="tab-pane active" id="control-sidebar-home-tab">
       
       <ul class="control-sidebar-menu">
-        <li>
-          <a href="<?php echo site_url('coordinator/logout');?>">
-            <i class="menu-icon fa fa-sign-out bg-green"></i>
-            <div class="menu-info">
-              <h4 class="control-sidebar-subheading">Logout Profile</h4>
-            </div>
-          </a>
-        </li>
+        
       </ul>
     <!-- /.control-sidebar-menu -->
     </div>
@@ -48,45 +41,45 @@ immediately after the control sidebar -->
   
   var member = "";
 
-  $('#table').change(function(){
-    var student = $('#student_box').attr('name');
-    var member = "";
-    var id = [];
-    $('#user_id').empty();
-    $('#users').empty();
+  // $('#table').change(function(){
+  //   var student = $('#student_box').attr('name');
+  //   var member = "";
+  //   var id = [];
+  //   $('#user_id').empty();
+  //   $('#users').empty();
 
-    //$('#user_id').empty();
-    $('table [type="checkbox"]').each(function(i, chk) {
-      if (chk.checked) {
-        console.log("Checked!", i, chk);
-        var name = $(this).attr("name");
-        console.log('id:' + name);
-        $.ajax({
-          type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_user_info/'+name,
-          success: function(data)
-          {
-            console.log(data);
-            member = member + data['user']['first_name']+' '+data['user']['last_name']+', ';
-            id.push(data['user']['user_id']);
-            console.log('senpai '+member);
-            $('#group_members').empty();
-            $('#group_members').append(member.substring(0, member.length -2));
-            $('#user_id').append('<input value="'+ data['user']['user_id']+'" name="users[]">');
-            $('#adviser_id').append('<input value="'+ $('#adviser').val()+'" name="adviser_id">');
-            console.log('kill: '+$('#users').attr("value"));
-            console.log('adviser id: '+$('#adviser').val());
-          },
-          error: function(err)
-          {
-            console.log(err);
-          }
-        });
-      }
+  //   $('#user_id').empty();
+  //   $('table [type="checkbox"]').each(function(i, chk) {
+  //     if (chk.checked) {
+  //       console.log("Checked!", i, chk);
+  //       var name = $(this).attr("name");
+  //       console.log('id:' + name);
+  //       $.ajax({
+  //         type: 'POST',
+  //         url: '/tms_ci/index.php/coordinator/get_user_info/'+name,
+  //         success: function(data)
+  //         {
+  //           console.log(data);
+  //           member = member + data['user']['first_name']+' '+data['user']['last_name']+', ';
+  //           id.push(data['user']['user_id']);
+  //           console.log('senpai '+member);
+  //           $('#group_members').empty();
+  //           $('#group_members').append(member.substring(0, member.length -2));
+  //           $('#user_id').append('<input value="'+ data['user']['user_id']+'" name="users[]">');
+  //           $('#adviser_id').append('<input value="'+ $('#adviser').val()+'" name="adviser_id">');
+  //           console.log('kill: '+$('#users').attr("value"));
+  //           console.log('adviser id: '+$('#adviser').val());
+  //         },
+  //         error: function(err)
+  //         {
+  //           console.log(err);
+  //         }
+  //       });
+  //     }
       
-    });
+  //   });
 
-  });
+  // });
   
 </script>
 
@@ -115,12 +108,39 @@ immediately after the control sidebar -->
   {
     var topic_info = editor.getData();
     var topic_name = $('#discussion_title').val();
+    var base = $('#base_url').val();
+    var event_id = $('#event_id').val();
     $('#discussion_title').val(topic_name);
     $('#editor1').val(topic_info);
     console.log('succe');
     console.log($('#editor1').val());
     console.log($('#discussion_title').val());
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/coordinator/validate_edited_specific_announcement/'+event_id,
+      data: {'discussion_title':topic_name, 'editor1':topic_info},
+      success: function(data)
+      {
+        if(data['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+data['message']+'</center></div>');
+        }
+        else if(data['type']=1)
+        {
+          window.location.replace(base+'index.php/'+data['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
   }
+
+
 </script>
 
 <script src="<?php echo base_url();?>jquery-1.11.2.js"></script>
@@ -137,6 +157,10 @@ immediately after the control sidebar -->
 
 <script>
   ////NONE
+</script>
+
+<script>
+  
 </script>
 
 <script type="text/javascript">
@@ -170,6 +194,7 @@ immediately after the control sidebar -->
     var firstPan = "";
     var secondPan = "";
     var thirdPan = "";
+    var base = $('#base_url').val();
 
     $('.modal').on('shown.bs.modal', function (e) {
       trigger = $(e.relatedTarget);
@@ -185,7 +210,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/update_group_panelist',
+          url: base+'index.php/coordinator/update_group_panelist',
           data: {'fid': fid, 'sid': sid, 'tid': tid, 'group_id': group_id},
           success: function(data)
           {
@@ -214,7 +239,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -286,7 +311,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_tags/'+first_id,
+          url: base+'index.php/coordinator/get_panel_tags/'+first_id,
           success: function(data)
           {
             tags = "";
@@ -349,7 +374,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -421,7 +446,7 @@ immediately after the control sidebar -->
         
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_tags/'+second_id,
+          url: base+'index.php/coordinator/get_panel_tags/'+second_id,
           success: function(data)
           {
             tags = "";
@@ -484,7 +509,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -556,7 +581,7 @@ immediately after the control sidebar -->
 
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_panel_tags/'+third_id,
+          url: base+'index.php/coordinator/get_panel_tags/'+third_id,
           success: function(data)
           {
             tags = "";
@@ -697,9 +722,12 @@ immediately after the control sidebar -->
 
       function fill_group_tags()
       {
+        $('#suggestionOne').empty();
+        $('#suggestionTwo').empty();
+        $('#suggestionThree').empty();
         $.ajax({
           type: 'POST',
-          url: '/tms_ci/index.php/coordinator/get_group_tags/'+group_id,
+          url: base+'index.php/coordinator/get_group_tags/'+group_id,
           success: function(data)
           {
             console.log('got tags');
@@ -746,8 +774,8 @@ immediately after the control sidebar -->
 
               $('#suggestionOne').append('\
                 <div class="alert alert-success alert-dismissible">\
-                  <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>'+data['tag_count'][0]['NAME']+'<a href="#"><i id="addPanel1" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>\
-                  <h5> Assistant Professor </h5>\
+                  <h4 id="suggestion1Name"><i class="icon fa fa-user"></i>'+data['tag_count'][0]['NAME']+'<a href="#"><i id="addPanel1" ></i></a></h4>\
+                  <h5>'+data['tag_common'][0]['RANK_NAME']+'</h5>\
                   <div> \
                     <p>\
                     <b> Specialization: </b> <br>\
@@ -786,8 +814,8 @@ immediately after the control sidebar -->
 
               $('#suggestionTwo').append('\
                 <div class="alert alert-success alert-dismissible">\
-                  <h4 id="suggestion2Name"><i class="icon fa fa-user"></i>'+data['tag_count'][1]['NAME']+'<a href="#"><i id="addPanel2" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>\
-                  <h5> Assistant Professor </h5>\
+                  <h4 id="suggestion2Name"><i class="icon fa fa-user"></i>'+data['tag_count'][1]['NAME']+'<a href="#"><i id="addPanel2" ></i></a></h4>\
+                  <h5>'+data['tag_common'][1]['RANK_NAME']+'</h5>\
                   <div> \
                     <p>\
                     <b> Specialization: </b> <br>\
@@ -797,7 +825,7 @@ immediately after the control sidebar -->
                   </div>\
                   <div> \
                     <p>\
-                    <b> Common (2): </b> <br>\
+                    <b> Common ('+data['tag_count'][1]['COUNT']+'): </b> <br>\
                     <span></span>'
                     +common+
                     '</p>\
@@ -826,8 +854,8 @@ immediately after the control sidebar -->
 
               $('#suggestionThree').append('\
                 <div class="alert alert-success alert-dismissible">\
-                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i>'+data['tag_count'][2]['NAME']+'<a href="#"><i id="addPanel3" class="buttonCustom fa fa-fw fa-plus-circle"></i></a></h4>\
-                  <h5> Assistant Professor </h5>\
+                  <h4 id="suggestion3Name"><i class="icon fa fa-user"></i>'+data['tag_count'][2]['NAME']+'<a href="#"><i id="addPanel3"></i></a></h4>\
+                  <h5>'+data['tag_common'][2]['RANK_NAME']+'</h5>\
                   <div> \
                     <p>\
                     <b> Specialization: </b> <br>\
@@ -837,7 +865,7 @@ immediately after the control sidebar -->
                   </div>\
                   <div> \
                     <p>\
-                    <b> Common (2): </b> <br>\
+                    <b> Common ('+data['tag_count'][2]['COUNT']+'): </b> <br>\
                     <span></span>'
                     +common+
                     '</p>\
@@ -862,7 +890,7 @@ immediately after the control sidebar -->
       {
         $.ajax({
           type:'POST',
-          url: '/tms_ci/index.php/coordinator/get_possible_panel/'+ group_id, 
+          url: base+'index.php/coordinator/get_possible_panel/'+ group_id, 
           success: function(data)
           {
             console.log('frist:' + data);
@@ -923,7 +951,7 @@ immediately after the control sidebar -->
 
             $.ajax({
               type: 'POST',
-              url: '/tms_ci/index.php/coordinator/get_panel_tags/'+first_id,
+              url: base+'index.php/coordinator/get_panel_tags/'+first_id,
               success: function(data)
               {
                 tags = "";
@@ -952,7 +980,7 @@ immediately after the control sidebar -->
 
             $.ajax({
               type: 'POST',
-              url: '/tms_ci/index.php/coordinator/get_panel_tags/'+second_id,
+              url: base+'index.php/coordinator/get_panel_tags/'+second_id,
               success: function(data)
               {
                 tags = "";
@@ -981,7 +1009,7 @@ immediately after the control sidebar -->
 
             $.ajax({
               type: 'POST',
-              url: '/tms_ci/index.php/coordinator/get_panel_tags/'+third_id,
+              url: base+'index.php/coordinator/get_panel_tags/'+third_id,
               success: function(data)
               {
                 tags = "";
@@ -1184,35 +1212,35 @@ immediately after the control sidebar -->
       });
 
       
-      $('#modal-defense-button').click(function(){
+      // $('#modal-defense-button').click(function(){
         
-        var dateVal =  $('#datepicker').val();
-        var formattedDate = new Date(dateVal);
-        var d = formattedDate.getDate();
-        var m =  formattedDate.getMonth();
-        m += 1;  // JavaScript months are 0-11
-        var y = formattedDate.getFullYear();
-        var new_date = y + "-" + m + "-" + d;
+      //   var dateVal =  $('#datepicker').val();
+      //   var formattedDate = new Date(dateVal);
+      //   var d = formattedDate.getDate();
+      //   var m =  formattedDate.getMonth();
+      //   m += 1;  // JavaScript months are 0-11
+      //   var y = formattedDate.getFullYear();
+      //   var new_date = y + "-" + m + "-" + d;
 
-        var start = $('#startHour').val()+':'+$('#startMinute').val()+$('#startMedDynamic').val();
-        var end = $('#endHour').val()+':'+$('#endMinute').val()+$('#endMedDynamic').val();
-        console.log(start+'-'+end);
+      //   var start = $('#startHour').val()+':'+$('#startMinute').val()+$('#startMedDynamic').val();
+      //   var end = $('#endHour').val()+':'+$('#endMinute').val()+$('#endMedDynamic').val();
+      //   console.log(start+'-'+end);
 
-        $.ajax({
-          type: 'POST',
-          url: '/tms_ci/index.php/coordinator/set_defense_date',
-          data: {'group_id': group_id, 'date': new_date, 'start': start, 'end':end},
-          success: function()
-          {
-            console.log('succ defendse');
-          },
-          error: function(err)
-          {
-            console.log(err);
-          }
-        });
+      //   $.ajax({
+      //     type: 'POST',
+      //     url: '/tms_ci/index.php/coordinator/set_defense_date',
+      //     data: {'group_id': group_id, 'date': new_date, 'start': start, 'end':end},
+      //     success: function()
+      //     {
+      //       console.log('succ defendse');
+      //     },
+      //     error: function(err)
+      //     {
+      //       console.log(err);
+      //     }
+      //   });
 
-      });
+      // });
 
     })
   
@@ -1488,15 +1516,54 @@ immediately after the control sidebar -->
     $('#editor1').val(topic_info);
   });
 
+  // function validate_home_announcement()
+  // {
+  //   var base = $('#base_url').val();
+  //   var news_id = $('#news_id').val();
+  //   var base = $('#base_url').val(); 
+  //   $('#discussion_title').val(topic_name);
+  //   $('#editor1').val(topic_info);
+  //   console.log('succe');
+  //   console.log($('#editor1').val());
+  //   console.log($('#discussion_title').val());
+
+    
+  // }
   function home_fill_in()
   {
     var topic_info = editor.getData();
     var topic_name = $('#discussion_title').val();
+    var base = $('#base_url').val();
+    var news_id = $('#news_id').val();
     $('#discussion_title').val(topic_name);
     $('#editor1').val(topic_info);
     console.log('succe');
     console.log($('#editor1').val());
     console.log($('#discussion_title').val());
+
+    $.ajax({
+      type: 'POST',
+      url: base+'index.php/coordinator/validate_edited_home_announcement/'+news_id,
+      data: {'discussion_title':topic_name, 'editor1':topic_info},
+      success: function(data)
+      {
+        if(data['type']==0)
+        {
+          $('#flash_message').empty();
+          $('#flash_message').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>'+data['message']+'</center></div>');
+        }
+        else if(data['type']=1)
+        {
+          window.location.replace(base+'index.php/'+data['link']);
+        }
+        
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
   }
 </script>
 
@@ -1572,8 +1639,9 @@ immediately after the control sidebar -->
       success: function(data)
       {
         console.log('succes term hase been moved');
-        $('#flash_message').empty();
-        $('#flash_message').append('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>A new term has been set!</center></div>');
+        // $('#flash_message').empty();
+        // $('#flash_message').append('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><center><h4><i class="icon fa fa-info"></i> Alert!</h4>A new term has been set!</center></div>');
+        window.location.replace(base+'index.php/coordinator/view_set_term');
       },
       error: function(err)
       {
@@ -1584,7 +1652,63 @@ immediately after the control sidebar -->
 
   }
   
+</script>
 
+<script>
+  function update_group_members()
+  {
+    var base  = $('#base_url').val();
+    var course_code = $('#group_course option:selected').text();
+    $.ajax({
+      type: 'POST',
+      url: base+'/index.php/coordinator/get_specific_course_students',
+      data: {'course_code':course_code},
+      success: function(data)
+      {
+        var options = "";
+        for(var x =0; x<data.length; x++)
+        {
+          var name = data[x]['NAME'];
+          options += '<option value="'+data[x]['USER_ID']+'">'+name+'</option>';
+        }
+        $('#members').empty();
+        $('#members').append(options);
+      },
+      error: function(err)
+      {
+        console.log(err);
+      }
+    });
+
+  }
+
+  function get_group_members()
+  {
+    var members = $('#members').val();
+    var base = $('#base_url').val();
+    var group_name = $('#group_name').val();
+    var thesis_title = $('#thesis_title').val();
+    var adviser = $('#adviser').val();
+    var adviser_id = $('#adviser_id').val();
+    var course = $('#group_course').val();
+
+    $.ajax({
+      type: 'POST',
+      url: base +'index.php/coordinator/insert_group',
+      data: {'members': members, 'group_name': group_name, 'thesis_title': thesis_title, 'adviser': adviser,'course': course},
+      success: function(data)
+      {
+        console.log('insert is a success');
+        window.location.replace(base+'index.php/coordinator/view_student');
+      },
+      error: function(err)
+      {
+
+      }
+    });
+
+    console.log('THE VALUE! ' + members);
+  }
 </script>
 
 </body>

@@ -3,7 +3,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h2>
-          CT - Thesis Portal
+          Documents
           
           </h2>
           <ol class="breadcrumb">

@@ -14,19 +14,19 @@
   </section>
   <!-- Main content -->
   <?php if($this->session->flashdata('fail')): ?>
-      <div class="alert alert-danger alert-dismissible">
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('fail'); ?></center>
+        </div>
+    <?php endif; ?>
+    <?php if($this->session->flashdata('success')): ?>
+      <div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('fail'); ?></center>
+        <?php echo $this->session->flashdata('success'); ?></center>
       </div>
-  <?php endif; ?>
-  <?php if($this->session->flashdata('success')): ?>
-    <div class="alert alert-info alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-      <?php echo $this->session->flashdata('success'); ?></center>
-    </div>
-  <?php endif; ?>
+    <?php endif; ?>
   <style type="text/css">
     #addForm{
       margin-left: 30px;
@@ -35,7 +35,7 @@
   </style>
   <div class="row">
     <div class="col-lg-12 col-xs-8">
-      <button id="addForm" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Form</button>
+      <button id="addForm" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Form</button>
     </div>
   </div>
   <!-- Modal -->
@@ -51,7 +51,7 @@
           <div class="modal-body">
             <div class="col-sm-8">
               <div id="upload" class="form-group">
-                <label for="exampleInputFile">Upload new form</label>
+                <label for="exampleInputFile">Upload <b>.docx or .pdf</b> form </label> 
                 <input id="submission" type="file" name="userfile" size="20">
               </div>
             </div>
@@ -88,7 +88,7 @@
       <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th>Form</th>
+            <th>Form (click to download)</th>
             <th>Course</th>
             <th></th>
           
@@ -98,7 +98,7 @@
         <tbody>
           <?php foreach($form as $row):?>
             <tr>
-              <td><a href="<?php echo site_url('coordinator/download_form/'.$row['form_name']);?>"><?php echo $row['form_name'];?></a></td>
+              <td><a href="<?php echo site_url('coordinator/download_form/'.$row['form_id']);?>"><?php echo $row['form_name'];?></a></td>
               <td><?php echo $row['course_code'];?></td>
               <td><a href="<?php echo site_url('coordinator/delete_form/'.$row['form_id']);?>"><button id="delete" type="button" class="btn btn-block btn-danger">Delete</button></a></td>
               
@@ -108,7 +108,7 @@
         </tbody>
       </table>
     </div>
-    <div align="center">Note: Please upload .docx format only</div>
+    <div align="center"><b>Note: Only .docx and .pdf file types are accepted</b></div>
     
   </section>
 </div>

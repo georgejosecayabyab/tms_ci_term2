@@ -61,7 +61,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Header -->
         <header class="main-header">
           <!-- Logo -->
-          <a href="coordinatorHome.html" class="logo">
+          
+          <a href="<?php echo site_url('coordinator');?>" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>C</b>TT</span>
             <!-- logo for regular state and mobile devices -->
@@ -84,7 +85,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar"> <i class="fa fa-user"></i> </a>
+                <li>
+          <a href="<?php echo site_url('coordinator/logout');?>">
+           
+            <div class="menu-info">
+              <h10 class="control-sidebar-subheading">Logout</h10>
+            </div>
+          </a>
+        </li>
               </li>
             </ul>
           </div>

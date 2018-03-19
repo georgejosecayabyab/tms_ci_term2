@@ -200,11 +200,10 @@ desired effect
           <li id="notification" class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span id="new_notification_number" class="label label-warning"></span>
+            
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header"></li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul id="notification_list" class="menu">
@@ -213,15 +212,26 @@ desired effect
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
+             
             </ul>
           </li>
           <!-- Tasks Menu -->
         
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-user"></i></a>
-          </li>
+            
+              <a href="<?php echo site_url('student/logout');?>">
+               
+
+                <div class="menu-info">
+              
+                  <h10 class="control-sidebar-subheading">Logout</h10>
+
+                
+                </div>
+              </a>
+            
+          
         </ul>
       </div>
     </nav>

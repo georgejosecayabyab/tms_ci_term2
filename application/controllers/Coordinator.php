@@ -20,12 +20,12 @@
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
 			$user_type = $session['user_type'];
-			if($user_type != 1) exit('Access not allowed');
-			$if_coordinator = $this->coordinator_model->if_coordinator($user_id);
-			if(sizeof($if_coordinator) == 0)
-			{
-				exit('Access not allowed');
-			}
+			if($user_type != 2) exit('Access not allowed');
+			// $if_coordinator = $this->coordinator_model->if_coordinator($user_id);
+			// if(sizeof($if_coordinator) == 0)
+			// {
+			// 	exit('Access not allowed');
+			// }
 		}
 
 		public function index()
@@ -271,6 +271,31 @@
 			$this->load->view('coordinator/coordinator_base_head', $data);
 			$this->load->view('coordinator/coordinator_new_announcement_specific_view', $data);
 			$this->load->view('coordinator/coordinator_base_foot', $data);
+		}
+
+		public function view_edit_specific_announcement($event_id)
+		{
+			$data['related_news'] = $this->coordinator_model->get_specific_related_news($event_id);
+			$data['course'] = $this->coordinator_model->get_all_course();
+			$data['active_tab'] = array(
+				'home' => "",
+				'group' => "",
+				'faculty' => "",
+				'student' => "",
+				'home_announcement' => "",
+				'specific_announcement' => "active",
+				'form' => "",
+				'report' => "",
+				'archive' => "",
+				'specialization' => "",
+				'term' => ""  ,
+				'time' => "" 
+			);
+
+			$this->load->view('coordinator/coordinator_base_head', $data);
+			$this->load->view('coordinator/coordinator_edit_specific_announcement_view', $data);
+			$this->load->view('coordinator/coordinator_base_foot', $data);
+		
 		}
 
 		public function view_form()
@@ -667,9 +692,9 @@
 			
 			$config['upload_path']          = './forms/';
             $config['allowed_types']        = 'pdf|docx';
-            $config['max_size']             = 2000;
-            $config['max_width']            = 4096;
-            $config['max_height']           = 2048;
+            $config['max_size']             = 30000;
+            $config['max_width']            = 8192;
+            $config['max_height']           = 8192;
 
             $this->load->library('upload', $config);
 
@@ -847,20 +872,30 @@
 			date_default_timezone_set('Asia/Manila');
 			$date_time = date("Y-m-d H:i:s");
 
-			$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
-			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim');
+			$users = $this->coordinator_model->get_specific_user_info($email);
 
-			if($this->form_validation->run() == FALSE)
+			if(sizeof($users) == 0)
 			{
-				//// set flash data
-				$this->session->set_flashdata('fail', validation_errors());
-				redirect('coordinator/view_student');
+				$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+				$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
+				$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim');
+
+				if($this->form_validation->run() == FALSE)
+				{
+					//// set flash data
+					$this->session->set_flashdata('fail', validation_errors());
+					redirect('coordinator/view_student');
+				}
+				else
+				{	
+					$this->create_student($email, $first_name, $last_name, $date_time, $course);
+					$this->session->set_flashdata('success', 'Student has been created!');
+					redirect('coordinator/view_student');
+				}
 			}
 			else
-			{	
-				$this->create_student($email, $first_name, $last_name, $date_time, $course);
-				$this->session->set_flashdata('success', 'Student has been created!');
+			{
+				$this->session->set_flashdata('fail', 'Invalid Email! Email address has already exist!');
 				redirect('coordinator/view_student');
 			}
 		}
@@ -912,6 +947,7 @@
 		public function delete_related_news($event_id)
 		{
 			$this->coordinator_model->delete_related_news($event_id);
+			$this->session->set_flashdata('success', 'Announcement has been deleted!');
 			redirect('coordinator/view_specific_announcement');
 		}
 
@@ -928,6 +964,7 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
+				$this->session->set_flashdata('fail', validation_errors());
 				redirect('coordinator/view_new_home_announcement');
 			}
 			else
@@ -939,6 +976,7 @@
 					'is_featured' => 0,
 				);
 				$this->coordinator_model->insert_new_home_announcement($data);
+				$this->session->set_flashdata('success', 'A new home announcement has been made!');
 				redirect('coordinator/view_home_announcement');
 
 			}
@@ -958,7 +996,14 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
-				redirect('coordinator/view_specific_home_announcement/'.$news_id);
+
+				$this->session->set_flashdata('fail', validation_errors());
+				$data['type'] = 0;
+				$data['message'] = validation_errors();
+
+				header("Content-type: application/json");
+				echo json_encode($data);
+				//redirect('coordinator/view_specific_home_announcement/'.$news_id);
 			}
 			else
 			{
@@ -970,7 +1015,14 @@
 					'news_id' => $news_id
 				);
 				$this->coordinator_model->update_specific_news($data);
-				redirect('coordinator/view_home_announcement');
+				$this->session->set_flashdata('success', 'Home announcement has been updated!');
+				$data['type'] = 1;
+				$data['message'] = validation_errors();
+
+				$data['link'] = 'coordinator/view_home_announcement';
+				header("Content-type: application/json");
+				echo json_encode($data);
+				//redirect('coordinator/view_home_announcement');
 
 			}
 		}
@@ -986,6 +1038,7 @@
 
 			if($this->form_validation->run() == FALSE)
 			{
+				$this->session->set_flashdata('fail', validation_errors());
 				redirect('coordinator/view_new_specific_announcement');
 			}
 			else
@@ -995,14 +1048,56 @@
 					'course_code' => $course
 				);
 				$this->coordinator_model->insert_new_specific_announcement($data);
+				$this->session->set_flashdata('success', 'A new announcement has been made!');
 				redirect('coordinator/view_specific_announcement');
 
 			}
 		}
 
-		////download
-		public function download_form($form_name)
+		public function validate_edited_specific_announcement($event_id)
 		{
+			$course = $this->input->post("course");
+			$event_desc = $this->input->post("editor1");
+			date_default_timezone_set('Asia/Manila');
+			$date_time = date("Y-m-d H:i:s");
+
+			$this->form_validation->set_rules('editor1', 'Information', 'required|trim');
+
+			if($this->form_validation->run() == FALSE)
+			{
+
+				$this->session->set_flashdata('fail', validation_errors());
+				$data['type'] = 0;
+				$data['message'] = validation_errors();
+
+				header("Content-type: application/json");
+				echo json_encode($data);
+				//redirect('coordinator/view_specific_announcement');
+			}
+			else
+			{
+				$data = array(
+					'event_id' => $event_id,
+					'event_desc' => $event_desc,
+					'course_code' => $course
+				);
+				$this->coordinator_model->update_related_news($data);
+				$this->session->set_flashdata('success', 'Specific announcement has been updated!');
+				$data['type'] = 1;
+				$data['message'] = validation_errors();
+
+				$data['link'] = 'coordinator/view_specific_announcement';
+				header("Content-type: application/json");
+				echo json_encode($data);
+
+			}
+		}
+
+		////download
+		public function download_form($form_id)
+		{
+			$form = $this->coordinator_model->get_specific_form($form_id);
+			$form_name = $form['form_name'];
 			if($form_name)
 			{
 				$file = realpath("forms")."\\".$form_name;
@@ -1110,18 +1205,21 @@
 			}
 
 			$this->session->set_flashdata('success', 'A new term has been set!');			
-			redirect('coordinator/view_set_term');
+			//redirect('coordinator/view_set_term');
 
 		}
 
 		public function insert_group()
 		{
-			$users = $this->input->post('users');
+			$users = $this->input->post('members');
 			$group_name = $this->input->post('group_name');
 			$thesis_title = $this->input->post('thesis_title');
 			$adviser = $this->input->post('adviser');
 			$adviser_id = $this->input->post('adviser_id');
 			$course = $this->input->post('course');
+
+			var_dump($users);
+			echo $group_name.' '.$thesis_title.' '.$adviser.' '.$course;
 
 			//// validations
 			if(sizeof($users) > 4 || sizeof($users) < 1)
@@ -1156,14 +1254,14 @@
 			else
 			{
 				$this->coordinator_model->insert_thesis($thesis_title);
-				$this->coordinator_model->insert_thesis_group($group_name, $adviser_id, $thesis_title, $course);
-				$thesis_group_id = $this->coordinator_model->get_thesis_group($group_name, $adviser_id);
+				$this->coordinator_model->insert_thesis_group($group_name, $adviser, $thesis_title, $course);
+				$thesis_group_id = $this->coordinator_model->get_thesis_group($group_name, $adviser);
 				for($x = 0; $x < sizeof($users); $x++)
 				{
 					$this->coordinator_model->insert_student_group($users[$x], $thesis_group_id['group_id']);
 				}
 				$this->session->set_flashdata('success', 'Group has been created!');
-				redirect('coordinator/view_student');
+				//redirect('coordinator/view_student');
 			}
 
 			foreach($users as $row)
@@ -1241,6 +1339,15 @@
 			}
 			$this->coordinator_model->update_user_status($user_id, $status_to_be);
 			$data = $this->coordinator_model->get_user_info($user_id);
+
+			header('Content-Type: application/json');
+			echo json_encode($data);
+		}
+
+		public function get_specific_course_students()
+		{
+			$course_code = $this->input->post("course_code");
+			$data = $this->coordinator_model->get_specific_course_students($course_code);
 
 			header('Content-Type: application/json');
 			echo json_encode($data);

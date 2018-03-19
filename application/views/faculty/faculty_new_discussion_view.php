@@ -11,6 +11,20 @@
       <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
       
     </ol>
+    <?php if($this->session->flashdata('fail')): ?>
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+        <?php echo $this->session->flashdata('fail'); ?></center>
+      </div>
+    <?php endif; ?>
+    <?php if($this->session->flashdata('success')): ?>
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+        <?php echo $this->session->flashdata('success'); ?></center>
+      </div>
+    <?php endif; ?> 
   </section>
   <!-- Main content -->
   <section class="content">
@@ -43,8 +57,9 @@
                   </div>
                   <div class="col-lg-3 col-xs-12">
                     <span></span>
-                    <input onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" onclick="fill_in()" value="Save and Quit">
+                    
                     <a href="<?php echo site_url('faculty/view_advisee_specific/'.$group['group_id']);?>"><input id="exit" name="exit" type="button" class="btn btn-danger" value="Exit"></a>
+                    <input onclick="fill_in()" id="save_discussion" name="save" type="submit" class="btn btn-success" onclick="fill_in()" value="Save and Quit">
                   </div>
                 </div>
               </div>
