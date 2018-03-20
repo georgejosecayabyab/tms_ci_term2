@@ -1835,15 +1835,25 @@ immediately after the control sidebar -->
         var i = 2;
         var translatedStartTime = translateToMin(hour,min);
         var translatedDurationTime = translateToMin(durationHour,durationMin);
+        var blank = "";
 
         $('#timeslot1').timepicker('setTime', hour + ':' + min +  meridian);
+        blank = blank + hour + ':' + min +  meridian + ' | ';
+        time_slot_1 = hour + ':' + min;
+        time_slot_2 = "";
+        time_slot_3 = "";
+        time_slot_4 = "";
+        time_slot_5 = "";
+        time_slot_6 = "";
+        time_slot_7 = "";
+        time_slot_8 = "";
+
 
         while (i <= 8){
 
             var newTime = parseInt(translatedStartTime + translatedDurationTime + parseInt(interval));
             var newMeridian ;
             console.log(" YOUR NEW TIME IS BEFORE REDUCTION " + newTime);
-  
 
 
             if (newTime > 1440){
@@ -1880,20 +1890,109 @@ immediately after the control sidebar -->
 
             $('#timeslot' + i).timepicker('setTime', newHour + ':' + newMin +  newMeridian);
 
+            blank = blank +  newHour + ':' + newMin +  newMeridian + ' | ';
+
             translatedStartTime = newTime;
+
+            if(i == 2)
+            {
+              time_slot_2 = newHour + ':' + newMin;
+            }
+            else if(i == 3)
+            {
+              time_slot_3 = newHour + ':' + newMin;
+            }
+            else if(i == 4)
+            {
+              time_slot_4 = newHour + ':' + newMin;
+            }
+            else if(i == 5)
+            {
+              time_slot_5 = newHour + ':' + newMin;
+            }
+            else if(i == 6)
+            {
+              time_slot_6 = newHour + ':' + newMin;
+            }
+            else if(i == 7)
+            {
+              time_slot_7 = newHour + ':' + newMin;
+            }
+            else
+            {
+              time_slot_8 = newHour + ':' + newMin;
+            }
+
 
             i++;
 
+
+
         
 
-          }
+        }
 
 
-
+        // alert($('#timeslot1').val() + ' | ' + $('#timeslot2').val() + ' | '+ $('#timeslot3').val() + ' | '+ $('#timeslot4').val() + ' | '+ $('#timeslot5').val() + ' | '+ $('#timeslot6').val() + ' | '+ $('#timeslot7').val() + ' | '+ $('#timeslot8').val() + ' | '  );
+        // alert(blank);
 
       }
-      );
+    );
   });
+
+
+</script>
+
+<script>
+  function get_time_slots()
+  {
+    var base = $('#base_url').val();
+    var ts1 = $('#timeslot1').val();
+    var ts2 = $('#timeslot2').val();
+    var ts3 = $('#timeslot3').val();
+    var ts4 = $('#timeslot4').val();
+    var ts5 = $('#timeslot5').val();
+    var ts6 = $('#timeslot6').val();
+    var ts7 = $('#timeslot7').val();
+    var ts8 = $('#timeslot8').val();
+
+    var hours = $('#duration').val().split(":")[0];
+    var minutes = $('#duration').val().split(":")[1];
+
+
+
+      // durationHour = e.time.hours;
+      // durationMin = e.time.minutes;
+
+    $('#time_message').empty();
+    console.log('SENS '+ hours +' OOO ' + minutes);
+
+    // console.log('---' +durationHour);
+    // console.log('ppp' +durationMin);
+    var time = parseInt(hours*60) + parseInt(minutes);
+    console.log('TIME: ' + time);
+    console.log(ts1 + ' | ' + ts2 + ' | ' + ts3 + ' | ' + ts4 + ' | ' + ts5 + ' | ' + ts6 + ' | ' + ts7 + ' | ' + ts8 + ' | ' );
+
+
+
+
+    $('#time_message').append("Do you want to replace old timeslots?");
+
+    $.ajax({
+      type:'POST',
+      url: base+'index.php/coordinator/update_time',
+      data: {'ts1':ts1, 'ts2':ts2, 'ts3':ts3 , 'ts4':ts4 , 'ts5':ts5 , 'ts6':ts6 , 'ts7':ts7 , 'ts8':ts8, 'duration':time},
+      success: function(data)
+      {
+        console.log('200');
+        window.location.replace(base+'index.php/coordinator/view_set_time_slot');
+      },
+      error: function(data)
+      {
+        console.log('1991');
+      }
+    });
+  }
 </script>
 
 

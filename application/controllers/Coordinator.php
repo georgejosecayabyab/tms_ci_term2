@@ -1353,5 +1353,76 @@
 			echo json_encode($data);
 		}
 
+		public function update_time()
+		{
+			$ts1 = date("G:i", strtotime($this->input->post('ts1')));
+			$ts2 = date("G:i", strtotime($this->input->post('ts2')));
+			$ts3 = date("G:i", strtotime($this->input->post('ts3')));
+			$ts4 = date("G:i", strtotime($this->input->post('ts4')));
+			$ts5 = date("G:i", strtotime($this->input->post('ts5')));
+			$ts6 = date("G:i", strtotime($this->input->post('ts6')));
+			$ts7 = date("G:i", strtotime($this->input->post('ts7')));
+			$ts8 = date("G:i", strtotime($this->input->post('ts8')));
+
+			// $ts1 = date("G:i", strtotime($this->input->post('timeslot1')));
+			// $ts2 = date("G:i", strtotime($this->input->post('timeslot2')));
+			// $ts3 = date("G:i", strtotime($this->input->post('timeslot3')));
+			// $ts4 = date("G:i", strtotime($this->input->post('timeslot4')));
+			// $ts5 = date("G:i", strtotime($this->input->post('timeslot5')));
+			// $ts6 = date("G:i", strtotime($this->input->post('timeslot6')));
+			// $ts7 = date("G:i", strtotime($this->input->post('timeslot7')));
+			// $ts8 = date("G:i", strtotime($this->input->post('timeslot8')));
+
+			$duration = $this->input->post('duration');
+
+			$this->form_validation->set_rules('ts1', 'Timeslot 1', 'required|trim');
+			$this->form_validation->set_rules('ts2', 'Timeslot 2', 'required|trim');
+			$this->form_validation->set_rules('ts3', 'Timeslot 3', 'required|trim');
+			$this->form_validation->set_rules('ts4', 'Timeslot 4', 'required|trim');
+			$this->form_validation->set_rules('ts5', 'Timeslot 5', 'required|trim');
+			$this->form_validation->set_rules('ts6', 'Timeslot 6', 'required|trim');
+			$this->form_validation->set_rules('ts7', 'Timeslot 7', 'required|trim');
+			$this->form_validation->set_rules('ts8', 'Timeslot 8', 'required|trim');
+			$this->form_validation->set_rules('duration', 'Duration', 'required|trim');
+
+
+
+			if($this->form_validation->run() == FALSE)
+			{
+				//// set flash data
+				$this->session->set_flashdata('fail', validation_errors());
+			}
+			else
+			{
+				$time['start_time'] = array($ts1,$ts2,$ts3,$ts4,$ts5,$ts6,$ts7,$ts8);
+				$to_end = array();
+				foreach($time['start_time'] as $row)
+				{
+					array_push($to_end, date('H:i',strtotime('+'.$duration.' minutes',strtotime($row))));
+				}
+
+				$time['end_time'] = $to_end;
+
+				$this->coordinator_model->update_time($time);
+				$this->session->set_flashdata('success', 'Timeslots have been updated!');
+				header('Content-Type: application/json');
+				echo json_encode($time);
+			}
+
+
+
+			// $time['start_time'] = array('9:10','10:10','11:10','12:10','13:10','14:10','15:10','16:10');
+			// $time['end_time'] = array('10:10','11:10','12:10','13:10','14:10','15:10','16:10','17:10');
+
+			// $start_time = date("G:i", strtotime('1:30 PM'));
+			// $end_time = date('H:i',strtotime('+'.$duration.' minutes',strtotime($start_time)));
+			//echo $start_time.'<br>'.$end_time;
+			// var_dump($time['end_time']);
+			// var_dump($time['start_time']);
+			//$time = 'hell'.$ts1.$ts2.$ts3.$duration;
+
+			
+		}
+
 	}
 ?>

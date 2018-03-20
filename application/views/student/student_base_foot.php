@@ -33,6 +33,10 @@
 
 <!-- <script src="<?php //echo base_url();?>js/jquery.weekly-schedule-plugin.js"></script> -->
 
+<?php 
+  echo '<script> var suck="join me";</script>';
+?>
+
 <script type="text/javascript">
   $('#datepicker').datepicker({
     autoclose: true
@@ -283,6 +287,7 @@
 
 <!---editor content-->
 <script>
+  var unforgive = "kampai";
   var editor = CKEDITOR.replace('editor1');
   $('#save_discussion').click(function() {
     var topic_info = editor.getData();
@@ -334,6 +339,8 @@
 <script>
   function meeting()
   {
+    alert(unforgive);
+    alert(suck);
     var base = $('#base_url').val();
     var date = $('#datepicker').val();
     var venue = $('#venue').val();
@@ -372,10 +379,12 @@
   $(document).ready(function() {
     $('#table').DataTable();
   });
+
 </script>
 
 <!-- schedule 2-->
 <script>
+
   $('.schedule').on('selectionmade', function() {
     console.log("Selection Made");
   }).on('selectionremoved', function() {
@@ -474,6 +483,7 @@
   $('#specialCase').click(function (){
     $('#specialField').html('<input class="text form-control" placeholder="Subject/Date/Time" id="specialText"> </input>');
   });
+
   $("#submitbtn").click(function() {
       var test = $('#target').weekly_schedule("getSelectedHour");
 

@@ -69,6 +69,10 @@
 						{
 							redirect("faculty");//faculty
 						}
+						else if($user_type['user_type'] == 3)
+						{
+
+						}
 						else
 						{
 							//var_dump($this->session->userdata());
@@ -108,7 +112,7 @@
             $g_client->setAccessToken($token);
             $pay_load = $g_client->verifyIdToken();
             $refresh_token = $g_client->getRefreshToken();
-   //          echo $refresh_token;
+   			//          echo $refresh_token;
 			// var_dump($refresh_token);			
 			$json_encode = json_encode($pay_load);
 			$url_encode = $this->base64UrlEncode($json_encode);

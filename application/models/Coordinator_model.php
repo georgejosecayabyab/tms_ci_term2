@@ -912,6 +912,30 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
+
+
+	public function update_time($time)
+	{
+		$sql = "SELECT * FROM TIME LIMIT 8;";
+		$query = $this->db->query($sql);
+		$time_db = $query->result_array();
+		for($x = 0; $x < sizeof($time_db); $x++)
+		{
+			// $data = array(
+			// 	'start_time' => $time['start_time'][$x],
+			// 	'end_time' => $time['end_time'][$x]
+			// );
+
+			$update_sql = "update time 
+					set start_time='".$time['start_time'][$x]."', end_time='".$time['end_time'][$x]."'
+					where time_id=".$time_db[$x]['time_id'].";";
+			$this->db->query($update_sql);
+
+
+			
+		}
+
+	}
 }
 
 
