@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       $day5 = $day5_content;
       $day6 = $day6_content;
       $array = array('day1'=>$day1,'day2'=>$day2,'day3'=>$day3,'day4'=>$day4,'day5'=>$day5,'day6'=>$day6);
-      echo "<script> var schedule=".json_encode($array)."; passData(schedule); </script>";
+      echo "<script> console.log('a simple survey |".json_encode($array)."'); var schedule=".json_encode($array)."; passData(schedule); </script>";
     }
 
     // $day1 = $day1_content;

@@ -59,6 +59,7 @@
 		{
 			$data['group'] = $this->coordinator_model->get_group_info();
 			$data['panel'] = $this->coordinator_model->archive_panels();
+			$data['member'] = $this->coordinator_model->archive_members();
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "active",

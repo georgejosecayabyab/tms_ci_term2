@@ -35,6 +35,7 @@
         <thead>
           <tr>
             <th>Topic</th>
+            <th>Members</th>
             <th>Course</th>
             <th>Panel</th>
             <th>Defense Date (mm/dd/yy)</th>
@@ -47,6 +48,19 @@
           <?php foreach($group as $row):?>
             <tr>
               <td><?php echo ucwords(strtolower($row['THESIS_TITLE']));?></td><!--palitan mo to george-->
+              <td>
+                <?php
+                  $tags = '';
+                  foreach($member as $mrow)
+                  {
+                    if($row['THESIS_ID']==$mrow['thesis_id'])
+                    {
+                      $tags.= ucwords(strtolower($mrow['name'])).', ';
+                    }
+                  }
+                  echo substr(trim($tags), 0, -1);
+                ?>
+              </td>
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>

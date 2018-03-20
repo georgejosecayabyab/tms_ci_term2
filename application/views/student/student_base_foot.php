@@ -339,8 +339,7 @@
 <script>
   function meeting()
   {
-    alert(unforgive);
-    alert(suck);
+   
     var base = $('#base_url').val();
     var date = $('#datepicker').val();
     var venue = $('#venue').val();
@@ -382,6 +381,43 @@
 
 </script>
 
+<!--time creation script-->
+<?php
+
+  if($active_tab['group_schedule']=='active')
+  {
+    //$hours_format = array();
+    $s1 = $all_time[0]['START']; 
+    $e1 = $all_time[0]['END'];
+
+    $s2 = $all_time[1]['START']; 
+    $e2 = $all_time[1]['END'];
+
+    $s3 = $all_time[2]['START']; 
+    $e3 = $all_time[2]['END'];
+
+    $s4 = $all_time[3]['START']; 
+    $e4 = $all_time[3]['END'];
+
+    $s5 = $all_time[4]['START']; 
+    $e5 = $all_time[4]['END'];
+
+    $s6 = $all_time[5]['START']; 
+    $e6 = $all_time[5]['END'];
+
+    $s7 = $all_time[6]['START']; 
+    $e7 = $all_time[6]['END'];
+
+    $s8 = $all_time[7]['START']; 
+    $e8 = $all_time[7]['END'];
+
+    $hours_format = array('Entry1Start'=>$s1, 'Entry1End'=>$e1, 'Entry2Start'=>$s2, 'Entry2End'=>$e2, 'Entry3Start'=>$s3, 'Entry3End'=>$e3, 'Entry4Start'=>$s4, 'Entry4End'=>$e4, 'Entry5Start'=>$s5, 'Entry5End'=>$e5, 'Entry6Start'=>$s6, 'Entry6End'=>$e6, 'Entry7Start'=>$s7, 'Entry7End'=>$e7, 'Entry8Start'=>$s8, 'Entry8End'=>$e8);
+
+    echo '<script>  var sample_sched = '.json_encode($hours_format).'; </script>';
+  }
+  
+?>
+
 <!-- schedule 2-->
 <script>
 
@@ -393,8 +429,8 @@
 
   var hoursFormat = {
 
-            Entry1Start : "7:30 AM",
-            Entry1End : "9:00 AM",
+            Entry1Start : "07:30 AM",
+            Entry1End : "09:00 AM",
             Entry2Start : "9:15 AM",
             Entry2End : "10:45 AM",
             Entry3Start : "11:00 AM",
@@ -460,7 +496,7 @@
     // Days displayed
     days: ["mon", "tue", "wed", "thu", "fri", "sat"],
     // Hours displyed
-    hours: hoursFormat,
+    hours: sample_sched,
     // Font used in the component
     fontFamily: "Montserrat",
     // Font colot used in the component

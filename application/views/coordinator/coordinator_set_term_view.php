@@ -159,9 +159,11 @@
                           <br>
                           5. Graduated students status are changed to inactive
                           <br>
-                          6. All faculty notifications are reset</b>
+                          6. All faculty notifications are reset
                           <br>
-                          7. Guest panelists are set to inactive
+                          7. Guest panelists are set to inactive</b>
+                          <br>
+                          <br>
                           </h5>
                           <a href="<?php echo site_url('coordinator');?>"><button type="button" class="btn btn-danger">Exit</button></a>
                           <button class="btn btn-success" data-dismiss="modal" onclick="move_to_next_term()">Move to Next Term</button></p>
