@@ -17,7 +17,7 @@
 					<!-- /.control-sidebar-menu -->
 					<ul class="control-sidebar-menu">
 						<li>
-							<a href="login.html">
+							<a href="<?php echo site_url('super_user/logout');?>">
 								<i class="menu-icon fa fa-sign-out bg-green"></i>
 								<div class="menu-info">
 									<h4 class="control-sidebar-subheading">Logout</h4>

@@ -671,7 +671,7 @@ class coordinator_model extends CI_Model
 
 	public function get_all_active_faculty()
 	{
-		$sql = "SELECT * FROM USER WHERE USER_ID IN(SELECT USER_ID FROM FACULTY WHERE IS_COORDINATOR=0) ORDER BY LAST_NAME ASC;";
+		$sql = "SELECT * FROM USER WHERE USER_ID IN(SELECT USER_ID FROM FACULTY WHERE IS_COORDINATOR=0) AND IS_ACTIVE=1 ORDER BY LAST_NAME ASC;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
