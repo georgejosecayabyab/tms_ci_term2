@@ -295,12 +295,18 @@
                   <label for="start_time" class="control-label">Start Time</label>
                   <input type="time" class="form-control" id="start_time" name="start_time" placeholder="Start Time">
                 </div>
+                
+                <div class="form-group">
+                  <label for="end_time" class="control-label">End Time</label>
+                  <input type="time" class="form-control" id="end_time" name="end_time" placeholder="End Time">
+                </div>
 
                 <div class="form-group">
                   <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
                   <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
                   
                 </div>
+
 
                 
               </form>

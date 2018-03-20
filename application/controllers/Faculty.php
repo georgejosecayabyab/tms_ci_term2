@@ -830,6 +830,7 @@
 			$this->form_validation->set_rules('venue', 'Venue', 'required|trim');
 			$this->form_validation->set_rules('datepicker', 'Date', 'required|trim');
 			$this->form_validation->set_rules('start_time', 'Start', 'required|trim');
+			$this->form_validation->set_rules('end_time', 'End Time', 'required|trim');
 
 			if($this->form_validation->run() == FALSE)
 			{
@@ -843,7 +844,8 @@
 					'group_id' => $group_id,
 					'created_by' => $user_id,
 					'venue' => $venue,
-					'start_time' => $time
+					'start_time' => $time,
+					'end_time' => $end_time
 				);
 
 				$this->faculty_model->insert_meeting($data);
