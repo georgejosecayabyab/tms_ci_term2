@@ -964,6 +964,24 @@ class coordinator_model extends CI_Model
 			$this->db->update('user', $data); 
 		}
 	}
+
+	public function get_group_id_by_thesis_id($thesis_id)
+	{
+		$sql = "select * from thesis_group where thesis_id=".$thesis_id."";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
+	public function get_uploads_revision($group_id)
+	{
+		$sql = "SELECT * 
+				FROM UPLOAD U 
+				LEFT JOIN REVISION R 
+				ON R.UPLOAD_ID=U.UPLOAD_ID
+				WHERE U.GROUP_ID = ".$group_id.";";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
 }
 
 

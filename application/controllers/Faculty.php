@@ -251,6 +251,8 @@
 		{
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
+
+			$group_id = $this->faculty_model->get_group_id_by_thesis_id($thesis_id);
 			
 			$data['faculty_data'] = $this->faculty_model->get_faculty_detail($user_id);
 			$data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
@@ -258,6 +260,7 @@
 			$data['member'] = $this->faculty_model->archive_members();
 			$data['panel'] = $this->faculty_model->archive_panels();
 			$data['specialization'] = $this->faculty_model->archive_specialization();
+			$data['uploads'] = $this->faculty_model->get_uploads_revision($group_id['group_id']);
 			$data['active_tab'] = array(
 				'home' => "",
 				'schedule' => "",
@@ -855,7 +858,7 @@
 			}
 		}
 
-		
+
 
 	}
 

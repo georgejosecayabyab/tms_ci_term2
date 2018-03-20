@@ -97,12 +97,16 @@
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
 
+
+			$group_id = $this->student_model->get_group_id_by_thesis_id($thesis_id);
+
 			$data['student_data'] = $this->student_model->get_user_information($user_id);
 			$data['group_id'] = $this->student_model->get_group($user_id);
 			$data['thesis'] = $this->student_model->get_thesis($thesis_id);
 			$data['member'] = $this->student_model->archive_members();
 			$data['panel'] = $this->student_model->archive_panels();
 			$data['specialization'] = $this->student_model->archive_specialization();
+			$data['uploads'] = $this->student_model->get_uploads_revision($group_id['group_id']);
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "",

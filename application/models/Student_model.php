@@ -602,6 +602,13 @@
 			return $query->result_array();
 		}
 
+		public function get_group_id_by_thesis_id($thesis_id)
+		{
+			$sql = "select * from thesis_group where thesis_id=".$thesis_id."";
+			$query = $this->db->query($sql);
+			return $query->first_row('array');
+		}
+
 		
 
 	}

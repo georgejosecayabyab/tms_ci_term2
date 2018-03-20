@@ -378,10 +378,14 @@
 
 		public function view_archive_specific($thesis_id)
 		{
+
+			$group_id = $this->coordinator_model->get_group_id_by_thesis_id($thesis_id);
+
 			$data['thesis'] = $this->coordinator_model->get_thesis_by_thesis_id($thesis_id);
 			$data['member'] = $this->coordinator_model->archive_members();
 			$data['panel'] = $this->coordinator_model->archive_panels();
 			$data['specialization'] = $this->coordinator_model->archive_specialization();
+			$data['uploads'] = $this->coordinator_model->get_uploads_revision($group_id['group_id']);
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "",
