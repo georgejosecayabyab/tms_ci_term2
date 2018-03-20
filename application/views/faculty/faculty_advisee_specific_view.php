@@ -191,6 +191,21 @@
             </div><!-- END DISCUSSION -->
             <!-- /.tab-pane -->
             <div class="tab-pane" id="timeline"><!-- VERDICT-->
+              <h3>Current Version: 
+                <?php 
+                  if(sizeof($uploads) != 0)
+                  {
+                    $link = site_url('faculty/download_file/'.$uploads[sizeof($uploads)-1]['upload_name']);
+                    echo '<a href="'.$link.'">Revised Document #'.sizeof($uploads).'</a>';
+                  }
+                  else
+                  {
+                    echo "None";
+                  }
+                  
+                ?>
+                  
+              </h3><br>
               <!-- The timeline -->
               <!-- VERDICT START-->
               <ul class="timeline timeline-inverse">

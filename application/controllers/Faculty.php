@@ -84,6 +84,7 @@
 			$data['reply'] = $this->faculty_model->get_discussion_reply_count();
 			$data['submit'] = $this->faculty_model->latest_uploaded($group_id);
 			$data['comment'] = $this->faculty_model->get_thesis_comment($group_id);
+			$data['uploads'] = $this->faculty_model->get_uploads_revision($group_id);
 			$data['active_tab'] = array(
 				'home' => "",
 				'schedule' => "",
@@ -853,6 +854,8 @@
 				redirect('faculty/view_advisee_specific/'.$group_id);
 			}
 		}
+
+		
 
 	}
 
