@@ -844,9 +844,19 @@ class coordinator_model extends CI_Model
 
 	public function delete_notifications()
 	{
-		$this->db->query("SET SQL_SAFE_UPDATES = 0;");
-		$this->db->query("delete from notification;");
-		$this->db->query("SET SQL_SAFE_UPDATES = 1;");
+		// $this->db->query("SET SQL_SAFE_UPDATES = 0;");
+		// $this->db->query("delete from notification;");
+		// $this->db->query("SET SQL_SAFE_UPDATES = 1;");
+
+		$sql = "SELECT * FROM NOTIFICATION";
+		$query = $this->db->query($sql);
+		$all_notif = $query->result_array();
+
+		foreach($all_notif as $row)
+		{
+			$this->db->where('notification_id', $row['notification_id']);
+			$this->db->delete('notification');	
+		}
 	}
 
 	public function get_members($group_id)
@@ -935,6 +945,12 @@ class coordinator_model extends CI_Model
 			
 		}
 
+	}
+
+	public function delete_all_guests()
+	{
+		$sql = "SELECT * FROM FACULTY WHERE RANK="GUEST";";
+		
 	}
 }
 

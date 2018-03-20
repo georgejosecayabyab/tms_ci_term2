@@ -1204,6 +1204,9 @@
 				$this->coordinator_model->update_verdicts($group_id);
 			}
 
+			$this->coordinator_model->delete_notifications();/////DELETE ALL NOTIFICAIOTNS
+			
+
 			$this->session->set_flashdata('success', 'A new term has been set!');			
 			//redirect('coordinator/view_set_term');
 
