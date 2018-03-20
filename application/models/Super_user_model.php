@@ -32,5 +32,13 @@
 			//escape every variable
 			$this->db->insert('user', $data);
 		}
+
+		public function get_user_by_email($email)
+		{
+			$sql = "SELECT * FROM USER WHERE EMAIL='".$email."';";
+			$query = $this->db->query($sql);
+
+			return $query->first_row('array');
+		}
 	}
 ?>

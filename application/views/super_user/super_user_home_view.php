@@ -10,6 +10,20 @@
 			<li><a href="studentHome"><i class="fa fa-home"></i> Home</a></li>
 			
 		</ol>
+		<?php if($this->session->flashdata('fail')): ?>
+	      <div class="alert alert-danger alert-dismissible">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+	        <?php echo $this->session->flashdata('fail'); ?></center>
+	      </div>
+		<?php endif; ?>
+		<?php if($this->session->flashdata('success')): ?>
+			<div class="alert alert-success alert-dismissible">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+			  <?php echo $this->session->flashdata('success'); ?></center>
+			</div>
+		<?php endif; ?>
 	</section>
 	<input type="hidden" value="<?php echo base_url();?>" id="base_url">
 	<!-- Main content -->
@@ -24,45 +38,47 @@
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add Student</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-horizontal">
-						<div class="form-group">
-							<label for="email" class="col-sm-2 control-label">Email</label>
-							<div class="col-sm-8">
-								<input class="form-control" id="email" placeholder="Email">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="first_name" class="col-sm-2 control-label">First Name</label>
-							<div class="col-sm-8">
-								<input class="form-control" id="first_name" placeholder="First Name">
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label for="last_name" class="col-sm-2 control-label">Last Name</label>
-							<div class="col-sm-8">
-								<input class="form-control" id="last_name" placeholder="Last Name">
-							</div>
-						</div>
-						
+			<form method="POST" action="<?php echo site_url('super_user/insert_user');?>">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Student</h4>
 					</div>
-					
-					
-					<div class="modal-footer">
-						<div class="row" align="center">
+					<div class="modal-body">
+						<div class="form-horizontal">
+							<div class="form-group">
+								<label for="email" class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-8">
+									<input class="form-control" name="email" id="email" placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="first_name" class="col-sm-2 control-label">First Name</label>
+								<div class="col-sm-8">
+									<input class="form-control" name="first_name" id="first_name" placeholder="First Name">
+								</div>
+							</div>
 							
-							<a href="<?php echo site_url('super_user');?>"><button id="submitbtn2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button></a>
-							<button id="submitbtn" onclick="" type="button" class="btn btn-success">Save and Quit</button>
+							<div class="form-group">
+								<label for="last_name" class="col-sm-2 control-label">Last Name</label>
+								<div class="col-sm-8">
+									<input class="form-control" name="last_name" id="last_name" placeholder="Last Name">
+								</div>
+							</div>
+							
+						</div>
+						
+						
+						<div class="modal-footer">
+							<div class="row" align="center">
+								<a href="<?php echo site_url('super_user');?>"><button id="submitbtn2" data-dismiss="modal" type="button" class="btn btn-danger">Exit</button></a>
+								<button id="submitbtn" onclick="" type="submit" class="btn btn-success">Save and Quit</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
+			<!--Modal content END-->
 		</div>
 	</div>
 
@@ -117,3 +133,5 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+			

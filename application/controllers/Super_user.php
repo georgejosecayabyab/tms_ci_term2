@@ -76,24 +76,51 @@
 
 		public function insert_user()
 		{
-			$first_name = $this->input->post();
-			$last_name = $this->input->post();
-			$email = $this->input->post();
+			$first_name = $this->input->post('first_name');
+			$last_name = $this->input->post('last_name');
+			$email = $this->input->post('email');
 			date_default_timezone_set('Asia/Manila');
 			$date_time = date("Y-m-d H:i:s");
 
-			$user = array(
-				'first_name' => $first_name,
-				'last_name' => $last_name,
-				'password' => 1234,
-				'email' => $email,
-				'is_active' => 1,
-				'date_joined' => $date_time,
-				'profile_pic' => NULL,
-				'user_type' => 1,
+			$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
+			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim');
 
-			);
-			$this->super_user->insert_user($user);
+			if($this->form_validation->run() == FALSE)
+			{
+				//// set flash data
+				$this->session->set_flashdata('fail', validation_errors());
+				redirect('super_user');
+			}
+			else
+			{
+				$email_exist = $this->super_user_model->get_user_by_email($email);
+				if(sizeof($email_exist) == 0)
+				{
+					$user = array(
+						'first_name' => $first_name,
+						'last_name' => $last_name,
+						'password' => 1234,
+						'email' => $email,
+						'is_active' => 1,
+						'date_joined' => $date_time,
+						'profile_pic' => NULL,
+						'user_type' => 2,
+
+					);
+					$this->super_user_model->insert_user($user);
+					$this->session->set_flashdata('success', 'Coordinator has been created!');
+					redirect('super_user');
+				}
+				else
+				{
+					$this->session->set_flashdata('fail', 'Email already exists!');
+					redirect('super_user');
+				}
+				
+			}
+
+			
 		}
 	}
 ?>
