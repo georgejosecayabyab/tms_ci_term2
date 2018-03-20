@@ -51,7 +51,6 @@
 						$user_type = $this->login_model->is_student($result['user_id']);
 						//This is an array
 						$data = [
-							'access_token' => $token,
 							'user_id' => $result['user_id'],
 							'user_type' => $user_type['user_type']
 						];
@@ -71,7 +70,7 @@
 						}
 						else if($user_type['user_type'] == 3)
 						{
-
+							redirect("super_user");
 						}
 						else
 						{
@@ -168,7 +167,7 @@
 				
 				else if($user_type['user_type'] == 3)
 				{
-
+					redirect("super_user");
 				}
 				else
 				{
