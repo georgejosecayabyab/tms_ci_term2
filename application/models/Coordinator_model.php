@@ -947,10 +947,22 @@ class coordinator_model extends CI_Model
 
 	}
 
-	public function delete_all_guests()
+	public function deactivate_all_guests()
 	{
-		$sql = "SELECT * FROM FACULTY WHERE RANK="GUEST";";
-		
+		$sql = "SELECT * FROM FACULTY WHERE RANK='GUEST';";
+		$query = $this->db->query($sql);
+		$all_guest = $query->result_array();
+
+		foreach($all_guest as $row)
+		{
+			
+			$data = array(
+				'is_active' => 0
+			);
+
+			$this->db->where('user_id', $row['user_id']);
+			$this->db->update('user', $data); 
+		}
 	}
 }
 

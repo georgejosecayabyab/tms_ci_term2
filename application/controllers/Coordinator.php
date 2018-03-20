@@ -1205,7 +1205,7 @@
 			}
 
 			$this->coordinator_model->delete_notifications();/////DELETE ALL NOTIFICAIOTNS
-			
+			$this->coordinator_model->deactivate_all_guests();//////DEACTIVATE GUESTS USERS
 
 			$this->session->set_flashdata('success', 'A new term has been set!');			
 			//redirect('coordinator/view_set_term');
