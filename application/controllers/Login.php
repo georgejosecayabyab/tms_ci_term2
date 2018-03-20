@@ -165,6 +165,11 @@
 				{
 					redirect("faculty");//faculty
 				}
+				
+				else if($user_type['user_type'] == 3)
+				{
+
+				}
 				else
 				{
 					redirect("coordinator");

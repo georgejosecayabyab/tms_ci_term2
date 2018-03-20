@@ -13,6 +13,7 @@
 			//SELECT * FROM USER WHERE EMAIL=$EMAIL AND PASSWORD=$PASSWORD;
 			$this->db->where('email', $email);
 			$this->db->where('password', $password);
+			$this->db->where('is_active', 1);
 			$query = $this->db->get('user');
 			return $query->first_row('array');
 		}
