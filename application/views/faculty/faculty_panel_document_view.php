@@ -150,18 +150,29 @@
                       <div class="timeline-body">
                         <div class="form-group">
                           <label></label>
-                          <textarea name="comment" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
+                          <textarea name="comment" id="com" class="form-control" rows="3" placeholder="Post a comment about your verdict on the thesis document."></textarea>
                         </div>
                       </div>
                       <div class="timeline-footer">
-                        <input type="submit" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
+                        <input type="submit" id="sub1" name="submit_comment" value="Submit" class="btn btn-primary btn-xs">
                       </div>
                     </form>
                   </div>
                 </li>
               </ul>
             </div>
-            
+            <style type="text/css">
+              #sub1{
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 20px;
+              }
+              #com{
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 20px;
+              }
+            </style>
             <!-- /.box-body -->
             <div class="box-footer">
               
