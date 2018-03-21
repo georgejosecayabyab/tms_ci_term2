@@ -290,6 +290,7 @@
 			$data['th'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'TH');
 			$data['fr'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'FR');
 			$data['sa'] = $this->faculty_model->get_schedule_complete_by_day($user_id, 'SA');
+			$data['all_time'] = $this->faculty_model->get_all_time();
 			$data['active_tab'] = array(
 				'home' => "",
 				'schedule' => "active",

@@ -646,5 +646,13 @@
 			return $query->first_row('array');
 		}
 
+		public function get_all_time()
+		{
+			$sql = "SELECT TIME_ID, TIME_FORMAT(START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(END_TIME, '%h:%i %p') AS 'END'
+					FROM TIME;";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
 	}
 ?>

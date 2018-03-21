@@ -490,7 +490,7 @@ immediately after the control sidebar -->
     // Days displayed
     days: ["mon", "tue", "wed", "thu", "fri", "sat"],
     // Hours displyed
-    hours: hoursFormat,
+    hours: sample_sched,
     // Font used in the component
     fontFamily: "Montserrat",
     // Font colot used in the component

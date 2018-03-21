@@ -43,6 +43,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="<?php echo base_url();?>js/jquery.min.js"></script>
   <script src="<?php echo base_url();?>jquery.weekly-schedule-plugin.js"></script>
+  <?php
+
+    if($active_tab['schedule']=='active')
+    {
+      //$hours_format = array();
+      $s1 = ltrim($all_time[0]['START'], '0'); 
+      $e1 = ltrim($all_time[0]['END'], '0');
+
+      $s2 = ltrim($all_time[1]['START'], '0'); 
+      $e2 = ltrim($all_time[1]['END'], '0');
+
+      $s3 = ltrim($all_time[2]['START'], '0'); 
+      $e3 = ltrim($all_time[2]['END'], '0');
+
+      $s4 = ltrim($all_time[3]['START'], '0'); 
+      $e4 = ltrim($all_time[3]['END'], '0');
+
+      $s5 = ltrim($all_time[4]['START'], '0'); 
+      $e5 = ltrim($all_time[4]['END'], '0');
+
+      $s6 = ltrim($all_time[5]['START'], '0'); 
+      $e6 = ltrim($all_time[5]['END'], '0');
+
+      $s7 = ltrim($all_time[6]['START'], '0'); 
+      $e7 = ltrim($all_time[6]['END'], '0');
+
+      $s8 = ltrim($all_time[7]['START'], '0'); 
+      $e8 = ltrim($all_time[7]['END'], '0');
+
+      $hours_format = array('Entry1Start'=>$s1, 'Entry1End'=>$e1, 'Entry2Start'=>$s2, 'Entry2End'=>$e2, 'Entry3Start'=>$s3, 'Entry3End'=>$e3, 'Entry4Start'=>$s4, 'Entry4End'=>$e4, 'Entry5Start'=>$s5, 'Entry5End'=>$e5, 'Entry6Start'=>$s6, 'Entry6End'=>$e6, 'Entry7Start'=>$s7, 'Entry7End'=>$e7, 'Entry8Start'=>$s8, 'Entry8End'=>$e8);
+
+      echo '<script>  var sample_sched = '.json_encode($hours_format).'; </script>';
+    }
+    
+  ?>
   <?php 
     if($active_tab['schedule']=='active')
     {
