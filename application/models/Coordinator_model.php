@@ -39,7 +39,8 @@ class coordinator_model extends CI_Model
 								JOIN RANK R
 								ON R.RANK_CODE=F.RANK
                                 JOIN DEPARTMENT D
-                                ON 	F.DEPARTMENT_CODE = D.DEPARTMENT_CODE;";
+                                ON 	F.DEPARTMENT_CODE = D.DEPARTMENT_CODE
+                WHERE U.USER_TYPE=1;";
 
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -463,6 +464,7 @@ class coordinator_model extends CI_Model
 				ON U.USER_ID=F.USER_ID
 				WHERE F.USER_ID NOT IN (SELECT ADVISER_ID FROM THESIS_GROUP WHERE GROUP_ID=".$group_id.")
 				AND U.IS_ACTIVE=1
+				AND U.USER_TYPE=1
 				ORDER BY U.LAST_NAME ASC;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -478,7 +480,9 @@ class coordinator_model extends CI_Model
 				JOIN USER U
 				ON U.USER_ID=F.USER_ID 
 				WHERE PG.GROUP_ID=".$group_id."
-				AND PG.STATUS=1;";
+				AND PG.STATUS=1
+				AND U.IS_ACTIVE=1
+				AND U.USER_TYPE=1;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

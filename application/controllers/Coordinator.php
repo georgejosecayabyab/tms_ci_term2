@@ -1441,5 +1441,19 @@
 			
 		}
 
+		public function download_file($file_name)
+		{
+			if($file_name)
+			{
+				$file = realpath("uploaded_thesis")."\\".$file_name;
+				if(file_exists($file))
+				{
+					$data = file_get_contents($file);
+
+					force_download($file_name, $data);
+				}	
+			}
+		}
+
 	}
 ?>
