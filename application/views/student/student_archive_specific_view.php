@@ -38,7 +38,7 @@
 
                 if(sizeof($uploads) != 0)
                 {
-                  $link = site_url('faculty/download_file/'.$uploads[sizeof($uploads)-1]['upload_name']);
+                  $link = site_url('student/download_file/'.$uploads[sizeof($uploads)-1]['upload_name']);
                   echo '<br><br>Download: <a href="'.$link.'">Revised Document #'.sizeof($uploads).'</a>';
                 }
                 else
