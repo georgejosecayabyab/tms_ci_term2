@@ -874,10 +874,10 @@
 			}
 			else
 			{
-				$this->session->set_flashdata('fail', 'Invalid Email! Email address has already exist!');
+				$this->session->set_flashdata('fail', 'Invalid Email! Email address already exist!');
 				redirect('coordinator/view_faculty');
 			}
-			
+
 			
 		}
 
@@ -913,7 +913,7 @@
 			}
 			else
 			{
-				$this->session->set_flashdata('fail', 'Invalid Email! Email address has already exist!');
+				$this->session->set_flashdata('fail', 'Invalid Email! Email address already exist!');
 				redirect('coordinator/view_student');
 			}
 		}
