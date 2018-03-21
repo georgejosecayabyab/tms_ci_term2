@@ -850,22 +850,35 @@
 			date_default_timezone_set('Asia/Manila');
 			$date_time = date("Y-m-d H:i:s");
 
-			$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
-			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim');
 
-			if($this->form_validation->run() == FALSE)
+			$users = $this->coordinator_model->get_specific_user_info($email);
+
+			if(sizeof($users) == 0)
 			{
-				//// set flash data
-				$this->session->set_flashdata('fail', validation_errors());
-				redirect('coordinator/view_faculty');
+				$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+				$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
+				$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim');
+
+				if($this->form_validation->run() == FALSE)
+				{
+					//// set flash data
+					$this->session->set_flashdata('fail', validation_errors());
+					redirect('coordinator/view_faculty');
+				}
+				else
+				{
+					$this->create_faculty($email, $first_name, $last_name, $date_time, $rank, $department_name);
+					$this->session->set_flashdata('success', 'Faculty has been created!');
+					redirect('coordinator/view_faculty');
+				}
 			}
 			else
 			{
-				$this->create_faculty($email, $first_name, $last_name, $date_time, $rank, $department_name);
-				$this->session->set_flashdata('success', 'Faculty has been created!');
+				$this->session->set_flashdata('fail', 'Invalid Email! Email address has already exist!');
 				redirect('coordinator/view_faculty');
 			}
+			
+			
 		}
 
 		public function validate_student()
