@@ -918,6 +918,7 @@ class coordinator_model extends CI_Model
 				FROM STUDENT S JOIN USER U
 				ON U.USER_ID=S.USER_ID
 				WHERE COURSE_CODE='".$course_code."'
+				AND U.USER_ID NOT IN (SELECT STUDENT_ID FROM STUDENT_GROUP)
 				AND U.IS_ACTIVE=1;";
 		$query = $this->db->query($sql);
 		return $query->result_array();

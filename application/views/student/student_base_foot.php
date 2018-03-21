@@ -381,42 +381,7 @@
 
 </script>
 
-<!--time creation script-->
-<?php
 
-  if($active_tab['group_schedule']=='active')
-  {
-    //$hours_format = array();
-    $s1 = ltrim($all_time[0]['START'], '0'); 
-    $e1 = ltrim($all_time[0]['END'], '0');
-
-    $s2 = ltrim($all_time[1]['START'], '0'); 
-    $e2 = ltrim($all_time[1]['END'], '0');
-
-    $s3 = ltrim($all_time[2]['START'], '0'); 
-    $e3 = ltrim($all_time[2]['END'], '0');
-
-    $s4 = ltrim($all_time[3]['START'], '0'); 
-    $e4 = ltrim($all_time[3]['END'], '0');
-
-    $s5 = ltrim($all_time[4]['START'], '0'); 
-    $e5 = ltrim($all_time[4]['END'], '0');
-
-    $s6 = ltrim($all_time[5]['START'], '0'); 
-    $e6 = ltrim($all_time[5]['END'], '0');
-
-    $s7 = ltrim($all_time[6]['START'], '0'); 
-    $e7 = ltrim($all_time[6]['END'], '0');
-
-    $s8 = ltrim($all_time[7]['START'], '0'); 
-    $e8 = ltrim($all_time[7]['END'], '0');
-
-    $hours_format = array('Entry1Start'=>$s1, 'Entry1End'=>$e1, 'Entry2Start'=>$s2, 'Entry2End'=>$e2, 'Entry3Start'=>$s3, 'Entry3End'=>$e3, 'Entry4Start'=>$s4, 'Entry4End'=>$e4, 'Entry5Start'=>$s5, 'Entry5End'=>$e5, 'Entry6Start'=>$s6, 'Entry6End'=>$e6, 'Entry7Start'=>$s7, 'Entry7End'=>$e7, 'Entry8Start'=>$s8, 'Entry8End'=>$e8);
-
-    echo '<script>  var sample_sched = '.json_encode($hours_format).'; </script>';
-  }
-  
-?>
 
 <!-- schedule 2-->
 <script>
@@ -427,24 +392,25 @@
     console.log("Selection Removed");
   });
 
-  var hoursFormat = {
+  
+  var hoursFormat3 = {
 
-            Entry1Start : "07:30 AM",
-            Entry1End : "09:00 AM",
-            Entry2Start : "9:15 AM",
-            Entry2End : "10:45 AM",
-            Entry3Start : "11:00 AM",
-            Entry3End : "12:30 PM",
-            Entry4Start : "12:45 PM",
-            Entry4End : "2:15 PM",
-            Entry5Start : "2:30 PM",
-            Entry5End : "4:00 PM",
-            Entry6Start : "4:15 PM",
-            Entry6End : "5:45 PM",
-            Entry7Start : "6:00 PM",
-            Entry7End : "7:30 PM",
-            Entry8Start :"7:30 PM",
-            Entry8End : "9:00 PM"           
+            Entry1Start : "9:00 AM",
+            Entry1End : "10:30 AM",
+            Entry2Start : "10:45 AM",
+            Entry2End : "12:15 PM",
+            Entry3Start : "1:45 PM",
+            Entry3End : "2:00 PM",
+            Entry4Start : "3:30 PM",
+            Entry4End : "5:00 PM",
+            Entry5Start : "5:15 PM",
+            Entry5End : "6:45 PM",
+            Entry6Start : "7:00 PM",
+            Entry6End : "8:30 PM",
+            Entry7Start : "8:45 PM",
+            Entry7End : "10:15 PM",
+            Entry8Start :"10:30 PM",
+            Entry8End : "12:00 PM"           
 
 
   };
@@ -470,30 +436,32 @@
 
   }
 
-  var hoursFormat3 = {
+  var hoursFormat = {
 
-            Entry1Start : "9:00 AM",
-            Entry1End : "10:30 AM",
-            Entry2Start : "10:45 AM",
-            Entry2End : "12:15 PM",
-            Entry3Start : "1:45 PM",
-            Entry3End : "2:00 PM",
-            Entry4Start : "3:30 PM",
-            Entry4End : "5:00 PM",
-            Entry5Start : "5:15 PM",
-            Entry5End : "6:45 PM",
-            Entry6Start : "7:00 PM",
-            Entry6End : "8:30 PM",
-            Entry7Start : "8:45 PM",
-            Entry7End : "10:15 PM",
-            Entry8Start :"10:30 PM",
-            Entry8End : "12:00 PM"           
+            Entry1Start : "07:30 AM",
+            Entry1End : "09:00 AM",
+            Entry2Start : "9:15 AM",
+            Entry2End : "10:45 AM",
+            Entry3Start : "11:00 AM",
+            Entry3End : "12:30 PM",
+            Entry4Start : "12:45 PM",
+            Entry4End : "2:15 PM",
+            Entry5Start : "2:30 PM",
+            Entry5End : "4:00 PM",
+            Entry6Start : "4:15 PM",
+            Entry6End : "5:45 PM",
+            Entry7Start : "6:00 PM",
+            Entry7End : "7:30 PM",
+            Entry8Start :"7:30 PM",
+            Entry8End : "9:00 PM"           
 
 
   };
 
   console.log('json: ' + JSON.stringify(hoursFormat));
   console.log('json2: ' + JSON.stringify(sample_sched));
+
+
 
   $('#target').weekly_schedule({
     // Days displayed
@@ -516,6 +484,7 @@
     headerBackgroundColor: "transparent"
 
   });
+  
 
 
 

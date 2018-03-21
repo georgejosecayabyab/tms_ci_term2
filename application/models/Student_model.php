@@ -417,7 +417,8 @@
 					FROM SCHEDULE S JOIN TIME T
 					ON S.TIME_ID=T.TIME_ID
 					WHERE S.USER_ID='".$user_id."' 
-					AND S.DAY='".$day."';";
+					AND S.DAY='".$day."'
+					GROUP BY S.DAY, S.TIME_ID;";
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}

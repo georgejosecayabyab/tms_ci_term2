@@ -1232,45 +1232,54 @@
 			//// validations
 			if(sizeof($users) > 4 || sizeof($users) < 1)
 			{
-				$this->session->set_flashdata('fail', 'Invalid number of students');
-				redirect('coordinator/view_student');
-				$count = 0;
-				for($x = 0; $x < sizeof($users); $x++)
-				{
-					$valid_course = $this->coordinator_model->check_degree_code($users[$x]);
-					if($valid_course['course_code'] == $course)
-					{
-						$count++;
-					}
-				}
-				if($count != sizeof($users))
-				{
-					$this->session->set_flashdata('fail', 'Invalid course of student!');
-					redirect('coordinator/view_student');
-				}
-			}
-
-			$this->form_validation->set_rules('group_name', 'Group Name', 'required|trim');
-			$this->form_validation->set_rules('thesis_title', 'Thesis Title', 'required');
-
-			if($this->form_validation->run() == FALSE)
-			{
-				//// set flash data
-				$this->session->set_flashdata('fail', validation_errors());
-				redirect('coordinator/view_student');
+				$this->session->set_flashdata('fail', 'Invalid Number of Students');
+				//redirect('coordinator/view_student');
+				//header('Content-Type: application/json');
+				
+				// $count = 0;
+				// for($x = 0; $x < sizeof($users); $x++)
+				// {
+				// 	$valid_course = $this->coordinator_model->check_degree_code($users[$x]);
+				// 	if($valid_course['course_code'] == $course)
+				// 	{
+				// 		$count++;
+				// 	}
+				// }
+				// if($count != sizeof($users))
+				// {
+				// 	$this->session->set_flashdata('fail', 'Invalid course of student!');
+				// 	//redirect('coordinator/view_student');
+				// 	return;
+				// }
 			}
 			else
 			{
-				$this->coordinator_model->insert_thesis($thesis_title);
-				$this->coordinator_model->insert_thesis_group($group_name, $adviser, $thesis_title, $course);
-				$thesis_group_id = $this->coordinator_model->get_thesis_group($group_name, $adviser);
-				for($x = 0; $x < sizeof($users); $x++)
+				$this->form_validation->set_rules('group_name', 'Group Name', 'required|trim');
+				$this->form_validation->set_rules('thesis_title', 'Thesis Title', 'required');
+
+				if($this->form_validation->run() == FALSE)
 				{
-					$this->coordinator_model->insert_student_group($users[$x], $thesis_group_id['group_id']);
+					//// set flash data
+					$this->session->set_flashdata('fail', validation_errors());
+					//redirect('coordinator/view_student');
+					return;
 				}
-				$this->session->set_flashdata('success', 'Group has been created!');
-				//redirect('coordinator/view_student');
+				else
+				{
+					$this->coordinator_model->insert_thesis($thesis_title);
+					$this->coordinator_model->insert_thesis_group($group_name, $adviser, $thesis_title, $course);
+					$thesis_group_id = $this->coordinator_model->get_thesis_group($group_name, $adviser);
+					for($x = 0; $x < sizeof($users); $x++)
+					{
+						$this->coordinator_model->insert_student_group($users[$x], $thesis_group_id['group_id']);
+					}
+					$this->session->set_flashdata('success', 'Group has been created!');
+					// //redirect('coordinator/view_student');
+					// header('Content-Type: application/json');
+				}
 			}
+
+
 
 			foreach($users as $row)
 			{

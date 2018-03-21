@@ -1176,31 +1176,45 @@ immediately after the control sidebar -->
           {
             
             var conflict = "";
-            console.log(data['panel_defense']);
-            console.log('this is free: ' + data['free'][0]['START']);
+            //console.log(data['panel_defense']);
+            // console.log('this is free: ' + data['free'][0]['START']);
             var common_button = "";
-            for(var x = 0; x<data['free'].length; x++)
+            
+            
+            if(data['free'].length > 0)
             {
-              var link = base_url+'index.php/coordinator/set_defense_date_link/'+group_id+'/'+new_date+'/'+data['free'][x]['TIME_ID'];
-              var time_string = data['free'][x]['START']+'-'+data['free'][x]['END'];
-              common_button = common_button + '<a href="'+link+'"><button id="'+data['free'][x]['TIME_ID']+'" class="btn btn-default time_button" name="time_button" value="'+data['free'][x]['TIME_ID']+'">'+ time_string+'</button></a>';
-              console.log(common_button);
-            }
-            for(var x = 0; x<data['panel_defense'].length; x++)
-            {
-              console.log('kanina '+data['panel_defense'][x]['NAME']);
-              conflict = conflict + '<span> <b> '+data['panel_defense'][x]['NAME']+' </b> has a thesis defense at <b> '+data['panel_defense'][x]['START']+' - ' +data['panel_defense'][x]['END'] +' </b> </span> <br>';
-            }
-            $("#suggestion").html('<div class="alert alert-success alert-dismissible">\
+              for(var x = 0; x<data['free'].length; x++)
+              {
+                var link = base_url+'index.php/coordinator/set_defense_date_link/'+group_id+'/'+new_date+'/'+data['free'][x]['TIME_ID'];
+                var time_string = data['free'][x]['START']+'-'+data['free'][x]['END'];
+                common_button = common_button + '<a href="'+link+'"><button id="'+data['free'][x]['TIME_ID']+'" class="btn btn-default time_button" name="time_button" value="'+data['free'][x]['TIME_ID']+'">'+ time_string+'</button></a>';
+                console.log(common_button);
+              }
+
+              $("#suggestion").html('<div class="alert alert-success alert-dismissible">\
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\
               <h4><i class="icon fa fa-check"></i> Available Schedule for ' +  dateVal  + ' </h4>\
               <h5> <span>'+common_button+'</span>\
               </h5> \
               </div>');
+            }
+            else
+            {
+              $("#suggestion").html('<div class="alert alert-success alert-dismissible">\
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\
+              <h4><i class="icon fa fa-check"></i>No Free Time for '+ dateVal +'</h4>\
+              </div>');
+            }
 
             
             if(data['panel_defense'].length > 0 )
             {
+              for(var x = 0; x<data['panel_defense'].length; x++)
+              {
+                console.log('kanina '+data['panel_defense'][x]['NAME']);
+                conflict = conflict + '<span> <b> '+data['panel_defense'][x]['NAME']+' </b> has a thesis defense at <b> '+data['panel_defense'][x]['START']+' - ' +data['panel_defense'][x]['END'] +' </b> </span> <br>';
+              }
+
               $("#conflict").html('<div class="alert alert-danger alert-dismissible">\
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\
               <h4><i class="icon fa fa-ban"></i> Conflict Defense for ' +  dateVal + ' </h4>\
@@ -1717,7 +1731,7 @@ immediately after the control sidebar -->
       type: 'POST',
       url: base +'index.php/coordinator/insert_group',
       data: {'members': members, 'group_name': group_name, 'thesis_title': thesis_title, 'adviser': adviser,'course': course},
-      success: function(data)
+      success: function()
       {
         console.log('insert is a success');
         window.location.replace(base+'index.php/coordinator/view_student');
