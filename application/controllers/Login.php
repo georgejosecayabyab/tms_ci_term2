@@ -16,6 +16,10 @@
 
 		}
 
+		/**
+		 * Disabled
+		 * @return [type] [description]
+		 */
 		public function index_1()
 		{
 			//get post values
@@ -103,6 +107,10 @@
 
 		} 
 
+		/**
+		 * Function responsible for creating google client object
+		 * and redirecting to check() with the google token
+		 */
 		public function index()
 		{
 			$g_client = $this->google->get_client();
@@ -111,23 +119,19 @@
             $g_client->setAccessToken($token);
             $pay_load = $g_client->verifyIdToken();
             $refresh_token = $g_client->getRefreshToken();
-   			//          echo $refresh_token;
-			// var_dump($refresh_token);			
 			$json_encode = json_encode($pay_load);
 			$url_encode = $this->base64UrlEncode($json_encode);
 			$json_token_encode = json_encode($token);
 			$url_token_encode = $this->base64UrlEncode($json_token_encode);
-			echo $json_token_encode;
-			echo $url_token_encode;
 			redirect('login/check/'.$url_encode.'/'.$url_token_encode);
 		}
 
-		public function sample()
-		{
-			$session = $this->session->userdata();
-			var_dump($session);
-		}
 
+		/**
+		 * Checks what type of user is then redirects to proper home page
+		 * @param  String $url_encode      	Contains user email address and other information
+		 * @param  String $url_token_encode 	Contains google auth token
+		 */
 		public function check($url_encode, $url_token_encode)
 		{
 			$url_decode = $this->base64UrlDecode($url_encode);
@@ -138,14 +142,11 @@
 			$token = $json_token_decode;
 			$email = $pay_load["email"];
 		    $result = $this->login_model->if_user_gmail($email);
-		    // echo $email;
-		    // var_dump($result);
+
 			if(sizeof($result) > 0)
 			{
 				//user exist and correct
-				//set session
 				$user_type = $this->login_model->is_student($result['user_id']);
-				//This is an array
 				$data = [
 					'access_token' => $token,
 					'user_id' => $result['user_id'],
@@ -157,12 +158,11 @@
 				//student or faculty
 				if($user_type['user_type']  == 0)
 				{
-					//var_dump($this->session->userdata());
-					redirect("student");//student
+					redirect("student");
 				}
 				else if($user_type['user_type']  == 1)
 				{
-					redirect("faculty");//faculty
+					redirect("faculty");
 				}
 				
 				else if($user_type['user_type'] == 3)
@@ -172,16 +172,6 @@
 				else
 				{
 					redirect("coordinator");
-					// $if_coordinator = $this->login_model->if_coordinator($result['user_id']);
-					// if(sizeof($if_coordinator) > 0)
-					// {
-					// 	redirect("coordinator");
-					// }
-					// else
-					// {
-					// 	redirect("faculty");//faculty
-					// }
-					
 				}
 			}
 			else
@@ -191,12 +181,11 @@
                 redirect('home');
 			}
 		}
-
-		public function sample_2()
-		{
-			echo 'joke!!';
-			var_dump($this->session->userdata());
-		}
+		
+		/**
+		 * Sets google auth
+		 * @return object Google client object
+		 */
 		public function google()
 		{
 			require ("vendor/autoload.php");
@@ -213,11 +202,21 @@
 			return $g_client;
 		}
 
+		/**
+		 * Encodes a string input
+		 * @param  String $inputStr 	String to be encoded
+		 * @return String				Encoded $inputStr		
+		 */
 		public function base64UrlEncode($inputStr)
         {
             return strtr(base64_encode($inputStr), '+/=', '-_,');
         }
 
+        /**
+         * Decodes a string input
+         * @param  String $inputStr String to be decoded
+         * @return String           Decoded $inputStr
+         */
         public function base64UrlDecode($inputStr)
         {
             return base64_decode(strtr($inputStr, '-_,', '+/='));
