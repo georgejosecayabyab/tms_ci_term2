@@ -28,10 +28,11 @@
 			// }
 		}
 
+		/**
+		 * Loads home page of coordinator
+		 */
 		public function index()
 		{
-			//$this->sample_common_free_time();
-
 			$data['defense'] = $this->coordinator_model->get_all_open_meetings();
 			$data['active_tab'] = array(
 				'home' => "active",
@@ -54,7 +55,9 @@
 
 		}
 
-
+		/**
+		 * Loads page to view list of active groups
+		 */
 		public function view_group()
 		{
 			$data['group'] = $this->coordinator_model->get_group_info();
@@ -82,6 +85,9 @@
 
 		}
 
+		/**
+		 * Loads page to view list of faculties
+		 */
 		public function view_faculty()
 		{
 			$data['faculty_detail'] = $this->coordinator_model->get_faculty_info();
@@ -109,6 +115,9 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view list of all students
+		 */
 		public function view_student()
 		{
 			$data['student'] = $this->coordinator_model->get_student_info();
@@ -135,29 +144,35 @@
 
 		}
 
-		public function view_announcement()
-		{
-			$data['group'] = $this->coordinator_model->get_group_info();
-			$data['active_tab'] = array(
-				'home' => "",
-				'group' => "",
-				'faculty' => "",
-				'student' => "",
-				'home_announcement' => "",
-				'specific_announcement' => "",
-				'form' => "",
-				'report' => "",
-				'archive' => "",
-				'specialization' => "",
-				'term' => ""  ,
-				'time' => "" 
-			);
+		/**
+		 * disabled
+		 */
+		// public function view_announcement()
+		// {
+		// 	$data['group'] = $this->coordinator_model->get_group_info();
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'group' => "",
+		// 		'faculty' => "",
+		// 		'student' => "",
+		// 		'home_announcement' => "",
+		// 		'specific_announcement' => "",
+		// 		'form' => "",
+		// 		'report' => "",
+		// 		'archive' => "",
+		// 		'specialization' => "",
+		// 		'term' => ""  ,
+		// 		'time' => "" 
+		// 	);
 
-			$this->load->view('coordinator/coordinator_base_head', $data);
-			$this->load->view('coordinator/coordinator_group_view', $data);
-			$this->load->view('coordinator/coordinator_base_foot', $data);
-		}
+		// 	$this->load->view('coordinator/coordinator_base_head', $data);
+		// 	$this->load->view('coordinator/coordinator_group_view', $data);
+		// 	$this->load->view('coordinator/coordinator_base_foot', $data);
+		// }
 
+		/**
+		 * Loads page to view list of announcements viewable in site home page
+		 */
 		public function view_home_announcement()
 		{
 			$data['news'] = $this->coordinator_model->get_news();
@@ -181,29 +196,37 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
-		public function view_new_home_announcement()
-		{
-			$data['group'] = $this->coordinator_model->get_group_info();
-			$data['active_tab'] = array(
-				'home' => "",
-				'group' => "",
-				'faculty' => "",
-				'student' => "",
-				'home_announcement' => "",
-				'specific_announcement' => "active",
-				'form' => "",
-				'report' => "",
-				'archive' => "",
-				'specialization' => "",
-				'term' => ""  ,
-				'time' => "" 
-			);
+		/**
+		 * disabled
+		 * Loads page where user can create new home announcement
+		 */
+		// public function view_new_home_announcement()
+		// {
+		// 	$data['group'] = $this->coordinator_model->get_group_info();
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'group' => "",
+		// 		'faculty' => "",
+		// 		'student' => "",
+		// 		'home_announcement' => "",
+		// 		'specific_announcement' => "active",
+		// 		'form' => "",
+		// 		'report' => "",
+		// 		'archive' => "",
+		// 		'specialization' => "",
+		// 		'term' => ""  ,
+		// 		'time' => "" 
+		// 	);
 
-			$this->load->view('coordinator/coordinator_base_head', $data);
-			$this->load->view('coordinator/coordinator_new_announcement_home_view', $data);
-			$this->load->view('coordinator/coordinator_base_foot', $data);
-		}
+		// 	$this->load->view('coordinator/coordinator_base_head', $data);
+		// 	$this->load->view('coordinator/coordinator_new_announcement_home_view', $data);
+		// 	$this->load->view('coordinator/coordinator_base_foot', $data);
+		// }
 
+		/**
+		 * Loads page to view specific home announcement
+		 * @param  integer $news_id id of the home announcement
+		 */
 		public function view_specific_home_announcement($news_id)
 		{
 			$data['group'] = $this->coordinator_model->get_group_info();
@@ -228,6 +251,9 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view list of announcement for each course
+		 */
 		public function view_specific_announcement()
 		{
 			$data['related_news'] = $this->coordinator_model->get_related_news();
@@ -251,6 +277,9 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		/**
+		 * Loads page where user can create a new announcmeent for a specific course
+		 */
 		public function view_new_specific_announcement()
 		{
 			$data['course'] = $this->coordinator_model->get_all_course();
@@ -274,6 +303,10 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		/**
+		 * Loads page where user can edit a specific announcement for a course
+		 * @param  integer $event_id id of the specific edited announcement 
+		 */
 		public function view_edit_specific_announcement($event_id)
 		{
 			$data['related_news'] = $this->coordinator_model->get_specific_related_news($event_id);
@@ -299,6 +332,9 @@
 		
 		}
 
+		/**
+		 * Loads page to view list of forms for all courses
+		 */
 		public function view_form()
 		{
 			$data['form'] = $this->coordinator_model->get_form();
@@ -324,29 +360,35 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
-		public function view_monitoring_report()
-		{
-			$data['group'] = $this->coordinator_model->get_group_info();
-			$data['active_tab'] = array(
-				'home' => "",
-				'group' => "",
-				'faculty' => "",
-				'student' => "",
-				'home_announcement' => "",
-				'specific_announcement' => "",
-				'form' => "",
-				'report' => "active",
-				'archive' => "",
-				'specialization' => "",
-				'term' => ""  ,
-				'time' => "" 
-			);
+		/**
+		 * Disabled
+		 */
+		// public function view_monitoring_report()
+		// {
+		// 	$data['group'] = $this->coordinator_model->get_group_info();
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'group' => "",
+		// 		'faculty' => "",
+		// 		'student' => "",
+		// 		'home_announcement' => "",
+		// 		'specific_announcement' => "",
+		// 		'form' => "",
+		// 		'report' => "active",
+		// 		'archive' => "",
+		// 		'specialization' => "",
+		// 		'term' => ""  ,
+		// 		'time' => "" 
+		// 	);
 
-			$this->load->view('coordinator/coordinator_base_head', $data);
-			$this->load->view('coordinator/coordinator_group_view', $data);
-			$this->load->view('coordinator/coordinator_base_foot', $data);
-		}
+		// 	$this->load->view('coordinator/coordinator_base_head', $data);
+		// 	$this->load->view('coordinator/coordinator_group_view', $data);
+		// 	$this->load->view('coordinator/coordinator_base_foot', $data);
+		// }
 
+		/**
+		 * Loads page to view list of theses in the archive
+		 */
 		public function view_archive()
 		{
 			
@@ -376,6 +418,10 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view a specific thesis in the archive
+		 * @param  integer $thesis_id id of thesis
+		 */
 		public function view_archive_specific($thesis_id)
 		{
 
@@ -406,6 +452,9 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view current term 
+		 */
 		public function view_set_term()
 		{
 			$data['term'] = $this->coordinator_model->get_term();
@@ -434,6 +483,9 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);	
 		}
 
+		/**
+		 * Loads page to view list of specializations
+		 */
 		public function view_specialization()
 		{
 			$data['specialization'] = $this->coordinator_model->get_all_specialization();
@@ -457,33 +509,42 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);	
 		}
 
-		public function view_thesis()
-		{
-			$data['active_tab'] = array(
-				'home' => "",
-				'group' => "",
-				'faculty' => "",
-				'student' => "",
-				'home_announcement' => "",
-				'specific_announcement' => "",
-				'form' => "",
-				'report' => "",
-				'archive' => "",
-				'specialization' => "active",
-				'term' => ""  ,
-				'time' => "" 
-			);
-		}
+		/**
+		 * Disabled
+		 */
+		// public function view_thesis()
+		// {
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'group' => "",
+		// 		'faculty' => "",
+		// 		'student' => "",
+		// 		'home_announcement' => "",
+		// 		'specific_announcement' => "",
+		// 		'form' => "",
+		// 		'report' => "",
+		// 		'archive' => "",
+		// 		'specialization' => "active",
+		// 		'term' => ""  ,
+		// 		'time' => "" 
+		// 	);
+		// }
 
-		public function sample_common_free_time()
-		{
-			$data['time_mo'] = $this->coordinator_model->get_group_common_free_time_by_day(5, 'MO');
-			$data['time_we'] = $this->coordinator_model->get_group_common_free_time_by_day(5, 'WE');
+		/**
+		 * Disabled
+		 */
+		// public function sample_common_free_time()
+		// {
+		// 	$data['time_mo'] = $this->coordinator_model->get_group_common_free_time_by_day(5, 'MO');
+		// 	$data['time_we'] = $this->coordinator_model->get_group_common_free_time_by_day(5, 'WE');
 
-			$this->load->view('coordinator/sample_schedule_view', $data);
+		// 	$this->load->view('coordinator/sample_schedule_view', $data);
 
-		}
+		// }
 
+		/**
+		 * Updates initial verdict of a group
+		 */
 		public function update_initial_group_verdict()
 		{
 			$group_id = $this->input->post("group_id");
@@ -503,6 +564,9 @@
 			$this->session->set_flashdata('success', 'Verdict has been updated!');
 		}
 
+		/**
+		 * Updates final verdict of a group
+		 */
 		public function update_final_group_verdict()
 		{
 			$group_id = $this->input->post("group_id");
@@ -513,6 +577,9 @@
 			$this->session->set_flashdata('success', 'Verdict has been updated!');
 		}
 
+		/**
+		 * Gets defense dates of a specific panel on a specific date
+		 */
 		public function get_panel_defense_date()
 		{
 			$group_id = $this->input->post('group_id');
@@ -581,6 +648,9 @@
 			echo json_encode($data);
 		}
 
+		/**
+		 * Sets defense date of a specific group
+		 */
 		public function set_defense_date()
 		{
 			$group_id = $this->input->post('group_id');
@@ -621,6 +691,12 @@
 			$this->session->set_flashdata('success', 'Defense date has been set!');
 		}
 
+		/**
+		 * Sets time to defense date of a specific group
+		 * @param integer $group_id id of the group
+		 * @param date $date       	date of defense date
+		 * @param integer $time_id  id of time according to the database 
+		 */
 		public function set_defense_date_link($group_id, $date, $time_id)
 		{
 			// $group_id = $this->input->post('group_id');
@@ -665,29 +741,39 @@
 			redirect('coordinator/view_group');
 		}
 
-		public function insert_defense_conversion($defense_date_id, $start, $end)////halt progress due to unknow defense_date_id in evry new insert
-		{
-			$this->coordinator_model->delete_defense_convert($defense_date_id);
+		/**
+		 * disabled
+		 * @param  [type] $defense_date_id [description]
+		 * @param  [type] $start           [description]
+		 * @param  [type] $end             [description]
+		 * @return [type]                  [description]
+		 */
+		// public function insert_defense_conversion($defense_date_id, $start, $end)////halt progress due to unknow defense_date_id in evry new insert
+		// {
+		// 	$this->coordinator_model->delete_defense_convert($defense_date_id);
 
-			$array_of_time = array ();
-			$start_time    = strtotime ($start);
-			$end_time      = strtotime ($end);
+		// 	$array_of_time = array ();
+		// 	$start_time    = strtotime ($start);
+		// 	$end_time      = strtotime ($end);
 
-			$fifteen_mins  = 15 * 60;
+		// 	$fifteen_mins  = 15 * 60;
 
-			while ($start_time < $end_time)
-			{
-			   $array_of_time[] = date ("H:i:s", $start_time);
-			   $start_time += $fifteen_mins;
-			}
+		// 	while ($start_time < $end_time)
+		// 	{
+		// 	   $array_of_time[] = date ("H:i:s", $start_time);
+		// 	   $start_time += $fifteen_mins;
+		// 	}
 
-			//print_r ($array_of_time);
-			foreach($array_of_time as $row)
-			{
-				$this->coordinator_model->insert_defense_convert($defense_date_id, $row);
-			}
-		}
+		// 	//print_r ($array_of_time);
+		// 	foreach($array_of_time as $row)
+		// 	{
+		// 		$this->coordinator_model->insert_defense_convert($defense_date_id, $row);
+		// 	}
+		// }
 
+		/**
+		 * Uploads a form for a specific course
+		 */
 		public function upload_form()
 		{
 			$session = $this->session->userdata();
@@ -723,6 +809,10 @@
             }
 		}
 
+		/**
+		 * Deletes a form for a specific course
+		 * @param  integer $form_id id of the form to be deleted
+		 */
 		public function delete_form($form_id)
 		{
 			$this->coordinator_model->delete_form($form_id);
@@ -730,6 +820,10 @@
 			redirect('coordinator/view_form');
 		}
 
+		/**
+		 * Gets all of the specialization of a specific group
+		 * @param  integer $group_id id of the group
+		 */
 		public function get_group_tags($group_id)
 		{
 
@@ -743,6 +837,10 @@
 			echo json_encode($data);
 		}
 
+		/**
+		 * Gets all possible panels for a specific group given the group's specializations
+		 * @param  integer $group_id id of the group
+		 */
 		public function get_possible_panel($group_id)
 		{
 			$data['possible'] = $this->coordinator_model->get_possible_panelist($group_id);
@@ -752,6 +850,10 @@
 			echo json_encode($data);
 		}
 
+		/**
+		 * Gets all of a specific group's panelists
+		 * @param  integer $group_id id of the group
+		 */
 		public function get_group_panel($group_id)
 		{
 			$result = $this->coordinator_model->get_active_group_panel($group_id);
@@ -760,6 +862,10 @@
 			echo json_encode($result);
 		}
 
+		/**
+		 * Gets all of a specific group's panelist' specializations
+		 * @param  integer $panel_id id of the panelist
+		 */
 		public function get_panel_tags($panel_id)
 		{
 			
@@ -769,6 +875,9 @@
 			echo json_encode($result);
 		}
 
+		/**
+		 * Updates the panelists of a specific group
+		 */
 		public function update_group_panelist()
 		{
 			$group_id = $this->input->post('group_id');
@@ -840,6 +949,9 @@
 			$this->session->set_flashdata('success', 'Panelists has been set!');
 		}
 
+		/**
+		 * Validates required fields of a faculty
+		 */
 		public function validate_faculty()
 		{
 			$email = $this->input->post("email");
@@ -881,6 +993,9 @@
 			
 		}
 
+		/**
+		 * Validates required fields of a student
+		 */
 		public function validate_student()
 		{
 			$email = $this->input->post("email");
@@ -918,6 +1033,15 @@
 			}
 		}
 
+		/**
+		 * Creates a faculty
+		 * @param  String $email           email of the faculty
+		 * @param  String $first_name      first name of the faculty
+		 * @param  String $last_name       last name of the faculty
+		 * @param  date $date_time         date of creation
+		 * @param  String $rank            rank of the faculty
+		 * @param  String $department_name department of the faculty
+		 */
 		public function create_faculty($email, $first_name, $last_name, $date_time, $rank, $department_name)
 		{
 			$user = array(
@@ -937,6 +1061,14 @@
 
 		}
 
+		/**
+		 * Creates a student
+		 * @param  String $email           email of the student
+		 * @param  String $first_name      first name of the student
+		 * @param  String $last_name       last name of the student
+		 * @param  date $date_time         date of creation
+		 * @param  integer $course         course of the student
+		 */
 		public function create_student($email, $first_name, $last_name, $date_time, $course)
 		{
 			$user = array(
@@ -955,13 +1087,22 @@
 			$this->coordinator_model->insert_student($first_name, $last_name, $email, $course);
 		}
 
-		public function delete_news($news_id)
-		{
-			$this->coordinator_model->delete_news($news_id);
-			redirect('coordinator/view_home_announcement');
+		/**
+		 * Disabled
+		 * Deletes announcement viewable in site home page
+		 * @param  [type] $news_id id of announcement
+		 */
+		// public function delete_news($news_id)
+		// {
+		// 	$this->coordinator_model->delete_news($news_id);
+		// 	redirect('coordinator/view_home_announcement');
 
-		}
+		// }
 
+		/**
+		 * Deletes specific announcement of a course
+		 * @param  integer $event_id id of the specific announcement
+		 */
 		public function delete_related_news($event_id)
 		{
 			$this->coordinator_model->delete_related_news($event_id);
@@ -969,6 +1110,9 @@
 			redirect('coordinator/view_specific_announcement');
 		}
 
+		/**
+		 * Validates required fields for a home announcement
+		 */
 		public function validate_home_announcement()
 		{
 			$topic_name = $this->input->post("discussion_title");
@@ -1000,6 +1144,10 @@
 			}
 		}
 		
+		/**
+		 * Validate edits on the required fields for a home announcement
+		 * @param  integer $news_id id of the home announcement
+		 */
 		public function validate_edited_home_announcement($news_id)
 		{
 			$topic_name = $this->input->post("discussion_title");
@@ -1045,6 +1193,9 @@
 			}
 		}
 
+		/**
+		 * Validates required fields for a specific announcement for a specific course
+		 */
 		public function validate_specific_announcement()
 		{
 			$course = $this->input->post("course");
@@ -1072,6 +1223,10 @@
 			}
 		}
 
+		/**
+		 * Validate edits on the required fields for a specific announcement for a specific course
+		 * @param  integer $event_id id of the specific announcement
+		 */
 		public function validate_edited_specific_announcement($event_id)
 		{
 			$course = $this->input->post("course");
@@ -1111,7 +1266,10 @@
 			}
 		}
 
-		////download
+		/**
+		 * Dowloads a form given the form's name
+		 * @param  String $form_name Name of the form to be downloaded
+		 */
 		public function download_form($form_id)
 		{
 			$form = $this->coordinator_model->get_specific_form($form_id);
@@ -1128,6 +1286,9 @@
 			}
 		}
 
+		/**
+		 * Validates required fields for a specialization
+		 */
 		public function validate_specialization()
 		{
 			$specialization = $this->input->post('specialization');
@@ -1149,6 +1310,10 @@
 
 		}
 
+		/**
+		 * Inserts a new specialization
+		 * @param  String $specialization name of the new specialization
+		 */
 		public function insert_specialization($specialization)
 		{
 			$data = array(
@@ -1158,6 +1323,10 @@
 
 		}
 
+		/**
+		 * Gets user information of a specific user
+		 * @param  integer $user_id id of the specific user
+		 */
 		public function get_user_info($user_id)
 		{
 			$data['user'] = $this->coordinator_model->get_user_info($user_id);
@@ -1166,13 +1335,19 @@
 			echo json_encode($data);
 		}
 
-		public function sample_year()
-		{
-			var_dump($this->input->post('george'));
-			echo $this->input->post('group_name');
-			echo $this->input->post('adviser');
-		}
+		/**
+		 * Disabled
+		 */
+		// public function sample_year()
+		// {
+		// 	var_dump($this->input->post('george'));
+		// 	echo $this->input->post('group_name');
+		// 	echo $this->input->post('adviser');
+		// }
 
+		/**
+		 * Moves to the next designated term
+		 */
 		public function move_to_next_term()
 		{
 			$old_term = $this->coordinator_model->get_term();
@@ -1230,6 +1405,9 @@
 
 		}
 
+		/**
+		 * Inserts a new group
+		 */
 		public function insert_group()
 		{
 			$users = $this->input->post('members');
@@ -1301,7 +1479,9 @@
 
 		}
 
-		////logout
+		/**
+		 * Logs out logged in user
+		 */
 		public function logout()
 		{
             $g_client = $this->google->get_client();
@@ -1318,7 +1498,9 @@
 			redirect("home/index");
 		}
 
-
+		/**
+		 * Loads page to set new timeslots
+		 */
 		public function view_set_time_slot()
 		{
 			$data['active_tab'] = array(
@@ -1343,7 +1525,10 @@
 			$this->load->view('coordinator/coordinator_base_foot', $data);
 		}
 
-
+		/**
+		 * Gets the verdict of a specific group
+		 * @param  integer $group_id id of the specific group
+		 */
 		public function get_verdict($group_id)
 		{
 			$data = $this->coordinator_model->get_verdict($group_id);
@@ -1354,6 +1539,9 @@
 
 		}
 
+		/**
+		 * Updates the status of a user to inactive or active
+		 */
 		public function update_user_status()
 		{
 			$user_id = $this->input->post('user_id');
@@ -1374,6 +1562,9 @@
 			echo json_encode($data);
 		}
 
+		/**
+		 * Gets all students, that are active and not a part of any group, of a specific course 
+		 */
 		public function get_specific_course_students()
 		{
 			$course_code = $this->input->post("course_code");
@@ -1383,6 +1574,9 @@
 			echo json_encode($data);
 		}
 
+		/**
+		 * Updates the time table of the database
+		 */
 		public function update_time()
 		{
 			$ts1 = date("G:i", strtotime($this->input->post('ts1')));
@@ -1454,6 +1648,10 @@
 			
 		}
 
+		/**
+		 * Downloads a file given the file's name
+		 * @param  [type] $file_name Name of the file to be downloaded
+		 */
 		public function download_file($file_name)
 		{
 			if($file_name)
