@@ -194,27 +194,27 @@
 		 * @param  [type] $upload_id [description]
 		 * @return [type]            [description]
 		 */
-		public function view_panel_document($group_id, $upload_id)
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
+		// public function view_panel_document($group_id, $upload_id)
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 
-			// $data['student_data'] = $this->student_model->get_user_information($user_id);
-			// $data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
-			// $data['comment'] = $this->faculty_model->get_thesis_comment($group_id);
-			// $data['submit'] = $this->faculty_model->latest_uploaded($group_id);
-			// $data['group'] = $this->faculty_model->get_group_details($group_id);
-			// $data['upload'] = $this->faculty_model->get_upload_thesis_revision($upload_id);
-			// $data['group_id'] = $this->student_model->get_group($user_id);
-			// $data['active_tab'] = array(
-			// 	'home' => "",
-			// 	'group' => "",
-			// 	'group_schedule' => "active",
-			// 	'form' => "",
-			// 	'archive' => "" 
-			// );
+		// 	// $data['student_data'] = $this->student_model->get_user_information($user_id);
+		// 	// $data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
+		// 	// $data['comment'] = $this->faculty_model->get_thesis_comment($group_id);
+		// 	// $data['submit'] = $this->faculty_model->latest_uploaded($group_id);
+		// 	// $data['group'] = $this->faculty_model->get_group_details($group_id);
+		// 	// $data['upload'] = $this->faculty_model->get_upload_thesis_revision($upload_id);
+		// 	// $data['group_id'] = $this->student_model->get_group($user_id);
+		// 	// $data['active_tab'] = array(
+		// 	// 	'home' => "",
+		// 	// 	'group' => "",
+		// 	// 	'group_schedule' => "active",
+		// 	// 	'form' => "",
+		// 	// 	'archive' => "" 
+		// 	// );
 
-		}
+		// }
 
 		/**
 		 * Loads page to view and set user schedule
@@ -252,28 +252,28 @@
 		/**
 		 * disabled
 		 */
-		public function view_edit_schedule()
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
+		// public function view_edit_schedule()
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 			
-			$data['student_data'] = $this->student_model->get_user_information($user_id);
-			$data['sched'] = $this->student_model->get_sched($user_id);
-			$data['group_id'] = $this->student_model->get_group($user_id);
-			$data['active_tab'] = array(
-				'home' => "",
-				'group' => "",
-				'group_schedule' => "active",
-				'form' => "",
-				'archive' => "" 
-			);
+		// 	$data['student_data'] = $this->student_model->get_user_information($user_id);
+		// 	$data['sched'] = $this->student_model->get_sched($user_id);
+		// 	$data['group_id'] = $this->student_model->get_group($user_id);
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'group' => "",
+		// 		'group_schedule' => "active",
+		// 		'form' => "",
+		// 		'archive' => "" 
+		// 	);
 
 
-			$this->load->view('student/student_base_head', $data);
-			$this->load->view('student/student_schedule_view', $data);
-			$this->load->view('student/student_base_foot', $data); 
-			//$this->load->view('faculty/sample', $data);
-		}
+		// 	$this->load->view('student/student_base_head', $data);
+		// 	$this->load->view('student/student_schedule_view', $data);
+		// 	$this->load->view('student/student_base_foot', $data); 
+		// 	//$this->load->view('faculty/sample', $data);
+		// }
 
 		/**
 		 * Loads page where user can create a new discussion
@@ -534,46 +534,46 @@
 		/**
 		 * disabled
 		 */
-		public function get_schedule()
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
+		// public function get_schedule()
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 
-			$result = $this->student_model->get_schedule($user_id);
-			$monday = $this->student_model->get_schedule_by_day($user_id, 'MO');
-			$tuesday = $this->student_model->get_schedule_by_day($user_id, 'TU');
-			$wednesday = $this->student_model->get_schedule_by_day($user_id, 'WE');
-			$thursday = $this->student_model->get_schedule_by_day($user_id, 'TH');
-			$friday = $this->student_model->get_schedule_by_day($user_id, 'FR');
-			$saturday = $this->student_model->get_schedule_by_day($user_id, 'SA');
+		// 	$result = $this->student_model->get_schedule($user_id);
+		// 	$monday = $this->student_model->get_schedule_by_day($user_id, 'MO');
+		// 	$tuesday = $this->student_model->get_schedule_by_day($user_id, 'TU');
+		// 	$wednesday = $this->student_model->get_schedule_by_day($user_id, 'WE');
+		// 	$thursday = $this->student_model->get_schedule_by_day($user_id, 'TH');
+		// 	$friday = $this->student_model->get_schedule_by_day($user_id, 'FR');
+		// 	$saturday = $this->student_model->get_schedule_by_day($user_id, 'SA');
 
 
-			$mo_common_time = "";
-			$start = $monday[0]['START_TIME'];
-			$end = '';
-			for($i=0; $i<sizeof($monday);$i++)
-			{	
-				if($i+1 < sizeof($monday))
-				{
-					if($monday[$i+1]['TIME_ID'] - $monday[$i]['TIME_ID'] != 1)
-					{
-						$end = $monday[$i]['END_TIME'];
-						$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
-						$start = $monday[$i+1]['START_TIME'];
-					}
-				}
-				if($i+1 == sizeof($monday))
-				{
-					$end = $monday[$i]['END_TIME'];
-					$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
-				}
-			}
+		// 	$mo_common_time = "";
+		// 	$start = $monday[0]['START_TIME'];
+		// 	$end = '';
+		// 	for($i=0; $i<sizeof($monday);$i++)
+		// 	{	
+		// 		if($i+1 < sizeof($monday))
+		// 		{
+		// 			if($monday[$i+1]['TIME_ID'] - $monday[$i]['TIME_ID'] != 1)
+		// 			{
+		// 				$end = $monday[$i]['END_TIME'];
+		// 				$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
+		// 				$start = $monday[$i+1]['START_TIME'];
+		// 			}
+		// 		}
+		// 		if($i+1 == sizeof($monday))
+		// 		{
+		// 			$end = $monday[$i]['END_TIME'];
+		// 			$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
+		// 		}
+		// 	}
 
-			echo $mo_common_time;
-		}
+		// 	echo $mo_common_time;
+		// }
 
 		/**
-		 * Updating unread notifications to read
+		 * Updates unread notifications to read
 		 */
 		public function update_notification()
 		{

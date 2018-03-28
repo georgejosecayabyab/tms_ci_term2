@@ -22,7 +22,9 @@
 			if($user_type != 1) exit('Access not allowed');
 		}
 
-		//////views
+		/**
+		 * Loads faculty home page 
+		 */
 		public function index()
 		{	
 			$session = $this->session->userdata();
@@ -45,6 +47,9 @@
 			$this->load->view('faculty/faculty_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view list of groups the user/faculty is in charge of
+		 */
 		public function view_advisee_list()
 		{
 			$session = $this->session->userdata();
@@ -69,6 +74,10 @@
 			$this->load->view('faculty/faculty_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view a specific group the user/faculty is in charge of
+		 * @param  integer $group_id group id of the user/faculty is in charge of
+		 */
 		public function view_advisee_specific($group_id)
 		{
 			$session = $this->session->userdata();
@@ -99,6 +108,9 @@
 
 		}
 
+		/**
+		 * Loads page to view the user's profile
+		 */
 		public function view_profile()
 		{
 			$session = $this->session->userdata();
@@ -121,7 +133,10 @@
 
 		}
 
-
+		/**
+		 * Loads page to view a specific discussion
+		 * @param  integer $topic_id topic id of the topic of the specific discussion
+		 */
 		public function view_discussion_specific($topic_id)
 		{
 			$session = $this->session->userdata();
@@ -145,6 +160,10 @@
 			$this->load->view('faculty/faculty_base_foot', $data); 
 		}
 
+		/**
+		 * Loads page to view the list of groups where the user is one of the panelists
+		 * @return [type] [description]
+		 */
 		public function view_panel_details()
 		{
 			$session = $this->session->userdata();
@@ -171,6 +190,11 @@
 
 		}
 
+		/**
+		 * Loads page to view a specific group where the user is one of the panelists
+		 * @param  [type] $group_id [description]
+		 * @return [type]           [description]
+		 */
 		public function view_panel_specific($group_id)
 		{
 			$session = $this->session->userdata();
@@ -197,6 +221,11 @@
 
 		}
 
+		/**
+		 * Loads page to view the revised document and revisions list of a group in a pdf viewer
+		 * @param  integer $group_id  group id of the group where the user is a panelist
+		 * @param  integer $upload_id id of the document chosen to be viewed in pdf viewer
+		 */
 		public function view_panel_document($group_id, $upload_id)
 		{
 			$session = $this->session->userdata();
@@ -222,6 +251,9 @@
 
 		}
 
+		/**
+		 * Loads page to view list of theses in the archive
+		 */
 		public function view_archive()
 		{
 			$session = $this->session->userdata();
@@ -247,6 +279,10 @@
 			$this->load->view('faculty/faculty_base_foot', $data); 
 		}
 
+		/**
+		 * Loads page to view a specific thesis in the archive
+		 * @param  integer $thesis_id id of thesis
+		 */
 		public function view_archive_specific($thesis_id)
 		{
 			$session = $this->session->userdata();
@@ -276,6 +312,9 @@
 		
 		}
 
+		/**
+		 * Loads page to view and set user schedule
+		 */
 		public function view_schedule()
 		{
 			$session = $this->session->userdata();
@@ -317,30 +356,35 @@
 			$this->load->view('faculty/faculty_base_foot', $data); 
 		}
 
-		public function view_edit_schedule()
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
+		/**
+		 * disabled
+		 */
+		// public function view_edit_schedule()
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 
-			$data['faculty_data'] = $this->faculty_model->get_faculty_detail($user_id);
-			$data['sched'] = $this->faculty_model->get_sched($user_id);
-			$data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
-			$data['active_tab'] = array(
-				'home' => "",
-				'schedule' => "active",
-				'advisees' => "",
-				'panels' => "",
-				'archive' => "" 
-			);
-
-
-			$this->load->view('faculty/faculty_base_head', $data);
-			$this->load->view('faculty/faculty_schedule_view', $data);
-			$this->load->view('faculty/faculty_base_foot', $data); 
-			//$this->load->view('faculty/sample', $data);
-		}
+		// 	$data['faculty_data'] = $this->faculty_model->get_faculty_detail($user_id);
+		// 	$data['sched'] = $this->faculty_model->get_sched($user_id);
+		// 	$data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'schedule' => "active",
+		// 		'advisees' => "",
+		// 		'panels' => "",
+		// 		'archive' => "" 
+		// 	);
 
 
+		// 	$this->load->view('faculty/faculty_base_head', $data);
+		// 	$this->load->view('faculty/faculty_schedule_view', $data);
+		// 	$this->load->view('faculty/faculty_base_foot', $data); 
+		// 	//$this->load->view('faculty/sample', $data);
+		// }
+
+		/**
+		 * Loads page where user can create a new discussion
+		 */
 		public function view_new_discussion($group_id)
 		{
 			$session = $this->session->userdata();
@@ -362,7 +406,9 @@
 			$this->load->view('faculty/faculty_base_foot', $data); 
 		}
 
-		//////edit
+		/**
+		 * Loads page to view and edit user profile
+		 */
 		public function edit_profile()
 		{
 			$session = $this->session->userdata();
@@ -387,7 +433,9 @@
 
 
 
-		//////validate
+		/**
+		 * Validates fields required in a comment
+		 */
 		public function validate_comment() 
 		{
 			$session = $this->session->userdata();
@@ -435,6 +483,9 @@
 
 		}
 
+		/**
+		 * Validates fields required in a reply
+		 */
 		public function validate_reply()
 		{
 			$session = $this->session->userdata();
@@ -485,6 +536,9 @@
 
 		}
 
+		/**
+		 * Validates fields required in a discussion
+		 */
 		public function validate_discussion()
 		{
 			$session = $this->session->userdata();
@@ -533,7 +587,9 @@
 			}
 		}
 
-		////get
+		/**
+		 * Gets all of the notifications of a user
+		 */
 		public function get_all_notifications()
 		{
 			$session = $this->session->userdata();
@@ -546,6 +602,9 @@
 
 		}
 
+		/**
+		 * Gets all of the unread notifications of a user
+		 */
 		public function get_new_notifications()
 		{
 			$session = $this->session->userdata();
@@ -558,19 +617,26 @@
 
 		}
 
-		public function get_discussion_reply($id)
+		/**
+		 * Gets all replies in a specific discussion
+		 * @param  integer $discussion_id id of the discussion
+		 */
+		public function get_discussion_reply($discussion_id)
 		{
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
 
 			
-			$result = $this->faculty_model->get_discussion_reply($id);
+			$result = $this->faculty_model->get_discussion_reply($discussion_id);
 			header('Content-Type: application/json');
 			echo json_encode($result);
 		}
 
-		//////insert 
-
+		/**
+		 * Inserts new notification to the database
+		 * @param  String $notification    String containing the notification
+		 * @param  integer $target_user_id user id of the intended receiver of the notification
+		 */
 		public function insert_notification($notification, $target_user_id)
 		{
 			$session = $this->session->userdata();
@@ -590,6 +656,10 @@
 			$this->faculty_model->insert_notification($data);
 		}
 
+		/**
+		 * Inserts new specialization of the user/faculty to the database
+		 * @param  String $specialization String conataining the specialization
+		 */
 		public function insert_faculty_specialization($specialization)
 		{
 			$session = $this->session->userdata();
@@ -597,29 +667,38 @@
 			$this->faculty_model->insert_faculty_specialization($user_id, $specialization);
 		}
 
-
-		////// delete
-
-		public function delete_comment($thesis_comment_id)
-		{
-			//$this->faculty_model->delete_thesis_comment($thesis_comment_id);
-			$result = $this->faculty_model->get_thesis_group_by_thesis_comment_id($thesis_comment_id);
-			$group_id = $result['group_id'];
-			$this->faculty_model->delete_thesis_comment($thesis_comment_id);
-			redirect('faculty/view_panel_specific/'.$group_id);
+		/**
+		 * Disabled
+		 * Deletes a specific comment
+		 * @param  integer $thesis_comment_id id of the comment
+		 */
+		// public function delete_comment($thesis_comment_id)
+		// {
+		// 	//$this->faculty_model->delete_thesis_comment($thesis_comment_id);
+		// 	$result = $this->faculty_model->get_thesis_group_by_thesis_comment_id($thesis_comment_id);
+		// 	$group_id = $result['group_id'];
+		// 	$this->faculty_model->delete_thesis_comment($thesis_comment_id);
+		// 	redirect('faculty/view_panel_specific/'.$group_id);
 			
-		}
+		// }
 
-		public function delete_reply($discussion_id)
-		{
-			//$this->faculty_model->delete_thesis_comment($thesis_comment_id);
-			$topic_id = $this->faculty_model->get_topic_id_by_discussion_id($discussion_id);
-			$this->faculty_model->delete_discussion_reply($discussion_id);
-			redirect('faculty/view_discussion_specific/'.$$topic_id);
+		/**
+		 * Disabled
+		 * Deletes a specific reply
+		 * @param  integer $discussion_id id of the discussion
+		 */
+		// public function delete_reply($discussion_id)
+		// {
+		// 	//$this->faculty_model->delete_thesis_comment($thesis_comment_id);
+		// 	$topic_id = $this->faculty_model->get_topic_id_by_discussion_id($discussion_id);
+		// 	$this->faculty_model->delete_discussion_reply($discussion_id);
+		// 	redirect('faculty/view_discussion_specific/'.$$topic_id);
 			
-		}
+		// }
 		
-		//////update
+		/**
+		 * Updates unread notifications to read
+		 */
 		public function update_notification()
 		{
 			$session = $this->session->userdata();
@@ -635,6 +714,9 @@
 			}
 		}
 
+		/**
+		 * Updates the user's/faculty's specializations
+		 */
 		public function update_faculty_specialization() ////not working
 		{
 			$value = $this->input->post('data'); 
@@ -645,17 +727,24 @@
 			}
 		}
 
+		/**
+		 * disabled
+		 * Updates the content of a reply
+		 * @param  [type] $discussion_id id of discussion
+		 */
+		// public function update_reply($discussion_id)
+		// {
+		// 	$topic_id = $this->faculty_model->get_topic_id_by_discussion_id($discussion_id);
+		// 	$this->faculty_model->delete_discussion_reply($discussion_id);
+		// 	redirect('faculty/view_discussion_specific/'.$$topic_id);
+		// 	$value = $this->input->post('data'); 
+		// 	$this->faculty_model->update_discussion_reply($discussion_id, $data);
+		// }
 
-		public function update_reply($discussion_id)
-		{
-			$topic_id = $this->faculty_model->get_topic_id_by_discussion_id($discussion_id);
-			$this->faculty_model->delete_discussion_reply($discussion_id);
-			redirect('faculty/view_discussion_specific/'.$$topic_id);
-			$value = $this->input->post('data'); 
-			$this->faculty_model->update_discussion_reply($discussion_id, $data);
-		}
-
-		////download 
+		/**
+		 * Downloads a file given the file's name
+		 * @param  [type] $file_name Name of the file to be downloaded
+		 */
 		public function download_file($file_name)
 		{
 			if($file_name)
@@ -670,7 +759,9 @@
 			}
 		}
 
-		////logout
+		/**
+		 * Logs out logged in user
+		 */
 		public function logout()
 		{
             $g_client = $this->google->get_client();
@@ -688,7 +779,9 @@
 		}
 
 
-		//////schedule
+		/**
+		 * Inserts user schedule to the database
+		 */
 		public function insert_schedule()
 		{
 			$session = $this->session->userdata();
@@ -731,6 +824,9 @@
 			echo json_encode($sched_per_day);
 		}
 
+		/**
+		 * Deletes user's old schedule
+		 */
 		public function delete_schedule()
 		{
 			$session = $this->session->userdata();
@@ -738,63 +834,69 @@
 
 			$this->faculty_model->delete_schedule($user_id);
 		}
-		///sample
-		public function try()
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
 
-			$agile = array();
-			$sched = $this->input->post("data");
-			$day = $this->input->post("day");
-			if($day == 0)
-			{
-				$day = 'MO';
-			}
-			elseif ($day == 1) {
-				$day = 'TU';
-			}
-			elseif ($day == 2) {
-				$day = 'WE';
-			}
-			elseif ($day == 3) {
-				$day = 'TH';
-			}
-			elseif ($day == 4) {
-				$day = 'FR';
-			}
-			elseif ($day == 5) {
-				$day = 'SA';
-			}
+		/**
+		 * Disable
+		 */
+		// public function try()
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 
-			$x = 0;
+		// 	$agile = array();
+		// 	$sched = $this->input->post("data");
+		// 	$day = $this->input->post("day");
+		// 	if($day == 0)
+		// 	{
+		// 		$day = 'MO';
+		// 	}
+		// 	elseif ($day == 1) {
+		// 		$day = 'TU';
+		// 	}
+		// 	elseif ($day == 2) {
+		// 		$day = 'WE';
+		// 	}
+		// 	elseif ($day == 3) {
+		// 		$day = 'TH';
+		// 	}
+		// 	elseif ($day == 4) {
+		// 		$day = 'FR';
+		// 	}
+		// 	elseif ($day == 5) {
+		// 		$day = 'SA';
+		// 	}
 
-			$k = (string)$x;
-			$l = (string)1;
+		// 	$x = 0;
 
-			$fl = sizeof($sched);
-			$sank = $sched[$k][$l];
-			$sank3 = $sched[(string)0];
+		// 	$k = (string)$x;
+		// 	$l = (string)1;
 
-			for($b = 0; $b < sizeof($sched); $b++)
-			{
-				$time = $sched[(string)$b];
-				array_push($agile, $time);
-				$rest = array(
-					'start_time' => $sched[(string)$b],
-					'end_time' => $sched[(string)$b]
-				);
-				$retime = date("G:i", strtotime((string)$time));
-				//$this->faculty_model->insert_some($rest);
-				$this->faculty_model->insert_sched($user_id, $retime, $day);
-			}
+		// 	$fl = sizeof($sched);
+		// 	$sank = $sched[$k][$l];
+		// 	$sank3 = $sched[(string)0];
 
-			header("Content-type: application/json");
-			echo json_encode($agile);
+		// 	for($b = 0; $b < sizeof($sched); $b++)
+		// 	{
+		// 		$time = $sched[(string)$b];
+		// 		array_push($agile, $time);
+		// 		$rest = array(
+		// 			'start_time' => $sched[(string)$b],
+		// 			'end_time' => $sched[(string)$b]
+		// 		);
+		// 		$retime = date("G:i", strtotime((string)$time));
+		// 		//$this->faculty_model->insert_some($rest);
+		// 		$this->faculty_model->insert_sched($user_id, $retime, $day);
+		// 	}
+
+		// 	header("Content-type: application/json");
+		// 	echo json_encode($agile);
 
 
-		}
+		// }
 
+		/**
+		 * Add specialization to user's group's list of specializations
+		 */
 		public function add_tags()
 		{
 			$session = $this->session->userdata();
@@ -819,6 +921,9 @@
 			echo json_encode($ar);
 		}
 
+		/**
+		 * Validates fields required in a meeting
+		 */
 		public function validate_meeting()
 		{
 			$session = $this->session->userdata();
