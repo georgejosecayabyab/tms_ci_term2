@@ -28,6 +28,9 @@
 			// }
 		}
 
+		/**
+		 * Loads super user home page
+		 */
 		public function index()
 		{
 			$data['coordinator'] = $this->super_user_model->get_all_coordinators();
@@ -37,7 +40,9 @@
 		}
 
 
-		////logout
+		/**
+		 * Logs out logged in user
+		 */
 		public function logout()
 		{
             $g_client = $this->google->get_client();
@@ -54,6 +59,9 @@
 			redirect("home/index");
 		}
 
+		/**
+		 * Updates user's status to inactive or active
+		 */
 		public function update_user_status()
 		{
 			$user_id = $this->input->post('user_id');
@@ -74,6 +82,9 @@
 			echo json_encode($data);
 		}
 
+		/**
+		 * Inserts a new coordinator in the database
+		 */
 		public function insert_user()
 		{
 			$first_name = $this->input->post('first_name');
