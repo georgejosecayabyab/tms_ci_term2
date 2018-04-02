@@ -12,6 +12,12 @@
 		 * @param  String $email Inputted email of the user
 		 * @param  String $password Inputted password of the user
 		 */
+		/**
+		 * Checks if the inputted email and password are valid
+		 * @param  String $email Inputted email of the user
+		 * @param  String $password Inputted password of the user
+		 * @return Array  Returns an emtpy array if email and password is not valid or if user is inactive else returns an array containing user information of a user 
+		 */
 		public function if_user($email, $password)
 		{
 			//SELECT * FROM USER WHERE EMAIL=$EMAIL AND PASSWORD=$PASSWORD;
@@ -25,6 +31,7 @@
 		/**
 		 * Checks if the user is a student
 		 * @param  Integer $user_id User ID of current user 
+		 * @return Array   Returns an array containing user information of a user with $user_id
 		 */
 		public function is_student($user_id)
 		{
