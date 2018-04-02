@@ -7,11 +7,7 @@
 			parent::__construct();
 		}
 
-		/**
-		 * Checks if the inputted email and password are valid
-		 * @param  String $email Inputted email of the user
-		 * @param  String $password Inputted password of the user
-		 */
+
 		/**
 		 * Checks if the inputted email and password are valid
 		 * @param  String $email Inputted email of the user
@@ -55,6 +51,7 @@
 		/**
 		 * Checks if the email input is a gmail account
 		 * @param  String $email Inputted email of the user
+		 * @return Array Returns an empty array if the email is not a valid gmail account else returns an array containing user information of a user
 		 */
 		public function if_user_gmail($email)
 		{
@@ -68,6 +65,7 @@
 		/**
 		 * Gets the user details given the user id
 		 * @param  Integer $user_id User ID of the current user
+		 * @return Array Returns an array contating the user information of a user with $user_id
 		 */
 		public function get_user_details($user_id)
 		{
@@ -88,6 +86,7 @@
 		/**
 		 * Checks if the user is a faculty
 		 * @param  Integer $user_id User ID of current user 
+		 * @return Array   Returns an empty array if the user is not a coordinator else it returns an array containing user information of a user with $user_id
 		 */
 		public function if_coordinator($user_id)
 		{
@@ -105,7 +104,8 @@
 			$sql = "SELECT";
 		}
 		/**
-		 * Gets the email of the current user 
+		 * Gets the email of the current user
+		 * @return Returns an array containing the email address 
 		 */
 		public function get_email()
 		{
@@ -123,7 +123,6 @@
 		{
 			$sql = "UPDATE `tms_ci`.`user` SET `password`=".$newpass." WHERE `user_id`= ".$user_id.";";
 			$query = $this->db->query($sql);
-			return $query->result_array();
 
 		}
 
