@@ -417,7 +417,8 @@
 					FROM SCHEDULE S JOIN TIME T
 					ON S.TIME_ID=T.TIME_ID
 					WHERE S.USER_ID='".$user_id."' 
-					AND S.DAY='".$day."';";
+					AND S.DAY='".$day."'
+					GROUP BY S.DAY, S.TIME_ID;";
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
@@ -593,6 +594,23 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
+
+		public function get_all_time()
+		{
+			$sql = "SELECT TIME_ID, TIME_FORMAT(START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(END_TIME, '%h:%i %p') AS 'END'
+					FROM TIME;";
+			$query = $this->db->query($sql);
+			return $query->result_array();
+		}
+
+		public function get_group_id_by_thesis_id($thesis_id)
+		{
+			$sql = "select * from thesis_group where thesis_id=".$thesis_id."";
+			$query = $this->db->query($sql);
+			return $query->first_row('array');
+		}
+
+		
 
 		
 

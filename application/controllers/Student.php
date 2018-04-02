@@ -22,7 +22,9 @@
 
 		}
 
-		/////view 
+		/**
+		 * Loads student home page 
+		 */
 		public function index()
 		{
 			$session = $this->session->userdata();
@@ -46,7 +48,10 @@
 			$this->load->view('student/student_base_foot', $data);
 		}
 
-		public function view_forms()//get course or course id
+		/**
+		 * Loads page to view forms
+		 */
+		public function view_forms()
 		{
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
@@ -68,6 +73,9 @@
 			$this->load->view('student/student_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view list of theses in the archive
+		 */
 		public function view_archive()
 		{
 			$session = $this->session->userdata();
@@ -92,10 +100,17 @@
 			$this->load->view('student/student_base_foot', $data);
 		}
 
+		/**
+		 * Loads page to view a specific thesis in the archive
+		 * @param  integer $thesis_id id of thesis
+		 */
 		public function view_archive_specific($thesis_id)
 		{
 			$session = $this->session->userdata();
 			$user_id = $session['user_id'];
+
+
+			$group_id = $this->student_model->get_group_id_by_thesis_id($thesis_id);
 
 			$data['student_data'] = $this->student_model->get_user_information($user_id);
 			$data['group_id'] = $this->student_model->get_group($user_id);
@@ -103,6 +118,7 @@
 			$data['member'] = $this->student_model->archive_members();
 			$data['panel'] = $this->student_model->archive_panels();
 			$data['specialization'] = $this->student_model->archive_specialization();
+			$data['uploads'] = $this->student_model->get_uploads_revision($group_id['group_id']);
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "",
@@ -116,7 +132,10 @@
 			$this->load->view('student/student_base_foot', $data);
 		}
 
-		//view_group if with group; if with no group, view_no_group
+		/**
+		 * Loads page to view information about the user's group
+		 * @param  integer $group_id user's group id
+		 */
 		public function view_group($group_id=NULL)
 		{
 			$session = $this->session->userdata();
@@ -169,28 +188,37 @@
 			//$this->load->view('student/student_group_whole_version_view', $data);
 		}
 
-		public function view_panel_document($group_id, $upload_id)
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
+		/**
+		 * disabled
+		 * @param  [type] $group_id  [description]
+		 * @param  [type] $upload_id [description]
+		 * @return [type]            [description]
+		 */
+		// public function view_panel_document($group_id, $upload_id)
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 
-			// $data['student_data'] = $this->student_model->get_user_information($user_id);
-			// $data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
-			// $data['comment'] = $this->faculty_model->get_thesis_comment($group_id);
-			// $data['submit'] = $this->faculty_model->latest_uploaded($group_id);
-			// $data['group'] = $this->faculty_model->get_group_details($group_id);
-			// $data['upload'] = $this->faculty_model->get_upload_thesis_revision($upload_id);
-			// $data['group_id'] = $this->student_model->get_group($user_id);
-			// $data['active_tab'] = array(
-			// 	'home' => "",
-			// 	'group' => "",
-			// 	'group_schedule' => "active",
-			// 	'form' => "",
-			// 	'archive' => "" 
-			// );
+		// 	// $data['student_data'] = $this->student_model->get_user_information($user_id);
+		// 	// $data['faculty_notification'] =$this->faculty_model->get_new_faculty_notification($user_id);
+		// 	// $data['comment'] = $this->faculty_model->get_thesis_comment($group_id);
+		// 	// $data['submit'] = $this->faculty_model->latest_uploaded($group_id);
+		// 	// $data['group'] = $this->faculty_model->get_group_details($group_id);
+		// 	// $data['upload'] = $this->faculty_model->get_upload_thesis_revision($upload_id);
+		// 	// $data['group_id'] = $this->student_model->get_group($user_id);
+		// 	// $data['active_tab'] = array(
+		// 	// 	'home' => "",
+		// 	// 	'group' => "",
+		// 	// 	'group_schedule' => "active",
+		// 	// 	'form' => "",
+		// 	// 	'archive' => "" 
+		// 	// );
 
-		}
+		// }
 
+		/**
+		 * Loads page to view and set user schedule
+		 */
 		public function view_schedule()
 		{
 			$session = $this->session->userdata();
@@ -206,39 +234,7 @@
 			$data['th'] = $this->student_model->get_schedule_complete_by_day($user_id, 'TH');
 			$data['fr'] = $this->student_model->get_schedule_complete_by_day($user_id, 'FR');
 			$data['sa'] = $this->student_model->get_schedule_complete_by_day($user_id, 'SA');
-			$data['active_tab'] = array(
-				'home' => "",
-				'group' => "",
-				'group_schedule' => "active",
-				'form' => "",
-				'archive' => "" 
-			);
-
-
-			// $this->load->view('student/student_base_head', $data);
-			// if(sizeof($data['sched'])>0)
-			// {
-			// 	$this->load->view('student/student_with_schedule_view', $data);
-			// }
-			// else
-			// {
-			// 	$this->load->view('student/student_schedule_view', $data);
-			// }
-			
-			// $this->load->view('student/student_base_foot', $data); 
-			$this->load->view('student/student_base_head', $data);
-			$this->load->view('student/student_schedule_view', $data);
-			$this->load->view('student/student_base_foot', $data); 
-		}
-
-		public function view_edit_schedule()
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
-			
-			$data['student_data'] = $this->student_model->get_user_information($user_id);
-			$data['sched'] = $this->student_model->get_sched($user_id);
-			$data['group_id'] = $this->student_model->get_group($user_id);
+			$data['all_time'] = $this->student_model->get_all_time();
 			$data['active_tab'] = array(
 				'home' => "",
 				'group' => "",
@@ -251,9 +247,37 @@
 			$this->load->view('student/student_base_head', $data);
 			$this->load->view('student/student_schedule_view', $data);
 			$this->load->view('student/student_base_foot', $data); 
-			//$this->load->view('faculty/sample', $data);
 		}
 
+		/**
+		 * disabled
+		 */
+		// public function view_edit_schedule()
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
+			
+		// 	$data['student_data'] = $this->student_model->get_user_information($user_id);
+		// 	$data['sched'] = $this->student_model->get_sched($user_id);
+		// 	$data['group_id'] = $this->student_model->get_group($user_id);
+		// 	$data['active_tab'] = array(
+		// 		'home' => "",
+		// 		'group' => "",
+		// 		'group_schedule' => "active",
+		// 		'form' => "",
+		// 		'archive' => "" 
+		// 	);
+
+
+		// 	$this->load->view('student/student_base_head', $data);
+		// 	$this->load->view('student/student_schedule_view', $data);
+		// 	$this->load->view('student/student_base_foot', $data); 
+		// 	//$this->load->view('faculty/sample', $data);
+		// }
+
+		/**
+		 * Loads page where user can create a new discussion
+		 */
 		public function view_new_discussion()
 		{
 			$session = $this->session->userdata();
@@ -275,6 +299,10 @@
 			$this->load->view('student/student_base_foot', $data); 
 		}
 
+		/**
+		 * Loads page to view a specific discussion
+		 * @param  integer $topic_id id of a specific topic
+		 */
 		public function view_discussion_specific($topic_id)
 		{
 			$session = $this->session->userdata();
@@ -299,7 +327,10 @@
 			$this->load->view('student/student_base_foot', $data);  
 		}
 
-		////download
+		/**
+		 * Dowloads a form given the form's name
+		 * @param  String $form_name Name of the form to be downloaded
+		 */
 		public function download_form($form_name)
 		{
 			if($form_name)
@@ -314,6 +345,10 @@
 			}
 		}
 
+		/**
+		 * Downloads a file given the file's name
+		 * @param  [type] $file_name Name of the file to be downloaded
+		 */
 		public function download_file($file_name)
 		{
 			if($file_name)
@@ -328,6 +363,9 @@
 			}
 		}
 
+		/**
+		 * Validates upload if it contains the revisions list and the revised document
+		 */
 		public function validate_thesis_uploads()
 		{
 			$session = $this->session->userdata();
@@ -346,22 +384,15 @@
 
             if(sizeof($files)==2)
             {
-            	//$d1 = $this->upload->do_upload('thesis_file');
-            	//$d2 = $this->upload->do_upload('revision_file');
-            	if($_FILES['thesis_file']['type'] != 'application/pdf' || $_FILES['revision_file']['type'] != 'application/pdf')////|| ! $this->upload->do_upload('revision_file') ! $this->upload->do_upload('thesis_file') 
+            	if($_FILES['thesis_file']['type'] != 'application/pdf' || $_FILES['revision_file']['type'] != 'application/pdf')
             	{
-            		//$error = array('error' => $this->upload->display_errors());
             		$this->session->set_flashdata('fail', "PDFs only");
             		redirect('student/view_group/'.$group['group_id']);
             		
             	}
             	else
             	{
-            		// $thesis = $this->upload->do_upload('thesis_file');
-            		// $revision = $this->upload->do_upload('revision_file');
 					$this->upload_file('thesis_file', 'revision_file');
-					// $this->upload_file('revision_file');
-					
 
 		            $this->session->set_flashdata('success', 'Documents have been uploaded!');
 		           	
@@ -395,8 +426,11 @@
             }
 		}
 
-		////upload
-		////uploading thesis and revisions list
+		/**
+		 * Upload revised document and revisions list
+		 * @param  String $file_name Name of the revised document
+		 * @param  String $revision  Name of the revisions list document
+		 */
 		public function upload_file($file_name, $revision)
 		{
 			$session = $this->session->userdata();
@@ -434,6 +468,13 @@
             }
 		}
 
+		/**
+		 * Upload revised document and revisions list
+		 * @param  String $file_name   	Name of the revisions list document
+		 * @param  String $upload_name 	Name of the revised document
+		 * @param  String $date_time   	string containing date
+		 * @param  integer $group_id    id of the user's group
+		 */
 		public function upload_revision($file_name, $upload_name, $date_time, $group_id)
 		{	
 			$config['upload_path']          = './uploaded_revision/';
@@ -460,8 +501,9 @@
             }
 		}
 
-		
-		/////get
+		/**
+		 * Gets all of the notifications of a user
+		 */
 		public function get_all_notifications()
 		{
 			$session = $this->session->userdata();
@@ -474,6 +516,9 @@
 
 		}
 
+		/**
+		 * Gets all of the unread notifications of a user
+		 */
 		public function get_new_notifications()
 		{
 			$session = $this->session->userdata();
@@ -486,46 +531,50 @@
 
 		}
 
-		public function get_schedule()
-		{
-			$session = $this->session->userdata();
-			$user_id = $session['user_id'];
+		/**
+		 * disabled
+		 */
+		// public function get_schedule()
+		// {
+		// 	$session = $this->session->userdata();
+		// 	$user_id = $session['user_id'];
 
-			$result = $this->student_model->get_schedule($user_id);
-			$monday = $this->student_model->get_schedule_by_day($user_id, 'MO');
-			$tuesday = $this->student_model->get_schedule_by_day($user_id, 'TU');
-			$wednesday = $this->student_model->get_schedule_by_day($user_id, 'WE');
-			$thursday = $this->student_model->get_schedule_by_day($user_id, 'TH');
-			$friday = $this->student_model->get_schedule_by_day($user_id, 'FR');
-			$saturday = $this->student_model->get_schedule_by_day($user_id, 'SA');
-
-
-			$mo_common_time = "";
-			$start = $monday[0]['START_TIME'];
-			$end = '';
-			for($i=0; $i<sizeof($monday);$i++)
-			{	
-				if($i+1 < sizeof($monday))
-				{
-					if($monday[$i+1]['TIME_ID'] - $monday[$i]['TIME_ID'] != 1)
-					{
-						$end = $monday[$i]['END_TIME'];
-						$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
-						$start = $monday[$i+1]['START_TIME'];
-					}
-				}
-				if($i+1 == sizeof($monday))
-				{
-					$end = $monday[$i]['END_TIME'];
-					$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
-				}
-			}
-
-			echo $mo_common_time;
-		}
+		// 	$result = $this->student_model->get_schedule($user_id);
+		// 	$monday = $this->student_model->get_schedule_by_day($user_id, 'MO');
+		// 	$tuesday = $this->student_model->get_schedule_by_day($user_id, 'TU');
+		// 	$wednesday = $this->student_model->get_schedule_by_day($user_id, 'WE');
+		// 	$thursday = $this->student_model->get_schedule_by_day($user_id, 'TH');
+		// 	$friday = $this->student_model->get_schedule_by_day($user_id, 'FR');
+		// 	$saturday = $this->student_model->get_schedule_by_day($user_id, 'SA');
 
 
-		////////update
+		// 	$mo_common_time = "";
+		// 	$start = $monday[0]['START_TIME'];
+		// 	$end = '';
+		// 	for($i=0; $i<sizeof($monday);$i++)
+		// 	{	
+		// 		if($i+1 < sizeof($monday))
+		// 		{
+		// 			if($monday[$i+1]['TIME_ID'] - $monday[$i]['TIME_ID'] != 1)
+		// 			{
+		// 				$end = $monday[$i]['END_TIME'];
+		// 				$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
+		// 				$start = $monday[$i+1]['START_TIME'];
+		// 			}
+		// 		}
+		// 		if($i+1 == sizeof($monday))
+		// 		{
+		// 			$end = $monday[$i]['END_TIME'];
+		// 			$mo_common_time.=date('h:i a', strtotime($start)).' - '.date('h:i a', strtotime($end)).' | ';
+		// 		}
+		// 	}
+
+		// 	echo $mo_common_time;
+		// }
+
+		/**
+		 * Updates unread notifications to read
+		 */
 		public function update_notification()
 		{
 			$session = $this->session->userdata();
@@ -541,7 +590,9 @@
 			}
 		}
 
-		/////validate
+		/**
+		 * Validates fields required in a discussion
+		 */
 		public function validate_discussion()
 		{
 			$session = $this->session->userdata();
@@ -616,6 +667,9 @@
 
 		}
 
+		/**
+		 * Validates fields required in a reply
+		 */
 		public function validate_reply()
 		{
 			$session = $this->session->userdata();
@@ -665,7 +719,9 @@
 			}
 		}
 
-
+		/**
+		 * Valdiates fields required in an abstract
+		 */
 		public function validate_abstract()
 		{
 			$session = $this->session->userdata();
@@ -692,7 +748,11 @@
 			}
 		}
 
-		/////insert
+		/**
+		 * Inserts new event to the database
+		 * @param  String $discussion  String containing the dicussion
+		 * @param  integer $course_id  id of the cuer's course
+		 */
 		public function insert_event($discussion, $course_id)
 		{
 			$session = $this->session->userdata();
@@ -706,6 +766,11 @@
 			$this->student_model->insert_event($data);
 		}
 
+		/**
+		 * Inserts new notification to the database
+		 * @param  String $notification    String containing the notification
+		 * @param  integer $target_user_id user id of the intended receiver of the notification
+		 */
 		public function insert_notification($notification, $target_user_id)
 		{
 			$session = $this->session->userdata();
@@ -725,7 +790,9 @@
 			$this->student_model->insert_notification($data);
 		}
 
-		////logout
+		/**
+		 * Logs out logged in user
+		 */
 		public function logout()
 		{
             $g_client = $this->google->get_client();
@@ -742,7 +809,9 @@
 			redirect("home/index");
 		}
 
-		/////schedule
+		/**
+		 * Inserts user schedule to the database
+		 */
 		public function insert_schedule()
 		{
 			$session = $this->session->userdata();
@@ -788,6 +857,9 @@
 			echo json_encode($sched_per_day);
 		}
 
+		/**
+		 * Deletes user's old schedule
+		 */
 		public function delete_schedule()
 		{
 			$session = $this->session->userdata();
@@ -796,6 +868,9 @@
 			$this->student_model->delete_schedule($user_id);
 		}
 
+		/**
+		 * Add specialization to user's group's list of specializations
+		 */
 		public function add_tags()
 		{
 			$session = $this->session->userdata();
@@ -823,6 +898,9 @@
 			redirect('student/view_group/'.$group_id['group_id']);
 		}
 
+		/**
+		 * Validates fields required in a meeting
+		 */
 		public function validate_meeting()
 		{
 			$session = $this->session->userdata();
@@ -873,7 +951,9 @@
 			}
 		}
 
-		//////validate
+		/**
+		 * Validates fields required in a comment
+		 */
 		public function validate_comment() 
 		{
 			$session = $this->session->userdata();

@@ -36,6 +36,8 @@ immediately after the control sidebar -->
 <!-- AdminLTE App -->
 <script src="<?php echo base_url();?>js/adminlte.min.js"></script>
 
+<script src="<?php echo base_url();?>js/bootstrap-timepicker.min.js"></script>
+
 <!--add student group-->
 <script>
   
@@ -1050,6 +1052,24 @@ immediately after the control sidebar -->
 
 <!--modal-defense-->
 <script type="text/javascript">
+  function change_date_val(button)
+  {
+    var date = button.id;
+    var thesis_title = $('#group_thesis_title').val();
+    document.getElementById("datepicker").value = date;
+    if(date)
+    {
+      $("#datepicker").change();
+    }
+    else
+    {
+      $("#suggestion").empty();
+      $("#conflict").empty();
+    }
+
+    $('#defense_date_group_name').empty();
+    $('#defense_date_group_name').append('<h4 class="modal-title">Assign Defense Date For <b>'+thesis_title+'</b></h4>');
+  }
 
   $(document).ready(function() {
     var group_id = "";
@@ -1134,6 +1154,7 @@ immediately after the control sidebar -->
       $("#datepicker").change(function () {
        
         var dateVal =  $('#datepicker').val();
+        //alert(dateVal);
         var weekday = ["SU","MO","TU","WE","TH","F","S"];
         var new_day = new Date(dateVal);
         var day = weekday[new_day.getDay()];
@@ -1155,31 +1176,45 @@ immediately after the control sidebar -->
           {
             
             var conflict = "";
-            console.log(data['panel_defense']);
-            console.log('this is free: ' + data['free'][0]['START']);
+            //console.log(data['panel_defense']);
+            // console.log('this is free: ' + data['free'][0]['START']);
             var common_button = "";
-            for(var x = 0; x<data['free'].length; x++)
+            
+            
+            if(data['free'].length > 0)
             {
-              var link = base_url+'index.php/coordinator/set_defense_date_link/'+group_id+'/'+new_date+'/'+data['free'][x]['TIME_ID'];
-              var time_string = data['free'][x]['START']+'-'+data['free'][x]['END'];
-              common_button = common_button + '<a href="'+link+'"><button id="'+data['free'][x]['TIME_ID']+'" class="btn btn-default time_button" name="time_button" value="'+data['free'][x]['TIME_ID']+'">'+ time_string+'</button></a>';
-              console.log(common_button);
-            }
-            for(var x = 0; x<data['panel_defense'].length; x++)
-            {
-              console.log('kanina '+data['panel_defense'][x]['NAME']);
-              conflict = conflict + '<span> <b> '+data['panel_defense'][x]['NAME']+' </b> has a thesis defense at <b> '+data['panel_defense'][x]['START']+' - ' +data['panel_defense'][x]['END'] +' </b> </span> <br>';
-            }
-            $("#suggestion").html('<div class="alert alert-success alert-dismissible">\
+              for(var x = 0; x<data['free'].length; x++)
+              {
+                var link = base_url+'index.php/coordinator/set_defense_date_link/'+group_id+'/'+new_date+'/'+data['free'][x]['TIME_ID'];
+                var time_string = data['free'][x]['START']+'-'+data['free'][x]['END'];
+                common_button = common_button + '<a href="'+link+'"><button id="'+data['free'][x]['TIME_ID']+'" class="btn btn-default time_button" name="time_button" value="'+data['free'][x]['TIME_ID']+'">'+ time_string+'</button></a>';
+                console.log(common_button);
+              }
+
+              $("#suggestion").html('<div class="alert alert-success alert-dismissible">\
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\
               <h4><i class="icon fa fa-check"></i> Available Schedule for ' +  dateVal  + ' </h4>\
               <h5> <span>'+common_button+'</span>\
               </h5> \
               </div>');
+            }
+            else
+            {
+              $("#suggestion").html('<div class="alert alert-success alert-dismissible">\
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\
+              <h4><i class="icon fa fa-check"></i>No Free Time for '+ dateVal +'</h4>\
+              </div>');
+            }
 
             
             if(data['panel_defense'].length > 0 )
             {
+              for(var x = 0; x<data['panel_defense'].length; x++)
+              {
+                console.log('kanina '+data['panel_defense'][x]['NAME']);
+                conflict = conflict + '<span> <b> '+data['panel_defense'][x]['NAME']+' </b> has a thesis defense at <b> '+data['panel_defense'][x]['START']+' - ' +data['panel_defense'][x]['END'] +' </b> </span> <br>';
+              }
+
               $("#conflict").html('<div class="alert alert-danger alert-dismissible">\
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\
               <h4><i class="icon fa fa-ban"></i> Conflict Defense for ' +  dateVal + ' </h4>\
@@ -1696,7 +1731,7 @@ immediately after the control sidebar -->
       type: 'POST',
       url: base +'index.php/coordinator/insert_group',
       data: {'members': members, 'group_name': group_name, 'thesis_title': thesis_title, 'adviser': adviser,'course': course},
-      success: function(data)
+      success: function()
       {
         console.log('insert is a success');
         window.location.replace(base+'index.php/coordinator/view_student');
@@ -1710,6 +1745,270 @@ immediately after the control sidebar -->
     console.log('THE VALUE! ' + members);
   }
 </script>
+
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+    
+
+    $('.timepicker').timepicker({
+      showInputs: false,
+      defaultTime: false
+    });
+
+
+    $('.timepicker2').timepicker({
+      showInputs: false,
+      showMeridian: false,
+      maxHours: 3,
+      defaultTime: false
+    });
+
+
+
+    var hour;
+    var min;
+    var interval;
+    var durationHour;
+    var durationMin;
+    var meridian; 
+
+    $('#startTime').timepicker().on('changeTime.timepicker', function(e) {
+
+      hour = e.time.hours;
+      min = e.time.minutes;
+      meridian = e.time.meridian;
+
+
+
+
+    });
+
+    $('#duration').timepicker().on('changeTime.timepicker', function(e) {
+
+
+      durationHour = e.time.hours;
+      durationMin = e.time.minutes;
+
+
+
+    });
+
+
+
+
+    $('#generate').click(
+
+
+      function generateSched () {
+
+        interval = $('#interval').val();
+
+        // ADD 720 IF PM 
+
+        console.log(hour);
+        console.log(min);
+        console.log(meridian);
+        console.log(interval);
+        console.log(durationHour);
+        console.log(durationMin);
+        console.log("===============");
+
+        
+        function translateToMin (hour,min){
+
+          var transHour;
+          var transTime;
+
+          if (meridian == "AM"){
+
+            transHour = hour * 60;
+            transTime = transHour + min;
+
+          }
+
+          else if (meridian == "PM"){
+
+            transHour = hour * 60;
+            transTime = transHour + min + 720;
+
+
+          }
+
+          return transTime;
+
+        }
+
+        console.log(translateToMin(hour,min) + " HOUR");
+        console.log("==============");
+
+
+        console.log(translateToMin(durationHour,durationMin) + " INTERVAL");
+        console.log("==============");
+
+        var i = 2;
+        var translatedStartTime = translateToMin(hour,min);
+        var translatedDurationTime = translateToMin(durationHour,durationMin);
+        var blank = "";
+
+        $('#timeslot1').timepicker('setTime', hour + ':' + min +  meridian);
+        blank = blank + hour + ':' + min +  meridian + ' | ';
+        time_slot_1 = hour + ':' + min;
+        time_slot_2 = "";
+        time_slot_3 = "";
+        time_slot_4 = "";
+        time_slot_5 = "";
+        time_slot_6 = "";
+        time_slot_7 = "";
+        time_slot_8 = "";
+
+
+        while (i <= 8){
+
+            var newTime = parseInt(translatedStartTime + translatedDurationTime + parseInt(interval));
+            var newMeridian ;
+            console.log(" YOUR NEW TIME IS BEFORE REDUCTION " + newTime);
+
+
+            if (newTime > 1440){
+
+              newMeridian = "AM"; 
+              
+              newTime = parseInt(newTime - 1440);
+
+              console.log("YOU WENT HERE EXCEEDED " + newTime);
+            }
+
+             if(newTime > 720){
+          
+              newMeridian = "PM";
+
+              console.log("YOU WENT HERE EXEEDED 720 " + newTime);
+
+            }
+
+            else{
+
+              newMeridian = "AM";
+
+              console.log("JUST EBLOW 720" + newTime);
+            }
+
+            console.log(i + "=====================");
+
+
+            var newHour = parseInt(newTime/60);
+            var newMin = parseInt(newTime%60);
+      
+         
+
+            $('#timeslot' + i).timepicker('setTime', newHour + ':' + newMin +  newMeridian);
+
+            blank = blank +  newHour + ':' + newMin +  newMeridian + ' | ';
+
+            translatedStartTime = newTime;
+
+            if(i == 2)
+            {
+              time_slot_2 = newHour + ':' + newMin;
+            }
+            else if(i == 3)
+            {
+              time_slot_3 = newHour + ':' + newMin;
+            }
+            else if(i == 4)
+            {
+              time_slot_4 = newHour + ':' + newMin;
+            }
+            else if(i == 5)
+            {
+              time_slot_5 = newHour + ':' + newMin;
+            }
+            else if(i == 6)
+            {
+              time_slot_6 = newHour + ':' + newMin;
+            }
+            else if(i == 7)
+            {
+              time_slot_7 = newHour + ':' + newMin;
+            }
+            else
+            {
+              time_slot_8 = newHour + ':' + newMin;
+            }
+
+
+            i++;
+
+
+
+        
+
+        }
+
+
+        // alert($('#timeslot1').val() + ' | ' + $('#timeslot2').val() + ' | '+ $('#timeslot3').val() + ' | '+ $('#timeslot4').val() + ' | '+ $('#timeslot5').val() + ' | '+ $('#timeslot6').val() + ' | '+ $('#timeslot7').val() + ' | '+ $('#timeslot8').val() + ' | '  );
+        // alert(blank);
+
+      }
+    );
+  });
+
+
+</script>
+
+<script>
+  function get_time_slots()
+  {
+    var base = $('#base_url').val();
+    var ts1 = $('#timeslot1').val();
+    var ts2 = $('#timeslot2').val();
+    var ts3 = $('#timeslot3').val();
+    var ts4 = $('#timeslot4').val();
+    var ts5 = $('#timeslot5').val();
+    var ts6 = $('#timeslot6').val();
+    var ts7 = $('#timeslot7').val();
+    var ts8 = $('#timeslot8').val();
+
+    var hours = $('#duration').val().split(":")[0];
+    var minutes = $('#duration').val().split(":")[1];
+
+
+
+      // durationHour = e.time.hours;
+      // durationMin = e.time.minutes;
+
+    $('#time_message').empty();
+    console.log('SENS '+ hours +' OOO ' + minutes);
+
+    // console.log('---' +durationHour);
+    // console.log('ppp' +durationMin);
+    var time = parseInt(hours*60) + parseInt(minutes);
+    console.log('TIME: ' + time);
+    console.log(ts1 + ' | ' + ts2 + ' | ' + ts3 + ' | ' + ts4 + ' | ' + ts5 + ' | ' + ts6 + ' | ' + ts7 + ' | ' + ts8 + ' | ' );
+
+
+
+
+    $('#time_message').append("Do you want to replace old timeslots?");
+
+    $.ajax({
+      type:'POST',
+      url: base+'index.php/coordinator/update_time',
+      data: {'ts1':ts1, 'ts2':ts2, 'ts3':ts3 , 'ts4':ts4 , 'ts5':ts5 , 'ts6':ts6 , 'ts7':ts7 , 'ts8':ts8, 'duration':time},
+      success: function(data)
+      {
+        console.log('200');
+        window.location.replace(base+'index.php/coordinator/view_set_time_slot');
+      },
+      error: function(data)
+      {
+        console.log('1991');
+      }
+    });
+  }
+</script>
+
 
 </body>
 </html>

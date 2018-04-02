@@ -33,6 +33,10 @@
 
 <!-- <script src="<?php //echo base_url();?>js/jquery.weekly-schedule-plugin.js"></script> -->
 
+<?php 
+  echo '<script> var suck="join me";</script>';
+?>
+
 <script type="text/javascript">
   $('#datepicker').datepicker({
     autoclose: true
@@ -228,7 +232,7 @@
       success: function(data)
       {
         //$('#notification_list').empty();
-        console.log(data);
+        //console.log(data);
         if(data.length > 0)
         {
           $('#new_notification_number').empty();
@@ -283,6 +287,7 @@
 
 <!---editor content-->
 <script>
+  var unforgive = "kampai";
   var editor = CKEDITOR.replace('editor1');
   $('#save_discussion').click(function() {
     var topic_info = editor.getData();
@@ -334,6 +339,7 @@
 <script>
   function meeting()
   {
+   
     var base = $('#base_url').val();
     var date = $('#datepicker').val();
     var venue = $('#venue').val();
@@ -372,34 +378,39 @@
   $(document).ready(function() {
     $('#table').DataTable();
   });
+
 </script>
+
+
 
 <!-- schedule 2-->
 <script>
+
   $('.schedule').on('selectionmade', function() {
     console.log("Selection Made");
   }).on('selectionremoved', function() {
     console.log("Selection Removed");
   });
 
-  var hoursFormat = {
+  
+  var hoursFormat3 = {
 
-            Entry1Start : "7:30 AM",
-            Entry1End : "9:00 AM",
-            Entry2Start : "9:15 AM",
-            Entry2End : "10:45 AM",
-            Entry3Start : "11:00 AM",
-            Entry3End : "12:30 PM",
-            Entry4Start : "12:45 PM",
-            Entry4End : "2:15 PM",
-            Entry5Start : "2:30 PM",
-            Entry5End : "4:00 PM",
-            Entry6Start : "4:15 PM",
-            Entry6End : "5:45 PM",
-            Entry7Start : "6:00 PM",
-            Entry7End : "7:30 PM",
-            Entry8Start :"7:30 PM",
-            Entry8End : "9:00 PM"           
+            Entry1Start : "9:00 AM",
+            Entry1End : "10:30 AM",
+            Entry2Start : "10:45 AM",
+            Entry2End : "12:15 PM",
+            Entry3Start : "1:45 PM",
+            Entry3End : "2:00 PM",
+            Entry4Start : "3:30 PM",
+            Entry4End : "5:00 PM",
+            Entry5Start : "5:15 PM",
+            Entry5End : "6:45 PM",
+            Entry6Start : "7:00 PM",
+            Entry6End : "8:30 PM",
+            Entry7Start : "8:45 PM",
+            Entry7End : "10:15 PM",
+            Entry8Start :"10:30 PM",
+            Entry8End : "12:00 PM"           
 
 
   };
@@ -425,33 +436,38 @@
 
   }
 
-  var hoursFormat3 = {
+  var hoursFormat = {
 
-            Entry1Start : "9:00 AM",
-            Entry1End : "10:30 AM",
-            Entry2Start : "10:45 AM",
-            Entry2End : "12:15 PM",
-            Entry3Start : "1:45 PM",
-            Entry3End : "2:00 PM",
-            Entry4Start : "3:30 PM",
-            Entry4End : "5:00 PM",
-            Entry5Start : "5:15 PM",
-            Entry5End : "6:45 PM",
-            Entry6Start : "7:00 PM",
-            Entry6End : "8:30 PM",
-            Entry7Start : "8:45 PM",
-            Entry7End : "10:15 PM",
-            Entry8Start :"10:30 PM",
-            Entry8End : "12:00 PM"           
+            Entry1Start : "07:30 AM",
+            Entry1End : "09:00 AM",
+            Entry2Start : "9:15 AM",
+            Entry2End : "10:45 AM",
+            Entry3Start : "11:00 AM",
+            Entry3End : "12:30 PM",
+            Entry4Start : "12:45 PM",
+            Entry4End : "2:15 PM",
+            Entry5Start : "2:30 PM",
+            Entry5End : "4:00 PM",
+            Entry6Start : "4:15 PM",
+            Entry6End : "5:45 PM",
+            Entry7Start : "6:00 PM",
+            Entry7End : "7:30 PM",
+            Entry8Start :"7:30 PM",
+            Entry8End : "9:00 PM"           
 
 
   };
+
+  console.log('json: ' + JSON.stringify(hoursFormat));
+  console.log('json2: ' + JSON.stringify(sample_sched));
+
+
 
   $('#target').weekly_schedule({
     // Days displayed
     days: ["mon", "tue", "wed", "thu", "fri", "sat"],
     // Hours displyed
-    hours: hoursFormat,
+    hours: sample_sched,
     // Font used in the component
     fontFamily: "Montserrat",
     // Font colot used in the component
@@ -468,12 +484,14 @@
     headerBackgroundColor: "transparent"
 
   });
+  
 
 
 
   $('#specialCase').click(function (){
     $('#specialField').html('<input class="text form-control" placeholder="Subject/Date/Time" id="specialText"> </input>');
   });
+
   $("#submitbtn").click(function() {
       var test = $('#target').weekly_schedule("getSelectedHour");
 
@@ -621,6 +639,7 @@
   // });
 
 </script>
+
 <script>
   function sample()
   {

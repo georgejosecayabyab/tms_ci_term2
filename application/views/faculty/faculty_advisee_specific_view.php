@@ -191,6 +191,21 @@
             </div><!-- END DISCUSSION -->
             <!-- /.tab-pane -->
             <div class="tab-pane" id="timeline"><!-- VERDICT-->
+              <h3>Current Version: 
+                <?php 
+                  if(sizeof($uploads) != 0)
+                  {
+                    $link = site_url('faculty/download_file/'.$uploads[sizeof($uploads)-1]['upload_name']);
+                    echo '<a href="'.$link.'">Revised Document #'.sizeof($uploads).'</a>';
+                  }
+                  else
+                  {
+                    echo "None";
+                  }
+                  
+                ?>
+                  
+              </h3><br>
               <!-- The timeline -->
               <!-- VERDICT START-->
               <ul class="timeline timeline-inverse">
@@ -297,10 +312,20 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="end_time" class="control-label">End Time</label>
+                  <input type="time" class="form-control" id="end_time" name="end_time" placeholder="End Time">
+                </div>
+
+                <div class="form-group">
                   <button id="submitbtn2" type="button" class="btn btn-danger">Exit</button>
                   <button id="submitbtn" type="submit" class="btn btn-success">Set Meeting</button>
                   
                 </div>
+                <style type="text/css">
+                  #submitbtn2{
+                    margin-right: 20px;
+                  }
+                </style>
 
                 
               </form>

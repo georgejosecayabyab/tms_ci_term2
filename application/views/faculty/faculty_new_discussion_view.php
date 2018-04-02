@@ -66,6 +66,12 @@
             </div>
           </form>
         </div>
+        <style type="text/css">
+          #editor1{
+            margin-top: 20px;
+            margin-bottom: 20px;
+          }
+        </style>
         <!-- /.box -->
       </div>
       <!-- /.col-->

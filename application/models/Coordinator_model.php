@@ -39,7 +39,8 @@ class coordinator_model extends CI_Model
 								JOIN RANK R
 								ON R.RANK_CODE=F.RANK
                                 JOIN DEPARTMENT D
-                                ON 	F.DEPARTMENT_CODE = D.DEPARTMENT_CODE;";
+                                ON 	F.DEPARTMENT_CODE = D.DEPARTMENT_CODE
+                WHERE U.USER_TYPE=1;";
 
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -219,7 +220,7 @@ class coordinator_model extends CI_Model
 
 	public function archive_panels()
 	{
-		$sql = "select tg.thesis_id, pg.group_id, concat(u.first_name,' ', u.last_name) as 'name'
+		$sql = "select tg.thesis_id, pg.group_id, concat(u.first_name,' ', u.last_name) as 'name', u.is_active
 				from panel_group pg
 				join faculty f
 				on f.user_id=pg.panel_id
@@ -315,7 +316,7 @@ class coordinator_model extends CI_Model
 				ON U.USER_ID=F.USER_ID
 				WHERE PG.PANEL_ID IN (SELECT PANEL_ID FROM PANEL_GROUP WHERE GROUP_ID=".$group_id." AND STATUS=1)
 				AND DD.DEFENSE_DATE = '".$date."'
-				AND DD.GROUP_ID!=".$group_id.";";
+				AND DD.GROUP_ID !=".$group_id.";";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -462,6 +463,8 @@ class coordinator_model extends CI_Model
 				JOIN USER U
 				ON U.USER_ID=F.USER_ID
 				WHERE F.USER_ID NOT IN (SELECT ADVISER_ID FROM THESIS_GROUP WHERE GROUP_ID=".$group_id.")
+				AND U.IS_ACTIVE=1
+				AND U.USER_TYPE=1
 				ORDER BY U.LAST_NAME ASC;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -477,7 +480,9 @@ class coordinator_model extends CI_Model
 				JOIN USER U
 				ON U.USER_ID=F.USER_ID 
 				WHERE PG.GROUP_ID=".$group_id."
-				AND PG.STATUS=1;";
+				AND PG.STATUS=1
+				AND U.IS_ACTIVE=1
+				AND U.USER_TYPE=1;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -670,7 +675,7 @@ class coordinator_model extends CI_Model
 
 	public function get_all_active_faculty()
 	{
-		$sql = "SELECT * FROM USER WHERE USER_ID IN(SELECT USER_ID FROM FACULTY WHERE IS_COORDINATOR=0) ORDER BY LAST_NAME ASC;";
+		$sql = "SELECT * FROM USER WHERE USER_ID IN(SELECT USER_ID FROM FACULTY WHERE IS_COORDINATOR=0) AND IS_ACTIVE=1 ORDER BY LAST_NAME ASC;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -843,9 +848,19 @@ class coordinator_model extends CI_Model
 
 	public function delete_notifications()
 	{
-		$this->db->query("SET SQL_SAFE_UPDATES = 0;");
-		$this->db->query("delete from notification;");
-		$this->db->query("SET SQL_SAFE_UPDATES = 1;");
+		// $this->db->query("SET SQL_SAFE_UPDATES = 0;");
+		// $this->db->query("delete from notification;");
+		// $this->db->query("SET SQL_SAFE_UPDATES = 1;");
+
+		$sql = "SELECT * FROM NOTIFICATION";
+		$query = $this->db->query($sql);
+		$all_notif = $query->result_array();
+
+		foreach($all_notif as $row)
+		{
+			$this->db->where('notification_id', $row['notification_id']);
+			$this->db->delete('notification');	
+		}
 	}
 
 	public function get_members($group_id)
@@ -907,7 +922,68 @@ class coordinator_model extends CI_Model
 				FROM STUDENT S JOIN USER U
 				ON U.USER_ID=S.USER_ID
 				WHERE COURSE_CODE='".$course_code."'
+				AND U.USER_ID NOT IN (SELECT STUDENT_ID FROM STUDENT_GROUP)
 				AND U.IS_ACTIVE=1;";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
+
+	public function update_time($time)
+	{
+		$sql = "SELECT * FROM TIME LIMIT 8;";
+		$query = $this->db->query($sql);
+		$time_db = $query->result_array();
+		for($x = 0; $x < sizeof($time_db); $x++)
+		{
+			// $data = array(
+			// 	'start_time' => $time['start_time'][$x],
+			// 	'end_time' => $time['end_time'][$x]
+			// );
+
+			$update_sql = "update time 
+					set start_time='".$time['start_time'][$x]."', end_time='".$time['end_time'][$x]."'
+					where time_id=".$time_db[$x]['time_id'].";";
+			$this->db->query($update_sql);
+
+
+			
+		}
+
+	}
+
+	public function deactivate_all_guests()
+	{
+		$sql = "SELECT * FROM FACULTY WHERE RANK='GUEST';";
+		$query = $this->db->query($sql);
+		$all_guest = $query->result_array();
+
+		foreach($all_guest as $row)
+		{
+			
+			$data = array(
+				'is_active' => 0
+			);
+
+			$this->db->where('user_id', $row['user_id']);
+			$this->db->update('user', $data); 
+		}
+	}
+
+	public function get_group_id_by_thesis_id($thesis_id)
+	{
+		$sql = "select * from thesis_group where thesis_id=".$thesis_id."";
+		$query = $this->db->query($sql);
+		return $query->first_row('array');
+	}
+
+	public function get_uploads_revision($group_id)
+	{
+		$sql = "SELECT * 
+				FROM UPLOAD U 
+				LEFT JOIN REVISION R 
+				ON R.UPLOAD_ID=U.UPLOAD_ID
+				WHERE U.GROUP_ID = ".$group_id.";";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

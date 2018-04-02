@@ -6,6 +6,13 @@ var scheduleTimes = "EMPTY";
           
         }
 
+         function passTime(passedTimeSched){
+
+            scheduleTest = passedDataSched   ;
+          
+        }
+
+
 
 (function($) {
     $.fn.weekly_schedule = function(callerSettings) {
@@ -139,8 +146,9 @@ var scheduleTimes = "EMPTY";
                 hourHeaderContainer.append(hour_header_item);
             }
 
-            var testCompare = ["7:30AM", "9:15AM", "11:00AM", "12:45PM", "2:30PM", "4:15PM", "6:00PM", "7:30PM"];
+            var testCompare = [(scheduleTimes.Entry1Start).replace(" ",""), (scheduleTimes.Entry2Start).replace(" ",""), (scheduleTimes.Entry3Start).replace(" ",""), (scheduleTimes.Entry4Start).replace(" ",""), (scheduleTimes.Entry5Start).replace(" ",""), (scheduleTimes.Entry6Start).replace(" ",""), (scheduleTimes.Entry7Start).replace(" ",""), (scheduleTimes.Entry8Start).replace(" ","")];
 
+              
                var testSched = {};
 
                  
@@ -171,6 +179,8 @@ var scheduleTimes = "EMPTY";
             var day4 = schedule.day4;
             var day5 = schedule.day5;
             var day6 = schedule.day6;
+
+          
             
                 for (var b = 0; b < day1.length; b++ ){
                     testSched[0].push(day1[b]);
@@ -488,6 +498,8 @@ var scheduleTimes = "EMPTY";
             "<br>" + Entry3Start + "<br> - </br>" + Entry3End, "<br> " + Entry4Start + "<br> - </br>" + Entry4End,
             "<br>" + Entry5Start + "<br> - </br>" + Entry5End, "<br> " + Entry6Start + "<br> - </br>" + Entry6End, 
             "<br> " + Entry7Start + "<br> - </br>" + Entry7End, "<br> " + Entry8Start + "<br> - </br>" + Entry8End];
+
+          
 
             return output;
         }

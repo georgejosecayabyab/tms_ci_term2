@@ -10,22 +10,25 @@
       <li><a href="<?php echo site_url('coordinator');?>"><i class="fa fa-home"></i> Home</a></li>
       <li class="<?php echo $active_tab['student'];?>"><a href="<?php echo site_url('coordinator/view_student');?>"><i class="fa fa-user"></i> <span>Students</span></a></li>
     </ol>
+    <div id="flash_message">
+      <?php if($this->session->flashdata('fail')): ?>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('fail'); ?></center>
+        </div>
+      <?php endif; ?>
+      <?php if($this->session->flashdata('success')): ?>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
+          <?php echo $this->session->flashdata('success'); ?></center>
+        </div>
+      <?php endif; ?>
+    </div>
   </section>
   <!-- Main content -->
-  <?php if($this->session->flashdata('fail')): ?>
-      <div class="alert alert-danger alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-        <?php echo $this->session->flashdata('fail'); ?></center>
-      </div>
-  <?php endif; ?>
-  <?php if($this->session->flashdata('success')): ?>
-    <div class="alert alert-success alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <center><h4><i class="icon fa fa-info"></i> Alert!</h4>
-      <?php echo $this->session->flashdata('success'); ?></center>
-    </div>
-  <?php endif; ?>
+  
   <style type="text/css">
     #addStu{
       margin-top: 20px;

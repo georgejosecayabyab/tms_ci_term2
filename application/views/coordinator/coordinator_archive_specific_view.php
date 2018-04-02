@@ -42,7 +42,21 @@
               <div class="box-header with-border">
                 <h3 class="box-title"> Abstract: <br> </h3>
                 <h5> 
-                  <?php echo $thesis['abstract'];?>
+                  <?php 
+                    echo $thesis['abstract'];
+
+
+                    if(sizeof($uploads) != 0)
+                    {
+                      $link = site_url('coordinator/download_file/'.$uploads[sizeof($uploads)-1]['upload_name']);
+                      echo '<br><br>Download: <a href="'.$link.'">Revised Document #'.sizeof($uploads).'</a>';
+                    }
+                    else
+                    {
+                      echo "<br><br>Download: No Revised Document";
+                    }
+
+                  ?>
                 </h5>
               </div>
             

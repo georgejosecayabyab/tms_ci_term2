@@ -34,12 +34,14 @@
               
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <form class="form-horizontal" method="POST">
-                <div class="form-group">
+                
+                <!-- <div class="form-group">
                   <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
                   <div class="col-sm-8">
                     <input class="form-control" id="inputFirstName" placeholder="Name" value="<?php echo $faculty_data['FIRST_NAME'];?>">
                   </div>
                 </div>
+
                 <div class="form-group">
                   <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
                   <div class="col-sm-8">
@@ -60,7 +62,8 @@
                       </select>
                     </span>
                   </div>
-                </div>
+                </div> -->
+
                 <div class="form-group ">
                   <label for="allSpecialization" class="col-sm-2 control-label">Specialization</label>
                   

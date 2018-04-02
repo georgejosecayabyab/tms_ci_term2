@@ -35,6 +35,7 @@
         <thead>
           <tr>
             <th>Topic</th>
+            <th>Members</th>
             <th>Course</th>
             <th>Panel</th>
             <th>Defense Date (mm/dd/yy)</th>
@@ -46,7 +47,20 @@
         <tbody>
           <?php foreach($group as $row):?>
             <tr>
-              <td><?php echo $row['THESIS_TITLE'];?></td><!--palitan mo to george-->
+              <td><?php echo ucwords(strtolower($row['THESIS_TITLE']));?></td><!--palitan mo to george-->
+              <td>
+                <?php
+                  $tags = '';
+                  foreach($member as $mrow)
+                  {
+                    if($row['THESIS_ID']==$mrow['thesis_id'])
+                    {
+                      $tags.= ucwords(strtolower($mrow['name'])).', ';
+                    }
+                  }
+                  echo substr(trim($tags), 0, -1);
+                ?>
+              </td>
               <td><?php echo $row['COURSE_CODE'];?></td>
               <td>
                 <?php if($row['INITIAL_VERDICT'] != 'NOV'):?>
@@ -58,8 +72,8 @@
                     {
                       if($row['GROUP_ID']==$prow['group_id'])
                       {
-                        $panels.=$prow['name'].', ';
-                        $panels2.=$prow['name'].', ';
+                        $panels.=ucwords(strtolower($prow['name'])).', ';
+                        $panels2.=ucwords(strtolower($prow['name'])).', ';
                       }
                     }
                     if($panels=='None -'){
@@ -82,8 +96,17 @@
                       {
                         if($row['GROUP_ID']==$prow['group_id'])
                         {
-                          $panels.=$prow['name'].', ';
-                          $panels2.=$prow['name'].', ';
+                          $active = "";
+                          if($prow['is_active'] == 1)
+                          {
+                            $active = "";
+                          }
+                          else
+                          {
+                            $active = "(Inactive)";
+                          }
+                          $panels.=ucwords(strtolower($prow['name'])).$active.', ';
+                          $panels2.=ucwords(strtolower($prow['name'])).$active.', ';
                         }
                       }
                       if($panels=='None -'){
@@ -100,9 +123,10 @@
                 <?php endif;?>
               </td>
               <td>
+                <input type="hidden" value="<?php echo ucwords(strtolower($row['THESIS_TITLE']));?>" id="group_thesis_title">
                 <?php if($row['FINAL_VERDICT']!="P" && $row['FINAL_VERDICT']!="F"):?>
                   <?php if($row['DEFENSE_DATE']==null):?>
-                    <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate">
+                    <button value="<?php echo $row['GROUP_ID'];?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate" onclick="change_date_val(this)">
                     Set Date <i class="fa fa-fw fa-calendar-plus-o"> </i>
                     </button>
                   <?php else:?>
@@ -114,7 +138,7 @@
                       $formatted_time_new = date('g:i A', $time_new);
                       $date_time = $formatted_date_new.' - '.$formatted_time_new;
                     ?>
-                    <button value="<?php echo $row['GROUP_ID'];?>" id="<?php echo $formatted_date_new;?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate">
+                    <button value="<?php echo $row['GROUP_ID'];?>" id="<?php echo $formatted_date_new;?>" type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-defensedate" onclick="change_date_val(this)">
                     <?php echo $date_time;?> <i class="fa fa-fw fa-calendar-check-o"> </i>
                     </button>
                   <?php endif;?>
@@ -226,8 +250,10 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Assign Defense Date</h4>
+        </button> 
+        <div id="defense_date_group_name">
+          <h4 class="modal-title">Assign Defense Date</h4>
+        </div>
       </div>
 
       <div class="modal-body">
@@ -240,6 +266,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
+
                   <input type="text" class="form-control pull-right" id="datepicker">
                   <input type="hidden" id="base" value="<?php echo base_url(); ?>">
                 </div>
@@ -254,7 +281,9 @@
                Select a date for suggestions
               </div>
 
-              
+              <div id="conflict"> 
+              </div>
+
             </div>
             
             <br>

@@ -28,6 +28,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap-datepicker.min.css">
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/select2.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap-timepicker.min.css">
     
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -136,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="<?php echo $active_tab['archive'];?>"><a href="<?php echo site_url('coordinator/view_archive');?>"><i class="fa fa-archive"></i> <span>Archive</span></a></li>
           <li class="<?php echo $active_tab['specialization'];?>"><a href="<?php echo site_url('coordinator/view_specialization');?>"><i class="fa fa-lightbulb-o"></i> <span>Specialization</span></a></li>
           <li class="<?php echo $active_tab['term'];?>"><a href="<?php echo site_url('coordinator/view_set_term');?>"><i class="fa fa-calendar"></i> <span>Set Current Term </span></a></li>
-          <!-- <li class="<?php echo $active_tab['time'];?>"><a href="<?php echo site_url('coordinator/view_set_time_slot');?>"><i class="fa fa-calendar-times-o"></i> <span>Set Time Slot </span></a></li> -->
+          <li class="<?php echo $active_tab['time'];?>"><a href="<?php echo site_url('coordinator/view_set_time_slot');?>"><i class="fa fa-calendar-times-o"></i> <span>Set Time Slot </span></a></li>
           
         </ul>
         <!-- /.sidebar-menu -->

@@ -111,12 +111,12 @@
             <div class="timeline-body">
               <div class="form-group">
                 <label></label>
-                <textarea name="reply" class="form-control" rows="3" placeholder="Post a reply about the discussion."></textarea>
+                <textarea name="reply" id=com class="form-control" rows="3" placeholder="Post a reply about the discussion."></textarea>
               </div>
             </div>
             <div class="timeline-footer">
               
-              <input type="submit" name="submit_reply" value="Submit" class="btn btn-primary btn-xs">
+              <input type="submit" id=sub1 name="submit_reply" value="Submit" class="btn btn-primary btn-xs">
             </div>
           </form>
         </div>
@@ -124,3 +124,15 @@
     </ul>
   </div>
 </div>
+<style type="text/css">
+              #sub1{
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 20px;
+              }
+              #com{
+                margin-top: 20px;
+                width: 90%;
+                margin-left: 20px;
+              }
+            </style>
