@@ -403,7 +403,7 @@
 		}
 
 		/**
-		 * Gets the new notifictions of the current student
+		 * Inserts a new notifictions of the current student
 		 * @param  Array $data Contains the information of the thesis related events 
 		 */
 		public function insert_event($data)
@@ -448,7 +448,7 @@
 			return $query->result_array();
 		}
 		/**
-		 * Gets the topic of the disccusion
+		 * Gets the panel group information of the student's group
 		 * @param  Integer $user_id User ID of the student
 		 * @param  Integer $group_id Group ID of the student
 		 * @return Returns an array containing the panel group information of the student's group
@@ -515,7 +515,7 @@
 			$this->db->insert('discussion', $data);
 		}
 		/**
-		 * Inserts a new discussion
+		 * Inserts a discussion
 		 * @param  Array $data Contains the content of the discussion
 		 */
 		public function insert_new_discussion($data)
@@ -622,7 +622,7 @@
 			return $query->first_row('array');
 		}
 		/**
-		 * Gets the current schedule of the student
+		 * Gets the thesis comments
 		 * @param  Interger @group_id Group ID of the student
 		 * @return Returns an array containing the thesis comments
 		 */		
@@ -753,7 +753,7 @@
 			return $query->result_array();
 		}
 		/**
-		 * Gets the uploaded revisions of the student's group
+		 * Gets the schedule of the student's group
 		 * @param  Interger @user_id User ID of the student
 		 * @return Returns an array containing the schedule of the student
 		 */
@@ -778,7 +778,7 @@
 			$this->db->delete('thesis_specialization'); 
 		}
 		/**
-		 * Inserts a specialization on the thesis project of the student's group
+		 * Inserts a meeting on the student's group
 		 * @param  Array $data Array containing the information of the meeting
 		 */
 		public function insert_meeting($data)

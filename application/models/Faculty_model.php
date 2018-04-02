@@ -2,7 +2,11 @@
 	
 	class faculty_model extends CI_Model
 	{
-		//get faculty detail using id
+		/**
+		 * Gets the faculty details
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing the faculty details of the user
+		 */
 		public function get_faculty_detail($user_id)
 		{
 			$sql = "SELECT F.USER_ID, FIRST_NAME, LAST_NAME, EMAIL, R.RANK
@@ -14,7 +18,11 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array'); 
 		}
-
+		/**
+		 * Gets the faculty specialization
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing the specialization of the user
+		 */
 		public function get_faculty_specialization($user_id)
 		{
 			$sql = "SELECT FS.USER_ID, S.SPECIALIZATION, S.SPECIALIZATION_ID 
@@ -26,7 +34,11 @@
 			return $query->result_array();
 		}
 
-		//get advisee groups
+		/**
+		 * Gets the groups who have the current faculty as their adviser
+		 * @param  Integer $faculty_id Faculty ID of current user 
+		 * @return Returns an array containing the groups under the faculty
+		 */
 		public function get_active_advisee_thesis_groups($faculty_id)
 		{
 			$sql = "SELECT GROUP_ID, GROUP_NAME, THESIS_TITLE	
@@ -39,7 +51,12 @@
 			return $query->result_array();
 		}
 
-		//get defense list as a panel or adviser
+		
+		/**
+		 * Gets the defense dates of the groups who have the current faculty as their panel
+		 * @param  Integer $faculty_id Faculty ID of current user 
+		 * @return Returns an array containing the defense date of the groups who have the current faculty as their panel
+		 */
 		public function get_defense_list($faculty_id)
 		{
 			$sql = "SELECT DD.GROUP_ID, DATE(DD.DEFENSE_DATE) AS DEF_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS START, TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS END, DD.VENUE, DD.STATUS, TG.GROUP_NAME, DATEDIFF(DD.DEFENSE_DATE, CURDATE()) AS DIFF, CURDATE() AS 'NOW'
@@ -53,8 +70,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
-		//get advisee thesis group members
+		/**
+		 * Gets the group members who have the current faculty as their adviser
+		 * @param  Integer $faculty_id Faculty ID of current user 
+		 * @return Returns an array containing the group members under the faculty
+		 */
 		public function get_advisee_thesis_group_members($faculty_id)
 		{
 			$sql = "SELECT *
@@ -69,7 +89,11 @@
 			return $query->result_array();
 		}
 
-		//get num notification on each group under advisee
+		/**
+		 * Gets the number of notification of each group that the faculty handlesr
+		 * @param  Integer $faculty_id Faculty ID of current user 
+		 * @return Returns an array containing the count of notification for each group handled by the faculty
+		 */
 		public function get_notification_count_under_advisee($faculty_id)
 		{
 			$sql = "SELECT TG.GROUP_NAME, TG.GROUP_ID, N.CREATED_BY, CONCAT(U.FIRST_NAME, ' ', U.LAST_NAME) AS CREATOR, N.TARGET_USER_ID, N.NOTIFICATION_DETAILS, N.IS_READ, COUNT(TG.GROUP_ID) AS NOTIF
@@ -89,8 +113,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
-		//get notifications of group, not working yet(10/24/2017)
+		/**
+		 * Gets the notifications of a specific group that the faculty handles
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty 
+		 * @return Returns an array containing the notifications for a specific group handled by the faculty
+		 */
 		public function get_notifications($group_id)
 		{
 			$sql = "SELECT N.NOTIFICATION_ID, N.CREATED_BY, U.FIRST_NAME, U.LAST_NAME, N.TARGET_USER_ID, N.IS_READ, TG.GROUP_ID, TG.GROUP_NAME
@@ -105,8 +132,10 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
-		//get discussion
+		/**
+		 * Gets all the discussion of a specific group handled by the faculty 
+		 * @return Returns an array containing the discussions for a specific group handled by the faculty
+		 */
 		public function get_discussion()
 		{	
 			$sql = "SELECT GROUP_ID, COUNT(GROUP_ID) AS 'COUNT'
@@ -116,7 +145,10 @@
 			return $query->result_array();
 		}
 
-		//get discussion reply  count
+		/**
+		 * Gets the count of replies in a specific discussion of a specific group handled by the faculty 
+		 * @return Returns an array containing the count of replies in a specific discussion for a specific group handled by the faculty
+		 */
 		public function get_discussion_reply_count()
 		{	
 			$sql = "SELECT TD.TOPIC_DISCUSSION_ID, COUNT(D.DISCUSSION_ID) AS 'COUNT', TD.GROUP_ID
@@ -127,7 +159,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets a specific discussion of a specific group handled by the faculty 
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty 
+		 * @return Returns an array containing a specific discussions for a specific group handled by the faculty
+		 */
 		public function get_discussion_specific($group_id)
 		{	
 			$sql = "SELECT TD.GROUP_ID, TD.TOPIC_DISCUSSION_ID, TD.TOPIC_NAME, TD.TOPIC_INFO, TD.CREATED_BY, CONCAT(U.FIRST_NAME, ' ',U.LAST_NAME) AS 'NAME', TIME_FORMAT(TD.DATE_TIME, '%h:%i %p') AS 'TIME', DATE(TD.DATE_TIME) AS 'DATE'
@@ -138,7 +174,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-		//get group info
+		/**
+		 * Gets the detials of a specific group handled by the faculty 
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty 
+		 * @return Returns an array containing details for a specific group handled by the faculty
+		 */
 		public function get_group_details($group_id)
 		{
 			$sql = "SELECT * 
@@ -153,7 +193,11 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-		//get group defense
+		/**
+		 * Gets the defense of a specific group handled by the faculty 
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty 
+		 * @return Returns an array containing defense date for a specific group handled by the faculty
+		 */
 		public function get_defense($group_id)
 		{
 			$sql = "SELECT DATE(DEFENSE_DATE) AS DEF_DATE, VENUE
@@ -164,7 +208,11 @@
 			return $query->first_row('array');
 		}
 
-		//get group thesis specialization
+		/**
+		 * Gets the specializations of a specific group handled by the faculty 
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty 
+		 * @return Returns an array containing specializations for a specific group handled by the faculty
+		 */
 		public function get_thesis_specialization($group_id)
 		{
 			$sql = "SELECT * 
@@ -179,9 +227,12 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-		// Jego
-
-		//get panel thesis group memeber (Thesis group members)
+		
+		/**
+		 * Gets the groups who have the current faculty as their panel
+		 * @param  Integer $id user ID of of the current faculty 
+		 * @return Returns an array containing the groups with the current faculty as their panel
+		 */
 		public function get_panel_thesis_group_members($id)
 		{
 			$sql ="SELECT TG.GROUP_ID, U.FIRST_NAME, U.LAST_NAME
@@ -198,7 +249,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-		//get thesis group tags (Thesis Specialization)
+		/**
+		 * Gets the group tags of groups who have the current faculty as their panel
+		 * @param  Integer $id user ID of of the current faculty 
+		 * @return Returns an array containing the group tags of groups with the current faculty as their panel
+		 */
 		public function get_panel_thesis_group_tags($id)
 		{
 			$sql = "SELECT S.specialization, TG.group_id
@@ -216,7 +271,11 @@
 
 		}
 
-		//get panel details (Time, Date, Topic, State)
+		/**
+		 * Gets the details of groups who have the current faculty as their panel
+		 * @param  Integer $id user ID of of the current faculty 
+		 * @return Returns an array containing the details of groups with the current faculty as their panel
+		 */
 		public function get_panel_details($id)
 		{
 			$sql = "SELECT PG.PANEL_GROUP_ID, PG.PANEL_ID, PG.STATUS, PG.GROUP_ID, TG.GROUP_NAME, TG.ADVISER_ID, TG.THESIS_ID, TG.COURSE_CODE, DD.DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS START, TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS END, DD.VENUE, DD.STATUS, TG.INITIAL_VERDICT, IV.VERDICT AS 'IV_CODE', TG.FINAL_VERDICT, FV.VERDICT AS 'FV_CODE'
@@ -234,7 +293,10 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the count of thesis comments made by other panelist or students in groups who have the current user as their panel
+		 * @return Returns an array containing the count of comments in thesis of groups with the current faculty as their panel
+		 */
 		public function get_thesis_comment_count()
 		{
 			$sql = "SELECT PG.GROUP_ID, COUNT(THESIS_COMMENT) AS 'COUNT'
@@ -245,7 +307,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the thesis comments of groups who have been paneled by the current faculty
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty as a panel
+		 * @return Returns an array containing the thesis comments of groups who have been paneled by the current faculty
+		 */
 		public function get_thesis_comment($group_id)
 		{
 			$sql = "SELECT * FROM ((SELECT TC.THESIS_COMMENT_ID AS 'COMMENT_ID', TC.THESIS_COMMENT AS 'THESIS_COMMENT', PG.PANEL_GROUP_ID AS 'GROUP_GROUP_ID', PG.GROUP_ID AS 'GROUP_ID', TG.GROUP_NAME AS 'GROUP_NAME', U.USER_ID AS 'USER_ID', CONCAT(U.FIRST_NAME,' ', U.LAST_NAME) AS 'COMMENTED BY', DATE(TC.DATE_TIME) AS 'DATE', TIME_FORMAT(TIME(TC.DATE_TIME), '%h:%i %p') AS 'TIME', U.USER_TYPE AS 'TYPE'
@@ -274,30 +340,43 @@
 			return $query->result_array();
 
 		}
-
+		/**
+		 * Gets the group ID of groups who have been paneled by the current faculty
+		 * @param  Integer $user_id Specific user ID of the current User
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty as a panel 
+		 * @return Returns an array containing the group ID of groups who have been paneled by the current faculty
+		 */
 		public function get_panel_group_id($user_id, $group_id)
 		{
 			$sql = "SELECT * FROM PANEL_GROUP WHERE PANEL_ID=".$user_id." AND GROUP_ID=".$group_id.";";
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Inserts a thesis comment as a panel
+		 * @param  Array $data Contains the content
+		 */
 		public function insert_thesis_comment($data)
 		{
 			//escape every variable
 			$this->db->insert('thesis_comment', $data);
 
 		}
-
+		/**
+		 * Deletes a thesis comment as a panel
+		 * @param  Integer $id Comment ID to be removed
+		 */
 		public function delete_thesis_comment($id)
 		{
 			//escape all variable
 			$this->db->where('thesis_comment_id', $id);
 			$this->db->delete('thesis_comment'); 
 		}
-
-
-
+		/**
+		 * Gets the specific thesis comment of groups who have been paneled by the current faculty
+		 * @param  Integer $thesis_comment_id Specific thesis comment id
+		 * @return Returns an array containing the specific thesis comment of groups who have been paneled by the current faculty
+		 */
 		public function get_thesis_group_by_thesis_comment_id($thesis_comment_id)
 		{
 			$sql = "SELECT *
@@ -308,7 +387,11 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Gets the new notifications of the user
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing the new notifications of the user
+		 */
 		public function get_new_faculty_notification($user_id)
 		{
 			$sql = "SELECT * 
@@ -318,7 +401,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets all notifications of the user
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing all notifications of the user
+		 */
 		public function get_all_faculty_notification($user_id)
 		{
 			$sql = "SELECT * 
@@ -329,7 +416,10 @@
 			return $query->result_array();
 			
 		}
-
+		/**
+		 * Updates the notification to make it read
+		 * @param  Integer $notification_id Specific notification ID of current user 
+		 */
 		public function update_notification($notification_id)
 		{
 			$data = array(
@@ -339,7 +429,11 @@
 			$this->db->where('notification_id', $notification_id);
 			$this->db->update('notification', $data); 
 		}
-
+		/**
+		 * Gets all notifications of the user as a panel
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing all notifications of the user as a panel
+		 */
 		public function get_notifications_as_panel($user_id)
 		{	
 			$sql = "SELECT N.NOTIFICATION_ID, N.NOTIFICATION_DETAILS, PG.PANEL_ID, TG.GROUP_ID, TG.GROUP_NAME, TIME_FORMAT(N.DATE_CREATED, '%h:%i %p') AS 'TIME'
@@ -356,7 +450,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets all notifications of the user as an adviser
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing all notifications of the user as an adviser
+		 */
 		public function get_notifications_as_advisee($user_id)
 		{	
 			$sql = "SELECT N.NOTIFICATION_ID, N.NOTIFICATION_DETAILS, TG.GROUP_ID, TG.GROUP_NAME, TIME_FORMAT(N.DATE_CREATED, '%h:%i %p') AS 'TIME', N.IS_READ
@@ -370,7 +468,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets all specialization not assign to the current user
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing all specialization not assigned to the current user
+		 */
 		public function get_all_specialization($user_id)
 		{
 			$sql = "SELECT *
@@ -379,13 +481,21 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Inserts a notification
+		 * @param  Array $data Contains the content
+		 */
 		public function insert_notification($data)
 		{
 			//escape every variable
 			$this->db->insert('notification', $data);
 		}
-
+		/**
+		 * Gets the thesis comments relevant to the faculty as a panel
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty as a panel
+		 * @param  Integer $user_id Specific user ID of the current Use 
+		 * @return Returns an array containing the thesis comments relevant to the faculty as a panel
+		 */
 		public function get_all_thesis_comment_notification_target($group_id, $user_id)
 		{
 			$sql = "SELECT * 
@@ -399,7 +509,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the topic from a discussion in a group as an adviser
+		 * @param  Integer $topic_id Specific topic ID  
+		 * @return Returns an array containing the topic from a discussion in a group as an adviser
+		 */
 		public function get_topic($topic_id)
 		{
 			$sql = "SELECT *
@@ -412,13 +526,22 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Gets the replies from a discussion in a group as an adviser
+		 * @param  Integer $id Specific discussion ID  
+		 * @return Returns an array containing the replies from a discussion in a group as an adviser
+		 */
 		public function get_discussion_reply($id)
 		{
 			$sql = "SELECT * FROM DISCUSSION WHERE DISCUSSION_ID=".$id.";";
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
+		/**
+		 * Gets the content from a discussion in a group as an adviser
+		 * @param  Integer $topic_id Specific topic ID  
+		 * @return Returns an array containing the content from a discussion in a group as an adviser
+		 */
 
 		public function get_topic_discussion($topic_id)
 		{
@@ -433,13 +556,21 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Inserts a reply in a discussion as an adviser
+		 * @param  Array $data Contains the content
+		 */
 		public function insert_discussion_reply($data)
 		{
 			//escape every variable
 			$this->db->insert('discussion', $data);
 		}
-
+		/**
+		 * Gets the discussion replies relevant to the faculty as a adviser
+		 * @param  Integer $group_id Specific group ID of ones handled by the current faculty as an adviser
+		 * @param  Integer $user_id Specific user ID of the current Use 
+		 * @return Returns an array containing the discussions relevant to the faculty as an adviser
+		 */
 		public function get_all_discussion_target($group_id, $user_id)
 		{
 			$sql = "SELECT * 
@@ -451,7 +582,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the topic id by the discussion id
+		 * @param  Integer $discussion_id Specific discussion ID  
+		 * @return Returns an array containing topic id with the same discussion id
+		 */
 		public function get_topic_id_by_discussion_id($discussion_id)
 		{
 			$sql = "SELECT * 
@@ -460,20 +595,32 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Deletes a discussion reply as an adviser
+		 * @param  Integer $id Comment ID to be removed
+		 */
 		public function delete_discussion_reply($id)
 		{
 			//escape all variable
 			$this->db->where('discussion_id', $id);
 			$this->db->delete('discussion'); 
 		}
-
+		/**
+		 * Updates a discussion reply as an adviser
+		 * @param  Integer $id Comment ID to be updated
+		 * @param  Array $data Content of the update
+		 */
 		public function update_discussion_reply($id, $data)
 		{
 			$this->db->where('discussion_id', $id);
 			$this->db->update('discussion', $data); 
 		}
 
+		/**
+		 * Gets all the ranks
+		 * @param  Integer $user_id User ID of current user 
+		 * @return Returns an array containing the ranks
+		 */
 		public function get_all_rank($user_id)
 		{
 			$sql = "SELECT RANK_CODE, RANK 
@@ -482,20 +629,30 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();	
 		}
-
+		/**
+		 * Inserts a specialization on the faculty specialization
+		 * @param  Integer @user_id User ID of the current user
+		 * @param  String @tag_name Specialization inputted
+		 */
 		public function insert_faculty_specialization($user_id, $tag_name)
 		{
 			$sql = "INSERT INTO FACULTY_SPECIALIZATION 
 					VALUES (".$user_id.", (SELECT SPECIALIZATION_ID FROM SPECIALIZATION WHERE SPECIALIZATION='".$tag_name."'));";
 			$this->db->query($sql);
 		}
-
+		/**
+		 * Inserts a new discussion
+		 * @param  Array $data Contains the content of the discussion
+		 */
 		public function insert_new_discussion($data)
 		{
 			//escape every variable
 			$this->db->insert('topic_discussion', $data);
 		}
-
+		/**
+		 * Gets the archived thesis done by past students 
+		 * @return Returns an array containing the archived thesis 
+		 */
 		public function archive_thesis()
 		{
 			$sql = "select t.thesis_id, t.thesis_title, tg.group_id, t.abstract, tg.course_code
@@ -506,7 +663,10 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the members of the archived thesis project 
+		 * @return Returns an array contating the group memebers of the archived thesis
+		 */
 		public function archive_members()
 		{
 			$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name', tg.course_code
@@ -520,8 +680,10 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
-
+		/**
+		 * Gets the specialization of the archived thesis project 
+		 * @return Returns an array containing the specialization of the archived thesis project
+		 */
 		public function archive_specialization()
 		{
 			$sql = "select s.specialization, ts.thesis_id
@@ -531,7 +693,10 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the panelist of the arhived thesis project
+		 * @return Returns an array containing the panelist of the archived thesis project
+		 */
 		public function archive_panels()
 		{
 			$sql = "select tg.thesis_id, pg.group_id, concat(u.first_name,' ', u.last_name) as 'name'
@@ -545,7 +710,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the thesis by the thesis id
+		 * @param  Integer $thesis_id Specific thesis ID  
+		 * @return Returns an array containing thesis with the same thesis id
+		 */
 		public function get_thesis_by_thesis_id($thesis_id)
 		{	
 			$sql = "SELECT * FROM THESIS WHERE THESIS_ID=".$thesis_id.";";
@@ -558,21 +727,33 @@
 		// {
 		// 	$this->db->insert('time', $data);
 		// }
-
+		/**
+		 * Inserts a schedule
+		 * @param  Interger @user_id User ID of the faculty
+		 * @param  Interger @time_id Time ID of the chosen time slot
+		 * @param  String @day Chosen day
+		 */
 		public function insert_schedule($user_id, $time, $day)
 		{
 			$sql = "INSERT INTO SCHEDULE (user_id, time_id, day)
 					VALUES (".$user_id.", (select time_id from time where start_time='".$time."'), '".$day."');";
 			$this->db->query($sql);
 		}
-
+		/**
+		 * Deletes the current schedule of the faculty
+		 * @param  Integer $user_id User ID of the faculty
+		 */
 		public function delete_schedule($user_id)
 		{
 			//escape all variable
 			$this->db->where('user_id', $user_id);
 			$this->db->delete('schedule'); 
 		}
-
+		/**
+		 * Gets the latest uploaded document by the group as a panel
+		 * @param  Interger @group_id Specific group ID
+		 * @return Returns an array containing the latest uploaded bu the group as a panel
+		 */		
 		public function latest_uploaded($group_id)
 		{
 			$sql = "SELECT * 
@@ -582,7 +763,11 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Gets the uploaded revisions of the group as a panel
+		 * @param  Interger @group_id Specific group ID
+		 * @return Returns an array uploaded revisions
+		 */	
 		public function get_uploads_revision($group_id)
 		{
 			$sql = "SELECT * 
@@ -593,7 +778,11 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the uploaded thesis with revisions of the group as a panel
+		 * @param  Interger @upload_id Specific upload ID
+		 * @return Returns an array containing uploaded thesis with revisions
+		 */	
 		public function get_upload_thesis_revision($upload_id)
 		{
 			$sql = "SELECT * 
@@ -604,7 +793,11 @@
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Gets the schedule of the faculty
+		 * @param  Interger @user_id User ID of the user
+		 * @return Returns an array containing the schedule of the user
+		 */
 		public function get_sched($user_id)
 		{
 			$sql = "SELECT S.USER_ID, S.DAY, TIME_FORMAT(T.START_TIME, '%h:%i %p') AS START, TIME_FORMAT(T.END_TIME, '%h:%i %p') AS END
@@ -615,7 +808,12 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Gets the current day schedule of the user
+		 * @param  Interger @user_id User ID of the user
+		 * @param  String @day Chosen day
+		 * @return Returns an array containing the complete shcdule for the day of the user
+		 */		
 		public function get_schedule_complete_by_day($user_id, $day)
 		{
 			$sql = "SELECT TIME_FORMAT(TIME(T.START_TIME), '%h:%i %p') AS 'START_TIME'
@@ -626,26 +824,39 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-
+		/**
+		 * Deletes specialization from the faculty
+		 * @param  Integer @user_id User ID of the user
+		 */
 		public function delete_faculty_tags($user_id)
 		{
 			//escape all variable
 			$this->db->where('user_id', $user_id);
 			$this->db->delete('faculty_specialization'); 
 		}
-
+		/**
+		 * Inserts a meeting on the student's group
+		 * @param  Array $data Array containing the information of the meeting
+		 */
 		public function insert_meeting($data)
 		{
 			$this->db->insert('meeting', $data);
 		}
-
+		/**
+		 * Gets the group id by the thesis id
+		 * @param  Integer $thesis_id Specific thesis ID  
+		 * @return Returns an array containing group id with the same thesis id
+		 */
 		public function get_group_id_by_thesis_id($thesis_id)
 		{
 			$sql = "select * from thesis_group where thesis_id=".$thesis_id."";
 			$query = $this->db->query($sql);
 			return $query->first_row('array');
 		}
-
+		/**
+		 * Gets the all time
+		 * @return Returns an array containing the time slots
+		 */
 		public function get_all_time()
 		{
 			$sql = "SELECT TIME_ID, TIME_FORMAT(START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(END_TIME, '%h:%i %p') AS 'END'
