@@ -7,7 +7,11 @@
 			parent::__construct();
 		}
 
-		//check if user exist
+		/**
+		 * Checks if the inputted email and password are valid
+		 * @param  String $email Inputted email of the user
+		 * @param  String $password Inputted password of the user
+		 */
 		public function if_user($email, $password)
 		{
 			//SELECT * FROM USER WHERE EMAIL=$EMAIL AND PASSWORD=$PASSWORD;
@@ -18,8 +22,10 @@
 			return $query->first_row('array');
 		}
 
-
-		//check if student
+		/**
+		 * Checks if the user is a student
+		 * @param  Integer $user_id User ID of current user 
+		 */
 		public function is_student($user_id)
 		{
 			//SELECT * FROM STUDENT WHERE USER_ID=$USER_ID;
@@ -39,7 +45,10 @@
 			return $query->first_row('array');
 		}
 
-		//check if user exist
+		/**
+		 * Checks if the email input is a gmail account
+		 * @param  String $email Inputted email of the user
+		 */
 		public function if_user_gmail($email)
 		{
 			//SELECT * FROM USER WHERE EMAIL=$EMAIL;
@@ -49,7 +58,10 @@
 			return $query->first_row('array');
 		}
 
-		//get user/general details
+		/**
+		 * Gets the user details given the user id
+		 * @param  Integer $user_id User ID of the current user
+		 */
 		public function get_user_details($user_id)
 		{
 			if ($this->is_student($user_id) == 1)
@@ -66,7 +78,10 @@
 			}
 
 		}
-
+		/**
+		 * Checks if the user is a faculty
+		 * @param  Integer $user_id User ID of current user 
+		 */
 		public function if_coordinator($user_id)
 		{
 			$sql = "SELECT * FROM FACULTY WHERE USER_ID=".$user_id." AND IS_COORDINATOR=1;";
@@ -74,12 +89,17 @@
 			return $query->first_row('array');
 		}
 
-		//get student details
+		/**
+		 * Gets Student info
+		 * @param  Integer $user_id User ID of current user 
+		 */
 		public function get_student($user_id)
 		{
 			$sql = "SELECT";
 		}
-
+		/**
+		 * Gets the email of the current user 
+		 */
 		public function get_email()
 		{
 			$sql = "select email from user;";
@@ -87,7 +107,11 @@
 			return $query->result_array();
 
 		}
-
+		/**
+		 * Changes the password of the user 
+		 * @param Integer $user_id User ID of current user
+		 * @param String $newpass New password inputted by the user
+		 */	
 		public function change_password($user_id, $newpass)
 		{
 			$sql = "UPDATE `tms_ci`.`user` SET `password`=".$newpass." WHERE `user_id`= ".$user_id.";";
