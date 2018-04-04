@@ -4,8 +4,8 @@
 	class super_user_model extends CI_Model
 	{		
 		/**
-		 * @description [get_all_coordinators description]
-		 * @return [type] [description]
+		 * @description Gets all coordinators
+		 * @return array Returns array of coordinators
 		 */
 		public function get_all_coordinators()
 		{
@@ -17,9 +17,9 @@
 		}
 		
 		/**
-		 * @description [get_user_info description]
-		 * @param  [type] $user_id [description]
-		 * @return [type]          [description]
+		 * @description Gets user information of a user with a specific user id
+		 * @param  integer $user_id id of user
+		 * @return array          returns array containing user information
 		 */
 		public function get_user_info($user_id)
 		{
@@ -29,10 +29,9 @@
 		}
 		
 		/**
-		 * @description [update_user_status description]
-		 * @param  [type] $user_id [description]
-		 * @param  [type] $status  [description]
-		 * @return [type]          [description]
+		 * @description updates user's status to inactive or active
+		 * @param  integer $user_id id of user
+		 * @param  integer $status  status of user 
 		 */
 		public function update_user_status($user_id, $status)
 		{
@@ -43,9 +42,8 @@
 		}
 		
 		/**
-		 * @description [insert_user description]
-		 * @param  [type] $data [description]
-		 * @return [type]       [description]
+		 * @description Creates and inserts a new user to the database
+		 * @param  array $data array containing fields necessary to insert a new user to the database
 		 */
 		public function insert_user($data)
 		{
@@ -54,9 +52,9 @@
 		}
 		
 		/**
-		 * @description [get_user_by_email description]
-		 * @param  [type] $email [description]
-		 * @return [type]        [description]
+		 * @description Gets user information of user with a specific email address
+		 * @param  String $email email address of user
+		 * @return array        Returns empty array if user does not exist
 		 */
 		public function get_user_by_email($email)
 		{

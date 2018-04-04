@@ -1,7 +1,7 @@
 <?php
 
 	$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
-	$pdf->SetTitle('My Title');
+	$pdf->SetTitle('Models');
 	$pdf->SetHeaderMargin(30);
 	$pdf->SetTopMargin(10);
 	$pdf->setFooterMargin(20);
@@ -12,6 +12,10 @@
 	$pdf->AddPage();
 	ob_start();
 ?>
+	<h1>Models</h1>
+
+	<br pagebreak="true"/>
+
 	<h1>Coordinator Model</h1>
 	<?php foreach($coordinator_model as $api):?>
 		<div nobr="true">

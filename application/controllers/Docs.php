@@ -554,10 +554,10 @@ class Docs extends CI_Controller{
 		$data['home'] = $this->my_doc_api_detail('home');
 
 
-		// $data['coordinator_model'] = $this->my_doc_model_detail('super_user_model');
+		// $data['coordinator_model'] = $this->my_doc_model_detail('coordinator_model');
 		// $data['super_user_model'] = $this->my_doc_model_detail('super_user_model');
 		// $data['faculty_model'] = $this->my_doc_model_detail('faculty_model');
-		// $data['student_model'] = $this->my_doc_model_detail('super_user_model');
+		// $data['student_model'] = $this->my_doc_model_detail('student_model');
 		// $data['login_model'] = $this->my_doc_model_detail('login_model');
 		// $data['home_model'] = $this->my_doc_model_detail('home_model');
 
@@ -576,7 +576,7 @@ class Docs extends CI_Controller{
 		// $data['home'] = $this->my_doc_api_detail('home');
 
 
-		$data['coordinator_model'] = $this->my_doc_model_detail('super_user_model');
+		$data['coordinator_model'] = $this->my_doc_model_detail('coordinator_model');
 		$data['super_user_model'] = $this->my_doc_model_detail('super_user_model');
 		$data['faculty_model'] = $this->my_doc_model_detail('faculty_model');
 		$data['student_model'] = $this->my_doc_model_detail('student_model');
