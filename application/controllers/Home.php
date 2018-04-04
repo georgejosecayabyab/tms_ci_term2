@@ -11,10 +11,12 @@
 		}
 
 		/**
-		 * Loads home page
+		 * @description Loads home page
 		 */
 		public function index()
 		{
+			$g_client = $this->google->get_client();
+			$data['auth_url'] = $g_client->createAuthUrl();
 			$data['awards'] = $this->home_model->get_awards_list();
 			$data['news'] = $this->home_model->get_news_list();
 			$data['news_1'] = $this->home_model->get_specific_news(1);

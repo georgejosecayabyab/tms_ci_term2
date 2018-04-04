@@ -16,99 +16,9 @@
 
 		}
 
-		/**
-		 * Disabled
-		 * @return [type] [description]
-		 */
-		public function index_1()
-		{
-			//get post values
-			$email = $this->input->post("email");
-			$password = $this->input->post("password");
-
-			//set validations
-			$this->form_validation->set_rules("email", "Email", "trim|required");
-			$this->form_validation->set_rules("password", "Password", "trim|required");
-
-			if($this->form_validation->run() == FALSE)
-			{
-				//validation fails
-				$data['active_tab'] = array(
-					'home' => "",
-					'login' => "active",
-				);
-				$this->load->view('home/home_head', $data);
-				$this->load->view('home/login_view');
-				$this->load->view('home/home_foot');
-			}
-			else
-			{
-				//validation succeeds
-				if($this->input->post('login') == "Login")
-				{
-					//check if email and password exist
-					$result = $this->login_model->if_user($email, $password);
-					if(sizeof($result) > 0)
-					{
-						//user exist and correct
-						//set session
-						$user_type = $this->login_model->is_student($result['user_id']);
-						//This is an array
-						$data = [
-							'user_id' => $result['user_id'],
-							'user_type' => $user_type['user_type']
-						];
-
-						$this->session->set_userdata($data);
-
-						var_dump($this->session->userdata());
-						//student or faculty
-						if($user_type['user_type'] == 0)
-						{
-							//var_dump($this->session->userdata());
-							redirect("student");//student
-						}
-						else if($user_type['user_type'] == 1)
-						{
-							redirect("faculty");//faculty
-						}
-						else if($user_type['user_type'] == 3)
-						{
-							redirect("super_user");
-						}
-						else
-						{
-							//var_dump($this->session->userdata());
-							redirect("coordinator");
-							// $if_coordinator = $this->login_model->if_coordinator($result['user_id']);
-							// if(sizeof($if_coordinator) > 0)
-							// {
-							// 	redirect("coordinator");
-							// }
-							// else
-							// {
-							// 	redirect("faculty");//faculty
-							// }
-							
-						}
-					}
-					else
-					{
-						$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Invalid email and password!</div>');
-                        redirect('login/index_1');
-					}
-				}
-				else
-				{
-					redirect("#");
-				}
-			}
-
-
-		} 
 
 		/**
-		 * Function responsible for creating google client object
+		 * @description Function responsible for creating google client object
 		 * and redirecting to check() with the google token
 		 */
 		public function index()
@@ -128,7 +38,7 @@
 
 
 		/**
-		 * Checks what type of user is then redirects to proper home page
+		 * @description Checks what type of user is then redirects to proper home page
 		 * @param  String $url_encode      	Contains user email address and other information
 		 * @param  String $url_token_encode 	Contains google auth token
 		 */
@@ -183,7 +93,7 @@
 		}
 		
 		/**
-		 * Sets google auth
+		 * @description Sets google auth
 		 * @return object Google client object
 		 */
 		public function google()
@@ -203,7 +113,7 @@
 		}
 
 		/**
-		 * Encodes a string input
+		 * @description Encodes a string input
 		 * @param  String $inputStr 	String to be encoded
 		 * @return String				Encoded $inputStr		
 		 */
@@ -213,7 +123,7 @@
         }
 
         /**
-         * Decodes a string input
+         * @description Decodes a string input
          * @param  String $inputStr String to be decoded
          * @return String           Decoded $inputStr
          */

@@ -23,7 +23,7 @@
 		}
 
 		/**
-		 * Loads student home page 
+		 * @description Loads student home page 
 		 */
 		public function index()
 		{
@@ -49,7 +49,7 @@
 		}
 
 		/**
-		 * Loads page to view forms
+		 * @description Loads page to view forms
 		 */
 		public function view_forms()
 		{
@@ -74,7 +74,7 @@
 		}
 
 		/**
-		 * Loads page to view list of theses in the archive
+		 * @description Loads page to view list of theses in the archive
 		 */
 		public function view_archive()
 		{
@@ -101,7 +101,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific thesis in the archive
+		 * @description Loads page to view a specific thesis in the archive
 		 * @param  integer $thesis_id id of thesis
 		 */
 		public function view_archive_specific($thesis_id)
@@ -133,7 +133,7 @@
 		}
 
 		/**
-		 * Loads page to view information about the user's group
+		 * @description Loads page to view information about the user's group
 		 * @param  integer $group_id user's group id
 		 */
 		public function view_group($group_id=NULL)
@@ -189,7 +189,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 * @param  [type] $group_id  [description]
 		 * @param  [type] $upload_id [description]
 		 * @return [type]            [description]
@@ -217,7 +217,7 @@
 		// }
 
 		/**
-		 * Loads page to view and set user schedule
+		 * @description Loads page to view and set user schedule
 		 */
 		public function view_schedule()
 		{
@@ -250,7 +250,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 */
 		// public function view_edit_schedule()
 		// {
@@ -276,7 +276,7 @@
 		// }
 
 		/**
-		 * Loads page where user can create a new discussion
+		 * @description Loads page where user can create a new discussion
 		 */
 		public function view_new_discussion()
 		{
@@ -300,7 +300,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific discussion
+		 * @description Loads page to view a specific discussion
 		 * @param  integer $topic_id id of a specific topic
 		 */
 		public function view_discussion_specific($topic_id)
@@ -328,7 +328,7 @@
 		}
 
 		/**
-		 * Dowloads a form given the form's name
+		 * @description Dowloads a form given the form's name
 		 * @param  String $form_name Name of the form to be downloaded
 		 */
 		public function download_form($form_name)
@@ -346,7 +346,7 @@
 		}
 
 		/**
-		 * Downloads a file given the file's name
+		 * @description Downloads a file given the file's name
 		 * @param  [type] $file_name Name of the file to be downloaded
 		 */
 		public function download_file($file_name)
@@ -364,7 +364,7 @@
 		}
 
 		/**
-		 * Validates upload if it contains the revisions list and the revised document
+		 * @description Validates upload if it contains the revisions list and the revised document
 		 */
 		public function validate_thesis_uploads()
 		{
@@ -427,7 +427,7 @@
 		}
 
 		/**
-		 * Upload revised document and revisions list
+		 * @description Upload revised document and revisions list
 		 * @param  String $file_name Name of the revised document
 		 * @param  String $revision  Name of the revisions list document
 		 */
@@ -469,7 +469,7 @@
 		}
 
 		/**
-		 * Upload revised document and revisions list
+		 * @description Upload revised document and revisions list
 		 * @param  String $file_name   	Name of the revisions list document
 		 * @param  String $upload_name 	Name of the revised document
 		 * @param  String $date_time   	string containing date
@@ -502,7 +502,7 @@
 		}
 
 		/**
-		 * Gets all of the notifications of a user
+		 * @description Gets all of the notifications of a user
 		 */
 		public function get_all_notifications()
 		{
@@ -517,7 +517,7 @@
 		}
 
 		/**
-		 * Gets all of the unread notifications of a user
+		 * @description Gets all of the unread notifications of a user
 		 */
 		public function get_new_notifications()
 		{
@@ -532,7 +532,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 */
 		// public function get_schedule()
 		// {
@@ -573,7 +573,7 @@
 		// }
 
 		/**
-		 * Updates unread notifications to read
+		 * @description Updates unread notifications to read
 		 */
 		public function update_notification()
 		{
@@ -591,7 +591,7 @@
 		}
 
 		/**
-		 * Validates fields required in a discussion
+		 * @description Validates fields required in a discussion
 		 */
 		public function validate_discussion()
 		{
@@ -668,7 +668,7 @@
 		}
 
 		/**
-		 * Validates fields required in a reply
+		 * @description Validates fields required in a reply
 		 */
 		public function validate_reply()
 		{
@@ -720,7 +720,7 @@
 		}
 
 		/**
-		 * Valdiates fields required in an abstract
+		 * @description Valdiates fields required in an abstract
 		 */
 		public function validate_abstract()
 		{
@@ -749,7 +749,7 @@
 		}
 
 		/**
-		 * Inserts new event to the database
+		 * @description Inserts new event to the database
 		 * @param  String $discussion  String containing the dicussion
 		 * @param  integer $course_id  id of the cuer's course
 		 */
@@ -767,7 +767,7 @@
 		}
 
 		/**
-		 * Inserts new notification to the database
+		 * @description Inserts new notification to the database
 		 * @param  String $notification    String containing the notification
 		 * @param  integer $target_user_id user id of the intended receiver of the notification
 		 */
@@ -791,7 +791,7 @@
 		}
 
 		/**
-		 * Logs out logged in user
+		 * @description Logs out logged in user
 		 */
 		public function logout()
 		{
@@ -810,7 +810,7 @@
 		}
 
 		/**
-		 * Inserts user schedule to the database
+		 * @description Inserts user schedule to the database
 		 */
 		public function insert_schedule()
 		{
@@ -858,7 +858,7 @@
 		}
 
 		/**
-		 * Deletes user's old schedule
+		 * @description Deletes user's old schedule
 		 */
 		public function delete_schedule()
 		{
@@ -869,7 +869,7 @@
 		}
 
 		/**
-		 * Add specialization to user's group's list of specializations
+		 * @description Add specialization to user's group's list of specializations
 		 */
 		public function add_tags()
 		{
@@ -899,7 +899,7 @@
 		}
 
 		/**
-		 * Validates fields required in a meeting
+		 * @description Validates fields required in a meeting
 		 */
 		public function validate_meeting()
 		{
@@ -952,7 +952,7 @@
 		}
 
 		/**
-		 * Validates fields required in a comment
+		 * @description Validates fields required in a comment
 		 */
 		public function validate_comment() 
 		{

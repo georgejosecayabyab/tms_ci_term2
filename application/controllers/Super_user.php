@@ -29,7 +29,7 @@
 		}
 
 		/**
-		 * Loads super user home page
+		 * @description Loads super user home page
 		 */
 		public function index()
 		{
@@ -41,7 +41,7 @@
 
 
 		/**
-		 * Logs out logged in user
+		 * @description Logs out logged in user
 		 */
 		public function logout()
 		{
@@ -60,7 +60,7 @@
 		}
 
 		/**
-		 * Updates user's status to inactive or active
+		 * @description Updates user's status to inactive or active
 		 */
 		public function update_user_status()
 		{
@@ -83,7 +83,7 @@
 		}
 
 		/**
-		 * Inserts a new coordinator in the database
+		 * @description Inserts a new coordinator in the database
 		 */
 		public function insert_user()
 		{

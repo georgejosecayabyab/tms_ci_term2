@@ -29,7 +29,7 @@
 		}
 
 		/**
-		 * Loads home page of coordinator
+		 * @description Loads home page of coordinator
 		 */
 		public function index()
 		{
@@ -56,7 +56,7 @@
 		}
 
 		/**
-		 * Loads page to view list of active groups
+		 * @description Loads page to view list of active groups
 		 */
 		public function view_group()
 		{
@@ -86,7 +86,7 @@
 		}
 
 		/**
-		 * Loads page to view list of faculties
+		 * @description Loads page to view list of faculties
 		 */
 		public function view_faculty()
 		{
@@ -116,7 +116,7 @@
 		}
 
 		/**
-		 * Loads page to view list of all students
+		 * @description Loads page to view list of all students
 		 */
 		public function view_student()
 		{
@@ -145,7 +145,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 */
 		// public function view_announcement()
 		// {
@@ -171,7 +171,7 @@
 		// }
 
 		/**
-		 * Loads page to view list of announcements viewable in site home page
+		 * @description Loads page to view list of announcements viewable in site home page
 		 */
 		public function view_home_announcement()
 		{
@@ -197,7 +197,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 * Loads page where user can create new home announcement
 		 */
 		// public function view_new_home_announcement()
@@ -224,7 +224,7 @@
 		// }
 
 		/**
-		 * Loads page to view specific home announcement
+		 * @description Loads page to view specific home announcement
 		 * @param  integer $news_id id of the home announcement
 		 */
 		public function view_specific_home_announcement($news_id)
@@ -252,7 +252,7 @@
 		}
 
 		/**
-		 * Loads page to view list of announcement for each course
+		 * @description Loads page to view list of announcement for each course
 		 */
 		public function view_specific_announcement()
 		{
@@ -278,7 +278,7 @@
 		}
 
 		/**
-		 * Loads page where user can create a new announcmeent for a specific course
+		 * @description Loads page where user can create a new announcmeent for a specific course
 		 */
 		public function view_new_specific_announcement()
 		{
@@ -304,7 +304,7 @@
 		}
 
 		/**
-		 * Loads page where user can edit a specific announcement for a course
+		 * @description Loads page where user can edit a specific announcement for a course
 		 * @param  integer $event_id id of the specific edited announcement 
 		 */
 		public function view_edit_specific_announcement($event_id)
@@ -333,7 +333,7 @@
 		}
 
 		/**
-		 * Loads page to view list of forms for all courses
+		 * @description Loads page to view list of forms for all courses
 		 */
 		public function view_form()
 		{
@@ -361,7 +361,7 @@
 		}
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 */
 		// public function view_monitoring_report()
 		// {
@@ -387,7 +387,7 @@
 		// }
 
 		/**
-		 * Loads page to view list of theses in the archive
+		 * @description Loads page to view list of theses in the archive
 		 */
 		public function view_archive()
 		{
@@ -419,7 +419,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific thesis in the archive
+		 * @description Loads page to view a specific thesis in the archive
 		 * @param  integer $thesis_id id of thesis
 		 */
 		public function view_archive_specific($thesis_id)
@@ -453,7 +453,7 @@
 		}
 
 		/**
-		 * Loads page to view current term 
+		 * @description Loads page to view current term 
 		 */
 		public function view_set_term()
 		{
@@ -484,7 +484,7 @@
 		}
 
 		/**
-		 * Loads page to view list of specializations
+		 * @description Loads page to view list of specializations
 		 */
 		public function view_specialization()
 		{
@@ -510,7 +510,7 @@
 		}
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 */
 		// public function view_thesis()
 		// {
@@ -531,7 +531,7 @@
 		// }
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 */
 		// public function sample_common_free_time()
 		// {
@@ -543,7 +543,7 @@
 		// }
 
 		/**
-		 * Updates initial verdict of a group
+		 * @description Updates initial verdict of a group
 		 */
 		public function update_initial_group_verdict()
 		{
@@ -565,7 +565,7 @@
 		}
 
 		/**
-		 * Updates final verdict of a group
+		 * @description Updates final verdict of a group
 		 */
 		public function update_final_group_verdict()
 		{
@@ -578,7 +578,7 @@
 		}
 
 		/**
-		 * Gets defense dates of a specific panel on a specific date
+		 * @description Gets defense dates of a specific panel on a specific date
 		 */
 		public function get_panel_defense_date()
 		{
@@ -649,7 +649,7 @@
 		}
 
 		/**
-		 * Sets defense date of a specific group
+		 * @description Sets defense date of a specific group
 		 */
 		public function set_defense_date()
 		{
@@ -692,7 +692,7 @@
 		}
 
 		/**
-		 * Sets time to defense date of a specific group
+		 * @description Sets time to defense date of a specific group
 		 * @param integer $group_id id of the group
 		 * @param date $date       	date of defense date
 		 * @param integer $time_id  id of time according to the database 
@@ -742,7 +742,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 * @param  [type] $defense_date_id [description]
 		 * @param  [type] $start           [description]
 		 * @param  [type] $end             [description]
@@ -772,7 +772,7 @@
 		// }
 
 		/**
-		 * Uploads a form for a specific course
+		 * @description Uploads a form for a specific course
 		 */
 		public function upload_form()
 		{
@@ -810,7 +810,7 @@
 		}
 
 		/**
-		 * Deletes a form for a specific course
+		 * @description Deletes a form for a specific course
 		 * @param  integer $form_id id of the form to be deleted
 		 */
 		public function delete_form($form_id)
@@ -821,7 +821,7 @@
 		}
 
 		/**
-		 * Gets all of the specialization of a specific group
+		 * @description Gets all of the specialization of a specific group
 		 * @param  integer $group_id id of the group
 		 */
 		public function get_group_tags($group_id)
@@ -838,7 +838,7 @@
 		}
 
 		/**
-		 * Gets all possible panels for a specific group given the group's specializations
+		 * @description Gets all possible panels for a specific group given the group's specializations
 		 * @param  integer $group_id id of the group
 		 */
 		public function get_possible_panel($group_id)
@@ -851,7 +851,7 @@
 		}
 
 		/**
-		 * Gets all of a specific group's panelists
+		 * @description Gets all of a specific group's panelists
 		 * @param  integer $group_id id of the group
 		 */
 		public function get_group_panel($group_id)
@@ -863,7 +863,7 @@
 		}
 
 		/**
-		 * Gets all of a specific group's panelist' specializations
+		 * @description Gets all of a specific group's panelist' specializations
 		 * @param  integer $panel_id id of the panelist
 		 */
 		public function get_panel_tags($panel_id)
@@ -876,7 +876,7 @@
 		}
 
 		/**
-		 * Updates the panelists of a specific group
+		 * @description Updates the panelists of a specific group
 		 */
 		public function update_group_panelist()
 		{
@@ -950,7 +950,7 @@
 		}
 
 		/**
-		 * Validates required fields of a faculty
+		 * @description Validates required fields of a faculty
 		 */
 		public function validate_faculty()
 		{
@@ -994,7 +994,7 @@
 		}
 
 		/**
-		 * Validates required fields of a student
+		 * @description Validates required fields of a student
 		 */
 		public function validate_student()
 		{
@@ -1034,7 +1034,7 @@
 		}
 
 		/**
-		 * Creates a faculty
+		 * @description Creates a faculty
 		 * @param  String $email           email of the faculty
 		 * @param  String $first_name      first name of the faculty
 		 * @param  String $last_name       last name of the faculty
@@ -1062,7 +1062,7 @@
 		}
 
 		/**
-		 * Creates a student
+		 * @description Creates a student
 		 * @param  String $email           email of the student
 		 * @param  String $first_name      first name of the student
 		 * @param  String $last_name       last name of the student
@@ -1088,7 +1088,7 @@
 		}
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 * Deletes announcement viewable in site home page
 		 * @param  [type] $news_id id of announcement
 		 */
@@ -1100,7 +1100,7 @@
 		// }
 
 		/**
-		 * Deletes specific announcement of a course
+		 * @description Deletes specific announcement of a course
 		 * @param  integer $event_id id of the specific announcement
 		 */
 		public function delete_related_news($event_id)
@@ -1111,7 +1111,7 @@
 		}
 
 		/**
-		 * Validates required fields for a home announcement
+		 * @description Validates required fields for a home announcement
 		 */
 		public function validate_home_announcement()
 		{
@@ -1145,7 +1145,7 @@
 		}
 		
 		/**
-		 * Validate edits on the required fields for a home announcement
+		 * @description Validate edits on the required fields for a home announcement
 		 * @param  integer $news_id id of the home announcement
 		 */
 		public function validate_edited_home_announcement($news_id)
@@ -1194,7 +1194,7 @@
 		}
 
 		/**
-		 * Validates required fields for a specific announcement for a specific course
+		 * @description Validates required fields for a specific announcement for a specific course
 		 */
 		public function validate_specific_announcement()
 		{
@@ -1224,7 +1224,7 @@
 		}
 
 		/**
-		 * Validate edits on the required fields for a specific announcement for a specific course
+		 * @description Validate edits on the required fields for a specific announcement for a specific course
 		 * @param  integer $event_id id of the specific announcement
 		 */
 		public function validate_edited_specific_announcement($event_id)
@@ -1267,7 +1267,7 @@
 		}
 
 		/**
-		 * Dowloads a form given the form's name
+		 * @description Dowloads a form given the form's name
 		 * @param  String $form_name Name of the form to be downloaded
 		 */
 		public function download_form($form_id)
@@ -1287,7 +1287,7 @@
 		}
 
 		/**
-		 * Validates required fields for a specialization
+		 * @description Validates required fields for a specialization
 		 */
 		public function validate_specialization()
 		{
@@ -1311,7 +1311,7 @@
 		}
 
 		/**
-		 * Inserts a new specialization
+		 * @description Inserts a new specialization
 		 * @param  String $specialization name of the new specialization
 		 */
 		public function insert_specialization($specialization)
@@ -1324,7 +1324,7 @@
 		}
 
 		/**
-		 * Gets user information of a specific user
+		 * @description Gets user information of a specific user
 		 * @param  integer $user_id id of the specific user
 		 */
 		public function get_user_info($user_id)
@@ -1336,7 +1336,7 @@
 		}
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 */
 		// public function sample_year()
 		// {
@@ -1346,7 +1346,7 @@
 		// }
 
 		/**
-		 * Moves to the next designated term
+		 * @description Moves to the next designated term
 		 */
 		public function move_to_next_term()
 		{
@@ -1406,7 +1406,7 @@
 		}
 
 		/**
-		 * Inserts a new group
+		 * @description Inserts a new group
 		 */
 		public function insert_group()
 		{
@@ -1480,7 +1480,7 @@
 		}
 
 		/**
-		 * Logs out logged in user
+		 * @description Logs out logged in user
 		 */
 		public function logout()
 		{
@@ -1499,7 +1499,7 @@
 		}
 
 		/**
-		 * Loads page to set new timeslots
+		 * @description Loads page to set new timeslots
 		 */
 		public function view_set_time_slot()
 		{
@@ -1526,7 +1526,7 @@
 		}
 
 		/**
-		 * Gets the verdict of a specific group
+		 * @description Gets the verdict of a specific group
 		 * @param  integer $group_id id of the specific group
 		 */
 		public function get_verdict($group_id)
@@ -1540,7 +1540,7 @@
 		}
 
 		/**
-		 * Updates the status of a user to inactive or active
+		 * @description Updates the status of a user to inactive or active
 		 */
 		public function update_user_status()
 		{
@@ -1563,7 +1563,7 @@
 		}
 
 		/**
-		 * Gets all students, that are active and not a part of any group, of a specific course 
+		 * @description Gets all students, that are active and not a part of any group, of a specific course 
 		 */
 		public function get_specific_course_students()
 		{
@@ -1575,7 +1575,7 @@
 		}
 
 		/**
-		 * Updates the time table of the database
+		 * @description Updates the time table of the database
 		 */
 		public function update_time()
 		{
@@ -1649,8 +1649,8 @@
 		}
 
 		/**
-		 * Downloads a file given the file's name
-		 * @param  [type] $file_name Name of the file to be downloaded
+		 * @description Downloads a file given the file's name
+		 * @param  String $file_name Name of the file to be downloaded
 		 */
 		public function download_file($file_name)
 		{

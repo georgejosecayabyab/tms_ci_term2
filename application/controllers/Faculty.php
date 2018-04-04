@@ -23,7 +23,7 @@
 		}
 
 		/**
-		 * Loads faculty home page 
+		 * @description Loads faculty home page 
 		 */
 		public function index()
 		{	
@@ -48,7 +48,7 @@
 		}
 
 		/**
-		 * Loads page to view list of groups the user/faculty is in charge of
+		 * @description Loads page to view list of groups the user/faculty is in charge of
 		 */
 		public function view_advisee_list()
 		{
@@ -75,7 +75,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific group the user/faculty is in charge of
+		 * @description Loads page to view a specific group the user/faculty is in charge of
 		 * @param  integer $group_id group id of the user/faculty is in charge of
 		 */
 		public function view_advisee_specific($group_id)
@@ -109,7 +109,7 @@
 		}
 
 		/**
-		 * Loads page to view the user's profile
+		 * @description Loads page to view the user's profile
 		 */
 		public function view_profile()
 		{
@@ -134,7 +134,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific discussion
+		 * @description Loads page to view a specific discussion
 		 * @param  integer $topic_id topic id of the topic of the specific discussion
 		 */
 		public function view_discussion_specific($topic_id)
@@ -161,7 +161,7 @@
 		}
 
 		/**
-		 * Loads page to view the list of groups where the user is one of the panelists
+		 * @description Loads page to view the list of groups where the user is one of the panelists
 		 * @return [type] [description]
 		 */
 		public function view_panel_details()
@@ -191,7 +191,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific group where the user is one of the panelists
+		 * @description Loads page to view a specific group where the user is one of the panelists
 		 * @param  [type] $group_id [description]
 		 * @return [type]           [description]
 		 */
@@ -222,7 +222,7 @@
 		}
 
 		/**
-		 * Loads page to view the revised document and revisions list of a group in a pdf viewer
+		 * @description Loads page to view the revised document and revisions list of a group in a pdf viewer
 		 * @param  integer $group_id  group id of the group where the user is a panelist
 		 * @param  integer $upload_id id of the document chosen to be viewed in pdf viewer
 		 */
@@ -252,7 +252,7 @@
 		}
 
 		/**
-		 * Loads page to view list of theses in the archive
+		 * @description Loads page to view list of theses in the archive
 		 */
 		public function view_archive()
 		{
@@ -280,7 +280,7 @@
 		}
 
 		/**
-		 * Loads page to view a specific thesis in the archive
+		 * @description Loads page to view a specific thesis in the archive
 		 * @param  integer $thesis_id id of thesis
 		 */
 		public function view_archive_specific($thesis_id)
@@ -313,7 +313,7 @@
 		}
 
 		/**
-		 * Loads page to view and set user schedule
+		 * @description Loads page to view and set user schedule
 		 */
 		public function view_schedule()
 		{
@@ -357,7 +357,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 */
 		// public function view_edit_schedule()
 		// {
@@ -383,7 +383,7 @@
 		// }
 
 		/**
-		 * Loads page where user can create a new discussion
+		 * @description Loads page where user can create a new discussion
 		 */
 		public function view_new_discussion($group_id)
 		{
@@ -407,7 +407,7 @@
 		}
 
 		/**
-		 * Loads page to view and edit user profile
+		 * @description Loads page to view and edit user profile
 		 */
 		public function edit_profile()
 		{
@@ -434,7 +434,7 @@
 
 
 		/**
-		 * Validates fields required in a comment
+		 * @description Validates fields required in a comment
 		 */
 		public function validate_comment() 
 		{
@@ -484,7 +484,7 @@
 		}
 
 		/**
-		 * Validates fields required in a reply
+		 * @description Validates fields required in a reply
 		 */
 		public function validate_reply()
 		{
@@ -537,7 +537,7 @@
 		}
 
 		/**
-		 * Validates fields required in a discussion
+		 * @description Validates fields required in a discussion
 		 */
 		public function validate_discussion()
 		{
@@ -588,7 +588,7 @@
 		}
 
 		/**
-		 * Gets all of the notifications of a user
+		 * @description Gets all of the notifications of a user
 		 */
 		public function get_all_notifications()
 		{
@@ -603,7 +603,7 @@
 		}
 
 		/**
-		 * Gets all of the unread notifications of a user
+		 * @description Gets all of the unread notifications of a user
 		 */
 		public function get_new_notifications()
 		{
@@ -618,7 +618,7 @@
 		}
 
 		/**
-		 * Gets all replies in a specific discussion
+		 * @description Gets all replies in a specific discussion
 		 * @param  integer $discussion_id id of the discussion
 		 */
 		public function get_discussion_reply($discussion_id)
@@ -633,7 +633,7 @@
 		}
 
 		/**
-		 * Inserts new notification to the database
+		 * @description Inserts new notification to the database
 		 * @param  String $notification    String containing the notification
 		 * @param  integer $target_user_id user id of the intended receiver of the notification
 		 */
@@ -657,7 +657,7 @@
 		}
 
 		/**
-		 * Inserts new specialization of the user/faculty to the database
+		 * @description Inserts new specialization of the user/faculty to the database
 		 * @param  String $specialization String conataining the specialization
 		 */
 		public function insert_faculty_specialization($specialization)
@@ -668,7 +668,7 @@
 		}
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 * Deletes a specific comment
 		 * @param  integer $thesis_comment_id id of the comment
 		 */
@@ -683,7 +683,7 @@
 		// }
 
 		/**
-		 * Disabled
+		 * @description Disabled
 		 * Deletes a specific reply
 		 * @param  integer $discussion_id id of the discussion
 		 */
@@ -697,7 +697,7 @@
 		// }
 		
 		/**
-		 * Updates unread notifications to read
+		 * @description Updates unread notifications to read
 		 */
 		public function update_notification()
 		{
@@ -715,7 +715,7 @@
 		}
 
 		/**
-		 * Updates the user's/faculty's specializations
+		 * @description Updates the user's/faculty's specializations
 		 */
 		public function update_faculty_specialization() ////not working
 		{
@@ -728,7 +728,7 @@
 		}
 
 		/**
-		 * disabled
+		 * @description disabled
 		 * Updates the content of a reply
 		 * @param  [type] $discussion_id id of discussion
 		 */
@@ -742,7 +742,7 @@
 		// }
 
 		/**
-		 * Downloads a file given the file's name
+		 * @description Downloads a file given the file's name
 		 * @param  [type] $file_name Name of the file to be downloaded
 		 */
 		public function download_file($file_name)
@@ -760,7 +760,7 @@
 		}
 
 		/**
-		 * Logs out logged in user
+		 * @description Logs out logged in user
 		 */
 		public function logout()
 		{
@@ -780,7 +780,7 @@
 
 
 		/**
-		 * Inserts user schedule to the database
+		 * @description Inserts user schedule to the database
 		 */
 		public function insert_schedule()
 		{
@@ -825,7 +825,7 @@
 		}
 
 		/**
-		 * Deletes user's old schedule
+		 * @description Deletes user's old schedule
 		 */
 		public function delete_schedule()
 		{
@@ -836,7 +836,7 @@
 		}
 
 		/**
-		 * Disable
+		 * @description Disable
 		 */
 		// public function try()
 		// {
@@ -895,7 +895,7 @@
 		// }
 
 		/**
-		 * Add specialization to user's group's list of specializations
+		 * @description Add specialization to user's group's list of specializations
 		 */
 		public function add_tags()
 		{
@@ -922,7 +922,7 @@
 		}
 
 		/**
-		 * Validates fields required in a meeting
+		 * @description Validates fields required in a meeting
 		 */
 		public function validate_meeting()
 		{
