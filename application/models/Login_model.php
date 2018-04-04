@@ -9,7 +9,7 @@
 
 
 		/**
-		 * Checks if the inputted email and password are valid
+		 * @description Checks if the inputted email and password are valid
 		 * @param  String $email Inputted email of the user
 		 * @param  String $password Inputted password of the user
 		 * @return Array  Returns an emtpy array if email and password is not valid or if user is inactive else returns an array containing user information of a user 
@@ -25,7 +25,7 @@
 		}
 
 		/**
-		 * Checks if the user is a student
+		 * @description Checks if the user is a student
 		 * @param  Integer $user_id User ID of current user 
 		 * @return Array   Returns an array containing user information of a user with $user_id
 		 */
@@ -49,7 +49,7 @@
 		}
 
 		/**
-		 * Checks if the email input is a gmail account
+		 * @description Checks if the email input is a gmail account
 		 * @param  String $email Inputted email of the user
 		 * @return Array Returns an empty array if the email is not a valid gmail account else returns an array containing user information of a user
 		 */
@@ -63,7 +63,7 @@
 		}
 
 		/**
-		 * Gets the user details given the user id
+		 * @description Gets the user details given the user id
 		 * @param  Integer $user_id User ID of the current user
 		 * @return Array Returns an array contating the user information of a user with $user_id
 		 */
@@ -84,7 +84,7 @@
 
 		}
 		/**
-		 * Checks if the user is a faculty
+		 * @description Checks if the user is a faculty
 		 * @param  Integer $user_id User ID of current user 
 		 * @return Array   Returns an empty array if the user is not a coordinator else it returns an array containing user information of a user with $user_id
 		 */
@@ -96,7 +96,7 @@
 		}
 
 		/**
-		 * Gets Student info
+		 * @description Gets Student info
 		 * @param  Integer $user_id User ID of current user 
 		 */
 		public function get_student($user_id)
@@ -104,7 +104,7 @@
 			$sql = "SELECT";
 		}
 		/**
-		 * Gets the email of the current user
+		 * @description Gets the email of the current user
 		 * @return Returns an array containing the email address 
 		 */
 		public function get_email()
@@ -114,17 +114,7 @@
 			return $query->result_array();
 
 		}
-		/**
-		 * Changes the password of the user 
-		 * @param Integer $user_id User ID of current user
-		 * @param String $newpass New password inputted by the user
-		 */	
-		public function change_password($user_id, $newpass)
-		{
-			$sql = "UPDATE `tms_ci`.`user` SET `password`=".$newpass." WHERE `user_id`= ".$user_id.";";
-			$query = $this->db->query($sql);
-
-		}
+		
 
 	}
 
