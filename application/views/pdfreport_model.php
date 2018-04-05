@@ -8,6 +8,7 @@
 	$pdf->SetAutoPageBreak(true);
 	$pdf->SetAuthor('Author');
 	$pdf->SetDisplayMode('real', 'default');
+	set_time_limit(0); 
 
 	$pdf->AddPage();
 	ob_start();

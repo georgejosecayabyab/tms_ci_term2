@@ -22,44 +22,15 @@
 			$this->g_client->setRedirectUri("http://localhost/tms_ci_term2/index.php/login");    
 		}
 
-		public function set_redirect_uri($url)
-		{
-			$this->redirect_uri = $url;	
-		}
-
+		/**
+		 * @description Gets google client set with cliend id, client secret, scopes, and redirect uri
+		 * @return Google_Client Returns google client object
+		 */
 		public function get_client()
 		{
 			return $this->g_client;
 		}
 
-		public function get_token()
-		{
-			return $this->token;
-		}
 
-		public function revoke_token()
-		{
-
-		}
-
-		public function get_pay_load()
-		{	
-			return $this->pay_load;
-		}
-
-		public function get_auth_url()
-		{
-
-		}
-
-		public function get_gmail()
-		{
-			return new Google_Service_Gmail($this->g_client);
-		}
-
-		public function get_gmail_message()
-		{
-			return  new Google_Service_Gmail_Message();
-		}
 	}
 ?>
