@@ -742,36 +742,6 @@
 		}
 
 		/**
-		 * @description disabled
-		 * @param  [type] $defense_date_id [description]
-		 * @param  [type] $start           [description]
-		 * @param  [type] $end             [description]
-		 * @return [type]                  [description]
-		 */
-		// public function insert_defense_conversion($defense_date_id, $start, $end)////halt progress due to unknow defense_date_id in evry new insert
-		// {
-		// 	$this->coordinator_model->delete_defense_convert($defense_date_id);
-
-		// 	$array_of_time = array ();
-		// 	$start_time    = strtotime ($start);
-		// 	$end_time      = strtotime ($end);
-
-		// 	$fifteen_mins  = 15 * 60;
-
-		// 	while ($start_time < $end_time)
-		// 	{
-		// 	   $array_of_time[] = date ("H:i:s", $start_time);
-		// 	   $start_time += $fifteen_mins;
-		// 	}
-
-		// 	//print_r ($array_of_time);
-		// 	foreach($array_of_time as $row)
-		// 	{
-		// 		$this->coordinator_model->insert_defense_convert($defense_date_id, $row);
-		// 	}
-		// }
-
-		/**
 		 * @description Uploads a form for a specific course
 		 */
 		public function upload_form()

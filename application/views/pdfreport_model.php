@@ -354,5 +354,5 @@
     $content = ob_get_contents();
 	ob_end_clean();
 	$pdf->writeHTML($content, true, false, true, false, '');
-	$pdf->Output('My-File-Name.pdf', 'I');
+	$pdf->Output('Models.pdf', 'I');
 ?>
