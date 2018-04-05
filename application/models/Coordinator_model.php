@@ -3,7 +3,12 @@
 
 class coordinator_model extends CI_Model
 {
-
+	/**
+	 * @description Gets the group common free time
+	 * @param  Interger $group_id Group ID of the group
+	 * @param  String $day Day of the free time
+	 * @return Array Returns an array containing the free time of the group on a specific day
+	 */
 	public function get_group_common_free_time_by_day($group_id, $day)
 	{
 		$sql = "SELECT T.TIME_ID, TIME_FORMAT(T.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(T.END_TIME, '%h:%i %p') AS 'END'
@@ -21,16 +26,21 @@ class coordinator_model extends CI_Model
 
 
 	}
-
+	/**
+	 * @description Gets the group common free time
+	 * @param  Interger $user_id User ID of the user
+	 * @return Array Returns an empty array if the user ID is not a coordinator or an array contains the info of the user
+	 */
 	public function if_coordinator($user_id)
 	{
 		$sql = "SELECT * FROM FACULTY WHERE USER_ID=".$user_id." AND IS_COORDINATOR=1;";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-	//Coordinator Faculty
-
-	//This function gets the user information of the faculty (NAME, USER_ID, IS_ACTIVE)
+	/**
+	 * @description Gets the faculty information
+	 * @return Array Returns an array containing the info of the faculty
+	 */
 	public function get_faculty_info()
 	{
 		$sql = "SELECT CONCAT(U.LAST_NAME,', ',U.FIRST_NAME) AS 'NAME', U.IS_ACTIVE, U.USER_ID, U.EMAIL, R.RANK, D.DEPARTMENT_NAME
@@ -47,7 +57,10 @@ class coordinator_model extends CI_Model
 	}
 
 	
-	//This functions gets the number of panel per faculty
+	/**
+	 * @description Gets the count of panels
+	 * @return Array Returns an array containing the count of panel
+	 */
 	public function get_no_of_panels()
 	{
 		$sql = "SELECT COUNT(PG.PANEL_ID) AS 'PANEL', U.USER_ID
@@ -64,8 +77,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
-	//This function gets the number of groups per faculty
+	/**
+	 * @description Gets the count of groups
+	 * @return Array Returns an array containing the count of group
+	 */
 	public function get_no_of_groups()
 	{
 		$sql = "SELECT COUNT(U.USER_ID) AS 'GROUP', TG.adviser_id, U.USER_ID
@@ -80,9 +95,10 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}	
 
-	//Coordinator Thesis Group
-
-	//This functions gets the group information
+	/**
+	 * @description Gets the group information
+	 * @return Array Returns an array containing the group information
+	 */
 	public function get_group_info()
 	{
 		$sql = "SELECT TG.GROUP_ID, TG.GROUP_NAME, TG.ADVISER_ID, TG.THESIS_ID, TG.COURSE_CODE, TG.INITIAL_VERDICT, TG.FINAL_VERDICT, TG.IS_ACTIVE, DD.DEFENSE_DATE_ID, DD.DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS 'END', DD.VENUE, TG.SECTION, DD.DEFENSE_TYPE, T.THESIS_TITLE
@@ -98,9 +114,10 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}	
 
-	//Coordinator Student
-
-	//This function gets the student information note no section
+	/**
+	 * @description Gets the student information
+	 * @return Array Returns an array containing the student information
+	 */
 	public function get_student_info()
 	{
 		$sql = "SELECT CONCAT(U.LAST_NAME,', ', U.FIRST_NAME) AS 'NAME', U.USER_ID, S.COURSE_CODE, TG.GROUP_NAME, U.IS_ACTIVE, TG.GROUP_ID, U.EMAIL
@@ -115,7 +132,10 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}	
 
-	///this function gets all course
+	/**
+	 * @description Gets all the courses information
+	 * @return Array Returns an array containing all the course information
+	 */
 	public function get_all_course_details()
 	{
 		$sql = "SELECT * 
@@ -123,7 +143,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets all the courses with its information
+	 * @return Array Returns an array containing all the courses with its information
+	 */
 	public function get_all_course()
 	{
 		$sql = "SELECT * 
@@ -131,9 +154,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
-	//Coordinator Announcement
-
+	/**
+	 * @description Inserts an announcement to a corresponding course
+	 * @param String $description Contains the content of the announcement  
+	 * @param String $course_code Contains the corresponding course for the announcement
+	 */
 	public function add_announcement($description, $course_code)
 	{
 		$sql = "INSERT INTO `thesis_related_event` (`event_id`, `event_desc`, `course_code`) 
@@ -142,9 +167,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 	}	
 
-	//Coordinator Form
-
-	//This function will get the form given the course_id
+	/**
+	 * @description Gets all the forms
+	 * @return Array Returns an array containing all the forms
+	 */
 	public function get_form()
 	{
 		$sql = "SELECT *
@@ -154,7 +180,11 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}	
 
-	//This function will add a form in the database
+	/**
+	 * @description Inserts a form to a corresponding course
+	 * @param String $form Contains the form 
+	 * @param String $course_code Contains the corresponding course for the form
+	 */
 	public function add_form($form, $course_code)
 	{
 		$sql = "INSERT INTO `form` (`form_id`, `form_name`, `course_code`) 
@@ -163,9 +193,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 	}
 
-	///coordinator home
-
-	////get all defense available 
+	/**
+	 * @description Gets all the defense date and time available
+	 * @return Array Returns an array containing all the defense date and time available
+	 */
 	public function get_all_open_meetings()
 	{
 		$sql = "SELECT DD.GROUP_ID, DATE(DD.DEFENSE_DATE) AS DEF_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS START, TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS END, DD.VENUE, DD.STATUS, DATEDIFF(DD.DEFENSE_DATE, CURDATE()) AS DIFF, CURDATE() AS 'NOW', T.THESIS_TITLE, TG.GROUP_NAME
@@ -181,7 +212,10 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}
 
-	///coordinator archive
+	/**
+	* @description Gets the archived thesis done by past students 
+	* @return Array Returns an array containing the archived thesis 
+	*/
 	public function archive_thesis()
 	{
 		$sql = "select t.thesis_id, t.thesis_title, tg.group_id, t.abstract, tg.course_code
@@ -192,7 +226,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets the members of the archived thesis project 
+	 * @return Array Returns an array contating the group memebers of the archived thesis
+	 */
 	public function archive_members()
 	{
 		$sql = "select tg.thesis_id, sg.group_id, concat(u.first_name,' ', u.last_name) as 'name', tg.course_code
@@ -206,8 +243,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
-
+	/**
+	* @description Gets the specialization of the archived thesis project 
+	* @return Array Returns an array containing the specialization of the archived thesis project
+	*/
 	public function archive_specialization()
 	{
 		$sql = "select s.specialization, ts.thesis_id
@@ -217,7 +256,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the panelist of the arhived thesis project
+	* @return Array Returns an array containing the panelist of the archived thesis project
+	*/
 	public function archive_panels()
 	{
 		$sql = "select tg.thesis_id, pg.group_id, concat(u.first_name,' ', u.last_name) as 'name', u.is_active
@@ -232,7 +274,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the thesis by the thesis id
+	* @param  Integer $thesis_id Specific thesis ID  
+	* @return Array Returns an array containing thesis with the same thesis id
+	*/
 	public function get_thesis_by_thesis_id($thesis_id)
 	{	
 		$sql = "SELECT * FROM THESIS WHERE THESIS_ID=".$thesis_id.";";
@@ -240,7 +286,11 @@ class coordinator_model extends CI_Model
 		return $query->first_row('array');
 
 	}
-
+	/**
+	* @description Updates intial verdict of a corresponding group
+	* @param  Integer $group_id Specific group ID to be updated
+	* @param  String $verdict Verdict to be updated into
+	*/
 	public function update_initial_verdict($group_id, $verdict)
 	{
 
@@ -251,7 +301,11 @@ class coordinator_model extends CI_Model
 		$this->db->where('group_id', $group_id);
 		$this->db->update('thesis_group', $data); 
 	}
-
+	/**
+	* @description Updates defense type depeneding on the verdict
+	* @param  Integer $group_id Specific group ID to be updated
+	* @param  String $verdict Verdict to be updated into
+	*/
 	public function update_defense_type($group_id, $verdict)
 	{
 		$defense_type = "";
@@ -277,7 +331,11 @@ class coordinator_model extends CI_Model
 		$this->db->where('group_id', $group_id);
 		$this->db->update('defense_date', $data); 
 	}
-
+	/**
+	* @description Updates final verdict of a corresponding group
+	* @param  Integer $group_id Specific group ID to be updated
+	* @param  String $verdict Verdict to be updated into
+	*/
 	public function update_final_verdict($group_id, $verdict)
 	{
 
@@ -287,7 +345,11 @@ class coordinator_model extends CI_Model
 		$this->db->where('group_id', $group_id);
 		$this->db->update('thesis_group', $data); 
 	}
-
+	/**
+	* @description Gets the verdict by the group id
+	* @param  Integer $group_id Specific group ID  
+	* @return Array Returns an array containing the verdict corresponding to a
+	*/
 	public function get_verdict($group_id)
 	{
 		$sql = "SELECT FV.VERDICT AS 'FINAL', IV.VERDICT AS 'INITIAL' 
@@ -300,8 +362,12 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
-	////returns time of defenses the panels needed to attend on that day 
+	/**
+	* @description Gets the time of defenses the panels is needed to attend on a specific date
+	* @param  Integer $group_id Specific group ID  
+	* @param  Date $date Specific date
+	* @return Array Returns an array containing the time of defenses the panels is needed to attend on a specific date
+	*/ 
 	public function get_panel_defense_date($group_id, $date)
 	{
 		$sql = "SELECT CONCAT(U.FIRST_NAME,' ', U.LAST_NAME) AS 'NAME',DEFENSE_DATE, TIME_FORMAT(DD.START_TIME, '%h:%i %p') AS 'START', TIME_FORMAT(DD.END_TIME, '%h:%i %p') AS 'END'
@@ -320,26 +386,41 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the defense date of a specific group
+	* @param  Integer $group_id Specific group ID  
+	* @return Array Returns an array containing the defense date of a specific group
+	*/ 
 	public function check_defense_date($group_id){
 		$sql = "SELECT * FROM DEFENSE_DATE WHERE GROUP_ID=".$group_id.";";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Updates thesis defense date of a corresponding group
+	* @param  Integer $group_id Specific group ID to be updated
+	* @param  Array $data Contains the data needed
+	*/
 	public function update_thesis_defense_date($group_id, $data)
 	{
 
 		$this->db->where('group_id', $group_id);
 		$this->db->update('defense_date', $data); 
 	}
-
+	/**
+	* @description Inserts a thesis defense date
+	* @param  Array $data Contains the data needed
+	*/
 	public function insert_thesis_defense_date($data)
 	{
 		//escape every variable
 		$this->db->insert('defense_date', $data);
 	}
-
+	/**
+	* @description Inserts a thesis defense date convert 
+	* @param  Integer $defense_date_id Specific existing defense date
+	* @param  Integer $start_time Specific time
+	*/
 	public function insert_defense_convert($defense_date_id, $start_time)
 	{
 		//escape every variable
@@ -347,35 +428,51 @@ class coordinator_model extends CI_Model
 				VALUES (".$defense_date_id.", (select time_id from time where start_time=".$start_time."));";
 		$query = $this->db->query($sql);
 	}
-
+	/**
+	* @description Deletes a thesis defense date convert 
+	* @param  Integer $defense_date_id Specific existing defense date
+	*/
 	public function delete_defense_convert($defense_date_id)
 	{
 		//escape all variable
 		$this->db->where('defense_date_id', $defense_date_id);
 		$this->db->delete('defense_convert');
 	}
-
+	/**
+	 * @description Gets the current term
+	 * @return Array Returns an array containing the current term
+	 */
 	public function get_term()
 	{
 		$sql = "SELECT * FROM SCHOOL_TERM WHERE IS_ACTIVE=1;";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	 * @description Gets all the terms
+	 * @return Array Returns an array containing all terms
+	 */
 	public function get_all_term()
 	{
 		$sql = "SELECT * FROM SCHOOL_TERM;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets the current year
+	 * @return Array Returns an array containing the current year
+	 */
 	public function get_year()
 	{
 		$sql = "SELECT * FROM SCHOOL_YEAR WHERE IS_ACTIVE=1;";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Inserts a form corresponding to a specific course
+	* @param  String $form_name Title of the form
+	* @param  String $course_code Specific course code for a specific course
+	*/
 	public function insert_form($form_name, $course_code)
 	{
 		//escape every variable
@@ -385,21 +482,32 @@ class coordinator_model extends CI_Model
 		);
 		$this->db->insert('form', $data);
 	}
-
+	/**
+	* @description Deletes a form
+	* @param  Integer $form_id Specific form ID corresponding to form
+	*/
 	public function delete_form($form_id)
 	{
 		//escape all variable
 		$this->db->where('form_id', $form_id);
 		$this->db->delete('form');
 	}
-
+	/**
+	* @description Gets a specific form
+	* @param  Integer $form_id Specific form ID corresponding to form
+	* @return Array Returns an array containing a specific form corresponding to a form ID
+	*/
 	public function get_specific_form($form_id)
 	{
 		$sql = "SELECT * FROM FORM WHERE FORM_ID=".$form_id.";";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Gets the group tags of groups
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing the group tags 
+	*/
 	public function get_group_tags($group_id)
 	{
 		$sql = "SELECT * 
@@ -410,7 +518,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the faculty who have common tags with a specific group
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing the faculty who have common tags with a specific group 
+	*/
 	public function get_common_tag($group_id)
 	{
 		$sql = "SELECT * 
@@ -428,7 +540,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the faculty and count of common tags with a specific group
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing the faculty and count of common tags with a specific group 
+	*/
 	public function get_common_tag_count($group_id)
 	{
 		$sql = "SELECT FS.USER_ID, CONCAT( U.LAST_NAME,', ',U.FIRST_NAME) AS 'NAME', COUNT(FS.USER_ID) AS 'COUNT'
@@ -445,7 +561,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets the specializations of all faculty
+	 * @return Array Returns an array containing the specializations of all faculty
+	 */
 	public function get_common_panel_specialization()
 	{
 		$sql = "SELECT * 
@@ -455,7 +574,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the active faculty panelist to a specific group
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing the active faculty panelist to a specific group
+	*/
 	public function get_possible_panelist($group_id)
 	{
 		$sql = "SELECT * 
@@ -470,7 +593,11 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 		
 	}
-
+	/**
+	* @description Gets the possible active panel group to a specific group
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing the possible active panel group to a specific group
+	*/
 	public function get_active_group_panel($group_id)
 	{
 		$sql = "SELECT * 
@@ -486,7 +613,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the inactive panel group to a specific group
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing the inactive panel group to a specific group
+	*/
 	public function get_inactive_group_panel($group_id)
 	{
 		$sql = "SELECT * 
@@ -500,7 +631,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Gets the specializations of a panel given the user ID
+	* @param  Integer $panel Specific user ID
+	* @return Array Returns an array containing the specializations of a panel given the user ID
+	*/
 	public function get_panel_tags($panel)
 	{
 		$sql = "SELECT * 
@@ -511,7 +646,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Updates the current status of a specific panel group
+	* @param  Integer $panel_group_id Specific panel group id
+	* @param  Integer $status Specific status
+	*/
 	public function update_group_panelist($panel_group_id, $status)
 	{
 		$data = array(
@@ -520,6 +659,12 @@ class coordinator_model extends CI_Model
 		$this->db->where('panel_group_id', $panel_group_id);
 		$this->db->update('panel_group', $data); 
 	}
+	/**
+	* @description Updates the current status of a past specific panel group
+	* @param  Integer $panel_group_id Specific panel group id
+	* @param  Integer $group_id Specific group ID of a group
+	* @param  Integer $status Specific status
+	*/
 
 	public function update_previous_group_panelist($panel_id, $group_id, $status)
 	{
@@ -530,40 +675,61 @@ class coordinator_model extends CI_Model
 		$this->db->where('group_id', $group_id);
 		$this->db->update('panel_group', $data); 
 	}
-
+	/**
+	* @description Inserts a group panelist
+	* @param  Array $data Contains the data needed
+	*/
 	public function insert_group_panelist($data)
 	{
 		//escape every variable
 		$this->db->insert('panel_group', $data);
 	}
-
+	/**
+	* @description Deletes a group panelist
+	* @param  Array $group_id Specific group ID
+	*/
 	public function delete_group_panelist($group_id)
 	{
 		//escape all variable
 		$this->db->where('group_id', $group_id);
 		$this->db->delete('panel_group');
 	}
-
+	/**
+	 * @description Gets all ranks
+	 * @return Array Returns an array containing all ranks
+	 */
 	public function get_all_rank()
 	{
 		$sql = "SELECT * FROM RANK";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets all departments
+	 * @return Array Returns an array containing all departments
+	 */
 	public function get_all_department()
 	{
 		$sql = "SELECT * FROM DEPARTMENT";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Inserts a user
+	* @param  Array $data Contains the data needed
+	*/
 	public function insert_user($data)
 	{
 		//escape every variable
 		$this->db->insert('user', $data);
 	}
-
+	/**
+	* @description Inserts a student
+	* @param  String $first_name First name of the user
+	* @param  String $last_name Last name of the user
+	* @param  String $email Email of the user
+	* @param  String $course Course of the student
+	*/
 	public function insert_student($first_name, $last_name, $email, $course)
 	{
 
@@ -572,7 +738,14 @@ class coordinator_model extends CI_Model
 
 		$query = $this->db->query($sql);
 	}
-
+	/**
+	* @description Inserts a student
+	* @param  String $first_name First name of the user
+	* @param  String $last_name Last name of the user
+	* @param  String $email Email of the user
+	* @param  String $rank Rank of the faculty
+	* @param  String $department_name Department of the faculty
+	*/
 	public function insert_faculty($first_name, $last_name, $email, $rank, $department_name)
 	{
 		$sql = "INSERT INTO FACULTY (USER_ID, IS_COORDINATOR, RANK, DEPARTMENT_CODE)
@@ -580,14 +753,21 @@ class coordinator_model extends CI_Model
 
 		$query = $this->db->query($sql);
 	}
-
+	/**
+	 * @description Gets all news
+	 * @return Array Returns an array containing all news
+	 */
 	public function get_news()
 	{
 		$sql = "SELECT * FROM NEWS;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets a speicific news
+	 * @param  Integer $news_id Specific ID of a speicifc news
+	 * @return Array Returns an array containing specific news
+	 */
 	public function get_specific_news($news_id)
 	{
 		$sql = "SELECT * FROM NEWS 
@@ -595,7 +775,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	 * @description Updates a speicific news
+	 * @param  Array $data Contains the content
+	 */
 	public function update_specific_news($data)
 	{
 		$sql = "update news
@@ -603,14 +786,20 @@ class coordinator_model extends CI_Model
 				where news_id='".$data['news_id']."';";
 		$this->db->query($sql);
 	}
-
+	/**
+	 * @description Deletes a speicific news
+	 * @param  Integer $news_id Specific ID of a speicifc news
+	 */
 	public function delete_news($news_id)
 	{
 		//escape all variable
 		$this->db->where('news_id', $news_id);
 		$this->db->delete('news');
 	}
-
+	/**
+	 * @description Gets all related news
+	 * @return Array Returns an array containing all related news
+	 */
 	public function get_related_news()
 	{
 		$sql = "SELECT * FROM THESIS_RELATED_EVENT;";
@@ -618,21 +807,31 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 
 	}
-
+	/**
+	 * @description Gets a speicific related news
+	 * @param  Integer $event_id Specific ID of a event
+	 * @return Array Returns an array containing specific events
+	 */
 	public function get_specific_related_news($event_id)
 	{
 		$sql = "SELECT * FROM THESIS_RELATED_EVENT WHERE EVENT_ID=".$event_id.";";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	 * @description Deletes a speicific related news
+	 * @param  Integer $event_id Specific ID of a event
+	 */
 	public function delete_related_news($event_id)
 	{
 		//escape all variable
 		$this->db->where('event_id', $event_id);
 		$this->db->delete('thesis_related_event');
 	}
-
+	/**
+	 * @description Updates a speicific related news
+	 * @param  Array $data Contains the content
+	 */
 	public function update_related_news($data)
 	{
 		$sql = "update thesis_related_event
@@ -640,46 +839,68 @@ class coordinator_model extends CI_Model
 				where event_id='".$data['event_id']."';";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Inserts a home announcement
+	* @param  Array $data Contains the data needed
+	*/
 	public function insert_new_home_announcement($data)
 	{
 		//escape every variable
 		$this->db->insert('news', $data);
 	}
-
+	/**
+	* @description Inserts a specific announcement
+	* @param  Array $data Contains the data needed
+	*/
 	public function insert_new_specific_announcement($data)
 	{
 		//escape every variable
 		$this->db->insert('thesis_related_event', $data);
 	}
-
+	/**
+	 * @description Gets all specialization
+	 * @return Array Returns an array containing all specialization
+	 */
 	public function get_all_specialization()
 	{
 		$sql = "SELECT * FROM SPECIALIZATION;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Inserts a specialization
+	* @param  Array $data Contains the data needed
+	*/
 	public function insert_specialization($data)
 	{
 		//escape every variable
 		$this->db->insert('specialization', $data);
 	}
-
+	/**
+	 * @description Gets information of a specific user
+	 * @param  Integer $user_id Specific user ID of a user
+	 * @return Array Returns an array containing information of a specific user
+	 */
 	public function get_user_info($user_id)
 	{
 		$sql = "SELECT * FROM USER WHERE USER_ID=".$user_id.";";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	 * @description Gets all active faculty
+	 * @return Array Returns an array containing all active faculty
+	 */
 	public function get_all_active_faculty()
 	{
 		$sql = "SELECT * FROM USER WHERE USER_ID IN(SELECT USER_ID FROM FACULTY WHERE IS_COORDINATOR=0) AND IS_ACTIVE=1 ORDER BY LAST_NAME ASC;";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets all years
+	 * @return Array Returns an array containing all years
+	 */
 	public function get_all_year()
 	{
 		$sql = "SELECT * FROM SCHOOL_YEAR;";
@@ -688,7 +909,10 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 		
 	}
-
+	/**
+	 * @description Gets all passed groups
+	 * @return Array Returns an array containing all passed groups
+	 */
 	public function get_all_passed_group()
 	{
 		$sql = "SELECT C.COURSE_ORDER, TG.COURSE_CODE, TG.GROUP_NAME, TG.GROUP_ID, C.DEGREE_CODE, TG.THESIS_ID
@@ -700,7 +924,12 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	 * @description Gets next course for a specific group with their degree, updates course of specific group if their final verdict is a 'pass'
+	 * @param  Integer $group_id Specific ID of a group
+	 * @param  String $degree Specific degree
+	 * @return Array Returns an array containing the next course of a specific group, or current course if the group is on the last course in the thesis
+	 */
 	public function sample_move_term($group_id, $degree_code)
 	{
 		$this->db->query("SET @GROUP_ID =".$group_id.";");
@@ -742,6 +971,10 @@ class coordinator_model extends CI_Model
 
 		return $query->first_row('array');
 	}
+	/**
+	* @description Decactivates a specific term
+	* @param  Integer $term Specific term
+	*/
 	public function deactivate_old_term($term)
 	{	
 		$data = array(
@@ -750,7 +983,10 @@ class coordinator_model extends CI_Model
 		$this->db->where('term', $term);
 		$this->db->update('school_term', $data);
 	}
-
+	/**
+	* @description Decactivates a specific year
+	* @param  Integer $year Specific year
+	*/
 	public function deactivate_old_year($year)
 	{	
 		$data = array(
@@ -759,7 +995,10 @@ class coordinator_model extends CI_Model
 		$this->db->where('year', $year);
 		$this->db->update('school_year', $data);
 	}
-
+	/**
+	* @description Activates a specific term
+	* @param  Integer $term Specific term
+	*/
 	public function activate_new_term($term)
 	{
 		$data = array(
@@ -768,7 +1007,10 @@ class coordinator_model extends CI_Model
 		$this->db->where('term', $term);
 		$this->db->update('school_term', $data);
 	}
-
+	/**
+	* @description Activates a specific year
+	* @param  Integer $year Specific year
+	*/
 	public function activate_new_year($year)
 	{
 		$data = array(
@@ -778,7 +1020,11 @@ class coordinator_model extends CI_Model
 		$this->db->update('school_year', $data);
 
 	}
-
+	/**
+	 * @description Gets specific time given the time id
+	 * @param  Integer $time_id Specific time ID
+	 * @return Array Returns an array containing specific time given the time id
+	 */
 	public function get_time($time_id)
 	{
 		$sql = "SELECT T.START_TIME AS 'START', T.END_TIME AS 'END'
@@ -787,7 +1033,10 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Inserts a thesis
+	* @param  String $thesis_title The thesis title of a thesis project
+	*/
 	public function insert_thesis($thesis_title)
 	{	
 		$data = array(
@@ -799,14 +1048,24 @@ class coordinator_model extends CI_Model
 		$this->db->insert('thesis', $data);
 
 	}
-
+	/**
+	* @description Inserts a thesis group
+	* @param  String $group_name Group name of the group
+	* @param  Integer $adviser Specific user id of a faculty
+	* @param  String $thesis_title The thesis title of a thesis project
+	* @param  String $course_code Current course of the group
+	*/
 	public function insert_thesis_group($group_name, $adviser, $thesis_title, $course_code)
 	{
 		$sql = "INSERT INTO THESIS_GROUP (GROUP_NAME, ADVISER_ID, THESIS_ID, INITIAL_VERDICT, FINAL_VERDICT, IS_ACTIVE, COURSE_CODE)
 				VALUES ('".$group_name."', (SELECT USER_ID FROM FACULTY WHERE USER_ID=".$adviser."), (SELECT THESIS_ID FROM THESIS WHERE THESIS_TITLE='".$thesis_title."'), 'NOV', 'NVY', 1, '".$course_code."')";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Inserts a student into a group
+	* @param  Integer $user_id Specific user id of a user
+	* @param  Integer $group_id Specific group id of a group
+	*/
 	public function insert_student_group($user_id, $group_id)
 	{
 		$data = array(
@@ -817,27 +1076,42 @@ class coordinator_model extends CI_Model
 
 		$this->db->insert('student_group', $data);
 	}
-
+	/**
+	 * @description Gets a specific thesis group
+	 * @param  String $group_name Specific group name of the thesis group
+	 * @param  Integer $adviser_id User id of a faculty
+	 * @return Array Returns an array containing a specific thesis group
+	 */
 	public function get_thesis_group($group_name, $adviser_id)
 	{
 		$sql = "SELECT * FROM THESIS_GROUP WHERE GROUP_NAME='".$group_name."' AND ADVISER_ID=".$adviser_id.";";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Inserts a student into a group
+	* @param  Integer $user_id Specific user id of a user
+	* @return Array Returns an array containing the degree code of a specific user
+	*/	
 	public function check_degree_code($user_id)
 	{
 		$sql = "SELECT * FROM STUDENT WHERE USER_ID=".$user_id.";" ;
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Deletes all the defense schedules of a group
+	* @param  Integer $group_id Specific group id of a group
+	*/
 	public function delete_all_defense_date($group_id)
 	{
 		$sql = "delete from defense_date where group_id=".$group_id.";";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Updates the verdict of a group
+	* @param  Integer $group_id Specific group id of a group
+	*/
 	public function update_verdicts($group_id)
 	{
 		$sql = "update thesis_group
@@ -845,7 +1119,9 @@ class coordinator_model extends CI_Model
 				where group_id=".$group_id.";";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Deletes notification of all users
+	*/
 	public function delete_notifications()
 	{
 		// $this->db->query("SET SQL_SAFE_UPDATES = 0;");
@@ -862,7 +1138,11 @@ class coordinator_model extends CI_Model
 			$this->db->delete('notification');	
 		}
 	}
-
+	/**
+	* @description Gets memebers of a group
+	* @param  Integer $group_id Specific group id of a group
+	* @return Array Returns an array containing the members of a group
+	*/	
 	public function get_members($group_id)
 	{
 		$sql = "SELECT * 
@@ -875,7 +1155,12 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
+	/**
+	* @description Updates the students course
+	* @param  Integer $user_id Specific user id of a user
+	* @param  String $degree Degree of the student
+	* @param  Integer $course_order Specific order of the current course
+	*/
 	public function update_student_course($user_id, $degree, $course_order)
 	{
 		$sql = "UPDATE STUDENT
@@ -883,7 +1168,11 @@ class coordinator_model extends CI_Model
 				WHERE USER_ID=".$user_id.";";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Updates the students status
+	* @param  Integer $user_id Specific user id of a user
+	* @param  String $status Status of a user 
+	*/
 	public function update_user_status($user_id, $status)
 	{
 		$sql = "update user 
@@ -891,7 +1180,10 @@ class coordinator_model extends CI_Model
 				where user_id=".$user_id.";";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Updates the thesis project status
+	* @param  Integer $thesis_id Specific thesis id 
+	*/
 	public function update_thesis_status($thesis_id)
 	{
 		$sql = "update thesis 
@@ -899,7 +1191,10 @@ class coordinator_model extends CI_Model
 				where thesis_id=".$thesis_id.";";
 		$this->db->query($sql);
 	}
-
+	/**
+	* @description Updates the group status
+	* @param  Integer $group_id Specific group id 
+	*/
 	public function update_group_status($group_id)
 	{
 		$sql = "update thesis_group 
@@ -908,6 +1203,11 @@ class coordinator_model extends CI_Model
 		$this->db->query($sql);
 	}
 
+	/**
+	 * @description Gets information of a specific user
+	 * @param  String $email Specific email of a user
+	 * @return Array Returns an array containing information of a specific user
+	 */
 	public function get_specific_user_info($email)
 	{
 		$sql = "select * from user 
@@ -915,7 +1215,11 @@ class coordinator_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	 * @description Gets students under a specific course
+	 * @param  String $course_code Specific course code
+	 * @return Array Returns an array containing students under a specific course
+	 */
 	public function get_specific_course_students($course_code)
 	{
 		$sql = "SELECT CONCAT(U.LAST_NAME, ', ', U.FIRST_NAME) AS 'NAME', S.COURSE_CODE, U.USER_ID 
@@ -928,7 +1232,10 @@ class coordinator_model extends CI_Model
 		return $query->result_array();
 	}
 
-
+	/**
+	* @description Updates the time lot in the scheduler
+	* @param  Integer $time Specific time
+	*/
 	public function update_time($time)
 	{
 		$sql = "SELECT * FROM TIME LIMIT 8;";
@@ -952,6 +1259,9 @@ class coordinator_model extends CI_Model
 
 	}
 
+	/**
+	* @description Deactivates all guest accounts
+	*/
 	public function deactivate_all_guests()
 	{
 		$sql = "SELECT * FROM FACULTY WHERE RANK='GUEST';";
@@ -970,13 +1280,22 @@ class coordinator_model extends CI_Model
 		}
 	}
 
+	/**
+	* @description Gets the group id by the thesis id
+	* @param  Integer $thesis_id Specific thesis ID  
+	* @return Array Returns an array containing group id with the same thesis id
+	*/
 	public function get_group_id_by_thesis_id($thesis_id)
 	{
 		$sql = "select * from thesis_group where thesis_id=".$thesis_id."";
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
-
+	/**
+	* @description Gets the upload revisions of a specific group
+	* @param  Integer $group_id Group ID of a speicifc group 
+	* @return Array Returns an array containing upload revisions of a specific group
+	*/
 	public function get_uploads_revision($group_id)
 	{
 		$sql = "SELECT * 
